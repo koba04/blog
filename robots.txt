@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://koba04.github.io/sitemap.xml 
