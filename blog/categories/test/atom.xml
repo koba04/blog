@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: test | blog.koba04.com]]></title>
+  <link href="http://koba04.github.io/blog/categories/test/atom.xml" rel="self"/>
+  <link href="http://koba04.github.io/"/>
+  <updated>2014-02-25T01:18:40+09:00</updated>
+  <id>http://koba04.github.io/</id>
+  <author>
+    <name><![CDATA[koba04]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[test]]></title>
+    <link href="http://koba04.github.io/post/2014/02/24/test/"/>
+    <updated>2014-02-24T23:52:55+09:00</updated>
+    <id>http://koba04.github.io/post/2014/02/24/test</id>
+    <content type="html"><![CDATA[<h1>main title</h1>
+
+<p>this is test</p>
+
+<p><a href="http://d.hatena.ne.jp/koba04/">my blog</a></p>
+
+<h2>sub title</h2>
+
+<p>```coffeescript
+class Hoge extend Foo
+  constructor: &ndash;></p>
+
+<pre><code>super
+</code></pre>
+
+<p>```</p>
+
+<p>that is..</p>
+]]></content>
+  </entry>
+  
+</feed>
