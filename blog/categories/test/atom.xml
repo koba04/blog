@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: test | blog.koba04.com]]></title>
-  <link href="http://koba04.github.io/blog/categories/test/atom.xml" rel="self"/>
-  <link href="http://koba04.github.io/"/>
-  <updated>2014-02-25T01:18:40+09:00</updated>
-  <id>http://koba04.github.io/</id>
+  <link href="http://blog.koba04.com/blog/categories/test/atom.xml" rel="self"/>
+  <link href="http://blog.koba04.com/"/>
+  <updated>2014-02-26T01:45:07+09:00</updated>
+  <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
     
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[test]]></title>
-    <link href="http://koba04.github.io/post/2014/02/24/test/"/>
+    <title type="html"><![CDATA[テスト]]></title>
+    <link href="http://blog.koba04.com/post/2014/02/24/test/"/>
     <updated>2014-02-24T23:52:55+09:00</updated>
-    <id>http://koba04.github.io/post/2014/02/24/test</id>
+    <id>http://blog.koba04.com/post/2014/02/24/test</id>
     <content type="html"><![CDATA[<h1>main title</h1>
 
 <p>this is test</p>

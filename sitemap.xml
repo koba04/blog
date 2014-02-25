@@ -1,19 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://koba04.github.io/post/2014/02/24/test/</loc>
-        <lastmod>2014-02-25T01:17:09+09:00</lastmod>
+        <loc>http://blog.koba04.com/post/2014/02/24/test/</loc>
+        <lastmod>2014-02-26T01:43:05+09:00</lastmod>
     </url>
     <url>
-        <loc>http://koba04.github.io/blog/archives/</loc>
-        <lastmod>2014-02-25T01:17:09+09:00</lastmod>
+        <loc>http://blog.koba04.com/blog/archives/</loc>
+        <lastmod>2014-02-26T01:43:05+09:00</lastmod>
     </url>
     <url>
-        <loc>http://koba04.github.io/</loc>
-        <lastmod>2014-02-25T01:17:09+09:00</lastmod>
+        <loc>http://blog.koba04.com/</loc>
+        <lastmod>2014-02-26T01:43:05+09:00</lastmod>
     </url>
     <url>
-        <loc>http://koba04.github.io/robots.txt</loc>
-        <lastmod>2014-02-24T23:44:50+09:00</lastmod>
+        <loc>http://blog.koba04.com/robots.txt</loc>
+        <lastmod>2014-02-26T01:43:05+09:00</lastmod>
     </url>
 </urlset>
