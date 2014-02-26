@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: test | blog.koba04.com]]></title>
+  <title><![CDATA[Category: test | koba04.log]]></title>
   <link href="http://blog.koba04.com/blog/categories/test/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-02-26T01:45:07+09:00</updated>
+  <updated>2014-02-27T00:14:02+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
