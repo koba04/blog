@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>blog.koba04.com</title>
+  <title>ブログ移行しました - blog.koba04.com</title>
   <meta name="author" content="koba04">
 
    
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.koba04.com">
+  <link rel="canonical" href="http://blog.koba04.com/post/2014/03/02/blog-renewal">
   <link href="/images/favicon.ico" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -34,9 +34,9 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
-  <meta property="og:title" content=" - blog.koba04.com" />
+  <meta property="og:title" content="ブログ移行しました - blog.koba04.com" />
 <meta property="og:description" content="" />
-<meta property="og:url" content="http://blog.koba04.com" />
+<meta property="og:url" content="http://blog.koba04.com/post/2014/03/02/blog-renewal" />
 <meta property="og:image" content="" />
 <meta property="og:author" content="koba04" />
 <meta property="og:site_name" content="blog.koba04.com" />
@@ -97,18 +97,14 @@
   <div class="container" id="main">
       <div class="row-fluid">
         <div id="content">
-          
+          <div>
+<article class="hentry" role="article">
+  
 
-<div class="blog-index">
-  
-  
-  
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+  <div class="jumbotron">
+    ブログ移行しました
+	<h5>
 
 
 
@@ -121,42 +117,116 @@
 
 
 <i class="icon-calendar-empty"></i> <time datetime="2014-03-02T03:07:09+09:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2014</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/blog/"><span class="badge">blog</span></a>
-          
-          <a href="/blog/categories/octopress/"><span class="badge">octopress</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/post/2014/03/02/blog-renewal/">ブログ移行しました</a></h1>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
       <p>これまでははてなダイアリーでブログを書いていたのですが、ふと思い立ってブログを移行しました。</p>
 
 <p>旧ブログ: <a href="http://d.hatena.ne.jp/koba04/">http://d.hatena.ne.jp/koba04/</a></p>
 
+<!-- more -->
 
-      
-       <a href="/post/2014/03/02/blog-renewal/">Read on &rarr;</a> 
+
+<p>ページのフッターにある通り、Octopressを使ってGithubPagesで公開しています。テーマは一覧から「Octoflat」を選んでいます。</p>
+
+<ul>
+<li><a href="http://octopress.org/">http://octopress.org/</a></li>
+<li><a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes</a></li>
+</ul>
+
+
+<p>ドメインはblog.koba04.comにkoba04.github.ioをCNAMEとして割り当てています(設定するときに間違ってAレコード消しちゃってしばらくアクセス出来なくしてしまいましたが&hellip;)</p>
+
+<h2>なぜ移行したのかとなぜOctopress？</h2>
+
+<p>はてなダイアリーだったのではてなブログとかにそろそろ移行しないとなぁと思っていたのが主な理由です。はてなブログでもよかったのですがせっかくなので色々自分で設定したいなと思い既存のブログサービスは選択しませんでした。</p>
+
+<p>Octopressにした理由はGithubと親和性が高いのとRuby触るきっかけになるかなと思ったくらいです。<a href="https://ghost.org/">Ghost</a>と少し悩みましたがインフラをGithubに任せられるのがいいなと思ってOctopressにしました。</p>
+
+<p>Github上で管理出来るのでissueをTODOとして使えるので便利ですね。ブラウザでmarkdown編集してcommit hookでdeploy出来るようにするとさらに便利そうだなぁと思ったりしてます。</p>
+
+<h2>やったこと</h2>
+
+<p>基本的にはSocial系のアカウント設定したりちょっとスタイル修正したりした程度ですが、わからないことが多くて結構詰まってました&hellip;でも楽しいです。</p>
+
+<p>特にOctopressの仕組みがわかってなくて、sourceブランチとmasterブランチの関係とか、sourceの_deployにmasterが入っていて、そこからmasterのブランチをpushしてるのとか。。</p>
+
+<ul>
+<li>Twitter, Facebook, HatenaBookmarkのリンクを設置</li>
+<li>Google Analyticsの設定</li>
+<li>Disqusの設定</li>
+<li>styleの修正</li>
+<li>headerにブログ名をリンクを移動</li>
+</ul>
+
+
+<p>見にくい部分とか色々あるのでこれから徐々に直していきたいと思います！</p>
+
     </div>
   </div>
 
 
 
-    </article>
+  <footer>
+    <hr>
     
-  
-  <div class="pagination">
-    
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
 
-    
-  </div>
+
+
+  <a href="/blog/categories/blog/"><span class="badge">blog</span></a>
+
+  <a href="/blog/categories/octopress/"><span class="badge">octopress</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://blog.koba04.com/post/2014/03/02/blog-renewal/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.koba04.com/post/2014/03/02/blog-renewal/" data-via="koba04" data-counturl="http://blog.koba04.com/post/2014/03/02/blog-renewal/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-href="http://blog.koba04.com/post/2014/03/02/blog-renewal/" data-send="true" data-width="100" data-show-faces="false"></div>
+  
 </div>
+
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
 
 
         </div>
@@ -178,7 +248,10 @@
       var disqus_shortname = 'koba04log';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.koba04.com/post/2014/03/02/blog-renewal/';
+        var disqus_url = 'http://blog.koba04.com/post/2014/03/02/blog-renewal/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
