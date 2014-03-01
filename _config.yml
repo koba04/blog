@@ -98,3 +98,6 @@ google_analytics_tracking_id: "UA-8875970-5"
 
 # Facebook Like
 facebook_like: true
+facebook_ogp_image: https://avatars.githubusercontent.com/u/250407
+facebook_app_id: 346463362115366
+facebook_locale: en_US
