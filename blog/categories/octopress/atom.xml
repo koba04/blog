@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-03-02T03:16:33+09:00</updated>
+  <updated>2014-03-02T03:19:12+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -55,6 +55,7 @@
 <li>Disqusの設定</li>
 <li>styleの修正</li>
 <li>headerにブログ名をリンクを移動</li>
+<li>なぜか末尾の/なしのURLがcanonicalで指定されていたので削除</li>
 </ul>
 
 
