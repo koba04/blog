@@ -15,6 +15,9 @@ $nav-font-color: #FFF;
 
 h1.link {
   font-size: $base-font-size;
+  a {
+    color: $primary-color;
+  }
 }
 
 .jumbotron {
