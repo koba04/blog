@@ -1,8 +1,24 @@
 // Add your custom styling here.
 
-.jumbotron {
-  font-size: 30px;
-}
+$base-font-size: 30px;
+$nav-font-color: #FFF;
+
 h1.link {
-  font-size: 30px;
+  font-size: $base-font-size;
+}
+.jumbotron {
+  font-size: $base-font-size;
+  padding: 0;
+}
+
+.nav-title {
+  font-size: $base-font-size * 1.25;
+  margin-right: $base-font-size;
+  a {
+    color: $nav-font-color;
+  }
+}
+.nav-subtitle {
+  white-space: nowrap;
+  color: $nav-font-color;
 }
