@@ -40,4 +40,25 @@ Github上で管理出来るのでissueをTODOとして使えるので便利で�
 * headerにブログ名をリンクを移動
 * なぜか末尾の/なしのURLがcanonicalで指定されていたので削除
 
+## Octopressでの記事書く流れ
+
+* previewサーバー立ち上げる
+```
+bundle exec rake preview
+```
+
+* 記事書く
+```
+bundle exec rake new_post["my great post"]
+vi source/_posts/xxxx-xx-xx-my-great-post.markdown
+# 記事編集する
+```
+
+* 問題なければdeployしてpushする
+```
+bundle exec rake deploy
+git push
+```
+
+
 見にくい部分とか色々あるのでこれから徐々に直していきたいと思います！
