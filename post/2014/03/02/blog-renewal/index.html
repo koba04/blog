@@ -35,12 +35,12 @@
   <meta property="og:title" content="ブログ移行しました - blog.koba04.com" />
 <meta property="og:description" content="" />
 <meta property="og:url" content="" />
-<meta property="og:image" content="https://avatars.githubusercontent.com/u/250407" />
+<meta property="og:image" content="" />
 <meta property="og:author" content="koba04" />
 <meta property="og:site_name" content="blog.koba04.com" />
-<meta property="og:locale" content="en_US" />
+<meta property="og:locale" content="" />
 <meta property="og:type" content="article" />
-<meta property="fb:app_id" content="346463362115366" />
+<meta property="fb:app_id" content="" />
 
   
   <script type="text/javascript">
@@ -160,6 +160,41 @@
 </ul>
 
 
+<h2>Octopressでの記事書く流れ</h2>
+
+<ul>
+<li>previewサーバー立ち上げる</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake preview</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>記事書く</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake new_post["my great post"]
+</span><span class='line'>vi source/_posts/xxxx-xx-xx-my-great-post.markdown
+</span><span class='line'># 記事編集する</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>問題なければdeployしてpushする</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake deploy
+</span><span class='line'>git push</span></code></pre></td></tr></table></div></figure>
+
+
 <p>見にくい部分とか色々あるのでこれから徐々に直していきたいと思います！</p>
 
     </div>
@@ -266,7 +301,7 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
   js = d.createElement(s); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=346463362115366&xfbml=1";
+  js.src = "//connect.facebook.net//all.js#appId=&xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 

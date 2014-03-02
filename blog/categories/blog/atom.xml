@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blog | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/blog/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-03-02T03:29:34+09:00</updated>
+  <updated>2014-03-02T14:44:53+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -56,6 +56,29 @@
 <li>styleの修正</li>
 <li>headerにブログ名をリンクを移動</li>
 <li>なぜか末尾の/なしのURLがcanonicalで指定されていたので削除</li>
+</ul>
+
+
+<h2>Octopressでの記事書く流れ</h2>
+
+<ul>
+<li><p>previewサーバー立ち上げる
+<code>
+bundle exec rake preview
+</code></p></li>
+<li><p>記事書く
+```
+bundle exec rake new_post[&ldquo;my great post&rdquo;]
+vi source/_posts/xxxx-xx-xx-my-great-post.markdown</p>
+
+<h1>記事編集する</h1>
+
+<p>```</p></li>
+<li><p>問題なければdeployしてpushする
+<code>
+bundle exec rake deploy
+git push
+</code></p></li>
 </ul>
 
 

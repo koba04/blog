@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-03-02T03:29:34+09:00</updated>
+  <updated>2014-03-02T14:44:53+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -57,6 +57,41 @@
 <li>headerにブログ名をリンクを移動</li>
 <li>なぜか末尾の/なしのURLがcanonicalで指定されていたので削除</li>
 </ul>
+
+
+<h2>Octopressでの記事書く流れ</h2>
+
+<ul>
+<li>previewサーバー立ち上げる</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake preview</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>記事書く</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake new_post["my great post"]
+</span><span class='line'>vi source/_posts/xxxx-xx-xx-my-great-post.markdown
+</span><span class='line'># 記事編集する</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>問題なければdeployしてpushする</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake deploy
+</span><span class='line'>git push</span></code></pre></td></tr></table></div></figure>
 
 
 <p>見にくい部分とか色々あるのでこれから徐々に直していきたいと思います！</p>
