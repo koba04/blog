@@ -30,8 +30,10 @@ h2 {
 }
 
 .nav-title {
-  font-size: $base-font-size * 1.25;
+  font-size: $base-font-size;
+  line-height: 100%;
   margin-right: $base-font-size;
+  padding-top: 10px;
   a {
     color: $nav-font-color;
   }
@@ -39,4 +41,12 @@ h2 {
 .nav-subtitle {
   white-space: nowrap;
   color: $nav-font-color;
+}
+
+.navbar .nav {
+  li {
+    a {
+      padding: 10px 15px 10px;
+    }
+  }
 }
