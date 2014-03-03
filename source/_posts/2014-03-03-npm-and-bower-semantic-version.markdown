@@ -8,7 +8,7 @@ categories: node javascript
 
 ## npmとbowerライブラリのバージョン管理
 
-npmやbowerのライブラリをプロジェクトに導入するときは"npm install --save xxx"や"bower install --save xxx"のような形で指定してインストールしつつpackage(bower).jsonに記録したりします。
+npmやbowerのライブラリをプロジェクトに導入するときは、"npm install --save xxx"や"bower install --save xxx"のような形で指定してインストールとpackage(bower).jsonへの記録をしたりします。
 
 その場合、package(bower).jsonには"xxx": "~x.y.z"という形式で記録されます。
 
@@ -21,7 +21,9 @@ npmやbowerのライブラリをプロジェクトに導入するときは"npm i
 
 なので"~"で指定していると、同じpackage(bower).jsonでもインストールするタイミングによって微妙に異なるバージョンがインストールされることになります。
 
-npmやbowerにはGemのGemfile.lockやCartonのcpanfile.snapshotのようにバージョンを固定するような仕組みはないと思いますが、かと言ってnode_modulesとかbower_componentsをrepositoryの中にも入れたくないので今のプロジェクトでは"x.y.z"とバージョンを固定しています。
+npmやbowerにはGemのGemfile.lockやCartonのcpanfile.snapshotのように依存も含めたバージョンを固定するような仕組みはないと思います。
+
+かと言ってnode_modulesとかbower_componentsをrepositoryの中にも入れたくないので今のプロジェクトでは"x.y.z"とバージョンを固定しています。
 
 この辺りはみんなどうしてるんですかね？
 
@@ -48,7 +50,7 @@ BackboneにもSemantic Versioninigに従うべきというissueがあったり�
 
 https://github.com/jashkenas/backbone/issues/2888
 
-ライブラリ自体も"~x.y.z"という形式で依存関係が指定されていることも多い現実と、PATCHレベルでの変更で壊れることもある現実、なかなか難しい...
+普段使っているようなライブラリも依存関係を"~x.y.z"という形式で指定されていることが多いのですが、それによって依存ライブラリのPATCHレベルでの変更で壊れることもあったりして、なかなか難しい...
 
 (結論なし..)
 
