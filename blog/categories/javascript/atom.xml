@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-03-04T01:39:05+09:00</updated>
+  <updated>2014-03-04T01:44:42+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -62,9 +62,9 @@
 
 <p>とされています。(1.0.0未満は開発版なので上の限りではない)</p>
 
-<p>さきほどのnpmやbowerの&mdash;saveが"~.x.y.z"となっているのも上のバージョニングだと考えると納得がいきます。</p>
+<p>さきほどのnpmやbowerの&mdash;saveが"~x.y.z"となっているのも上のバージョニングだと考えると納得がいきます。</p>
 
-<p>ただ、実際その通りになっているライブラリばかりではなく、PATCHバージョンあげたら動かなくなることもありますし、そもそも1.0.0未満だと対象外なので"~.x.y.z"の指定で大丈夫というわけにはいきません。</p>
+<p>ただ、実際その通りになっているライブラリばかりではなく、PATCHバージョンあげたら動かなくなることもありますし、そもそも1.0.0未満だと対象外なので"~x.y.z"の指定で大丈夫というわけにはいきません。</p>
 
 <p>BackboneにもSemantic Versioninigに従うべきというissueがあったりしますが、実際はなかなかむずかしそうです。(jashkenasもその通りにしていたらBackbone 43.0.0になってるとコメントしたりしています)</p>
 
