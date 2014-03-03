@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ブログ移行しました - blog.koba04.com</title>
+  <title>npmやbowerライブラリのバージョン管理 - blog.koba04.com</title>
   <meta name="author" content="koba04">
 
    
@@ -32,9 +32,9 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
-  <meta property="og:title" content="ブログ移行しました - blog.koba04.com" />
+  <meta property="og:title" content="npmやbowerライブラリのバージョン管理 - blog.koba04.com" />
 <meta property="og:description" content="" />
-<meta property="og:url" content="http://blog.koba04.com/post/2014/03/02/blog-renewal/" />
+<meta property="og:url" content="http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version/" />
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/250407" />
 <meta property="og:author" content="koba04" />
 <meta property="og:site_name" content="blog.koba04.com" />
@@ -100,7 +100,7 @@
 
   <header>
   <div class="jumbotron">
-    ブログ移行しました
+    Npmやbowerライブラリのバージョン管理
 	<h5>
 
 
@@ -113,88 +113,66 @@
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2014-03-02T03:07:09+09:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2014</time></h5>
+<i class="icon-calendar-empty"></i> <time datetime="2014-03-03T23:11:37+09:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2014</time></h5>
   </div>
 </header>
   <div class="row-fluid">
     <div class="span12">
-      <p>これまでははてなダイアリーでブログを書いていたのですが、ふと思い立ってブログを移行しました。</p>
+      <h2>npmとbowerライブラリのバージョン管理</h2>
 
-<p>旧ブログ: <a href="http://d.hatena.ne.jp/koba04/">http://d.hatena.ne.jp/koba04/</a></p>
+<p>npmやbowerのライブラリをプロジェクトに導入するときは、&#8221;npm install &mdash;save xxx&#8221;や&#8221;bower install &mdash;save xxx&#8221;のような形で指定してインストールとpackage(bower).jsonへの記録をしたりします。</p>
+
+<p>その場合、package(bower).jsonには&#8221;xxx&#8221;: &ldquo;~x.y.z&#8221;という形式で記録されます。</p>
+
+<p>&ldquo;~x.y.z&#8221;という表記は、&rdquo;~1.2.3&#8221;だとすると1.2.3 &lt;= x.x.x &lt; 1.3.0 の間での最新バージョンがインストールされます。</p>
 
 <!-- more -->
 
 
-<p>ページのフッターにある通り、Octopressを使ってGithubPagesで公開しています。テーマは一覧から「Octoflat」を選んでいます。</p>
-
 <ul>
-<li><a href="http://octopress.org/">http://octopress.org/</a></li>
-<li><a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes</a></li>
+<li><a href="https://www.npmjs.org/doc/misc/semver.html">https://www.npmjs.org/doc/misc/semver.html</a></li>
 </ul>
 
 
-<p>ドメインはblog.koba04.comにkoba04.github.ioをCNAMEとして割り当てています(設定するときに間違ってAレコード消しちゃってしばらくアクセス出来なくしてしまいましたが&hellip;)</p>
+<p>なので&#8221;~&ldquo;で指定していると、同じpackage(bower).jsonでもインストールするタイミングによって微妙に異なるバージョンがインストールされることになります。</p>
 
-<h2>なぜ移行したのかとなぜOctopress？</h2>
+<p>npmやbowerにはGemのGemfile.lockやCartonのcpanfile.snapshotのように依存も含めたバージョンを固定するような仕組みはないと思います。</p>
 
-<p>はてなダイアリーだったのではてなブログとかにそろそろ移行しないとなぁと思っていたのが主な理由です。はてなブログでもよかったのですがせっかくなので色々自分で設定したいなと思い既存のブログサービスは選択しませんでした。</p>
+<p>かと言ってnode_modulesとかbower_componentsをrepositoryの中にも入れたくないので今のプロジェクトでは&#8221;x.y.z&#8221;とバージョンを固定しています。</p>
 
-<p>Octopressにした理由はGithubと親和性が高いのとRuby触るきっかけになるかなと思ったくらいです。<a href="https://ghost.org/">Ghost</a>と少し悩みましたがインフラをGithubに任せられるのがいいなと思ってOctopressにしました。</p>
+<p>この辺りはみんなどうしてるんですかね？</p>
 
-<p>Github上で管理出来るのでissueをTODOとして使えるので便利ですね。ブラウザでmarkdown編集してcommit hookでdeploy出来るようにするとさらに便利そうだなぁと思ったりしてます。</p>
+<h2>Semantic Versioning</h2>
 
-<h2>やったこと</h2>
-
-<p>基本的にはSocial系のアカウント設定したりちょっとスタイル修正したりした程度ですが、わからないことが多くて結構詰まってました&hellip;でも楽しいです。</p>
-
-<p>特にOctopressの仕組みがわかってなくて、sourceブランチとmasterブランチの関係とか、sourceの_deployにmasterが入っていて、そこからmasterのブランチをpushしてるのとか。。</p>
+<p>上の辺りを調べているときにSemantic Versioningというサイトがあるのをしりました。</p>
 
 <ul>
-<li>Twitter, Facebook, HatenaBookmarkのリンクを設置</li>
-<li>Google Analyticsの設定</li>
-<li>Disqusの設定</li>
-<li>styleの修正</li>
-<li>headerにブログ名をリンクを移動</li>
-<li>なぜか末尾の/なしのURLがcanonicalで指定されていたので削除</li>
+<li><a href="http://semver.org/">http://semver.org/</a></li>
 </ul>
 
 
-<h2>Octopressでの記事書く流れ</h2>
+<p>これによるとバージョンニングをMAJOR.MINOR.PATCHと定義していて、</p>
 
 <ul>
-<li>previewサーバー立ち上げる</li>
+<li>MAJORは互換性のない変更</li>
+<li>MINORは後方互換性のある追加機能</li>
+<li>PATCHは後方互換性のあるBugFix</li>
 </ul>
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake preview</span></code></pre></td></tr></table></div></figure>
+<p>とされています。(1.0.0未満は開発版なので上の限りではない)</p>
 
+<p>さきほどのnpmやbowerの&mdash;saveが&#8221;~.x.y.z&#8221;となっているのも上のバージョニングだと考えると納得がいきます。</p>
 
-<ul>
-<li>記事書く</li>
-</ul>
+<p>ただ、実際その通りになっているライブラリばかりではなく、PATCHバージョンあげたら動かなくなることもありますし、そもそも1.0.0未満だと対象外なので&#8221;~.x.y.z&#8221;の指定で大丈夫というわけにはいきません。</p>
 
+<p>BackboneにもSemantic Versioninigに従うべきというissueがあったりしますが、実際はなかなかむずかしそうです。(jashkenasもその通りにしていたらBackbone 43.0.0になってるとコメントしたりしています)</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake new_post["my great post"]
-</span><span class='line'>vi source/_posts/xxxx-xx-xx-my-great-post.markdown
-</span><span class='line'># 記事編集する</span></code></pre></td></tr></table></div></figure>
+<p><a href="https://github.com/jashkenas/backbone/issues/2888">https://github.com/jashkenas/backbone/issues/2888</a></p>
 
+<p>普段使っているようなライブラリも依存関係を&#8221;~x.y.z&#8221;という形式で指定されていることが多いのですが、それによって依存ライブラリのPATCHレベルでの変更で壊れることもあったりして、なかなか難しい&hellip;</p>
 
-<ul>
-<li>問題なければdeployしてpushする</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake deploy
-</span><span class='line'>git push</span></code></pre></td></tr></table></div></figure>
-
-
-<p>見にくい部分とか色々あるのでこれから徐々に直していきたいと思います！</p>
+<p>(結論なし..)</p>
 
     </div>
   </div>
@@ -213,9 +191,9 @@
 
 
 
-  <a href="/blog/categories/blog/"><span class="badge">blog</span></a>
+  <a href="/blog/categories/javascript/"><span class="badge">javascript</span></a>
 
-  <a href="/blog/categories/octopress/"><span class="badge">octopress</span></a>
+  <a href="/blog/categories/node/"><span class="badge">node</span></a>
 
 
 
@@ -225,13 +203,13 @@
       
       <div class="span6 social-sharing">
         <div class="sharing">
-  <a href="http://b.hatena.ne.jp/entry/http://blog.koba04.com/post/2014/03/02/blog-renewal/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.koba04.com/post/2014/03/02/blog-renewal/" data-via="koba04" data-counturl="http://blog.koba04.com/post/2014/03/02/blog-renewal/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version/" data-via="koba04" data-counturl="http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version/" >Tweet</a>
   
   
   
-    <div class="fb-like" data-href="http://blog.koba04.com/post/2014/03/02/blog-renewal/" data-send="true" data-width="100" data-show-faces="false"></div>
+    <div class="fb-like" data-href="http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version/" data-send="true" data-width="100" data-show-faces="false"></div>
   
 </div>
 
@@ -245,8 +223,8 @@
       <div class="span12">
         <p class="meta">
           
+            <a class="basic-alignment left" href="/post/2014/03/02/blog-renewal/" title="Previous Post: ブログ移行しました">&laquo; ブログ移行しました</a>
           
-            <a class="basic-alignment right" href="/post/2014/03/03/npm-and-bower-semantic-version/" title="Next Post: npmやbowerライブラリのバージョン管理">npmやbowerライブラリのバージョン管理 &raquo;</a>
           
         </p>
       </div>
@@ -284,8 +262,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.koba04.com/post/2014/03/02/blog-renewal/';
-        var disqus_url = 'http://blog.koba04.com/post/2014/03/02/blog-renewal/';
+        var disqus_identifier = 'http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version/';
+        var disqus_url = 'http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-03-03T00:15:49+09:00</updated>
+  <updated>2014-03-04T01:39:05+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[npmやbowerライブラリのバージョン管理]]></title>
+    <link href="http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version/"/>
+    <updated>2014-03-03T23:11:37+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version</id>
+    <content type="html"><![CDATA[<h2>npmとbowerライブラリのバージョン管理</h2>
+
+<p>npmやbowerのライブラリをプロジェクトに導入するときは、&#8221;npm install &mdash;save xxx&#8221;や&#8221;bower install &mdash;save xxx&#8221;のような形で指定してインストールとpackage(bower).jsonへの記録をしたりします。</p>
+
+<p>その場合、package(bower).jsonには&#8221;xxx&#8221;: &ldquo;~x.y.z&#8221;という形式で記録されます。</p>
+
+<p>&ldquo;~x.y.z&#8221;という表記は、&rdquo;~1.2.3&#8221;だとすると1.2.3 &lt;= x.x.x &lt; 1.3.0 の間での最新バージョンがインストールされます。</p>
+
+<!-- more -->
+
+
+<ul>
+<li><a href="https://www.npmjs.org/doc/misc/semver.html">https://www.npmjs.org/doc/misc/semver.html</a></li>
+</ul>
+
+
+<p>なので&#8221;~&ldquo;で指定していると、同じpackage(bower).jsonでもインストールするタイミングによって微妙に異なるバージョンがインストールされることになります。</p>
+
+<p>npmやbowerにはGemのGemfile.lockやCartonのcpanfile.snapshotのように依存も含めたバージョンを固定するような仕組みはないと思います。</p>
+
+<p>かと言ってnode_modulesとかbower_componentsをrepositoryの中にも入れたくないので今のプロジェクトでは&#8221;x.y.z&#8221;とバージョンを固定しています。</p>
+
+<p>この辺りはみんなどうしてるんですかね？</p>
+
+<h2>Semantic Versioning</h2>
+
+<p>上の辺りを調べているときにSemantic Versioningというサイトがあるのをしりました。</p>
+
+<ul>
+<li><a href="http://semver.org/">http://semver.org/</a></li>
+</ul>
+
+
+<p>これによるとバージョンニングをMAJOR.MINOR.PATCHと定義していて、</p>
+
+<ul>
+<li>MAJORは互換性のない変更</li>
+<li>MINORは後方互換性のある追加機能</li>
+<li>PATCHは後方互換性のあるBugFix</li>
+</ul>
+
+
+<p>とされています。(1.0.0未満は開発版なので上の限りではない)</p>
+
+<p>さきほどのnpmやbowerの&mdash;saveが&#8221;~.x.y.z&#8221;となっているのも上のバージョニングだと考えると納得がいきます。</p>
+
+<p>ただ、実際その通りになっているライブラリばかりではなく、PATCHバージョンあげたら動かなくなることもありますし、そもそも1.0.0未満だと対象外なので&#8221;~.x.y.z&#8221;の指定で大丈夫というわけにはいきません。</p>
+
+<p>BackboneにもSemantic Versioninigに従うべきというissueがあったりしますが、実際はなかなかむずかしそうです。(jashkenasもその通りにしていたらBackbone 43.0.0になってるとコメントしたりしています)</p>
+
+<p><a href="https://github.com/jashkenas/backbone/issues/2888">https://github.com/jashkenas/backbone/issues/2888</a></p>
+
+<p>普段使っているようなライブラリも依存関係を&#8221;~x.y.z&#8221;という形式で指定されていることが多いのですが、それによって依存ライブラリのPATCHレベルでの変更で壊れることもあったりして、なかなか難しい&hellip;</p>
+
+<p>(結論なし..)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ブログ移行しました]]></title>
