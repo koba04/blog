@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-03-04T10:05:14+09:00</updated>
+  <updated>2014-03-04T12:44:51+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -47,6 +47,112 @@
 <blockquote><p>npm shrinkwrapってコマンドがあって、それを使うとライブラリのバージョンを固定できる。bower shrinkwrapは実装待ち <a href="https://github.com/bower/bower/issues/505">https://github.com/bower/bower/issues/505</a></p></blockquote>
 
 <p>というわけでnpmはnpm-shrinkwrapを使って管理することにしました yosuke_furukawa++</p>
+
+<h2>npm-shrinkwrap</h2>
+
+<p><a href="https://www.npmjs.org/doc/cli/npm-shrinkwrap.html">https://www.npmjs.org/doc/cli/npm-shrinkwrap.html</a></p>
+
+<p>node_modulesにライブラリがインストールされている状態でnpm shrinkwrapするとnpm-shrinkwrap.jsonという依存しているライブラリのバージョンが記載されたファイルがつくられます。</p>
+
+<p>devDependenciesも含めたい場合は、&mdash;devオプションを付ける必要があります</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>% npm shrinkwrap --save
+</span><span class='line'>wrote npm-shrinkwrap.json
+</span><span class='line'>
+</span><span class='line'>% cat npm-shrinkwrap.json
+</span><span class='line'>{
+</span><span class='line'>  "name": "myapp",
+</span><span class='line'>  "version": "0.0.1",
+</span><span class='line'>  "dependencies": {
+</span><span class='line'>    "grunt-contrib-concat": {
+</span><span class='line'>      "version": "0.3.0",
+</span><span class='line'>      "from": "grunt-contrib-concat@"
+</span><span class='line'>    },
+</span><span class='line'>    "grunt-remove-logging": {
+</span><span class='line'>      "version": "0.1.1",
+</span><span class='line'>      "from": "grunt-remove-logging@",
+</span><span class='line'>      "resolved": "https://registry.npmjs.org/grunt-remove-logging/-/grunt-remove-logging-0.1.1.tgz"
+</span><span class='line'>    },
+</span><span class='line'>    "grunt-contrib-coffee": {
+</span><span class='line'>      "version": "0.7.0",
+</span><span class='line'>      "from": "grunt-contrib-coffee@",
+</span><span class='line'>      "dependencies": {
+</span><span class='line'>        "coffee-script": {
+</span><span class='line'>          "version": "1.6.3",
+</span><span class='line'>          "from": "coffee-script@~1.6.2"
+</span><span class='line'>        }
+</span><span class='line'>      }
+</span><span class='line'>    },
+</span><span class='line'>    "grunt-contrib-compass": {
+</span><span class='line'>      "version": "0.6.0",
+</span><span class='line'>      "from": "grunt-contrib-compass@",
+</span><span class='line'>      "resolved": "https://registry.npmjs.org/grunt-contrib-compass/-/grunt-contrib-compass-0.6.0.tgz",
+</span><span class='line'>      "dependencies": {
+</span><span class='line'>        "tmp": {
+</span><span class='line'>          "version": "0.0.21",
+</span><span class='line'>          "from": "tmp@0.0.21"
+</span><span class='line'>        },
+</span><span class='line'>        "dargs": {
+</span><span class='line'>          "version": "0.1.0",
+</span><span class='line'>          "from": "dargs@~0.1.0"
+</span><span class='line'>        },
+</span><span class='line'>        "async": {
+</span><span class='line'>          "version": "0.2.9",
+</span><span class='line'>          "from": "async@~0.2.0"
+</span><span class='line'>        }
+</span><span class='line'>      }
+</span><span class='line'>    },
+</span><span class='line'>:</span></code></pre></td></tr></table></div></figure>
+
+
+<p>package.jsonで&#8221;x.y.z&#8221;指定でバージョン固定した場合でもそのライブラリが依存しているライブラリは&#8221;~x.y.z&#8221;で指定されているためバージョンがズレることがあったのですが、npm-shrinkwrapを使うと依存しているライブラリのバージョンも固定出来て素晴らしい！</p>
 
 <h2>Semantic Versioning</h2>
 
