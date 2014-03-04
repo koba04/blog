@@ -4,7 +4,7 @@
   <title><![CDATA[Category: node | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/node/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-03-04T09:38:39+09:00</updated>
+  <updated>2014-03-04T10:05:14+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -38,13 +38,15 @@
 
 <p><del>npmやbowerにはGemのGemfile.lockやCartonのcpanfile.snapshotのように依存も含めたバージョンを固定するような仕組みはないと思います。</del></p>
 
+<p><del>かと言ってnode_modulesとかbower_componentsをrepositoryの中にも入れたくないので今のプロジェクトでは"x.y.z"とバージョンを固定しています。</del></p>
+
+<p><del>この辺りはみんなどうしてるんですかね？</del></p>
+
 <p><strong>[追記:2013-03-04] yosuke_furukawaさんに教えていただきました!ありがとうございます！</strong></p>
 
 <blockquote><p>npm shrinkwrapってコマンドがあって、それを使うとライブラリのバージョンを固定できる。bower shrinkwrapは実装待ち <a href="https://github.com/bower/bower/issues/505">https://github.com/bower/bower/issues/505</a></p></blockquote>
 
-<p>かと言ってnode_modulesとかbower_componentsをrepositoryの中にも入れたくないので今のプロジェクトでは"x.y.z"とバージョンを固定しています。</p>
-
-<p>この辺りはみんなどうしてるんですかね？</p>
+<p>というわけでnpmはnpm-shrinkwrapを使って管理することにしました yosuke_furukawa++</p>
 
 <h2>Semantic Versioning</h2>
 
