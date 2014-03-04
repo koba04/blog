@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-03-04T12:52:30+09:00</updated>
+  <updated>2014-03-04T12:59:22+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -103,7 +103,7 @@
 <span class='line-number'>45</span>
 <span class='line-number'>46</span>
 <span class='line-number'>47</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>% npm shrinkwrap --save
+</pre></td><td class='code'><pre><code class=''><span class='line'>% npm shrinkwrap --dev
 </span><span class='line'>wrote npm-shrinkwrap.json
 </span><span class='line'>
 </span><span class='line'>% cat npm-shrinkwrap.json
