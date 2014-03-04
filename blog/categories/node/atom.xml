@@ -4,7 +4,7 @@
   <title><![CDATA[Category: node | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/node/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-03-04T12:48:02+09:00</updated>
+  <updated>2014-03-04T12:52:30+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -54,9 +54,8 @@
 
 <p>node_modulesにライブラリがインストールされている状態でnpm shrinkwrapするとnpm-shrinkwrap.jsonという依存しているライブラリのバージョンが記載されたファイルがつくられます。</p>
 
-<p>devDependenciesも含めたい場合は、&mdash;devオプションを付ける必要があります</p>
-
-<p>```
+<p>devDependenciesも含めたい場合は、&mdash;devオプションを付ける必要があります
+```
 % npm shrinkwrap &mdash;save
 wrote npm-shrinkwrap.json</p>
 
@@ -106,14 +105,13 @@ wrote npm-shrinkwrap.json</p>
 },
 </code></pre>
 
-<p>:</p>
+<p>:
+```</p>
 
-<p>% npm install
-:</p>
-
-<h1>npm-shrinkwrap.jsonに記載されてるバージョンでインストールされる</h1>
-
-<p>```</p>
+<p>npm-shrinkwrap.jsonがある状態でnpm installするとnpm-shrinkwrap.json記載されてるバージョンでインストールされます。
+<code>
+% npm install
+</code></p>
 
 <p>package.jsonで"x.y.z"指定でバージョン固定した場合でもそのライブラリが依存しているライブラリは"~x.y.z"で指定されているためバージョンがズレることがあったのですが、npm-shrinkwrapを使うと依存しているライブラリのバージョンも固定出来て素晴らしい！</p>
 

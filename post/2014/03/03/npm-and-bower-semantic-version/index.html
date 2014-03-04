@@ -203,10 +203,6 @@
 <span class='line-number'>45</span>
 <span class='line-number'>46</span>
 <span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>% npm shrinkwrap --save
 </span><span class='line'>wrote npm-shrinkwrap.json
 </span><span class='line'>
@@ -253,11 +249,13 @@
 </span><span class='line'>        }
 </span><span class='line'>      }
 </span><span class='line'>    },
-</span><span class='line'>:
-</span><span class='line'>
-</span><span class='line'>% npm install
-</span><span class='line'>:
-</span><span class='line'># npm-shrinkwrap.jsonに記載されてるバージョンでインストールされる</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>:</span></code></pre></td></tr></table></div></figure>
+
+
+<p>npm-shrinkwrap.jsonがある状態でnpm installするとnpm-shrinkwrap.json記載されてるバージョンでインストールされます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>% npm install</span></code></pre></td></tr></table></div></figure>
 
 
 <p>package.jsonで&#8221;x.y.z&#8221;指定でバージョン固定した場合でもそのライブラリが依存しているライブラリは&#8221;~x.y.z&#8221;で指定されているためバージョンがズレることがあったのですが、npm-shrinkwrapを使うと依存しているライブラリのバージョンも固定出来て素晴らしい！</p>
