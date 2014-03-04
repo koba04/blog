@@ -43,7 +43,6 @@ https://www.npmjs.org/doc/cli/npm-shrinkwrap.html
 node\_modulesにライブラリがインストールされている状態でnpm shrinkwrapするとnpm-shrinkwrap.jsonという依存しているライブラリのバージョンが記載されたファイルがつくられます。
 
 devDependenciesも含めたい場合は、--devオプションを付ける必要があります
-
 ```
 % npm shrinkwrap --save
 wrote npm-shrinkwrap.json
@@ -92,10 +91,11 @@ wrote npm-shrinkwrap.json
       }
     },
 :
+```
 
+npm-shrinkwrap.jsonがある状態でnpm installするとnpm-shrinkwrap.json記載されてるバージョンでインストールされます。
+```
 % npm install
-:
-# npm-shrinkwrap.jsonに記載されてるバージョンでインストールされる
 ```
 
 package.jsonで"x.y.z"指定でバージョン固定した場合でもそのライブラリが依存しているライブラリは"~x.y.z"で指定されているためバージョンがズレることがあったのですが、npm-shrinkwrapを使うと依存しているライブラリのバージョンも固定出来て素晴らしい！
