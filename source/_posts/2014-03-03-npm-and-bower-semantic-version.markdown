@@ -44,7 +44,7 @@ node\_modulesにライブラリがインストールされている状態でnpm 
 
 devDependenciesも含めたい場合は、--devオプションを付ける必要があります
 ```
-% npm shrinkwrap --save
+% npm shrinkwrap --dev
 wrote npm-shrinkwrap.json
 
 % cat npm-shrinkwrap.json
