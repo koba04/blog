@@ -21,7 +21,12 @@ npmやbowerのライブラリをプロジェクトに導入するときは、"np
 
 なので"~"で指定していると、同じpackage(bower).jsonでもインストールするタイミングによって微妙に異なるバージョンがインストールされることになります。
 
-npmやbowerにはGemのGemfile.lockやCartonのcpanfile.snapshotのように依存も含めたバージョンを固定するような仕組みはないと思います。
+~~npmやbowerにはGemのGemfile.lockやCartonのcpanfile.snapshotのように依存も含めたバージョンを固定するような仕組みはないと思います。~~
+
+**[追記:2013-03-04] yosuke_furukawaさんに教えていただきました!ありがとうございます！**
+
+>
+npm shrinkwrapってコマンドがあって、それを使うとライブラリのバージョンを固定できる。bower shrinkwrapは実装待ち https://github.com/bower/bower/issues/505
 
 かと言ってnode_modulesとかbower_componentsをrepositoryの中にも入れたくないので今のプロジェクトでは"x.y.z"とバージョンを固定しています。
 
