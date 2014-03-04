@@ -36,6 +36,67 @@ npm shrinkwrapってコマンドがあって、それを使うとライブラリ
 というわけでnpmはnpm-shrinkwrapを使って管理することにしました yosuke\_furukawa++
 
 
+## npm-shrinkwrap
+
+https://www.npmjs.org/doc/cli/npm-shrinkwrap.html
+
+node\_modulesにライブラリがインストールされている状態でnpm shrinkwrapするとnpm-shrinkwrap.jsonという依存しているライブラリのバージョンが記載されたファイルがつくられます。
+
+devDependenciesも含めたい場合は、--devオプションを付ける必要があります
+
+```
+% npm shrinkwrap --save
+wrote npm-shrinkwrap.json
+
+% cat npm-shrinkwrap.json
+{
+  "name": "myapp",
+  "version": "0.0.1",
+  "dependencies": {
+    "grunt-contrib-concat": {
+      "version": "0.3.0",
+      "from": "grunt-contrib-concat@"
+    },
+    "grunt-remove-logging": {
+      "version": "0.1.1",
+      "from": "grunt-remove-logging@",
+      "resolved": "https://registry.npmjs.org/grunt-remove-logging/-/grunt-remove-logging-0.1.1.tgz"
+    },
+    "grunt-contrib-coffee": {
+      "version": "0.7.0",
+      "from": "grunt-contrib-coffee@",
+      "dependencies": {
+        "coffee-script": {
+          "version": "1.6.3",
+          "from": "coffee-script@~1.6.2"
+        }
+      }
+    },
+    "grunt-contrib-compass": {
+      "version": "0.6.0",
+      "from": "grunt-contrib-compass@",
+      "resolved": "https://registry.npmjs.org/grunt-contrib-compass/-/grunt-contrib-compass-0.6.0.tgz",
+      "dependencies": {
+        "tmp": {
+          "version": "0.0.21",
+          "from": "tmp@0.0.21"
+        },
+        "dargs": {
+          "version": "0.1.0",
+          "from": "dargs@~0.1.0"
+        },
+        "async": {
+          "version": "0.2.9",
+          "from": "async@~0.2.0"
+        }
+      }
+    },
+:
+```
+
+package.jsonで"x.y.z"指定でバージョン固定した場合でもそのライブラリが依存しているライブラリは"~x.y.z"で指定されているためバージョンがズレることがあったのですが、npm-shrinkwrapを使うと依存しているライブラリのバージョンも固定出来て素晴らしい！
+
+
 ## Semantic Versioning
 
 上の辺りを調べているときにSemantic Versioningというサイトがあるのをしりました。
