@@ -92,6 +92,10 @@ wrote npm-shrinkwrap.json
       }
     },
 :
+
+% npm install
+:
+# npm-shrinkwrap.jsonに記載されてるバージョンでインストールされる
 ```
 
 package.jsonで"x.y.z"指定でバージョン固定した場合でもそのライブラリが依存しているライブラリは"~x.y.z"で指定されているためバージョンがズレることがあったのですが、npm-shrinkwrapを使うと依存しているライブラリのバージョンも固定出来て素晴らしい！
