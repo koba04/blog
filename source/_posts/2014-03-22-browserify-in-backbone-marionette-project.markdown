@@ -196,7 +196,7 @@ describe "views/layouts/top", ->
 ## まとめ
 
 * まだまだ情報が少ない気がしますが、依存関係を意識せずrequireでライブラリを使えるのはわかりやすくてよさそうに感じました。
-
+* https://github.com/koba04/backbone-boilerplate
 
 ## 参考
 
