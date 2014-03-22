@@ -1,11 +1,5 @@
 // Add your custom styling here.
 
-
-h2 {
-  border-bottom: solid 1px #e44a4e;
-  margin: 25px 0 10px 0;
-}
-
 li {
   margin: 5px 0;
 }
@@ -22,6 +16,13 @@ h1.link {
 
 h2 {
   font-size: 20px;
+  border-bottom: solid 1px #e44a4e;
+  margin: 25px 0 10px 0;
+}
+
+h3 {
+  border-bottom: solid 1px;
+  margin: 25px 0 10px 0;
 }
 
 .jumbotron {
@@ -55,4 +56,8 @@ blockquote {
   p {
     font-size: 0.9em;
   }
+}
+
+strong {
+  color: $primary-color;
 }
