@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "browserify in Backbone.Marionette project"
-date: 2014-03-22 13:39:46 +0900
+date: 2014-03-23 21:05:46 +0900
 comments: true
 categories: browserify backbone.js marionette.js
 ---
