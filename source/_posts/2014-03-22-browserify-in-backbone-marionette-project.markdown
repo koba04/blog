@@ -115,9 +115,9 @@ users = require 'myapp/collections/users'
 
 * aliasで全部のmodelとかviewを指定すれば出来そうな気もするけどそれは面倒なのでやりたくない・・・。
 
-## 使う例
+## Sample
 
-* アプリ(coffee/views/layouts/top.coffee)
+* App(coffee/views/layouts/top.coffee)
 
 ```coffeescript
 'use strict'
@@ -143,7 +143,7 @@ module.exports = class extends Backbone.Marionette.Layout
     @topTracks.show new TracksView collection: tracks
 ```
 
-* テスト(specs/views/layouts/top_spec.coffee)
+* Spec(specs/views/layouts/top_spec.coffee)
 
 ```coffeescript
 describe "views/layouts/top", ->
@@ -193,11 +193,11 @@ describe "views/layouts/top", ->
       expect(view.topTracks.currentView.collection).to.be tracks
 ```
 
-## まとめ
+## Summary
 
 * まだまだ情報が少ない気がしますが、依存関係を意識せずrequireでライブラリを使えるのはわかりやすくてよさそうに感じました。
 * https://github.com/koba04/backbone-boilerplate
 
-## 参考
+## References
 
 * http://aeflash.com/2014-03/a-year-with-browserify.html
