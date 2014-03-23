@@ -24,11 +24,13 @@ browserifyはbrowser環境でもnodeのようにrequire('xxx')というスタイ
 
 * https://github.com/koba04/backbone-boilerplate
 
-サンプルプロジェクト過ぎると役に立たないと思うので、webアプリっぽくLast.FMのAPI使ってアーティストの人気の曲一覧を表示するようなアプリにしてみました。
-
 {% img /images/last-fm-top-tracks.png 'Atrist Top Tracks by Last.FM' %}
 
 * http://koba04.com/last-fm-top-tracks/
+
+サンプルプロジェクト過ぎると役に立たないと思うので、テストも書きつつwebアプリっぽくLast.FMのAPI使ってアーティストの人気の曲一覧を表示するようなアプリにしてみました。
+
+(testling対応はIssueにしているのでそのうちやります... https://ci.testling.com/)
 
 
 ## grunt-browserify
@@ -85,7 +87,7 @@ coffeescriptやhandlebarsのgrunt pluginを別途使用する必要がなくて�
 
 ### separate files
 
-ライブラリ(vendor)とアプリ(app)のjsを分けているのは、ブラウザでのキャッシュやビルド時間を少しでも短くするためです。
+ライブラリ(vendor)とアプリ(app)のjsを分けているのは、vendor.jsはほとんど変更されることがないので毎回ビルドに含まれるのは無駄なためです。
 
 ### external
 
@@ -195,7 +197,9 @@ describe "views/layouts/top", ->
 
 ## Summary
 
-* まだまだ情報が少ない気がしますが、依存関係を意識せずrequireでライブラリを使えるのはわかりやすくてよさそうに感じました。
+まだまだ情報が少ない気がしますが、依存関係を意識せずrequireでライブラリを使えるのはわかりやすくてよさそうに感じました(実装を理解するともっと便利に使えそう)
+
+
 * https://github.com/koba04/backbone-boilerplate
 
 ## References
