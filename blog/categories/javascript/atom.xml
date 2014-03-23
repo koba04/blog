@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-03-04T01:44:42+09:00</updated>
+  <updated>2014-03-04T14:31:15+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -36,11 +36,86 @@
 
 <p>なので"~&ldquo;で指定していると、同じpackage(bower).jsonでもインストールするタイミングによって微妙に異なるバージョンがインストールされることになります。</p>
 
-<p>npmやbowerにはGemのGemfile.lockやCartonのcpanfile.snapshotのように依存も含めたバージョンを固定するような仕組みはないと思います。</p>
+<p><del>npmやbowerにはGemのGemfile.lockやCartonのcpanfile.snapshotのように依存も含めたバージョンを固定するような仕組みはないと思います。</del></p>
 
-<p>かと言ってnode_modulesとかbower_componentsをrepositoryの中にも入れたくないので今のプロジェクトでは"x.y.z"とバージョンを固定しています。</p>
+<p><del>かと言ってnode_modulesとかbower_componentsをrepositoryの中にも入れたくないので今のプロジェクトでは"x.y.z"とバージョンを固定しています。</del></p>
 
-<p>この辺りはみんなどうしてるんですかね？</p>
+<p><del>この辺りはみんなどうしてるんですかね？</del></p>
+
+<p><strong>[追記:2013-03-04] yosuke_furukawaさんに教えていただきました!ありがとうございます！</strong></p>
+
+<blockquote><p>npm shrinkwrapってコマンドがあって、それを使うとライブラリのバージョンを固定できる。bower shrinkwrapは実装待ち <a href="https://github.com/bower/bower/issues/505">https://github.com/bower/bower/issues/505</a></p></blockquote>
+
+<p>というわけでnpmはnpm-shrinkwrapを使って管理することにしました yosuke_furukawa++</p>
+
+<h2>npm-shrinkwrap</h2>
+
+<p><a href="https://www.npmjs.org/doc/cli/npm-shrinkwrap.html">https://www.npmjs.org/doc/cli/npm-shrinkwrap.html</a></p>
+
+<p>node_modulesにライブラリがインストールされている状態でnpm shrinkwrapするとnpm-shrinkwrap.jsonという依存しているライブラリのバージョンが記載されたファイルがつくられます。</p>
+
+<p>devDependenciesも含めたい場合は、&mdash;devオプションを付ける必要があります
+```
+% npm install
+:
+% npm shrinkwrap &mdash;dev
+wrote npm-shrinkwrap.json</p>
+
+<p>% cat npm-shrinkwrap.json
+{
+  &ldquo;name&rdquo;: &ldquo;myapp&rdquo;,
+  &ldquo;version&rdquo;: &ldquo;0.0.1&rdquo;,
+  &ldquo;dependencies&rdquo;: {</p>
+
+<pre><code>"grunt-contrib-concat": {
+  "version": "0.3.0",
+  "from": "grunt-contrib-concat@"
+},
+"grunt-remove-logging": {
+  "version": "0.1.1",
+  "from": "grunt-remove-logging@",
+  "resolved": "https://registry.npmjs.org/grunt-remove-logging/-/grunt-remove-logging-0.1.1.tgz"
+},
+"grunt-contrib-coffee": {
+  "version": "0.7.0",
+  "from": "grunt-contrib-coffee@",
+  "dependencies": {
+    "coffee-script": {
+      "version": "1.6.3",
+      "from": "coffee-script@~1.6.2"
+    }
+  }
+},
+"grunt-contrib-compass": {
+  "version": "0.6.0",
+  "from": "grunt-contrib-compass@",
+  "resolved": "https://registry.npmjs.org/grunt-contrib-compass/-/grunt-contrib-compass-0.6.0.tgz",
+  "dependencies": {
+    "tmp": {
+      "version": "0.0.21",
+      "from": "tmp@0.0.21"
+    },
+    "dargs": {
+      "version": "0.1.0",
+      "from": "dargs@~0.1.0"
+    },
+    "async": {
+      "version": "0.2.9",
+      "from": "async@~0.2.0"
+    }
+  }
+},
+</code></pre>
+
+<p>:
+```</p>
+
+<p>npm-shrinkwrap.jsonがある状態でnpm installするとnpm-shrinkwrap.json記載されてるバージョンでインストールされます。
+<code>
+% npm install
+</code></p>
+
+<p>package.jsonで"x.y.z"指定でバージョン固定した場合でもそのライブラリが依存しているライブラリは"~x.y.z"で指定されているためバージョンがズレることがあったのですが、npm-shrinkwrapを使うと依存しているライブラリのバージョンも固定出来て素晴らしい！</p>
 
 <h2>Semantic Versioning</h2>
 
