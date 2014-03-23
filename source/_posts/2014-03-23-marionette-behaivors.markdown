@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Marionette Behaivors (1.7 feature)"
-date: 2014-03-23 15:14:30 +0900
+date: 2014-03-23 21:10:30 +0900
 comments: true
 categories: marionette.js
 ---
