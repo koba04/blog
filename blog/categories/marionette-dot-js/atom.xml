@@ -4,7 +4,7 @@
   <title><![CDATA[Category: marionette.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/marionette-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-03-23T21:05:55+09:00</updated>
+  <updated>2014-03-23T21:10:44+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Marionette Behaivors (1.7 feature)]]></title>
+    <link href="http://blog.koba04.com/post/2014/03/23/marionette-behaivors/"/>
+    <updated>2014-03-23T21:10:30+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/03/23/marionette-behaivors</id>
+    <content type="html"><![CDATA[<h2>Release 1.7</h2>
+
+<p><a href="https://github.com/marionettejs/backbone.marionette/blob/master/changelog.md">https://github.com/marionettejs/backbone.marionette/blob/master/changelog.md</a></p>
+
+<p>Marionette 1.7がリリースされましたね。今回の大きな変更はBehaivorsというのが追加されたことです。</p>
+
+<h2>Behaivors</h2>
+
+<p>BehaivorsというのはViewでのMixinみたいなもので、MarionetteでViewを作っていると共通の処理をまとめたいけど、継承関係にするのもなんか違うなぁということがあってそういうときに使うことが出来ます。</p>
+
+<!-- more -->
+
+
+<ul>
+<li><a href="https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.behavior.md">https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.behavior.md</a></li>
+<li><a href="https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.behaviors.md">https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.behaviors.md</a></li>
+</ul>
+
+
+<p>上のドキュメントを見るとだいたいわかるのですが、例にあるようにtooltipだったりViewを閉じるときにalertを出したりしたいときに便利です。</p>
+
+<h2>How to use</h2>
+
+<p>ここでは指定された秒数経過すると消えるviewを作ってみます</p>
+
+<h3>Marionette.Behaviors.behaviorsLookup</h3>
+
+<p>Behaivorsを使うには最低限、Marionette.Behaviors.behaviorsLookupを実装する必要があります。</p>
+
+<p>behaviorsLookupで返した値を元にgetBehaviorClassというメソッドでBehaivorを取得するような処理になっていて、getBehaivorClassのデフォルトの実装は、<strong>Behaviors.behaviorsLookup[key]</strong>のようにbehaviorsLookupで返したオブジェクトにkeyを渡して取得するようになっています。</p>
+
+<p>なのでここでは単純にオブジェクトを返してみます。</p>
+
+<p>```coffeescript
+Backbone.Marionette.Behaviors.behaviorsLookup =  &ndash;>
+  return {</p>
+
+<pre><code>Close: CloseBehavior
+</code></pre>
+
+<p>  }
+```</p>
+
+<h3>Behaivor</h3>
+
+<p>BehaivorではonShow、onRenderなどのイベント、$,$elがproxyされていて、Behaivorを使用しているviewもviewとして参照できるのでその辺りを使って処理を書いていきます。</p>
+
+<p>```coffeescript
+class CloseBehavior extends Backbone.Marionette.Behavior
+  defaults:</p>
+
+<pre><code>seconds: 3  # 指定がない場合は3秒で閉じる
+</code></pre>
+
+<p>  onShow: &ndash;></p>
+
+<pre><code>setTimeout =&gt;
+  @view.close()
+,@options.seconds * 1000
+</code></pre>
+
+<p>```</p>
+
+<h3>View</h3>
+
+<p>Viewではbehaivorsとして使いたいBehaivorのkey(getBehaivorClassに渡される)とoptionを指定するだけです</p>
+
+<p>```coffeescript
+class SomeView extends Backbone.Marionette.ItemView
+  behaviors:</p>
+
+<pre><code>Close:
+  seconds: 10
+</code></pre>
+
+<p>```</p>
+
+<p>View周りの処理をまとめやすくなっていいですね！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[browserify in Backbone.Marionette project]]></title>
