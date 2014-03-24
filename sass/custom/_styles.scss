@@ -29,6 +29,7 @@ h3 {
 .jumbotron {
   font-size: $base-font-size;
   line-height: 150%;
+  margin-top: 10px;
   padding: 0;
   @media screen and (max-width: 480px) {
     font-size: $base-font-size - 5;
