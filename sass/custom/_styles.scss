@@ -28,7 +28,11 @@ h3 {
 
 .jumbotron {
   font-size: $base-font-size;
+  line-height: 150%;
   padding: 0;
+  @media screen and (max-width: 480px) {
+    font-size: $base-font-size - 5;
+  }
 }
 
 .nav-title {
