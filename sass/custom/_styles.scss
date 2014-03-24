@@ -1,45 +1,52 @@
 // Add your custom styling here.
 
+$header-main-font-size: 30px;
+$header-sub-font-size: 20px;
+$header-sub-margin: 25px 0 10px 0;
+$nav-font-color: #FFF;
+
+
+
 li {
   margin: 5px 0;
 }
 
-$base-font-size: 30px;
-$nav-font-color: #FFF;
-
 h1.link {
-  font-size: $base-font-size;
+  font-size: $header-main-font-size;
+  @media screen and (max-width: 480px) {
+    font-size: $header-main-font-size - 5;
+  }
   a {
     color: $primary-color;
   }
 }
 
 h2 {
-  font-size: 20px;
+  font-size: $header-sub-font-size;
+  margin: $header-sub-margin;
   border-bottom: solid 1px #e44a4e;
-  margin: 25px 0 10px 0;
 }
 
 h3 {
-  font-size: 20px;
+  font-size: $header-sub-font-size;
+  margin: $header-sub-margin;
   border-bottom: solid 1px;
-  margin: 25px 0 10px 0;
 }
 
 .jumbotron {
-  font-size: $base-font-size;
+  font-size: $header-main-font-size;
   line-height: 150%;
   margin-top: 10px;
   padding: 0;
   @media screen and (max-width: 480px) {
-    font-size: $base-font-size - 5;
+    font-size: $header-main-font-size - 5;
   }
 }
 
 .nav-title {
-  font-size: $base-font-size;
+  font-size: $header-main-font-size;
   line-height: 100%;
-  margin-right: $base-font-size;
+  margin-right: $header-main-font-size;
   padding-top: 10px;
   a {
     color: $nav-font-color;
