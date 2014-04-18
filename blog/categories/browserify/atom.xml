@@ -4,7 +4,7 @@
   <title><![CDATA[Category: browserify | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/browserify/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-04-17T01:14:14+09:00</updated>
+  <updated>2014-04-18T20:34:58+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -258,6 +258,16 @@ opacity: 1
 </code></pre>
 
 <p>```</p>
+
+<h3>追記</h3>
+
+<p>ちなみにネストしたViewの場合は色々な解決方法があると思うのですが、v-viewとv-refを組み合わせて実現することも出来ます</p>
+
+<p>v-refを使うことで子のViewを参照することができるのでそれを使って同じようにv-componentを更新する感じです</p>
+
+<p>サンプルはこんな感じ</p>
+
+<p><a href="http://jsfiddle.net/koba04/WgSK9/1/">http://jsfiddle.net/koba04/WgSK9/1/</a></p>
 
 <h2>more?</h2>
 
