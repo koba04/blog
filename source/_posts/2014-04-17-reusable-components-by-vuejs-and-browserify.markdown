@@ -186,6 +186,17 @@ v-viewとv-animationの組み合わせについては、v-leaveのanimation-end�
     -webkit-transform: scale(0)
 ```
 
+### 追記
+
+ちなみにネストしたViewの場合は色々な解決方法があると思うのですが、v-viewとv-refを組み合わせて実現することも出来ます
+
+v-refを使うことで子のViewを参照することができるのでそれを使って同じようにv-componentを更新する感じです
+
+サンプルはこんな感じ
+
+http://jsfiddle.net/koba04/WgSK9/1/
+
+
 ## more?
 
 本当はここにtestling + mocha + power-assertな組み合わせのテストも含めたかったのですが間に合わず・・。
