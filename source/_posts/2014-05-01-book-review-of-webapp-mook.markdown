@@ -6,13 +6,16 @@ comments: true
 categories: book
 ---
 
-<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=musicfanclub-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=4774163678" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+[Webアプリエンジニア養成読本](http://www.amazon.co.jp/dp/4774163678?)
+
 
 ## 全体の感想
 
 タイトル通り、これからWebアプリエンジニアになる人の最初のお供にとても相応しい本だなという感想を持ちました。
 
 構成としては、1章でWebについて、2章でPHPとRubyによる実践、3章でサーバー環境について、4章でサービスの運用について書かれていて、コンパクトなサイズで幅広く触れられています。
+
+<!-- more -->
 
 各章の最後でこの本を読んだ次の本のオススメが書かれていたりと、Webアプリ開発をやる上で知っておくべきことに対する道標が示されているような内容になっています。なので、この本を読めばバリバリ開発出来るぜーとはならないと思いますが、この本でどういったことを知っておく必要があるのか把握しておくことはとても役に立つと思うので、ちょうど4月からWebアプリエンジニアとして働くような人には特にオススメだと思いました。
 
@@ -56,5 +59,4 @@ Webアプリケーションを作ってみたいと思っている人や仕事�
 
 紹介されている本もいい本ばかりなので、この本を読んだあとに紹介されている本を読んで知識を深めていくとよさそうだと思いました。
 
-
-
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=musicfanclub-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=4774163678" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
