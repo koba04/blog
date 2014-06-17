@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-05-02T00:41:32+09:00</updated>
+  <updated>2014-06-18T00:52:09+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,134 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Don't use Backbone.Model#toJSON for render]]></title>
+    <link href="http://blog.koba04.com/post/2014/06/17/dont-use-backbone-model-tojson-for-render/"/>
+    <updated>2014-06-17T23:32:16+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/06/17/dont-use-backbone-model-tojson-for-render</id>
+    <content type="html"><![CDATA[<p>Marionette.jsのrepoを見ていて知ったのですが、BackboneのtoJSONをViewをrenderするデータを作る目的では使うべきではないということです。</p>
+
+<ul>
+<li><a href="https://github.com/marionettejs/backbone.marionette/issues/1476">https://github.com/marionettejs/backbone.marionette/issues/1476</a></li>
+</ul>
+
+
+<!-- more -->
+
+
+<h2>toJSON</h2>
+
+<p>Backbone.ModelやBackbone.CollectionはtoJSONというメソッドを持っていて実装はattributesをcloneして返すようになっています。</p>
+
+<ul>
+<li>Model(<a href="https://github.com/jashkenas/backbone/blob/master/backbone.js#L296-L298">https://github.com/jashkenas/backbone/blob/master/backbone.js#L296-L298</a>)</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">toJSON</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">_</span><span class="p">.</span><span class="nx">clone</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">attributes</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Collection(<a href="https://github.com/jashkenas/backbone/blob/master/backbone.js#L645-L647">https://github.com/jashkenas/backbone/blob/master/backbone.js#L645-L647</a>)</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">toJSON</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">model</span><span class="p">){</span> <span class="k">return</span> <span class="nx">model</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span> <span class="p">});</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>toJSONはBackbone内では、ajaxリクエストを行うBackbone.syncの中でModelのデータをシリアライズするために使われています。</p>
+
+<h2>The many uses of Model#toJSON()</h2>
+
+<ul>
+<li><a href="https://github.com/jashkenas/backbone/issues/2134">https://github.com/jashkenas/backbone/issues/2134</a></li>
+</ul>
+
+
+<p>Backbone.syncの中で使われているこのtoJSONですが、以前のBackboneのドキュメント内ではtemplateをrenderする際に下記のような感じでtoJSONが使われていたため、toJSONをrenderするときに使うことが広まってしまっているようです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">model</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">()));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というわけで、サーバーに送るデータを作るメソッドとtemplateに渡すデータを作るメソッドが同じなのは２つの全く違う役割を持っている点もよくないし、サーバーに送りたい形式とtemplateで使いたい形式が異なる場合などに不都合が生じるのでよくないとして、ドキュメントは修正されました。</p>
+
+<h2>Marionette.js</h2>
+
+<p><a href="https://github.com/marionettejs/backbone.marionette/pull/745">https://github.com/marionettejs/backbone.marionette/pull/745</a></p>
+
+<p>Marionette.jsではItemViewにtemplateに渡すデータを作るためのserializeDataというメソッドがあって、その中ではtoJSONが呼ばれています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">serializeData</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">model</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">data</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">model</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">items</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">()</span> <span class="p">};</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">data</span><span class="p">;</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ですが上記の理由から2.0またはそれ以降からはtoJSONが使われなくなりそうです。</p>
+
+<p>このpullreqだと、serializeModel(Collection)というメソッドを定義してそのなかではtoJSONと同じくcloneしたattributesを返す形になっています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">serializeModel</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">model</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">_</span><span class="p">.</span><span class="nx">clone</span><span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">attributes</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">serializeCollection</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">collection</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">model</span><span class="p">){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">serializeModel</span><span class="p">(</span><span class="nx">model</span><span class="p">);</span> <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Conclusion</h2>
+
+<p>Backboneでtemplateに渡すデータを作るためにtoJSONを渡すのは推奨されていないので注意しましょう。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Webアプリエンジニア養成読本を読んだ]]></title>

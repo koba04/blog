@@ -4,7 +4,7 @@
   <title><![CDATA[Category: backbone.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/backbone-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-05-02T00:41:32+09:00</updated>
+  <updated>2014-06-18T00:52:09+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,113 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Don't use Backbone.Model#toJSON for render]]></title>
+    <link href="http://blog.koba04.com/post/2014/06/17/dont-use-backbone-model-tojson-for-render/"/>
+    <updated>2014-06-17T23:32:16+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/06/17/dont-use-backbone-model-tojson-for-render</id>
+    <content type="html"><![CDATA[<p>Marionette.jsのrepoを見ていて知ったのですが、BackboneのtoJSONをViewをrenderするデータを作る目的では使うべきではないということです。</p>
+
+<ul>
+<li><a href="https://github.com/marionettejs/backbone.marionette/issues/1476">https://github.com/marionettejs/backbone.marionette/issues/1476</a></li>
+</ul>
+
+
+<!-- more -->
+
+
+<h2>toJSON</h2>
+
+<p>Backbone.ModelやBackbone.CollectionはtoJSONというメソッドを持っていて実装はattributesをcloneして返すようになっています。</p>
+
+<ul>
+<li>Model(<a href="https://github.com/jashkenas/backbone/blob/master/backbone.js#L296-L298">https://github.com/jashkenas/backbone/blob/master/backbone.js#L296-L298</a>)</li>
+</ul>
+
+
+<p><code>js
+toJSON: function(options) {
+  return _.clone(this.attributes);
+},
+</code></p>
+
+<ul>
+<li>Collection(<a href="https://github.com/jashkenas/backbone/blob/master/backbone.js#L645-L647">https://github.com/jashkenas/backbone/blob/master/backbone.js#L645-L647</a>)</li>
+</ul>
+
+
+<p><code>js
+toJSON: function(options) {
+  return this.map(function(model){ return model.toJSON(options); });
+},
+</code></p>
+
+<p>toJSONはBackbone内では、ajaxリクエストを行うBackbone.syncの中でModelのデータをシリアライズするために使われています。</p>
+
+<h2>The many uses of Model#toJSON()</h2>
+
+<ul>
+<li><a href="https://github.com/jashkenas/backbone/issues/2134">https://github.com/jashkenas/backbone/issues/2134</a></li>
+</ul>
+
+
+<p>Backbone.syncの中で使われているこのtoJSONですが、以前のBackboneのドキュメント内ではtemplateをrenderする際に下記のような感じでtoJSONが使われていたため、toJSONをrenderするときに使うことが広まってしまっているようです。</p>
+
+<p><code>js
+this.$el.html(this.template(this.model.toJSON()));
+</code></p>
+
+<p>というわけで、サーバーに送るデータを作るメソッドとtemplateに渡すデータを作るメソッドが同じなのは２つの全く違う役割を持っている点もよくないし、サーバーに送りたい形式とtemplateで使いたい形式が異なる場合などに不都合が生じるのでよくないとして、ドキュメントは修正されました。</p>
+
+<h2>Marionette.js</h2>
+
+<p><a href="https://github.com/marionettejs/backbone.marionette/pull/745">https://github.com/marionettejs/backbone.marionette/pull/745</a></p>
+
+<p>Marionette.jsではItemViewにtemplateに渡すデータを作るためのserializeDataというメソッドがあって、その中ではtoJSONが呼ばれています。</p>
+
+<p>```js
+serializeData: function(){
+  var data = {};</p>
+
+<p>  if (this.model) {</p>
+
+<pre><code>data = this.model.toJSON();
+</code></pre>
+
+<p>  }
+  else if (this.collection) {</p>
+
+<pre><code>data = { items: this.collection.toJSON() };
+</code></pre>
+
+<p>  }</p>
+
+<p>  return data;
+},
+```</p>
+
+<p>ですが上記の理由から2.0またはそれ以降からはtoJSONが使われなくなりそうです。</p>
+
+<p>このpullreqだと、serializeModel(Collection)というメソッドを定義してそのなかではtoJSONと同じくcloneしたattributesを返す形になっています。</p>
+
+<p><code>js
+serializeModel: function(model){
+  return _.clone(model.attributes);
+},
+</code></p>
+
+<p><code>js
+serializeCollection: function(collection){
+  return collection.map(function(model){ return this.serializeModel(model); }, this);
+},
+</code></p>
+
+<h2>Conclusion</h2>
+
+<p>Backboneでtemplateに渡すデータを作るためにtoJSONを渡すのは推奨されていないので注意しましょう。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[browserify in Backbone.Marionette project]]></title>

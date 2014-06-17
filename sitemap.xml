@@ -29,12 +29,18 @@
         <lastmod>2014-05-02T00:41:32+09:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://blog.koba04.com/post/2014/06/17/dont-use-backbone-model-tojson-for-render/
+        </loc>
+        <lastmod>2014-06-18T00:52:08+09:00</lastmod>
+    </url>
+    <url>
         <loc>http://blog.koba04.com/blog/archives/</loc>
-        <lastmod>2014-05-02T00:41:32+09:00</lastmod>
+        <lastmod>2014-06-18T00:52:08+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/</loc>
-        <lastmod>2014-05-02T00:41:32+09:00</lastmod>
+        <lastmod>2014-06-18T00:52:08+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/robots.txt</loc>
