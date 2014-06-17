@@ -88,6 +88,6 @@ serializeCollection: function(collection){
 
 ## Conclusion
 
-Backboneでtemplateに渡すデータを作るためにtoJSONを渡すのは推奨されていないので注意しましょう。
+Backboneでtemplateに渡すデータを作るためにtoJSONを使うことは推奨されていないので注意しましょう。
 
 
