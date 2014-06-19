@@ -4,7 +4,7 @@
   <title><![CDATA[Category: marionette.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/marionette-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-06-18T01:13:07+09:00</updated>
+  <updated>2014-06-19T23:28:49+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,65 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Release Marionette 2.0!]]></title>
+    <link href="http://blog.koba04.com/post/2014/06/19/release-marionette-2_0/"/>
+    <updated>2014-06-19T00:53:03+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/06/19/release-marionette-2_0</id>
+    <content type="html"><![CDATA[<p>Marionette.jsの2.0がリリースされましたね！(2.0.1も出ましたが..)</p>
+
+<p>1.x系では入れることが出来なかったbreakingな変更がかなりあるので内容を確認してみました。</p>
+
+<p><a href="https://github.com/marionettejs/backbone.marionette/releases/tag/v2.0.0">https://github.com/marionettejs/backbone.marionette/releases/tag/v2.0.0</a></p>
+
+<!-- more -->
+
+
+<h2>Translate release note in Japanese</h2>
+
+<p>というわけで、上記のリリースノートをざっくり日本語に訳してみたのを @samccone が公開してもいいと言ってくれたので公開します。
+実際に動作確認して確証を取るまではやってないので間違っているところがあれば指摘してもらえるとありがたいです。</p>
+
+<p><a href="https://gist.github.com/koba04/c375231f871a6cd1a42c">https://gist.github.com/koba04/c375231f871a6cd1a42c</a></p>
+
+<p>view.closeがview.destoryになったり、LayoutがLayoutViewに変わったりといったI/Fがガッツリ変わるものから、triggerMethodがmethodが呼ばれたあとにeventがtriggerされるように順番が変わったなど、地味だけどハマりそうな変更まで色々あります。</p>
+
+<p>ただ、基本的には大きな機能追加というよりはbreakingになるため出来なかったわかりにくいかった部分の改善などが主な感じです。</p>
+
+<p>わかりやすくなってよくなったと思います。</p>
+
+<h2>1.x to 2.0</h2>
+
+<p>実際にどうかなと思って、1系で作ってたMarionetteのサンプルプロジェクトを2.0に移行してみました。</p>
+
+<ul>
+<li><p>2.0対応したコミットログはこの辺り</p>
+
+<ul>
+<li><a href="https://github.com/koba04/backbone-boilerplate/commit/7eb3ae0537be2c8a004aed31743bc7ece46c6f95">https://github.com/koba04/backbone-boilerplate/commit/7eb3ae0537be2c8a004aed31743bc7ece46c6f95</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>LayoutをLayoutViewにしたりitemViewをchildViewにしたりと機械的に出来る変更だけでいけるかなと思いましたが、regionのelがDOMに存在しない時に例外を投げるようになった変更の影響でテストの時にDOMへの反映をちゃんとやってなくてエラーになり、その対応に地味に時間を取られたりしました。</p>
+
+<p>実際のプロダクトの方はちょっと大変かもと思いましたが、テスト書いてあればまぁ移行できそうな印象です。</p>
+
+<h2>Upgrade Guide</h2>
+
+<p>あた、ここにpython製の1.xから2.0への移行scriptがあるのでそれを試してみるのもいいかもしれないですね。</p>
+
+<p><a href="https://github.com/marionettejs/Marionette.Upgrade">https://github.com/marionettejs/Marionette.Upgrade</a></p>
+
+<h2>Announce</h2>
+
+<p>蛇足ですが、「天下一クライアントサイドJS MV*フレームワーク武道会」でMarionette派としてLTします。2.0がいいタイミングで出たので2.0のコードベースで出来るのでよかったです。</p>
+
+<p><a href="http://connpass.com/event/6910/">http://connpass.com/event/6910/</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Marionette Behaivors (1.7 feature)]]></title>
