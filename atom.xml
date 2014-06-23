@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-06-19T23:28:49+09:00</updated>
+  <updated>2014-06-24T01:18:57+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,310 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Karma for JavaScript test runner]]></title>
+    <link href="http://blog.koba04.com/post/2014/06/23/karma-for-javascript-test-runner/"/>
+    <updated>2014-06-23T00:48:32+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/06/23/karma-for-javascript-test-runner</id>
+    <content type="html"><![CDATA[<p><img src="http://blog.koba04.com/images/karma.png" title="'karma'" ></p>
+
+<p>今まではなんとなくtestemを使っていたのですが、Karmaを検討する必要があったので試してみました。</p>
+
+<p>サンプルの設定などは↓で見ることが出来ます。</p>
+
+<ul>
+<li><a href="https://github.com/koba04/backbone-boilerplate">https://github.com/koba04/backbone-boilerplate</a></li>
+</ul>
+
+
+<!-- more -->
+
+
+<h2>testem to karma</h2>
+
+<p>これまでは業務でもtestemを使っていて、テストの数が少ないうち(1000以下)は問題なかったのですが、
+段々テストが増えてくるとCPU100%になってテストが走るブラウザが固まることが増えてきて辛い感じになってきました。</p>
+
+<p>そんなときに下記の記事を見て同じような現象だなと思いKarmaを試してみることにしました。</p>
+
+<ul>
+<li><a href="http://developer.cybozu.co.jp/tech/?p=7089">http://developer.cybozu.co.jp/tech/?p=7089</a></li>
+</ul>
+
+
+<h2>Installation</h2>
+
+<p>インストールは<strong>npm install karma</strong>するだけです。</p>
+
+<p>globalでkarmaのコマンドが使いたい場合はgruntのように<strong>npm install -g karma-cli</strong>します。</p>
+
+<ul>
+<li>karmaはglobalに入れません。</li>
+</ul>
+
+
+<h2>Easy to use</h2>
+
+<p>テストを読み込むためのHTMLを用意して色々書いたりする必要がなくて、<strong>karma init</strong>してframeworkやテスト対象のファイルを指定して、
+<strong>karma start</strong>するだけで変更を監視しての自動テストを行うことが出来ます。簡単です。</p>
+
+<h2>Configration</h2>
+
+<p>最初の設定は、<strong>karma init</strong>することで対話的に作成することが出来て、終了すると<strong>karma.conf.js</strong>が作成されます。</p>
+
+<ul>
+<li>ちなみに<strong>karma init karma.conf.coffee</strong>と拡張子をcoffeeにして指定することで設定ファイルはcoffeescriptで作成することも出来ます。</li>
+</ul>
+
+
+<p>生成されたファイルはこんな感じで、使うフレームワークや対象ファイル、実行するブラウザ、出力形式、ファイルの変更を監視して自動でテストするか、テスト終了後もプロセスを残すかどうかなどを設定します。</p>
+
+<ul>
+<li>設定項目の抜粋</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">config</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// ベースとなるパス</span>
+</span><span class='line'>    <span class="nx">basePath</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// 使用するフレームワーク。ここから探せる https://npmjs.org/browse/keyword/karma-adapter</span>
+</span><span class='line'>    <span class="nx">frameworks</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mocha&#39;</span><span class="p">],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// 読み込むファイル(テスト対象のファイルやテストファイルなど)。</span>
+</span><span class='line'>    <span class="nx">files</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;js/*.js&#39;</span><span class="p">],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// filesから除外したファイル</span>
+</span><span class='line'>    <span class="nx">exclude</span><span class="o">:</span> <span class="p">[],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// テストの実行前に差し込む処理。ここから探せる https://npmjs.org/browse/keyword/karma-preprocessor</span>
+</span><span class='line'>    <span class="nx">preprocessors</span><span class="o">:</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// テストの結果を出力する形式。ここから探せる https://npmjs.org/browse/keyword/karma-reporter</span>
+</span><span class='line'>    <span class="c1">// &#39;dots&#39;と&#39;progress&#39;は最初から使える</span>
+</span><span class='line'>    <span class="nx">reporters</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;progress&#39;</span><span class="p">],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// 使用するport</span>
+</span><span class='line'>    <span class="nx">port</span><span class="o">:</span> <span class="mi">9876</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// 出力に色を付けるか</span>
+</span><span class='line'>    <span class="nx">colors</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// ログレベル: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG</span>
+</span><span class='line'>    <span class="nx">logLevel</span><span class="o">:</span> <span class="nx">config</span><span class="p">.</span><span class="nx">LOG_INFO</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// ファイルの変更を監視してテストを自動的に実行するかどうか</span>
+</span><span class='line'>    <span class="nx">autoWatch</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// テストするブラウザ。ここから探せる https://npmjs.org/browse/keyword/karma-launcher</span>
+</span><span class='line'>    <span class="nx">browsers</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Chrome&#39;</span><span class="p">],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// trueにすると一回テストを実行するとプロセスが終了する</span>
+</span><span class='line'>    <span class="c1">// CIのときに使ったり。</span>
+</span><span class='line'>    <span class="nx">singleRun</span><span class="o">:</span> <span class="kc">false</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>その他では、<strong>autoWatchBatchDelay</strong>を使うと指定したms内での変更をまとめて一つとして扱ってくれるので、監視対象のファイルが短い時間に連続して更新されて複数回テストが実行される場合は、この値を長めにするといいかもしれません(defaultは250ms)。</p>
+
+<h2>Browsers</h2>
+
+<p>ブラウザはChromeやSafariやPhantomJSなど色々ありますので、<strong>karma-xxx-launcher</strong>で探すことが出来ます。</p>
+
+<h2>Frameworks</h2>
+
+<p><strong>mocha</strong>や<strong>jasmine</strong>や<strong>qunit</strong>などの場合は<strong>karma-mocha</strong>のようにすでにadapterが用意されているので、
+ここにframeworkを設定に書いてadapterをインストールするだけで使うことが出来ます。</p>
+
+<h3>karma-mocha-debug</h3>
+
+<ul>
+<li><a href="https://github.com/maksimr/karma-mocha-debug">https://github.com/maksimr/karma-mocha-debug</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">frameworks</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mocha-debug&#39;</span><span class="p">,</span> <span class="s1">&#39;mocha&#39;</span><span class="p">],</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>testem+mochaでやっている時に、ブラウザで結果を見ることが出来てそこから指定したテストだけを再実行することが出来るのが便利だったので
+karmaでも出来ないないかな思って調べるみると、karma-mocha-debugを使うと出来るようでした。
+karmaのブラウザからdebugボタンを押してdebug.htmlを開くと見ることが出来ます。素晴らしい！</p>
+
+<p><img src="http://blog.koba04.com/images/karma-mocha-debug.png" title="'karma mocha debug'" ></p>
+
+<h2>Preprocessors</h2>
+
+<p>preprocessorsを指定することで<strong>files</strong>に書いたファイルに対してテストを実行する前に処理を挟むことが出来、柔軟なテストの設定が可能です。</p>
+
+<p>coffeescriptのコンパイルだったりbrowserifyのビルドなどで<strong>karma-xxxx-preprocessor</strong>で探すことが出来ます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">preprocessors</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="s1">&#39;**/*.coffee&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;coffee&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>karma-html2js-preprocessor</h3>
+
+<ul>
+<li><a href="https://github.com/karma-runner/karma-html2js-preprocessor">https://github.com/karma-runner/karma-html2js-preprocessor</a></li>
+</ul>
+
+
+<p>また、karma-html2js-preprocessorというものもあって、これを使うと指定したHTMLを<strong>window.__html__[&lsquo;name.html&rsquo;]</strong>というkeyで入れてくれるので、fixtureデータとして使うことが出来ます。アプリのテストだとどうしてもDOMが必要になるので便利です。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">files</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>  <span class="s1">&#39;**/*.html&#39;</span>
+</span><span class='line'><span class="p">],</span>
+</span><span class='line'><span class="nx">preprocessors</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="s1">&#39;**/*.html&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;html2js&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">before</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;body&#39;</span><span class="p">).</span><span class="nx">append</span> <span class="nb">window</span><span class="p">.</span><span class="nx">__html__</span><span class="p">[</span><span class="s">&#39;fixture.html&#39;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Reporters</h2>
+
+<p>reporterを指定することで、様々な形式でテストの結果を出力したり通知したりすることが出来ます。</p>
+
+<p>karma-xxxx-reporterで探すことが出来て、
+nyanやtapやmocha形式のような出力形式のカスタマイズ以外にも、結果をgrowlやmp3で通知したりcoverageを計測したりなどさまざまなreporterがあります。</p>
+
+<h3>karma-nyan-reporter</h3>
+
+<ul>
+<li><a href="https://github.com/dgarlitt/karma-nyan-reporter">https://github.com/dgarlitt/karma-nyan-reporter</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">reporters</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;nyan&quot;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>nyanの形式でテストを出力してくれるのでもっとテスト書こうという気持ちになっていいです。(バグってたのpull reqして直してもらいました&hellip;)</p>
+
+<p><img src="http://blog.koba04.com/images/karma-nyan-reporter.gif" title="'karma nyan reporter'" ></p>
+
+<h3>karma-growl-reporter,karma-osx-reporter</h3>
+
+<ul>
+<li><a href="https://github.com/petrbela/karma-osx-reporter">https://github.com/petrbela/karma-osx-reporter</a></li>
+<li><a href="https://github.com/karma-runner/karma-growl-reporter">https://github.com/karma-runner/karma-growl-reporter</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">reporters</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;growl&quot;</span><span class="p">,</span> <span class="s2">&quot;osx&quot;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>GrowlかNotificationCenterでテストの結果を通知してくれるので便利です。</p>
+
+<h3>karma-mp3-reporter</h3>
+
+<p><a href="https://github.com/x2es/karma-mp3-reporter">https://github.com/x2es/karma-mp3-reporter</a></p>
+
+<p>成功したとき、失敗したときに好きな音が流せて楽しいですね。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">reporters</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;mp3&quot;</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">mp3Reporter</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">red</span><span class="o">:</span> <span class="s2">&quot;go-to-hell.mp3&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">green</span><span class="o">:</span> <span class="s2">&quot;happy.mp3&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Conclution</h2>
+
+<p>というわけでKarmaを試したのですが、思った以上に簡単に始めることが出来て、<strong>preprocessors</strong>や<strong>reporters</strong>などの仕組みがあってプラガブルな感じがとてもいいなぁと思いました。</p>
+
+<p>今後もっとpluginが増えていくことに期待です。</p>
+
+<h2>おまけ</h2>
+
+<h3>power-assert対応しました</h3>
+
+<p>もともとbrowserifyを使っていたので、transformにespowerifyを指定してあとはテストをassertに書き換えるだけだったのでとても簡単に出来てよかったです！素晴らしい！</p>
+
+<p>コミットログはこの辺り。 <a href="https://github.com/koba04/backbone-boilerplate/commit/2fadec43e46f99cce0d3d828c66d4b12d758f4f0">https://github.com/koba04/backbone-boilerplate/commit/2fadec43e46f99cce0d3d828c66d4b12d758f4f0</a></p>
+
+<p><img src="http://blog.koba04.com/images/power-assert.png" title="'power-assert'" ></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Release Marionette 2.0!]]></title>
