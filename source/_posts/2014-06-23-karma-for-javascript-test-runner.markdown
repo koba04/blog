@@ -46,7 +46,7 @@ globalでkarmaのコマンドが使いたい場合はgruntのように**npm inst
 
 最初の設定は、**karma init**することで対話的に作成することが出来て、終了すると**karma.conf.js**が作成されます。
 
-* ちなみに**karma init karma.conf.coffee**と拡張子をcoffeeにして指定することで設定ファイルはcoffeescriptで作成することも出来ます。
+ちなみに**karma init karma.conf.coffee**のように拡張子をcoffeeにして指定することでcoffeescriptで作成することも出来ます。
 
 生成されたファイルはこんな感じで、使うフレームワークや対象ファイル、実行するブラウザ、出力形式、ファイルの変更を監視して自動でテストするか、テスト終了後もプロセスを残すかどうかなどを設定します。
 
@@ -118,7 +118,7 @@ module.exports = function(config) {
 frameworks: ['mocha-debug', 'mocha'],
 ```
 
-testem+mochaでやっている時に、ブラウザで結果を見ることが出来てそこから指定したテストだけを再実行することが出来るのが便利だったので
+testem+mochaでやっている時に、ブラウザで結果を確認してそこから指定したテストだけを再実行出来るのが便利だったので
 karmaでも出来ないないかな思って調べるみると、karma-mocha-debugを使うと出来るようでした。
 karmaのブラウザからdebugボタンを押してdebug.htmlを開くと見ることが出来ます。素晴らしい！
 
@@ -141,7 +141,7 @@ preprocessors: {
 
 * https://github.com/karma-runner/karma-html2js-preprocessor
 
-また、karma-html2js-preprocessorというものもあって、これを使うと指定したHTMLを**window.\_\_html\_\_['name.html']**というkeyで入れてくれるので、fixtureデータとして使うことが出来ます。アプリのテストだとどうしてもDOMが必要になるので便利です。
+また、karma-html2js-preprocessorというものもあって、これを使うと指定したHTMLを**window.\_\_html\_\_['name.html']**に入れてくれるので、fixtureデータとして使うことが出来ます。アプリのテストだとどうしてもDOMが必要になるので便利です。
 
 ```js
 files: [
