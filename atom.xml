@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-03-24T10:22:20+09:00</updated>
+  <updated>2014-06-24T01:41:56+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,897 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Karma for JavaScript test runner]]></title>
+    <link href="http://blog.koba04.com/post/2014/06/23/karma-for-javascript-test-runner/"/>
+    <updated>2014-06-23T00:48:32+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/06/23/karma-for-javascript-test-runner</id>
+    <content type="html"><![CDATA[<p><img src="http://blog.koba04.com/images/karma.png" title="'karma'" ></p>
+
+<p>今まではなんとなくtestemを使っていたのですが、Karmaを検討する必要があったので試してみました。</p>
+
+<p>サンプルの設定などは↓で見ることが出来ます。</p>
+
+<ul>
+<li><a href="https://github.com/koba04/backbone-boilerplate">https://github.com/koba04/backbone-boilerplate</a></li>
+</ul>
+
+
+<!-- more -->
+
+
+<h2>testem to karma</h2>
+
+<p>これまでは業務でもtestemを使っていて、テストの数が少ないうち(1000以下)は問題なかったのですが、
+段々テストが増えてくるとCPU100%になってテストが走るブラウザが固まることが増えてきて辛い感じになってきました。</p>
+
+<p>そんなときに下記の記事を見て同じような現象だなと思いKarmaを試してみることにしました。</p>
+
+<ul>
+<li><a href="http://developer.cybozu.co.jp/tech/?p=7089">http://developer.cybozu.co.jp/tech/?p=7089</a></li>
+</ul>
+
+
+<h2>Installation</h2>
+
+<p>インストールは<strong>npm install karma</strong>するだけです。</p>
+
+<p>globalでkarmaのコマンドが使いたい場合はgruntのように<strong>npm install -g karma-cli</strong>します。</p>
+
+<ul>
+<li>karmaはglobalに入れません。</li>
+</ul>
+
+
+<h2>Easy to use</h2>
+
+<p>テストを読み込むためのHTMLを用意して色々書いたりする必要がなくて、<strong>karma init</strong>してframeworkやテスト対象のファイルを指定して、
+<strong>karma start</strong>するだけで変更を監視しての自動テストを行うことが出来ます。簡単です。</p>
+
+<h2>Configration</h2>
+
+<p>最初の設定は、<strong>karma init</strong>することで対話的に作成することが出来て、終了すると<strong>karma.conf.js</strong>が作成されます。</p>
+
+<p>ちなみに<strong>karma init karma.conf.coffee</strong>のように拡張子をcoffeeにして指定することでcoffeescriptで作成することも出来ます。</p>
+
+<p>生成されたファイルはこんな感じで、使うフレームワークや対象ファイル、実行するブラウザ、出力形式、ファイルの変更を監視して自動でテストするか、テスト終了後もプロセスを残すかどうかなどを設定します。</p>
+
+<ul>
+<li>設定項目の抜粋</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">config</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// ベースとなるパス</span>
+</span><span class='line'>    <span class="nx">basePath</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// 使用するフレームワーク。ここから探せる https://npmjs.org/browse/keyword/karma-adapter</span>
+</span><span class='line'>    <span class="nx">frameworks</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mocha&#39;</span><span class="p">],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// 読み込むファイル(テスト対象のファイルやテストファイルなど)。</span>
+</span><span class='line'>    <span class="nx">files</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;js/*.js&#39;</span><span class="p">],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// filesから除外したファイル</span>
+</span><span class='line'>    <span class="nx">exclude</span><span class="o">:</span> <span class="p">[],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// テストの実行前に差し込む処理。ここから探せる https://npmjs.org/browse/keyword/karma-preprocessor</span>
+</span><span class='line'>    <span class="nx">preprocessors</span><span class="o">:</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// テストの結果を出力する形式。ここから探せる https://npmjs.org/browse/keyword/karma-reporter</span>
+</span><span class='line'>    <span class="c1">// &#39;dots&#39;と&#39;progress&#39;は最初から使える</span>
+</span><span class='line'>    <span class="nx">reporters</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;progress&#39;</span><span class="p">],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// 使用するport</span>
+</span><span class='line'>    <span class="nx">port</span><span class="o">:</span> <span class="mi">9876</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// 出力に色を付けるか</span>
+</span><span class='line'>    <span class="nx">colors</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// ログレベル: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG</span>
+</span><span class='line'>    <span class="nx">logLevel</span><span class="o">:</span> <span class="nx">config</span><span class="p">.</span><span class="nx">LOG_INFO</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// ファイルの変更を監視してテストを自動的に実行するかどうか</span>
+</span><span class='line'>    <span class="nx">autoWatch</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// テストするブラウザ。ここから探せる https://npmjs.org/browse/keyword/karma-launcher</span>
+</span><span class='line'>    <span class="nx">browsers</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Chrome&#39;</span><span class="p">],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// trueにすると一回テストを実行するとプロセスが終了する</span>
+</span><span class='line'>    <span class="c1">// CIのときに使ったり。</span>
+</span><span class='line'>    <span class="nx">singleRun</span><span class="o">:</span> <span class="kc">false</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>その他では、<strong>autoWatchBatchDelay</strong>を使うと指定したms内での変更をまとめて一つとして扱ってくれるので、監視対象のファイルが短い時間に連続して更新されて複数回テストが実行される場合は、この値を長めにするといいかもしれません(defaultは250ms)。</p>
+
+<h2>Browsers</h2>
+
+<p>ブラウザはChromeやSafariやPhantomJSなど色々ありますので、<strong>karma-xxx-launcher</strong>で探すことが出来ます。</p>
+
+<h2>Frameworks</h2>
+
+<p><strong>mocha</strong>や<strong>jasmine</strong>や<strong>qunit</strong>などの場合は<strong>karma-mocha</strong>のようにすでにadapterが用意されているので、
+ここにframeworkを設定に書いてadapterをインストールするだけで使うことが出来ます。</p>
+
+<h3>karma-mocha-debug</h3>
+
+<ul>
+<li><a href="https://github.com/maksimr/karma-mocha-debug">https://github.com/maksimr/karma-mocha-debug</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">frameworks</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mocha-debug&#39;</span><span class="p">,</span> <span class="s1">&#39;mocha&#39;</span><span class="p">],</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>testem+mochaでやっている時に、ブラウザで結果を確認してそこから指定したテストだけを再実行出来るのが便利だったので
+karmaでも出来ないないかな思って調べるみると、karma-mocha-debugを使うと出来るようでした。
+karmaのブラウザからdebugボタンを押してdebug.htmlを開くと見ることが出来ます。素晴らしい！</p>
+
+<p><img src="http://blog.koba04.com/images/karma-mocha-debug.png" title="'karma mocha debug'" ></p>
+
+<h2>Preprocessors</h2>
+
+<p>preprocessorsを指定することで<strong>files</strong>に書いたファイルに対してテストを実行する前に処理を挟むことが出来、柔軟なテストの設定が可能です。</p>
+
+<p>coffeescriptのコンパイルだったりbrowserifyのビルドなどで<strong>karma-xxxx-preprocessor</strong>で探すことが出来ます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">preprocessors</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="s1">&#39;**/*.coffee&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;coffee&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>karma-html2js-preprocessor</h3>
+
+<ul>
+<li><a href="https://github.com/karma-runner/karma-html2js-preprocessor">https://github.com/karma-runner/karma-html2js-preprocessor</a></li>
+</ul>
+
+
+<p>また、karma-html2js-preprocessorというものもあって、これを使うと指定したHTMLを<strong>window.__html__[&lsquo;name.html&rsquo;]</strong>に入れてくれるので、fixtureデータとして使うことが出来ます。アプリのテストだとどうしてもDOMが必要になるので便利です。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">files</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>  <span class="s1">&#39;**/*.html&#39;</span>
+</span><span class='line'><span class="p">],</span>
+</span><span class='line'><span class="nx">preprocessors</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="s1">&#39;**/*.html&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;html2js&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">before</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;body&#39;</span><span class="p">).</span><span class="nx">append</span> <span class="nb">window</span><span class="p">.</span><span class="nx">__html__</span><span class="p">[</span><span class="s">&#39;fixture.html&#39;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Reporters</h2>
+
+<p>reporterを指定することで、様々な形式でテストの結果を出力したり通知したりすることが出来ます。</p>
+
+<p>karma-xxxx-reporterで探すことが出来て、
+nyanやtapやmocha形式のような出力形式のカスタマイズ以外にも、結果をgrowlやmp3で通知したりcoverageを計測したりなどさまざまなreporterがあります。</p>
+
+<h3>karma-nyan-reporter</h3>
+
+<ul>
+<li><a href="https://github.com/dgarlitt/karma-nyan-reporter">https://github.com/dgarlitt/karma-nyan-reporter</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">reporters</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;nyan&quot;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>nyanの形式でテストを出力してくれるのでもっとテスト書こうという気持ちになっていいです。(バグってたのpull reqして直してもらいました&hellip;)</p>
+
+<p><img src="http://blog.koba04.com/images/karma-nyan-reporter.gif" title="'karma nyan reporter'" ></p>
+
+<h3>karma-growl-reporter,karma-osx-reporter</h3>
+
+<ul>
+<li><a href="https://github.com/petrbela/karma-osx-reporter">https://github.com/petrbela/karma-osx-reporter</a></li>
+<li><a href="https://github.com/karma-runner/karma-growl-reporter">https://github.com/karma-runner/karma-growl-reporter</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">reporters</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;growl&quot;</span><span class="p">,</span> <span class="s2">&quot;osx&quot;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>GrowlかNotificationCenterでテストの結果を通知してくれるので便利です。</p>
+
+<h3>karma-mp3-reporter</h3>
+
+<p><a href="https://github.com/x2es/karma-mp3-reporter">https://github.com/x2es/karma-mp3-reporter</a></p>
+
+<p>成功したとき、失敗したときに好きな音が流せて楽しいですね。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">reporters</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;mp3&quot;</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">mp3Reporter</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">red</span><span class="o">:</span> <span class="s2">&quot;go-to-hell.mp3&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">green</span><span class="o">:</span> <span class="s2">&quot;happy.mp3&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Conclution</h2>
+
+<p>というわけでKarmaを試したのですが、思った以上に簡単に始めることが出来て、<strong>preprocessors</strong>や<strong>reporters</strong>などの仕組みがあってプラガブルな感じがとてもいいなぁと思いました。</p>
+
+<p>今後もっとpluginが増えていくことに期待です。</p>
+
+<h2>おまけ</h2>
+
+<h3>power-assert対応しました</h3>
+
+<p>もともとbrowserifyを使っていたので、transformにespowerifyを指定してあとはテストをassertに書き換えるだけだったのでとても簡単に出来てよかったです！素晴らしい！</p>
+
+<p>コミットログはこの辺り。 <a href="https://github.com/koba04/backbone-boilerplate/commit/2fadec43e46f99cce0d3d828c66d4b12d758f4f0">https://github.com/koba04/backbone-boilerplate/commit/2fadec43e46f99cce0d3d828c66d4b12d758f4f0</a></p>
+
+<p><img src="http://blog.koba04.com/images/power-assert.png" title="'power-assert'" ></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release Marionette 2.0!]]></title>
+    <link href="http://blog.koba04.com/post/2014/06/19/release-marionette-2_0/"/>
+    <updated>2014-06-19T00:53:03+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/06/19/release-marionette-2_0</id>
+    <content type="html"><![CDATA[<p>Marionette.jsの2.0がリリースされましたね！(2.0.1も出ましたが..)</p>
+
+<p>1.x系では入れることが出来なかったbreakingな変更がかなりあるので内容を確認してみました。</p>
+
+<p><a href="https://github.com/marionettejs/backbone.marionette/releases/tag/v2.0.0">https://github.com/marionettejs/backbone.marionette/releases/tag/v2.0.0</a></p>
+
+<!-- more -->
+
+
+<h2>Translate release note in Japanese</h2>
+
+<p>というわけで、上記のリリースノートをざっくり日本語に訳してみたのを @samccone が公開してもいいと言ってくれたので公開します。
+実際に動作確認して確証を取るまではやってないので間違っているところがあれば指摘してもらえるとありがたいです。</p>
+
+<p><a href="https://gist.github.com/koba04/c375231f871a6cd1a42c">https://gist.github.com/koba04/c375231f871a6cd1a42c</a></p>
+
+<p>view.closeがview.destoryになったり、LayoutがLayoutViewに変わったりといったI/Fがガッツリ変わるものから、triggerMethodがmethodが呼ばれたあとにeventがtriggerされるように順番が変わったなど、地味だけどハマりそうな変更まで色々あります。</p>
+
+<p>ただ、基本的には大きな機能追加というよりはbreakingになるため出来なかったわかりにくいかった部分の改善などが主な感じです。</p>
+
+<p>わかりやすくなってよくなったと思います。</p>
+
+<h2>1.x to 2.0</h2>
+
+<p>実際にどうかなと思って、1系で作ってたMarionetteのサンプルプロジェクトを2.0に移行してみました。</p>
+
+<ul>
+<li><p>2.0対応したコミットログはこの辺り</p>
+
+<ul>
+<li><a href="https://github.com/koba04/backbone-boilerplate/commit/7eb3ae0537be2c8a004aed31743bc7ece46c6f95">https://github.com/koba04/backbone-boilerplate/commit/7eb3ae0537be2c8a004aed31743bc7ece46c6f95</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>LayoutをLayoutViewにしたりitemViewをchildViewにしたりと機械的に出来る変更だけでいけるかなと思いましたが、regionのelがDOMに存在しない時に例外を投げるようになった変更の影響でテストの時にDOMへの反映をちゃんとやってなくてエラーになり、その対応に地味に時間を取られたりしました。</p>
+
+<p>実際のプロダクトの方はちょっと大変かもと思いましたが、テスト書いてあればまぁ移行できそうな印象です。</p>
+
+<h2>Upgrade Guide</h2>
+
+<p>あた、ここにpython製の1.xから2.0への移行scriptがあるのでそれを試してみるのもいいかもしれないですね。</p>
+
+<p><a href="https://github.com/marionettejs/Marionette.Upgrade">https://github.com/marionettejs/Marionette.Upgrade</a></p>
+
+<h2>Announce</h2>
+
+<p>蛇足ですが、「天下一クライアントサイドJS MV*フレームワーク武道会」でMarionette派としてLTします。2.0がいいタイミングで出たので2.0のコードベースで出来るのでよかったです。</p>
+
+<p><a href="http://connpass.com/event/6910/">http://connpass.com/event/6910/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Don't use Backbone.Model#toJSON for render]]></title>
+    <link href="http://blog.koba04.com/post/2014/06/17/dont-use-backbone-model-tojson-for-render/"/>
+    <updated>2014-06-17T23:32:16+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/06/17/dont-use-backbone-model-tojson-for-render</id>
+    <content type="html"><![CDATA[<p>Marionette.jsのrepoを見ていて知ったのですが、BackboneのtoJSONをViewをrenderするデータを作る目的では使うべきではないということです。</p>
+
+<ul>
+<li><a href="https://github.com/marionettejs/backbone.marionette/issues/1476">https://github.com/marionettejs/backbone.marionette/issues/1476</a></li>
+</ul>
+
+
+<!-- more -->
+
+
+<h2>toJSON</h2>
+
+<p>Backbone.ModelやBackbone.CollectionはtoJSONというメソッドを持っていて実装はattributesをcloneして返すようになっています。</p>
+
+<ul>
+<li>Model(<a href="https://github.com/jashkenas/backbone/blob/master/backbone.js#L296-L298">https://github.com/jashkenas/backbone/blob/master/backbone.js#L296-L298</a>)</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">toJSON</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">_</span><span class="p">.</span><span class="nx">clone</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">attributes</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Collection(<a href="https://github.com/jashkenas/backbone/blob/master/backbone.js#L645-L647">https://github.com/jashkenas/backbone/blob/master/backbone.js#L645-L647</a>)</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">toJSON</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">model</span><span class="p">){</span> <span class="k">return</span> <span class="nx">model</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span> <span class="p">});</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>toJSONはBackbone内では、ajaxリクエストを行うBackbone.syncの中でModelのデータをシリアライズするために使われています。</p>
+
+<h2>The many uses of Model#toJSON()</h2>
+
+<ul>
+<li><a href="https://github.com/jashkenas/backbone/issues/2134">https://github.com/jashkenas/backbone/issues/2134</a></li>
+</ul>
+
+
+<p>Backbone.syncの中で使われているこのtoJSONですが、以前のBackboneのドキュメント内ではtemplateをrenderする際に下記のような感じでtoJSONが使われていたため、toJSONをrenderするときに使うことが広まってしまっているようです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">model</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">()));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というわけで、サーバーに送るデータを作るメソッドとtemplateに渡すデータを作るメソッドが同じなのは２つの全く違う役割を持っている点もよくないし、サーバーに送りたい形式とtemplateで使いたい形式が異なる場合などに不都合が生じるのでよくないとして、ドキュメントは修正されました。</p>
+
+<h2>Marionette.js</h2>
+
+<p><a href="https://github.com/marionettejs/backbone.marionette/pull/745">https://github.com/marionettejs/backbone.marionette/pull/745</a></p>
+
+<p>Marionette.jsではItemViewにtemplateに渡すデータを作るためのserializeDataというメソッドがあって、その中ではtoJSONが呼ばれています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">serializeData</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">model</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">data</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">model</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">items</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">()</span> <span class="p">};</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">data</span><span class="p">;</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ですが上記の理由から2.0またはそれ以降からはtoJSONが使われなくなりそうです。</p>
+
+<p>このpullreqだと、serializeModel(Collection)というメソッドを定義してそのなかではtoJSONと同じくcloneしたattributesを返す形になっています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">serializeModel</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">model</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">_</span><span class="p">.</span><span class="nx">clone</span><span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">attributes</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">serializeCollection</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">collection</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">model</span><span class="p">){</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">serializeModel</span><span class="p">(</span><span class="nx">model</span><span class="p">);</span> <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Conclusion</h2>
+
+<p>Backboneでtemplateに渡すデータを作るためにtoJSONを使うことは推奨されていないので注意しましょう。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Webアプリエンジニア養成読本を読んだ]]></title>
+    <link href="http://blog.koba04.com/post/2014/05/01/book-review-of-webapp-mook/"/>
+    <updated>2014-05-01T23:36:44+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/05/01/book-review-of-webapp-mook</id>
+    <content type="html"><![CDATA[<p><a href="http://www.amazon.co.jp/dp/4774163678?">Webアプリエンジニア養成読本</a></p>
+
+<h2>全体の感想</h2>
+
+<p>タイトル通り、これからWebアプリエンジニアになる人の最初のお供にとても相応しい本だなという感想を持ちました。</p>
+
+<p>構成としては、1章でWebについて、2章でPHPとRubyによる実践、3章でサーバー環境について、4章でサービスの運用について書かれていて、コンパクトなサイズで幅広く触れられています。</p>
+
+<!-- more -->
+
+
+<p>各章の最後でこの本を読んだ次の本のオススメが書かれていたりと、Webアプリ開発をやる上で知っておくべきことに対する道標が示されているような内容になっています。なので、この本を読めばバリバリ開発出来るぜーとはならないと思いますが、この本でどういったことを知っておく必要があるのか把握しておくことはとても役に立つと思うので、ちょうど4月からWebアプリエンジニアとして働くような人には特にオススメだと思いました。</p>
+
+<p>全体を通してセキュリティについても触れられているのもいいなと思いました。</p>
+
+<h2>1章 Web技術オーバービュー</h2>
+
+<p>HTTPからGithub、エディタまでWebアプリ開発で必要になってくることがわかりやすく読みやすく書かれています。この章をもっと詳しく知りたいと思ったら「<a href="http://www.amazon.co.jp/dp/4774154075">Webサービスの作り方</a>」を読むといいんじゃないかなと思いました。</p>
+
+<h2>2章 Webアプリケーション実践入門</h2>
+
+<h3>PHP</h3>
+
+<p>PHPについては全然知らなかったのでとても勉強になりました。Composerみたいなpackage managerもあるんですね。Slimの使い方からテストの仕方やデバッグの方法まで読んでいて面白かったです。やっぱり\を区切りにつかってるのには慣れなかったですがｗ</p>
+
+<h3>Ruby</h3>
+
+<p>Rubyの文法からSinatra、RSpec、Rakeといった内容を順番に説明されていてわかりやすかったです。コードがシンプルになるのはRubyの良さだなと思いました。</p>
+
+<h2>3章 サーバー環境の作り方</h2>
+
+<p>IaaS業者やLinuxのディストリビューションの選び方、ミドルウェアの設定やデプロイの仕方まで丁寧に書かれていてわかりやすかったです。</p>
+
+<h2>4章 サービス運用の基礎知識</h2>
+
+<p>監視やロギング、バックアップやチューニングなどのついつい後回しに考えがちな内容についてがコンパクトに書かれていて面白かったです。</p>
+
+<p>また障害対応などについても触れられているのでとても勉強になりました。</p>
+
+<h2>蛇足</h2>
+
+<p>褒めてばっかりだとアレなので、こうなってるとさらによかったのかなーと思ったことも。</p>
+
+<p>この書籍では、WindowsとMac環境での開発についても丁寧に説明されていて素晴らしいのですが結構面倒なこともあるし実際はLinuxの上でアプリケーションを動かすことになると思うので、そこはVirtualBoxにLinux入れてという構成にしてもよかったのかなーと思ったりもしました。</p>
+
+<p>あと、RubyとPHPで作るサンプルが似てはいるものの違うものだったので、全く同じものにしてもRubyとPHPの違いが見えて面白いのかなと思ったりもしました。</p>
+
+<h2>最後に</h2>
+
+<p>Webアプリケーションを作ってみたいと思っている人や仕事でWebアプリケーション作るけどあまりよくわかってないという人は手にとって読んでみるといいんじゃないかなと思いました！</p>
+
+<p>紹介されている本もいい本ばかりなので、この本を読んだあとに紹介されている本を読んで知識を深めていくとよさそうだと思いました。</p>
+
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=musicfanclub-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=4774163678" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Reusable components by Vue.js and Browserify]]></title>
+    <link href="http://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browserify/"/>
+    <updated>2014-04-17T01:27:24+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browserify</id>
+    <content type="html"><![CDATA[<p>最近Vue.jsについて調べたり試したりしていて、browserifyと組み合わせたexampleがなかなか興味深かったので参考に自分でも作ってみました。</p>
+
+<p>参考</p>
+
+<ul>
+<li><a href="https://github.com/vuejs/vue-browserify-example">https://github.com/vuejs/vue-browserify-example</a></li>
+</ul>
+
+
+<p>作ったサンプル</p>
+
+<ul>
+<li><a href="https://github.com/koba04/vue-boilerplate">https://github.com/koba04/vue-boilerplate</a></li>
+<li><a href="http://koba04.com/vue-boilerplate/">http://koba04.com/vue-boilerplate/</a></li>
+</ul>
+
+
+<!-- more -->
+
+
+<h2>browserify</h2>
+
+<p>Vue.js自体はビルドに<a href="https://github.com/component/component">Compoment</a>を使っているのですが、ここでは個人的な好みによりbrowserifyを使っています。</p>
+
+<p>上記のexampleではbrowserifyにプラスしてwatchifyとpartialifyを使っていたのですが、今回はlivereloadもしたかったのでwatchifyではなくて<a href="https://github.com/chrisdickinson/beefy">beefy</a>にして、さらにcoffeeifyとstylifyも使ってcoffeescriptとstylusのcompileも任せることにしました。</p>
+
+<p>その結果の起動scriptはこんな感じで、<strong>npm run dev</strong>するとlivereload + auto buildな環境が立ち上がり、<strong>npm run build</strong>するとbundle.jsが生成されるようになっています。</p>
+
+<ul>
+<li><a href="https://github.com/koba04/vue-boilerplate/blob/master/package.json">https://github.com/koba04/vue-boilerplate/blob/master/package.json</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>  <span class="s2">&quot;scripts&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;dev&quot;</span><span class="o">:</span> <span class="s2">&quot;beefy src/index.coffee:bundle.js --live -- -t partialify -t coffeeify -t stylify --extension=coffee&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;build&quot;</span><span class="o">:</span> <span class="s2">&quot;browserify src/index.coffee -t partialify -t coffeeify -t stylify --extension=coffee &gt; bundle.js&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ちなみに<a href="https://github.com/bclinkinbeard/partialify">partialify</a>はhtmlをrequireで読み込むのに使っています。</p>
+
+<p>これで、gruntを使うことなくbrowserifyだけでlivereload + auto buildが出来るようになりました。便利！</p>
+
+<h2>Reusable components</h2>
+
+<p>Vue.jsを使っていると、ViewModelをCompomentとして組み合わせてアプリケーションを作る感じになっていくので、Component単位でhtml、js、cssをまとめたくなります(ならない？)。</p>
+
+<p>Vue.jsにはcompomentという概念があるのでこんな感じでViewModelをcompomentとして登録することが出来ます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="c1"># グローバルにcompomentを登録</span>
+</span><span class='line'><span class="nx">Vue</span><span class="p">.</span><span class="nx">component</span> <span class="s">&#39;artist&#39;</span><span class="p">,</span>   <span class="nx">require</span> <span class="s">&#39;./artist/index.coffee&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># or</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># ViewModelに紐づけて登録</span>
+</span><span class='line'><span class="nv">module.exports = </span><span class="nx">Vue</span><span class="p">.</span><span class="nx">extend</span>
+</span><span class='line'>  <span class="nv">components:</span>
+</span><span class='line'>    <span class="s">&quot;nav&quot;</span><span class="o">:</span>          <span class="nx">require</span> <span class="s">&#39;../nav/index.coffee&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>exampleでもそのようになっていて、partialifyでhtmlとcssをrequireして読み込んでcssの方はinsert-cssで追加する感じになっています。</p>
+
+<ul>
+<li>insert-cssというのはsubstackが作っているライブラリで、CSSを渡すとDOMにstyle要素を作ってhead要素にappendしてくれるというライブラリです。
+
+<ul>
+<li><a href="https://www.npmjs.org/package/insert-css">https://www.npmjs.org/package/insert-css</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>ただCSSはグローバルに作用してしまいます。なので名前ベースで解決したくなりますがCSSではネストした記述をサポートしていません。そこでstylusを使ってネストで書きやすくしてみました。</p>
+
+<ul>
+<li><a href="https://github.com/koba04/vue-boilerplate/blob/master/src/top/index.coffee">https://github.com/koba04/vue-boilerplate/blob/master/src/top/index.coffee</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">require</span><span class="p">(</span><span class="s">&#39;insert-css&#39;</span><span class="p">)(</span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;./index.styl&#39;</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">Vue = </span><span class="nx">require</span> <span class="s">&#39;vue&#39;</span>
+</span><span class='line'><span class="nv">module.exports = </span><span class="nx">Vue</span><span class="p">.</span><span class="nx">extend</span>
+</span><span class='line'>  <span class="nv">template: </span><span class="nx">require</span> <span class="s">&#39;./index.html&#39;</span>
+</span><span class='line'>  <span class="nv">className: </span><span class="s">&#39;top&#39;</span>
+</span><span class='line'>  <span class="nv">components:</span>
+</span><span class='line'>    <span class="s">&quot;nav&quot;</span><span class="o">:</span>          <span class="nx">require</span> <span class="s">&#39;../nav/index.coffee&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><a href="https://github.com/koba04/vue-boilerplate/blob/master/src/top/index.styl">https://github.com/koba04/vue-boilerplate/blob/master/src/top/index.styl</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.top</span>
+</span><span class='line'>  <span class="nt">h1</span>
+</span><span class='line'>    <span class="na">font-family</span><span class="o">:</span> <span class="s1">&#39;</span><span class="s2">Playfair Display SC&#39;</span><span class="o">,</span> <span class="no">serif</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんな感じにすると、Compoment単位でディレクトリ作ってindex.coffeeの中でinsert-cssを使ってcssを追加しつつpartialifyでhtmlをtemplateとして設定することで、javascriptとhtmlとcssをまとめることが出来ます。</p>
+
+<ul>
+<li><p>ファイル名の付け方は悩ましいですが・・・。</p></li>
+<li><p><a href="https://github.com/koba04/vue-boilerplate">https://github.com/koba04/vue-boilerplate</a></p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>src
+</span><span class='line'>├── artist
+</span><span class='line'>│   ├── components
+</span><span class='line'>│   │   └── input-artist
+</span><span class='line'>│   │       ├── index.coffee
+</span><span class='line'>│   │       ├── index.html
+</span><span class='line'>│   │       └── index.styl
+</span><span class='line'>│   ├── index.coffee
+</span><span class='line'>│   ├── index.html
+</span><span class='line'>│   └── index.styl
+</span><span class='line'>├── country
+</span><span class='line'>│   ├── components
+</span><span class='line'>│   │   └── <span class="k">select</span>-country
+</span><span class='line'>│   │       ├── index.coffee
+</span><span class='line'>│   │       ├── index.html
+</span><span class='line'>│   │       └── index.styl
+</span><span class='line'>│   ├── index.coffee
+</span><span class='line'>│   ├── index.html
+</span><span class='line'>│   └── index.styl
+</span><span class='line'>├── index.coffee
+</span><span class='line'>├── index.html
+</span><span class='line'>├── index.styl
+</span><span class='line'>├── nav
+</span><span class='line'>│   ├── index.coffee
+</span><span class='line'>│   ├── index.html
+</span><span class='line'>│   └── index.styl
+</span><span class='line'>├── partials
+</span><span class='line'>│   └── footer.html
+</span><span class='line'>├── top
+</span><span class='line'>│   ├── index.coffee
+</span><span class='line'>│   ├── index.html
+</span><span class='line'>│   └── index.styl
+</span><span class='line'>└── tracks
+</span><span class='line'>    ├── index.coffee
+</span><span class='line'>    ├── index.html
+</span><span class='line'>    └── index.styl
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>まぁ実際はcompoment化してもなかなか再利用は難しいのですが、こういう分け方もありかなーと思いました。</p>
+
+<h2>routing animation by v-view and css animation</h2>
+
+<p>余談ですが、今回作ったサンプルの遷移時のウザイアニメーションは、v-viewとv-animationを組み合わせています。</p>
+
+<ul>
+<li><a href="http://koba04.com/vue-boilerplate/">http://koba04.com/vue-boilerplate/</a></li>
+</ul>
+
+
+<p>routingは<a href="https://www.npmjs.org/package/director">director</a>とv-viewとVue.compomentを組み合わせています。</p>
+
+<ul>
+<li>angular.jsのng-animateみたいな感じでv-enterとv-leaveというクラスがあてられるのでそれを使ってアニメーションさせています。</li>
+</ul>
+
+
+<p>v-viewとv-animationの組み合わせについては、v-leaveのanimation-endで要素が削除されるためアニメーションが指定されていないと古い要素が残ったりと若干ハマりどころもあるのですが、それはまた別の機会にまとめたいと思います。</p>
+
+<ul>
+<li><a href="https://github.com/koba04/vue-boilerplate/blob/master/src/index.html">https://github.com/koba04/vue-boilerplate/blob/master/src/index.html</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">v-view=</span><span class="s">&quot;view&quot;</span> <span class="na">v-animation</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><a href="https://github.com/koba04/vue-boilerplate/blob/master/src/index.styl">https://github.com/koba04/vue-boilerplate/blob/master/src/index.styl</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">#app</span>
+</span><span class='line'>  <span class="nc">.v-enter</span>
+</span><span class='line'>    <span class="na">-webkit-animation</span><span class="o">:</span> <span class="n">fadein</span> <span class="mi">0</span><span class="mf">.5</span><span class="kt">s</span>
+</span><span class='line'>    <span class="na">-webkit-animation-delay</span><span class="o">:</span> <span class="mi">0</span><span class="mf">.2</span><span class="kt">s</span>
+</span><span class='line'>    <span class="na">animation</span><span class="o">:</span> <span class="n">fadein</span> <span class="mi">0</span><span class="mf">.5</span><span class="kt">s</span>
+</span><span class='line'>    <span class="na">animation-delay</span><span class="o">:</span> <span class="mi">0</span><span class="mf">.2</span><span class="kt">s</span>
+</span><span class='line'>    <span class="na">opacity</span><span class="o">:</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="nc">.v-leave</span>
+</span><span class='line'>    <span class="na">-webkit-animation</span><span class="o">:</span> <span class="n">fadeout</span> <span class="mi">0</span><span class="mf">.2</span><span class="kt">s</span>
+</span><span class='line'>    <span class="na">animation</span><span class="o">:</span> <span class="n">fadeout</span> <span class="mi">0</span><span class="mf">.2</span><span class="kt">s</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@keyframes</span> <span class="nt">fadein</span>
+</span><span class='line'>  <span class="nt">0</span><span class="err">%</span>
+</span><span class='line'>    <span class="na">transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">0</span><span class="mf">.5</span><span class="p">)</span>
+</span><span class='line'>    <span class="na">-webkit-transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">0</span><span class="mf">.5</span><span class="p">)</span>
+</span><span class='line'>    <span class="na">opacity</span><span class="o">:</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="nt">50</span><span class="err">%</span>
+</span><span class='line'>    <span class="na">transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">1</span><span class="mf">.2</span><span class="p">)</span>
+</span><span class='line'>    <span class="na">-webkit-transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">1</span><span class="mf">.2</span><span class="p">)</span>
+</span><span class='line'>    <span class="na">opacity</span><span class="o">:</span> <span class="mi">0</span><span class="mf">.7</span>
+</span><span class='line'>  <span class="nt">100</span><span class="err">%</span>
+</span><span class='line'>    <span class="na">transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>    <span class="na">-webkit-transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>    <span class="na">opacity</span><span class="o">:</span> <span class="mi">1</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@keyframes</span> <span class="nt">fadeout</span>
+</span><span class='line'>  <span class="nt">0</span><span class="err">%</span>
+</span><span class='line'>    <span class="na">transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>    <span class="na">-webkit-transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>  <span class="nt">100</span><span class="err">%</span>
+</span><span class='line'>    <span class="na">transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>    <span class="na">-webkit-transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>追記</h3>
+
+<p>ちなみにネストしたViewの場合は色々な解決方法があると思うのですが、v-viewとv-refを組み合わせて実現することも出来ます</p>
+
+<p>v-refを使うことで子のViewを参照することができるのでそれを使って同じようにv-componentを更新する感じです</p>
+
+<p>サンプルはこんな感じ</p>
+
+<p><a href="http://jsfiddle.net/koba04/WgSK9/1/">http://jsfiddle.net/koba04/WgSK9/1/</a></p>
+
+<h2>more?</h2>
+
+<p>本当はここにtestling + mocha + power-assertな組み合わせのテストも含めたかったのですが間に合わず・・。</p>
+
+<p>Vue.js自体についても下記のメモをスライドにでもまとめようかなと思っています..そのうち..</p>
+
+<ul>
+<li><a href="https://gist.github.com/koba04/9776792">https://gist.github.com/koba04/9776792</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Marionette Behaivors (1.7 feature)]]></title>
