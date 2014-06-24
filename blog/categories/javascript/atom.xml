@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: javascript, | blog.koba04.com]]></title>
+  <title><![CDATA[Category: javascript | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-06-24T01:41:56+09:00</updated>
+  <updated>2014-06-24T09:46:44+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -249,6 +249,144 @@ reporters: [&ldquo;mp3&rdquo;]</p>
 <p>コミットログはこの辺り。 <a href="https://github.com/koba04/backbone-boilerplate/commit/2fadec43e46f99cce0d3d828c66d4b12d758f4f0">https://github.com/koba04/backbone-boilerplate/commit/2fadec43e46f99cce0d3d828c66d4b12d758f4f0</a></p>
 
 <p><img src="/images/power-assert.png" title="&lsquo;power-assert&rsquo;" ></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[npmやbowerライブラリのバージョン管理]]></title>
+    <link href="http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version/"/>
+    <updated>2014-03-03T23:11:37+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version</id>
+    <content type="html"><![CDATA[<h2>npmとbowerライブラリのバージョン管理</h2>
+
+<p>npmやbowerのライブラリをプロジェクトに導入するときは、"npm install &mdash;save xxx"や"bower install &mdash;save xxx"のような形で指定してインストールとpackage(bower).jsonへの記録をしたりします。</p>
+
+<p>その場合、package(bower).jsonには"xxx": &ldquo;~x.y.z"という形式で記録されます。</p>
+
+<p>&ldquo;~x.y.z"という表記は、&rdquo;~1.2.3"だとすると1.2.3 &lt;= x.x.x &lt; 1.3.0 の間での最新バージョンがインストールされます。</p>
+
+<!-- more -->
+
+
+<ul>
+<li><a href="https://www.npmjs.org/doc/misc/semver.html">https://www.npmjs.org/doc/misc/semver.html</a></li>
+</ul>
+
+
+<p>なので"~&ldquo;で指定していると、同じpackage(bower).jsonでもインストールするタイミングによって微妙に異なるバージョンがインストールされることになります。</p>
+
+<p><del>npmやbowerにはGemのGemfile.lockやCartonのcpanfile.snapshotのように依存も含めたバージョンを固定するような仕組みはないと思います。</del></p>
+
+<p><del>かと言ってnode_modulesとかbower_componentsをrepositoryの中にも入れたくないので今のプロジェクトでは"x.y.z"とバージョンを固定しています。</del></p>
+
+<p><del>この辺りはみんなどうしてるんですかね？</del></p>
+
+<p><strong>[追記:2013-03-04] yosuke_furukawaさんに教えていただきました!ありがとうございます！</strong></p>
+
+<blockquote><p>npm shrinkwrapってコマンドがあって、それを使うとライブラリのバージョンを固定できる。bower shrinkwrapは実装待ち <a href="https://github.com/bower/bower/issues/505">https://github.com/bower/bower/issues/505</a></p></blockquote>
+
+<p>というわけでnpmはnpm-shrinkwrapを使って管理することにしました yosuke_furukawa++</p>
+
+<h2>npm-shrinkwrap</h2>
+
+<p><a href="https://www.npmjs.org/doc/cli/npm-shrinkwrap.html">https://www.npmjs.org/doc/cli/npm-shrinkwrap.html</a></p>
+
+<p>node_modulesにライブラリがインストールされている状態でnpm shrinkwrapするとnpm-shrinkwrap.jsonという依存しているライブラリのバージョンが記載されたファイルがつくられます。</p>
+
+<p>devDependenciesも含めたい場合は、&mdash;devオプションを付ける必要があります
+```
+% npm install
+:
+% npm shrinkwrap &mdash;dev
+wrote npm-shrinkwrap.json</p>
+
+<p>% cat npm-shrinkwrap.json
+{
+  &ldquo;name&rdquo;: &ldquo;myapp&rdquo;,
+  &ldquo;version&rdquo;: &ldquo;0.0.1&rdquo;,
+  &ldquo;dependencies&rdquo;: {</p>
+
+<pre><code>"grunt-contrib-concat": {
+  "version": "0.3.0",
+  "from": "grunt-contrib-concat@"
+},
+"grunt-remove-logging": {
+  "version": "0.1.1",
+  "from": "grunt-remove-logging@",
+  "resolved": "https://registry.npmjs.org/grunt-remove-logging/-/grunt-remove-logging-0.1.1.tgz"
+},
+"grunt-contrib-coffee": {
+  "version": "0.7.0",
+  "from": "grunt-contrib-coffee@",
+  "dependencies": {
+    "coffee-script": {
+      "version": "1.6.3",
+      "from": "coffee-script@~1.6.2"
+    }
+  }
+},
+"grunt-contrib-compass": {
+  "version": "0.6.0",
+  "from": "grunt-contrib-compass@",
+  "resolved": "https://registry.npmjs.org/grunt-contrib-compass/-/grunt-contrib-compass-0.6.0.tgz",
+  "dependencies": {
+    "tmp": {
+      "version": "0.0.21",
+      "from": "tmp@0.0.21"
+    },
+    "dargs": {
+      "version": "0.1.0",
+      "from": "dargs@~0.1.0"
+    },
+    "async": {
+      "version": "0.2.9",
+      "from": "async@~0.2.0"
+    }
+  }
+},
+</code></pre>
+
+<p>:
+```</p>
+
+<p>npm-shrinkwrap.jsonがある状態でnpm installするとnpm-shrinkwrap.json記載されてるバージョンでインストールされます。
+<code>
+% npm install
+</code></p>
+
+<p>package.jsonで"x.y.z"指定でバージョン固定した場合でもそのライブラリが依存しているライブラリは"~x.y.z"で指定されているためバージョンがズレることがあったのですが、npm-shrinkwrapを使うと依存しているライブラリのバージョンも固定出来て素晴らしい！</p>
+
+<h2>Semantic Versioning</h2>
+
+<p>上の辺りを調べているときにSemantic Versioningというサイトがあるのをしりました。</p>
+
+<ul>
+<li><a href="http://semver.org/">http://semver.org/</a></li>
+</ul>
+
+
+<p>これによるとバージョンニングをMAJOR.MINOR.PATCHと定義していて、</p>
+
+<ul>
+<li>MAJORは互換性のない変更</li>
+<li>MINORは後方互換性のある追加機能</li>
+<li>PATCHは後方互換性のあるBugFix</li>
+</ul>
+
+
+<p>とされています。(1.0.0未満は開発版なので上の限りではない)</p>
+
+<p>さきほどのnpmやbowerの&mdash;saveが"~x.y.z"となっているのも上のバージョニングだと考えると納得がいきます。</p>
+
+<p>ただ、実際その通りになっているライブラリばかりではなく、PATCHバージョンあげたら動かなくなることもありますし、そもそも1.0.0未満だと対象外なので"~x.y.z"の指定で大丈夫というわけにはいきません。</p>
+
+<p>BackboneにもSemantic Versioninigに従うべきというissueがあったりしますが、実際はなかなかむずかしそうです。(jashkenasもその通りにしていたらBackbone 43.0.0になってるとコメントしたりしています)</p>
+
+<p><a href="https://github.com/jashkenas/backbone/issues/2888">https://github.com/jashkenas/backbone/issues/2888</a></p>
+
+<p>普段使っているようなライブラリも依存関係を"~x.y.z"という形式で指定されていることが多いのですが、それによって依存ライブラリのPATCHレベルでの変更で壊れることもあったりして、なかなか難しい&hellip;</p>
+
+<p>(結論なし..)</p>
 ]]></content>
   </entry>
   
