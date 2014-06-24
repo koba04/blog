@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-06-24T09:46:44+09:00</updated>
+  <updated>2014-06-24T10:09:08+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -293,6 +293,43 @@ nyanやtapやmocha形式のような出力形式のカスタマイズ以外に�
 </span><span class='line'>  <span class="nx">red</span><span class="o">:</span> <span class="s2">&quot;go-to-hell.mp3&quot;</span><span class="p">,</span>
 </span><span class='line'>  <span class="nx">green</span><span class="o">:</span> <span class="s2">&quot;happy.mp3&quot;</span>
 </span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>karma-mocha-reporter</h3>
+
+<p><a href="https://github.com/litixsoft/karma-mocha-reporter">https://github.com/litixsoft/karma-mocha-reporter</a></p>
+
+<p>mochaの形式で出力してくれるreporterなのですが、describeとitに与える説明をObjectが持っている関数名にすると&#8221;Cannot assign to read only property&#8221;というエラーになるので注意が必要です(describe &ldquo;method名&#8221;の形式で書いていたのでハマった&hellip;)。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="c1"># Error!!!!</span>
+</span><span class='line'><span class="nx">describe</span> <span class="s">&quot;constructor&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="nx">it</span> <span class="s">&quot;xxxx&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+</span><span class='line'>    <span class="p">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>原因としては、下記のようにdescriptionをpropertyとして使っているため、constructorやtoStringとかを指定すると関数が取得されて、そこにnameを追加しようとしてエラーになる感じです(use strictが指定されてるためエラーになる)。</p>
+
+<ul>
+<li><a href="https://github.com/litixsoft/karma-mocha-reporter/blob/master/index.js#L178-L182">https://github.com/litixsoft/karma-mocha-reporter/blob/master/index.js#L178-L182</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>    <span class="nx">path</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">suite</span><span class="p">,</span> <span class="nx">description</span><span class="p">,</span> <span class="nx">depth</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">suite</span><span class="p">[</span><span class="nx">description</span><span class="p">]</span> <span class="o">||</span> <span class="p">{};</span>
+</span><span class='line'>        <span class="nx">suite</span><span class="p">[</span><span class="nx">description</span><span class="p">]</span> <span class="o">=</span> <span class="nx">item</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">item</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">description</span><span class="p">;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
