@@ -206,6 +206,33 @@ mp3Reporter: {
 }
 ```
 
+
+### karma-mocha-reporter
+
+https://github.com/litixsoft/karma-mocha-reporter
+
+mochaの形式で出力してくれるreporterなのですが、describeとitに与える説明をObjectが持っている関数名にすると"Cannot assign to read only property"というエラーになるので注意が必要です(describe "method名"の形式で書いていたのでハマった...)。
+
+```coffeescript
+# Error!!!!
+describe "constructor", ->
+  it "xxxx", ->
+    ...
+```
+
+原因としては、下記のようにdescriptionをpropertyとして使っているため、constructorやtoStringとかを指定すると関数が取得されて、そこにnameを追加しようとしてエラーになる感じです(use strictが指定されてるためエラーになる)。
+
+* https://github.com/litixsoft/karma-mocha-reporter/blob/master/index.js#L178-L182
+
+```js
+        path.reduce(function (suite, description, depth) {
+            var item = suite[description] || {};
+            suite[description] = item;
+
+            item.name = description;
+```
+
+
 ## Conclution
 
 というわけでKarmaを試したのですが、思った以上に簡単に始めることが出来て、**preprocessors**や**reporters**などの仕組みがあってプラガブルな感じがとてもいいなぁと思いました。
