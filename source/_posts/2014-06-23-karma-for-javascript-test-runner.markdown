@@ -3,7 +3,7 @@ layout: post
 title: "Karma for JavaScript test runner"
 date: 2014-06-23 00:48:32 +0900
 comments: true
-categories: javascript, test, karma
+categories: javascript test karma
 ---
 
 {% img /images/karma.png 'karma' %}
