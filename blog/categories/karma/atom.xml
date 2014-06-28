@@ -4,7 +4,7 @@
   <title><![CDATA[Category: karma | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/karma/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-06-24T10:09:08+09:00</updated>
+  <updated>2014-06-29T01:33:05+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,76 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Release karma-say-reporter]]></title>
+    <link href="http://blog.koba04.com/post/2014/06/29/release-karma-say-reporter/"/>
+    <updated>2014-06-29T01:14:36+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/06/29/release-karma-say-reporter</id>
+    <content type="html"><![CDATA[<p>最近karmaを使っているのもあって、karma-say-reporterっていうのをリリースしました。</p>
+
+<p><a href="https://www.npmjs.org/package/karma-say-reporter">https://www.npmjs.org/package/karma-say-reporter</a></p>
+
+<!-- more -->
+
+
+<p>karmaでテストの結果によって通知するものとしては、<a href="https://www.npmjs.org/package/karma-mp3-reporter">karma-mp3-reporter</a>というものがありますが、好きな言葉を指定したいということでOSXにあるsayコマンドで結果を通知してくれるものです。</p>
+
+<h2>Config</h2>
+
+<p>こんな感じでreportersにsayを追加して、successとfailのときのメッセージを指定出来るようになっています。また、sayコマンドの-vで指定出来るvoiceの種類も設定出来るようになっています。</p>
+
+<p>```js
+// karma.conf.js
+module.exports = function(config) {
+  config.set({</p>
+
+<pre><code>reporters: ['progress', 'say'],
+
+sayReporter: {
+  success: "test all successs",
+  fail: "test failed",
+  voice: "Agnes"
+}
+</code></pre>
+
+<p>  });
+};
+```</p>
+
+<h2>Kyoko for Japanese</h2>
+
+<p>デフォルトだと日本語を指定することが出来ないのですが、環境設定の「音声入力と読み上げ」からKyokoさんを追加すれば日本語を指定できるようになるので、Kyokoさんを追加した後に下記のように設定することで日本語で通知することも出来ます。</p>
+
+<p>```js
+// karma.conf.js
+module.exports = function(config) {
+  config.set({</p>
+
+<pre><code>reporters: ['progress', 'say'],
+
+sayReporter: {
+  success: "やったね",
+  fail: "テストこけてるで",
+  voice: "Kyoko"
+}
+</code></pre>
+
+<p>  });
+};
+```</p>
+
+<h2>Linux&hellip;</h2>
+
+<p>ソース見てもらえれば分かる通り、voiceを覗いてはただsayコマンドに渡してるだけなので、独自にsayコマンドを定義してあげれば多分動くと思います。</p>
+
+<p>なので汎用的なreporterとしても使えるかもしれないです。</p>
+
+<h2>Enjoy!</h2>
+
+<p>Karmaのpluginはまだ未開の地な感があるのでいろんなplugin作っていくと楽しくテスト書けそうでいいですね！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Karma for JavaScript test runner]]></title>

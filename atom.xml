@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-06-24T10:09:08+09:00</updated>
+  <updated>2014-06-29T01:33:05+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,94 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Release karma-say-reporter]]></title>
+    <link href="http://blog.koba04.com/post/2014/06/29/release-karma-say-reporter/"/>
+    <updated>2014-06-29T01:14:36+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/06/29/release-karma-say-reporter</id>
+    <content type="html"><![CDATA[<p>最近karmaを使っているのもあって、karma-say-reporterっていうのをリリースしました。</p>
+
+<p><a href="https://www.npmjs.org/package/karma-say-reporter">https://www.npmjs.org/package/karma-say-reporter</a></p>
+
+<!-- more -->
+
+
+<p>karmaでテストの結果によって通知するものとしては、<a href="https://www.npmjs.org/package/karma-mp3-reporter">karma-mp3-reporter</a>というものがありますが、好きな言葉を指定したいということでOSXにあるsayコマンドで結果を通知してくれるものです。</p>
+
+<h2>Config</h2>
+
+<p>こんな感じでreportersにsayを追加して、successとfailのときのメッセージを指定出来るようになっています。また、sayコマンドの-vで指定出来るvoiceの種類も設定出来るようになっています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// karma.conf.js</span>
+</span><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">config</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">reporters</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;progress&#39;</span><span class="p">,</span> <span class="s1">&#39;say&#39;</span><span class="p">],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">sayReporter</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">success</span><span class="o">:</span> <span class="s2">&quot;test all successs&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">fail</span><span class="o">:</span> <span class="s2">&quot;test failed&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">voice</span><span class="o">:</span> <span class="s2">&quot;Agnes&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Kyoko for Japanese</h2>
+
+<p>デフォルトだと日本語を指定することが出来ないのですが、環境設定の「音声入力と読み上げ」からKyokoさんを追加すれば日本語を指定できるようになるので、Kyokoさんを追加した後に下記のように設定することで日本語で通知することも出来ます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// karma.conf.js</span>
+</span><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">config</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">reporters</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;progress&#39;</span><span class="p">,</span> <span class="s1">&#39;say&#39;</span><span class="p">],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">sayReporter</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">success</span><span class="o">:</span> <span class="s2">&quot;やったね&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">fail</span><span class="o">:</span> <span class="s2">&quot;テストこけてるで&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">voice</span><span class="o">:</span> <span class="s2">&quot;Kyoko&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Linux&hellip;</h2>
+
+<p>ソース見てもらえれば分かる通り、voiceを覗いてはただsayコマンドに渡してるだけなので、独自にsayコマンドを定義してあげれば多分動くと思います。</p>
+
+<p>なので汎用的なreporterとしても使えるかもしれないです。</p>
+
+<h2>Enjoy!</h2>
+
+<p>Karmaのpluginはまだ未開の地な感があるのでいろんなplugin作っていくと楽しくテスト書けそうでいいですね！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Karma for JavaScript test runner]]></title>
