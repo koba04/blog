@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "天下一クライアントサイドJS MV*レームワーク武道会で話しました"
+title: "天下一クライアントサイドJS MV*レームワーク武道会で話しました #ten1club"
 date: 2014-07-12 23:13:39 +0900
 comments: true
 categories: javascript
