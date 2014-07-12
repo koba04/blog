@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-06-29T01:33:05+09:00</updated>
+  <updated>2014-07-13T01:07:31+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[天下一クライアントサイドJS MV*レームワーク武道会で話しました]]></title>
+    <link href="http://blog.koba04.com/post/2014/07/12/talked-at-ten1club/"/>
+    <updated>2014-07-12T23:13:39+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/07/12/talked-at-ten1club</id>
+    <content type="html"><![CDATA[<p><a href="http://connpass.com/event/6910/">http://connpass.com/event/6910/</a></p>
+
+<p>「天下一クライアントサイドJS MV*フレームワーク武道会」でMarionette.jsについてのLTとパネルディスカッションをさせて頂きました。</p>
+
+<!-- more -->
+
+
+<p>JavaScriptについて外部で話すの初めてだったのでドキドキしてましたが本当にとても面白いイベントでした。</p>
+
+<p><a href="https://twitter.com/yosuke_furukawa">@yosuke_furukawa</a>さんに感謝です。++</p>
+
+<p>ありがとうございます！</p>
+
+<h2>LT</h2>
+
+<p>Marionette.jsについてを簡単に説明した感じです。面白みがないですが&hellip;。興味があれば見てみてください。</p>
+
+<p><a href="https://speakerdeck.com/koba04/5fen-dewakarumarionette-dot-jsfalseiitokoro">5分でわかるMarionette.jsのいいところ</a></p>
+
+<p>他の方の発表もみんな面白かったです。Reactが気になっていたのでその辺りも少し聞けてよかったです。</p>
+
+<h2>パネルディスカッション</h2>
+
+<p><a href="https://twitter.com/mizchi">@mizchi</a>さん、<a href="https://twitter.com/damele0n">@damele0n</a>さん、<a href="https://twitter.com/hokaccha">@hokaccha</a>さん、<a href="https://twitter.com/teppeis">@teppeis</a>さんという豪華なメンバーに紛れて参加させて頂いたいのですが、うまく伝えられず反省する点もありましたが聞いていてとても楽しくてあっという間の1時間でした。また機会があれば続きをやりたいです。</p>
+
+<h2>懇親会</h2>
+
+<p>色んな方に声を掛けて頂き、面白い話がいっぱい聞けて楽しかったです。ブログ見たと言ってもらえたのが嬉しかったのと、意外とMarionette.js使われていて同じようなところで悩んでるなぁとわかってよかったです。懇親会後のWebComponents話も面白かったです。</p>
+
+<h2>最強のフレームワーク??</h2>
+
+<p>まぁぶっちゃけ、このフレームワーク使っておけばいいというものはなくて、「誰が触るのか」、「どんなアプリなのか」によって全く答えは変わってくるので、選択肢を自分の中で持っておくことが大切なんじゃないかなと思いました。</p>
+
+<h2>蛇足</h2>
+
+<p>ちなみに個人的には、Vue.js、browserify辺りを使って、テストはkarma、mocha、power-assertとか組み合わせるのが今は好きです。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Release karma-say-reporter]]></title>
