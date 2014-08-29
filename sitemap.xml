@@ -2,68 +2,68 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://blog.koba04.com/post/2014/03/02/blog-renewal/</loc>
-        <lastmod>2014-03-23T15:50:05+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version/</loc>
-        <lastmod>2014-03-23T15:50:05+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.koba04.com/post/2014/03/23/browserify-in-backbone-marionette-project/
         </loc>
-        <lastmod>2014-03-25T00:04:13+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/03/23/marionette-behaivors/</loc>
-        <lastmod>2014-03-23T21:10:29+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browserify/
         </loc>
-        <lastmod>2014-04-18T20:34:57+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/05/01/book-review-of-webapp-mook/</loc>
-        <lastmod>2014-05-02T00:41:32+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.koba04.com/post/2014/06/17/dont-use-backbone-model-tojson-for-render/
         </loc>
-        <lastmod>2014-06-18T01:09:48+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/06/19/release-marionette-2_0/</loc>
-        <lastmod>2014-06-19T23:28:48+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/06/23/karma-for-javascript-test-runner/</loc>
-        <lastmod>2014-06-24T23:58:53+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/06/29/release-karma-say-reporter/</loc>
-        <lastmod>2014-06-29T01:33:05+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/07/12/talked-at-ten1club/</loc>
-        <lastmod>2014-07-13T01:09:23+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/07/25/book-review-of-the-launch-pad/</loc>
-        <lastmod>2014-07-25T01:27:26+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/blog/archives/</loc>
-        <lastmod>2014-07-25T01:27:26+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/</loc>
-        <lastmod>2014-07-25T01:27:26+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/robots.txt</loc>
-        <lastmod>2014-03-23T15:50:05+09:00</lastmod>
+        <lastmod>2014-08-29T13:24:28+09:00</lastmod>
     </url>
 </urlset>
