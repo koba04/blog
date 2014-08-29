@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-08-30T01:42:46+09:00</updated>
+  <updated>2014-08-30T02:06:23+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -31,7 +31,7 @@
 
 <p>そもそも何でやっていたかですが、</p>
 
-<p>Facebookのmessageで<a href="https://twitter.com/yusukebe">@yusukebe</a>さんからWebアプリのコンテストみたいなのやりたいから企画と当日の仕切りをお願いしますというオファーが来たので、なんか大変そうな気もするけど楽しそうなので受けることにしました。</p>
+<p><a href="https://twitter.com/yusukebe">@yusukebe</a>さんからWebアプリのコンテストみたいなのやりたいから企画と当日の仕切りをお願いしますというオファーが来たので、なんか大変そうな気もするけど楽しそうなので受けることにしました。</p>
 
 <h2>企画を考える</h2>
 
@@ -46,7 +46,7 @@
 </ul>
 
 
-<p>ですが最終的には、「前夜祭ということでイベントの一発目」ということで勢いのある感じのイベントにしたいということで、Talk(10min)を10本ぶっ通しで行うという形に落ち着きました。</p>
+<p>ですが最終的には、「前夜祭はYAPC::ASIA 2014一番目のイベント」なので勢いのある感じにしたいということで、Talk(10min)を10本ぶっ通しで行うという形に落ち着きました。</p>
 
 <p>なんとなく、今回はYAPC初参加のPerlを使っていない人もそこそこいると思ったのと、前夜祭は初参加の人にとってはYAPCを印象付けるものになると思ったので、誰でも楽しめるようなイベントになるようにとは考えていました。</p>
 
