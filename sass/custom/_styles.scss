@@ -25,13 +25,21 @@ h2 {
   font-size: $header-sub-font-size;
   margin: $header-sub-margin;
   border-bottom: solid 1px #e44a4e;
+  code {
+    font-size: inherit;
+  }
 }
 
 h3 {
-  font-size: $header-sub-font-size;
+  font-size: $header-sub-font-size - 2;
   margin: $header-sub-margin;
   border-bottom: solid 1px;
+  code {
+    font-size: inherit;
+  }
+
 }
+
 
 .jumbotron {
   font-size: $header-main-font-size;
@@ -73,4 +81,8 @@ blockquote {
 
 strong {
   color: $primary-color;
+}
+
+code {
+  font-size: inherit;
 }
