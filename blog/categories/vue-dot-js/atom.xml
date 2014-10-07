@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vue.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/vue-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-08-30T02:06:23+09:00</updated>
+  <updated>2014-10-07T14:13:10+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,623 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Vue.js v0.11の変更点(予定)まとめ]]></title>
+    <link href="http://blog.koba04.com/post/2014/10/07/vue-js-v011-changes/"/>
+    <updated>2014-10-07T13:04:51+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/10/07/vue-js-v011-changes</id>
+    <content type="html"><![CDATA[<p>Vue.js v0.11のrc版もリリースされて、v0.10からの変更点が多いのでchangesを参考にまとめてみました。</p>
+
+<p>APIの変更も多いですが、data継承の仕組みが完全に変わっているのでその辺りは注意が必要ですね。</p>
+
+<!-- more -->
+
+
+<p>まだ安定してなかったりドキュメントはv0.10のものしかなくてchangesとmergeしながら読む必要があったりするので、これから開発する人は今のタイミングはどのバージョンを使えばいいのかちょっと悩ましいですね。v0.11系を使っていった方がいいとは思いつつ。</p>
+
+<p>今回の変更でも見えるのですが、Angular.js以外にもBackbone.jsやReact.jsなど様々なフレームワークからいいところを持ってきてるところがVue.jsの面白いところですね。</p>
+
+<p><a href="https://github.com/yyx990803/vue/blob/0.11.0-rc/changes.md">https://github.com/yyx990803/vue/blob/0.11.0-rc/changes.md</a></p>
+
+<h2>Instantiation process</h2>
+
+<p><code>el</code>オプションがインスタンス化する際に指定されていなかった場合、以前は空のdivを作成していましたが"unmounted"な状態となり新しく追加された<code>$mount</code>メソッドにquerySelectorを渡すことでViewと紐付けるようになりました。</p>
+
+<p>``` js
+var vm = new Vue({ data: {a:1} }) // only observes the data
+vm.$mount(&lsquo;#app&rsquo;) // actually compile the DOM</p>
+
+<p>// in comparison, this will compile instantly just like before.
+var vm = new Vue({ el: &lsquo;#app&rsquo;, data: {a: 1} })
+```</p>
+
+<h2>New Scope Inheritance Model</h2>
+
+<p>以前のバージョンではprototypeなデータ継承の仕組みを持っていませんでした。にも関わらず<code>this.$parent</code>や<code>this.$get</code>を使って親scopeの値を参照することが出来ました。</p>
+
+<p>新しいバージョンでは、Angular.jsに似た継承システムを持っていて、直接親scopeの値を参照することが出来ます。
+大きな違いは子scopeで値を設定するとそれは親scopeにも影響することです。</p>
+
+<p>この例がわかりやすいです。 <a href="http://jsfiddle.net/Px2n6/2/">http://jsfiddle.net/Px2n6/2/</a></p>
+
+<p>デフォルトではtemplate内で入れ子にしても親scopeは継承しません。これは意図せず親scopeの値を書き換えないようにするためです。
+もし親scopeを継承したい場合は<code>inherit: true</code>オプションをつける必要があります。</p>
+
+<p><code>v-repeat</code>と<code>v-if</code>は親scopeをデフォルトで継承します。</p>
+
+<h2>Instance Option changes</h2>
+
+<h3><code>Vue.extend</code>内で<code>el</code>と<code>data</code>を使用する場合は関数定義にする必要があります。</h3>
+
+<p>```js
+var MyComponent = Vue.extend({
+  el: function () {</p>
+
+<pre><code>var el = document.createElement('p')
+// you can initialize your element here.
+// you can even return a documentFragment to create
+// a block instance.
+el.className = 'content'
+return el
+</code></pre>
+
+<p>  },
+  data: function () {</p>
+
+<pre><code>// similar to ReactComponent.getInitialState
+return {
+  a: {
+    b: 123
+  }
+}
+</code></pre>
+
+<p>  }
+})
+```</p>
+
+<h3><code>events</code>オプション追加されました</h3>
+
+<p>Backbone.jsのeventsみたいな感じですね。
+$emitで発行する独自イベント以外にも<code>hook:created</code>のようなライフサイクルイベントについても定義することが出来ます。</p>
+
+<p>```js
+var vm = new Vue({
+  events: {</p>
+
+<pre><code>'hook:created': function () {
+  console.log('created!')
+},
+greeting: function (msg) {
+  console.log(msg)
+},
+// can also use a string for methods
+bye: 'sayGoodbye'
+</code></pre>
+
+<p>  },
+  methods: {</p>
+
+<pre><code>sayGoodbye: function () {
+  console.log('goodbye!')
+}
+</code></pre>
+
+<p>  }
+})
+// &ndash;> created!
+vm.$emit(&lsquo;greeting&rsquo;, &lsquo;hi!&rsquo;)
+// &ndash;> hi!
+vm.$emit(&lsquo;bye&rsquo;)
+// &ndash;> goodbye!
+```</p>
+
+<h3><code>inherit</code>オプションが追加されました(デフォルトはfalse)</h3>
+
+<p>親scopeの<code>data</code>を継承するかどうかの設定です。
+継承することで</p>
+
+<ol>
+<li>親scopeの値をtemplateで参照することが出来るようになります</li>
+<li>親scopeの値をインスタンスから直接アクセス出来るようになります</li>
+</ol>
+
+
+<h3><code>mixin</code>オプションが追加されました</h3>
+
+<p>いわゆるmixinってやつです。</p>
+
+<p><code>js
+var mixin = {
+  created: function () { console.log(2) }
+}
+var vm = new Vue({
+  created: function () { console.log(1) },
+  mixins: [mixin]
+})
+// -&gt; 1
+// -&gt; 2
+</code></p>
+
+<h3><code>name</code>オプションが追加されました</h3>
+
+<p>デバッグしやすさのために名前をつけることが出来るようになりました。</p>
+
+<p><code>js
+var SubClass = Vue.extend({
+  name: 'MyComponent'
+})
+var instance = new SubClass()
+console.log(instance) // -&gt; MyComponent { $el: ... }
+</code></p>
+
+<h3><code>parent</code>オプションが削除されました</h3>
+
+<p>かわりに$addChildを使うことが出来ます。</p>
+
+<p><code>js
+var child = parent.$addChild(options, [contructor])
+</code></p>
+
+<h3><code>lazy</code>が削除されました</h3>
+
+<p>ViewModelに指定するのではなくて、<code>v-model</code>毎に設定すべきだからということで<code>v-model</code>のoptionになりました。</p>
+
+<h3><code>id</code>、<code>tagName</code>、<code>className</code>、<code>attributes</code>も削除されました</h3>
+
+<p>代わりに<code>el</code>に関数定義して指定するようにします</p>
+
+<h3><code>created</code>のhookの挙動が変更されました</h3>
+
+<p>データバインディングされた後に呼ばれるにようになったので、dataを追加する場合は$addや$removeを使わないとデータバインディングの対象にならなくなりました。</p>
+
+<h3><code>ready</code>のhookの挙動が変更されました</h3>
+
+<p>documentに初めて追加されるときだけに呼ばれるようになりました。これまでと同じように使いたい場合は<code>compiled</code>を使ってください。</p>
+
+<h3><code>beforeCompile</code>のhookが追加されました</h3>
+
+<p>インスタンス化されてDOMのcompileが開始される前に呼ばれます。</p>
+
+<h3><code>compiled</code>のhookが追加されました</h3>
+
+<p>これまでの<code>ready</code>のタイミングで呼ばれて、初期のデータでのcompileが終了したタイミングで呼ばれます。</p>
+
+<h3><code>afterDestroy</code>のhookが<code>destroy</code>に変更されました</h3>
+
+<h2>Instance methods change</h2>
+
+<h3><code>$watch</code>に評価式を渡せるようになりました</h3>
+
+<p><code>js
+vm.$watch('a + b', function (newVal, oldVal) {
+  // do something
+})
+</code></p>
+
+<h3><code>$watch</code>でのdeep watchの挙動が変わりました</h3>
+
+<p>デフォルトではwatchに渡した値に対する変更しか監視しなくなったので、ネストしたオブジェクトの評価をしたい場合は、第三引数に<code>true</code>を渡す必要があります。</p>
+
+<p><code>js
+vm.$watch('someObject', callback, true)
+vm.someObject.nestedValue = 123
+// callback is fired
+</code></p>
+
+<h3><code>$watch</code>の即時実行</h3>
+
+<p>第四引数にtrueを渡すことで初回に値をセットするときにもcallbackを実行させることが出来ます。</p>
+
+<p><code>js
+vm.$watch('a', callback, false, true)
+// callback is fired immediately with current value of `a`
+</code></p>
+
+<p>この辺、deepWatchと合わせて第三引数をoptionsなオブジェクトにしたほうがいいと思う。</p>
+
+<h3><code>$unwatch</code>は削除されて、<code>$watch</code>の戻り値である関数を呼ぶことでunwatchされます</h3>
+
+<p><code>js
+var unwatch = vm.$watch('a', cb)
+// later, teardown the watcher
+unwatch()
+</code></p>
+
+<h3><code>vm.$get</code>に評価式を渡せるようになりました</h3>
+
+<p><code>js
+var value = vm.$get('a + b')
+</code></p>
+
+<h3><code>vm.$add</code>と<code>vm.$delete</code>が追加されました</h3>
+
+<p>ViewModelのプロパティを追加・削除するときに使います。
+まぁでも、インスタンス化する際に全てのプロパティをnullなどで設定しておく方がいいです。</p>
+
+<h3><code>vm.$eval</code>が追加されました</h3>
+
+<p>filterも適用することが出来ます。</p>
+
+<p><code>js
+var value = vm.$eval('msg | uppercase')
+</code></p>
+
+<h3><code>vm.$interpolate</code>が追加されました</h3>
+
+<p>template文字列を評価することが出来ます。</p>
+
+<p>```js
+var markup = vm.$interpolate(&lsquo;<p></p>&rsquo;)</p>
+
+<p>```</p>
+
+<h3><code>vm.$log</code>が追加されました</h3>
+
+<p>インスタンスのdataを生のオブジェクトとしてみることが出来ます(getter/setterなし)。</p>
+
+<p><code>js
+vm.$log() // logs entire ViewModel data
+vm.$log('item') // logs vm.item
+</code></p>
+
+<h2>Computed Properties API Change</h2>
+
+<h3><code>$get</code>、<code>$set</code>は<code>get</code>、<code>set</code>になりました</h3>
+
+<p>```js
+computed: {
+  fullName: {</p>
+
+<pre><code>get: function () {},
+set: function () {}
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<h2>Directive API change</h2>
+
+<h3>directiveに動的な値を指定出来るようになりました</h3>
+
+<p>こんな感じでv-viewみたいなことが出来るようになりました</p>
+
+<p>
+```html</p>
+
+<div v-component="{{test}}"></div>
+
+
+<p>```
+</p>
+
+<p>今サポートしているのは<code>v-component</code>だけで、独自directiveを作る時は<code>update</code>関数を実装することでハンドリング出来ます。</p>
+
+<h3><code>v-model</code>に<code>lazy</code>属性と<code>number</code>属性が追加されました</h3>
+
+<p><code>lazy</code>はこれまでインスタンスオプションにあった、enterキー押したときかフォーカス外れた時だけにchangeイベントが発行されるものがv-modelの属性になりました。</p>
+
+<p><code>number</code>はmodelに反映されるときにNumber型にすることが出来ます。</p>
+
+<h3>select要素に<code>v-model</code>としてtextとvalueを含んだオブジェクトの配列を渡すとoption要素として評価してくれます</h3>
+
+<p><code>js
+[
+  { text: 'A', value: 'a' },
+  { text: 'B', value: 'b' }
+]
+</code></p>
+
+<p><code>html
+&lt;select&gt;
+  &lt;option value="a"&gt;A&lt;/option&gt;
+  &lt;option value="b"&gt;B&lt;/option&gt;
+&lt;/select&gt;
+</code></p>
+
+<h3>select要素に<code>v-model</code>としてlabelとoptionsを含んだオブジェクトの配列を渡すとoptgroup要素として評価してくれます</h3>
+
+<p><code>js
+[
+  { label: 'A', options: ['a', 'b']},
+  { label: 'B', options: ['c', 'd']}
+]
+</code></p>
+
+<p>```html
+<select>
+  <optgroup label="A"></p>
+
+<pre><code>&lt;option value="a"&gt;a&lt;/option&gt;
+&lt;option value="b"&gt;b&lt;/option&gt;
+</code></pre>
+
+<p>  </optgroup>
+  <optgroup label="B"></p>
+
+<pre><code>&lt;option value="c"&gt;c&lt;/option&gt;
+&lt;option value="d"&gt;d&lt;/option&gt;
+</code></pre>
+
+<p>  </optgroup>
+</select>
+```</p>
+
+<h3><code>v-component</code>に<code>keep-alive</code>属性を指定するとインスタンスを破棄せずにキャッシュしておいてくれるようになります</h3>
+
+<p>Viewの切り替えを<code>v-component</code>で行うときに使うとよさそうです。使い方間違うとリークしそうですが&hellip;。</p>
+
+<h3><code>v-repeat</code>に<code>trackby</code>を指定することで、配列の値を再利用することが出来るようになりました</h3>
+
+<p>配列のdataにAPIのレスポンスなどを適用してswapされた場合など、今までは全部の要素を作りなおしていたのですがtrackbyを指定することで既存の値は再利用してくれるようになりました。React.jsのkeyみたいな感じ。</p>
+
+<p><code>js
+items: [
+  { _id: 1, ... },
+  { _id: 2, ... },
+  { _id: 3, ... }
+]
+</code></p>
+
+<p><code>html
+&lt;li v-repeat="items" trackby="_id"&gt;...&lt;/li&gt;
+</code></p>
+
+<h3><code>v-with</code>で親と子のインスタンスの間で2wayバインディングされないようになりました</h3>
+
+<p><code>v-with</code>で作られた子のインスタンスの値を変更しても親には反映されなくなります。親のインスタンスの変更は子に反映されます。</p>
+
+<h3><code>v-el</code>が追加されました</h3>
+
+<p><code>v-ref</code>で似た感じですが、こちらは<code>vm.$$.xxx</code>とすることでDOM Nodeを参照することが出来ます。</p>
+
+<h3><code>twoWay</code>のオプションが追加されました</h3>
+
+<p>このオプションはdirectiveが2wayデータバインディングをするかどうかを指定します。
+これを指定することで<code>this.set(value)</code>をdirectiveの内部で使用することが出来ます。</p>
+
+<ul>
+<li>ちょっとどういう使われ方するのかよくわかってないです&hellip;</li>
+</ul>
+
+
+<h3><code>isEmpty</code>オプションが削除されました</h3>
+
+<h2>Interpolation change</h2>
+
+<h3>textのバインディング自動的にstringifyしなくなりました。</h3>
+
+<p><code>json</code>filterを使いましょう。</p>
+
+<h3>One time interpolationsが指定出来るようになりました</h3>
+
+<p>変更されない値に指定することでrenderingのパフォーマンスを向上させることが出来ます。</p>
+
+<p>
+<code>html
+&lt;span&gt;{{* hello }}&lt;/span&gt;
+</code>
+</p>
+
+<h2>Config API change</h2>
+
+<h3>Vue.configがメソッド形式からpropertyアクセスに変更されました</h3>
+
+<p>```js
+// old
+// Vue.config(&lsquo;debug&rsquo;, true)</p>
+
+<p>// new
+Vue.config.debug = true
+```</p>
+
+<h3><code>config.prefix</code>の値にハイフンが必須になりました</h3>
+
+<p><code>js
+Vue.config.prefix = "data-"
+</code></p>
+
+<h3><code>config.delimiters</code>が少し柔軟に指定出来るようになりました</h3>
+
+<p>これまでは<code>['{','}']</code>というような指定しか出来なかったのが<code>['(%', '%)']</code>という指定も出来るようになりました。</p>
+
+<p><code>js
+Vue.config.delimiters = ['(%', '%)']
+// tags now are (% %) for text
+// and ((% %)) for HTML
+</code></p>
+
+<h3>&lsquo;proto'optionをfalseにすることで<code>__proto__</code>の書き換えを禁止することが出来ます</h3>
+
+<p><code>data</code>に生のオブジェクトを指定している場合は問題ないけど、コンストラクタからインスタンス化したオブジェクトを指定している場合など<code>__proto__</code>が書き換えられると困る場合にfalseを指定することが出来るようになりました。</p>
+
+<h2>Transition API change</h2>
+
+<h3><code>v-transition</code>と<code>v-animation</code>と<code>v-effect</code>の違いはなくなりました</h3>
+
+<p>どれかに統一されるのかな？</p>
+
+<h3><code>Vue.config</code>でenter/leaveの指定が設定出来なくなりました</h3>
+
+<h3><code>Vue.effect</code>は<code>Vue.transition</code>に変更されました。<code>effects</code>オプションも<code>transitions</code>に変更されました。</h3>
+
+<h3><code>v-transition="my-transition"</code>とした場合、</h3>
+
+<ol>
+<li><code>Vue.transition(id, def)</code>で登録されているオブジェクトまたは、<code>transitions</code>オプションを"my-transition"をkeyとして探します。</li>
+<li>上記で見つからなかった場合、CSS transitionsまたはCSS animationsを適用します。</li>
+<li>上記でもアニメーションしなかった場合、DOM操作を即時に行われます。</li>
+</ol>
+
+
+<h3>JavaScript transitionsのAPIがAngular.jsっぽく変更されました</h3>
+
+<p>```js
+Vue.transition(&lsquo;fade&rsquo;, {
+  beforeEnter: function (el) {</p>
+
+<pre><code>// a synchronous function called right before the
+// element is inserted into the document.
+// you can do some pre-styling here to avoid FOC.
+</code></pre>
+
+<p>  },
+  enter: function (el, done) {</p>
+
+<pre><code>// element is already inserted into the DOM
+// call done when animation finishes.
+$(el)
+  .css('opacity', 0)
+  .animate({ opacity: 1 }, 1000, done)
+// optionally return a "cancel" function
+// to clean up if the animation is cancelled
+return function () {
+  $(el).stop()
+}
+</code></pre>
+
+<p>  },
+  leave: function (el, done) {</p>
+
+<pre><code>// same as enter
+$(el)
+  .animate({ opacity: 0 }, 1000, done)
+return function () {
+  $(el).stop()
+}
+</code></pre>
+
+<p>  }
+})
+```</p>
+
+<h2>Events API change</h2>
+
+<h3><code>$dispatch</code>と<code>broadcast</code>で発行されるイベントのコールバックでfalseを返すと、伝播を止めることが出来るようになりました。</h3>
+
+<p>```js
+var a = new Vue()
+var b = new Vue({
+  parent: a
+})
+var c = new Vue({
+  parent: b
+})</p>
+
+<p>a.$on(&lsquo;test&rsquo;, function () {
+  console.log(&lsquo;a&rsquo;)
+})
+b.$on(&lsquo;test&rsquo;, function () {
+  console.log(&lsquo;b&rsquo;)
+  return false
+})
+c.$on(&lsquo;test&rsquo;, function () {
+  console.log(&lsquo;c&rsquo;)
+})
+c.$dispatch(&lsquo;test&rsquo;)
+// &ndash;> &lsquo;c&rsquo;
+// &ndash;> &lsquo;b&rsquo;
+```</p>
+
+<h2>Two Way filters</h2>
+
+<h3>filterに関数を渡すとreadのfilterとして扱われますが、<code>v-model</code>のような2wayバインディングのdirectiveと組み合わせることでwriteのfilterも定義出来るようになりました</h3>
+
+<p>```js
+Vue.filter(&lsquo;format&rsquo;, {
+  read: function (val) {</p>
+
+<pre><code>return val + '!'
+</code></pre>
+
+<p>  },
+  write: function (val, oldVal) {</p>
+
+<pre><code>return val.match(/ok/) ? val : oldVal
+</code></pre>
+
+<p>  }
+})
+```</p>
+
+<h2>Block logic control</h2>
+
+<h3>template要素を制御ブロックとして扱うことが出来るようになりました</h3>
+
+<p>```js
+items: [
+  {</p>
+
+<pre><code>title: 'title-1',
+subtitle: 'subtitle-1',
+content: 'content-1'
+</code></pre>
+
+<p>  },
+  {</p>
+
+<pre><code>title: 'title-2',
+subtitle: 'subtitle-2',
+content: 'content-2'
+</code></pre>
+
+<p>  }
+]
+```</p>
+
+<p><code>html
+&lt;template v-repeat="item:items"&gt;
+  &lt;h2&gt;&lt;/h2&gt;
+  &lt;p&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;/p&gt;
+&lt;/template&gt;
+</code></p>
+
+<p>```html</p>
+
+<!--v-block-start-->
+
+
+<h2>title-1</h2>
+
+
+<p>subtitle-1</p>
+
+
+<p>content-1</p>
+
+
+<!--v-block-end-->
+
+
+<!--v-block-start-->
+
+
+<h2>title-2</h2>
+
+
+<p>subtitle-2</p>
+
+
+<p>content-2</p>
+
+
+<!--v-block-end-->
+
+
+<p>```</p>
+
+<h2>Misc</h2>
+
+<h3><code>v-model</code>と一緒に<code>value</code>属性を指定するとvmの値を上書きして初期値として設定されます</h3>
+
+<hr />
+
+<p>vue.js bookもv0.11対応して続きを書かないと&hellip;.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Reusable components by Vue.js and Browserify]]></title>

@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-08-30T02:06:23+09:00</updated>
+  <updated>2014-10-07T14:13:10+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,766 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Vue.js v0.11の変更点(予定)まとめ]]></title>
+    <link href="http://blog.koba04.com/post/2014/10/07/vue-js-v011-changes/"/>
+    <updated>2014-10-07T13:04:51+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/10/07/vue-js-v011-changes</id>
+    <content type="html"><![CDATA[<p>Vue.js v0.11のrc版もリリースされて、v0.10からの変更点が多いのでchangesを参考にまとめてみました。</p>
+
+<p>APIの変更も多いですが、data継承の仕組みが完全に変わっているのでその辺りは注意が必要ですね。</p>
+
+<!-- more -->
+
+
+<p>まだ安定してなかったりドキュメントはv0.10のものしかなくてchangesとmergeしながら読む必要があったりするので、これから開発する人は今のタイミングはどのバージョンを使えばいいのかちょっと悩ましいですね。v0.11系を使っていった方がいいとは思いつつ。</p>
+
+<p>今回の変更でも見えるのですが、Angular.js以外にもBackbone.jsやReact.jsなど様々なフレームワークからいいところを持ってきてるところがVue.jsの面白いところですね。</p>
+
+<p><a href="https://github.com/yyx990803/vue/blob/0.11.0-rc/changes.md">https://github.com/yyx990803/vue/blob/0.11.0-rc/changes.md</a></p>
+
+<h2>Instantiation process</h2>
+
+<p><code>el</code>オプションがインスタンス化する際に指定されていなかった場合、以前は空のdivを作成していましたが&#8221;unmounted&#8221;な状態となり新しく追加された<code>$mount</code>メソッドにquerySelectorを渡すことでViewと紐付けるようになりました。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">}</span> <span class="p">})</span> <span class="c1">// only observes the data</span>
+</span><span class='line'><span class="nx">vm</span><span class="p">.</span><span class="nx">$mount</span><span class="p">(</span><span class="s1">&#39;#app&#39;</span><span class="p">)</span> <span class="c1">// actually compile the DOM</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// in comparison, this will compile instantly just like before.</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span> <span class="nx">el</span><span class="o">:</span> <span class="s1">&#39;#app&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">}</span> <span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>New Scope Inheritance Model</h2>
+
+<p>以前のバージョンではprototypeなデータ継承の仕組みを持っていませんでした。にも関わらず<code>this.$parent</code>や<code>this.$get</code>を使って親scopeの値を参照することが出来ました。</p>
+
+<p>新しいバージョンでは、Angular.jsに似た継承システムを持っていて、直接親scopeの値を参照することが出来ます。
+大きな違いは子scopeで値を設定するとそれは親scopeにも影響することです。</p>
+
+<p>この例がわかりやすいです。 <a href="http://jsfiddle.net/Px2n6/2/">http://jsfiddle.net/Px2n6/2/</a></p>
+
+<p>デフォルトではtemplate内で入れ子にしても親scopeは継承しません。これは意図せず親scopeの値を書き換えないようにするためです。
+もし親scopeを継承したい場合は<code>inherit: true</code>オプションをつける必要があります。</p>
+
+<p><code>v-repeat</code>と<code>v-if</code>は親scopeをデフォルトで継承します。</p>
+
+<h2>Instance Option changes</h2>
+
+<h3><code>Vue.extend</code>内で<code>el</code>と<code>data</code>を使用する場合は関数定義にする必要があります。</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">MyComponent</span> <span class="o">=</span> <span class="nx">Vue</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">el</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1">// you can initialize your element here.</span>
+</span><span class='line'>    <span class="c1">// you can even return a documentFragment to create</span>
+</span><span class='line'>    <span class="c1">// a block instance.</span>
+</span><span class='line'>    <span class="nx">el</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">&#39;content&#39;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">el</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nx">data</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// similar to ReactComponent.getInitialState</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">a</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">b</span><span class="o">:</span> <span class="mi">123</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>events</code>オプション追加されました</h3>
+
+<p>Backbone.jsのeventsみたいな感じですね。
+$emitで発行する独自イベント以外にも<code>hook:created</code>のようなライフサイクルイベントについても定義することが出来ます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">events</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s1">&#39;hook:created&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;created!&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">greeting</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="c1">// can also use a string for methods</span>
+</span><span class='line'>    <span class="nx">bye</span><span class="o">:</span> <span class="s1">&#39;sayGoodbye&#39;</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">sayGoodbye</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;goodbye!&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'><span class="c1">// -&gt; created!</span>
+</span><span class='line'><span class="nx">vm</span><span class="p">.</span><span class="nx">$emit</span><span class="p">(</span><span class="s1">&#39;greeting&#39;</span><span class="p">,</span> <span class="s1">&#39;hi!&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">// -&gt; hi!</span>
+</span><span class='line'><span class="nx">vm</span><span class="p">.</span><span class="nx">$emit</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">// -&gt; goodbye!</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>inherit</code>オプションが追加されました(デフォルトはfalse)</h3>
+
+<p>親scopeの<code>data</code>を継承するかどうかの設定です。
+継承することで</p>
+
+<ol>
+<li>親scopeの値をtemplateで参照することが出来るようになります</li>
+<li>親scopeの値をインスタンスから直接アクセス出来るようになります</li>
+</ol>
+
+
+<h3><code>mixin</code>オプションが追加されました</h3>
+
+<p>いわゆるmixinってやつです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">mixin</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">created</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">created</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">},</span>
+</span><span class='line'>  <span class="nx">mixins</span><span class="o">:</span> <span class="p">[</span><span class="nx">mixin</span><span class="p">]</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'><span class="c1">// -&gt; 1</span>
+</span><span class='line'><span class="c1">// -&gt; 2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>name</code>オプションが追加されました</h3>
+
+<p>デバッグしやすさのために名前をつけることが出来るようになりました。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">SubClass</span> <span class="o">=</span> <span class="nx">Vue</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;MyComponent&#39;</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SubClass</span><span class="p">()</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">instance</span><span class="p">)</span> <span class="c1">// -&gt; MyComponent { $el: ... }</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>parent</code>オプションが削除されました</h3>
+
+<p>かわりに$addChildを使うことが出来ます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">$addChild</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="p">[</span><span class="nx">contructor</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>lazy</code>が削除されました</h3>
+
+<p>ViewModelに指定するのではなくて、<code>v-model</code>毎に設定すべきだからということで<code>v-model</code>のoptionになりました。</p>
+
+<h3><code>id</code>、<code>tagName</code>、<code>className</code>、<code>attributes</code>も削除されました</h3>
+
+<p>代わりに<code>el</code>に関数定義して指定するようにします</p>
+
+<h3><code>created</code>のhookの挙動が変更されました</h3>
+
+<p>データバインディングされた後に呼ばれるにようになったので、dataを追加する場合は$addや$removeを使わないとデータバインディングの対象にならなくなりました。</p>
+
+<h3><code>ready</code>のhookの挙動が変更されました</h3>
+
+<p>documentに初めて追加されるときだけに呼ばれるようになりました。これまでと同じように使いたい場合は<code>compiled</code>を使ってください。</p>
+
+<h3><code>beforeCompile</code>のhookが追加されました</h3>
+
+<p>インスタンス化されてDOMのcompileが開始される前に呼ばれます。</p>
+
+<h3><code>compiled</code>のhookが追加されました</h3>
+
+<p>これまでの<code>ready</code>のタイミングで呼ばれて、初期のデータでのcompileが終了したタイミングで呼ばれます。</p>
+
+<h3><code>afterDestroy</code>のhookが<code>destroy</code>に変更されました</h3>
+
+<h2>Instance methods change</h2>
+
+<h3><code>$watch</code>に評価式を渡せるようになりました</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">vm</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;a + b&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">newVal</span><span class="p">,</span> <span class="nx">oldVal</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// do something</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>$watch</code>でのdeep watchの挙動が変わりました</h3>
+
+<p>デフォルトではwatchに渡した値に対する変更しか監視しなくなったので、ネストしたオブジェクトの評価をしたい場合は、第三引数に<code>true</code>を渡す必要があります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">vm</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;someObject&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+</span><span class='line'><span class="nx">vm</span><span class="p">.</span><span class="nx">someObject</span><span class="p">.</span><span class="nx">nestedValue</span> <span class="o">=</span> <span class="mi">123</span>
+</span><span class='line'><span class="c1">// callback is fired</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>$watch</code>の即時実行</h3>
+
+<p>第四引数にtrueを渡すことで初回に値をセットするときにもcallbackを実行させることが出来ます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">vm</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+</span><span class='line'><span class="c1">// callback is fired immediately with current value of `a`</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この辺、deepWatchと合わせて第三引数をoptionsなオブジェクトにしたほうがいいと思う。</p>
+
+<h3><code>$unwatch</code>は削除されて、<code>$watch</code>の戻り値である関数を呼ぶことでunwatchされます</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">unwatch</span> <span class="o">=</span> <span class="nx">vm</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span>
+</span><span class='line'><span class="c1">// later, teardown the watcher</span>
+</span><span class='line'><span class="nx">unwatch</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>vm.$get</code>に評価式を渡せるようになりました</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">vm</span><span class="p">.</span><span class="nx">$get</span><span class="p">(</span><span class="s1">&#39;a + b&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>vm.$add</code>と<code>vm.$delete</code>が追加されました</h3>
+
+<p>ViewModelのプロパティを追加・削除するときに使います。
+まぁでも、インスタンス化する際に全てのプロパティをnullなどで設定しておく方がいいです。</p>
+
+<h3><code>vm.$eval</code>が追加されました</h3>
+
+<p>filterも適用することが出来ます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">vm</span><span class="p">.</span><span class="nx">$eval</span><span class="p">(</span><span class="s1">&#39;msg | uppercase&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>vm.$interpolate</code>が追加されました</h3>
+
+<p>template文字列を評価することが出来ます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">markup</span> <span class="o">=</span> <span class="nx">vm</span><span class="p">.</span><span class="nx">$interpolate</span><span class="p">(</span><span class="s1">&#39;&lt;p&gt;&lt;/p&gt;&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>vm.$log</code>が追加されました</h3>
+
+<p>インスタンスのdataを生のオブジェクトとしてみることが出来ます(getter/setterなし)。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">vm</span><span class="p">.</span><span class="nx">$log</span><span class="p">()</span> <span class="c1">// logs entire ViewModel data</span>
+</span><span class='line'><span class="nx">vm</span><span class="p">.</span><span class="nx">$log</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">)</span> <span class="c1">// logs vm.item</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Computed Properties API Change</h2>
+
+<h3><code>$get</code>、<code>$set</code>は<code>get</code>、<code>set</code>になりました</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">computed</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">fullName</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+</span><span class='line'>    <span class="nx">set</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Directive API change</h2>
+
+<h3>directiveに動的な値を指定出来るようになりました</h3>
+
+<p>こんな感じでv-viewみたいなことが出来るようになりました</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">v-component=</span><span class="s">&quot;{{test}}&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>今サポートしているのは<code>v-component</code>だけで、独自directiveを作る時は<code>update</code>関数を実装することでハンドリング出来ます。</p>
+
+<h3><code>v-model</code>に<code>lazy</code>属性と<code>number</code>属性が追加されました</h3>
+
+<p><code>lazy</code>はこれまでインスタンスオプションにあった、enterキー押したときかフォーカス外れた時だけにchangeイベントが発行されるものがv-modelの属性になりました。</p>
+
+<p><code>number</code>はmodelに反映されるときにNumber型にすることが出来ます。</p>
+
+<h3>select要素に<code>v-model</code>としてtextとvalueを含んだオブジェクトの配列を渡すとoption要素として評価してくれます</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="p">[</span>
+</span><span class='line'>  <span class="p">{</span> <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;a&#39;</span> <span class="p">},</span>
+</span><span class='line'>  <span class="p">{</span> <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;b&#39;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;select&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;a&quot;</span><span class="nt">&gt;</span>A<span class="nt">&lt;/option&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;b&quot;</span><span class="nt">&gt;</span>B<span class="nt">&lt;/option&gt;</span>
+</span><span class='line'><span class="nt">&lt;/select&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>select要素に<code>v-model</code>としてlabelとoptionsを含んだオブジェクトの配列を渡すとoptgroup要素として評価してくれます</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="p">[</span>
+</span><span class='line'>  <span class="p">{</span> <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]},</span>
+</span><span class='line'>  <span class="p">{</span> <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">]}</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;select&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;optgroup</span> <span class="na">label=</span><span class="s">&quot;A&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;a&quot;</span><span class="nt">&gt;</span>a<span class="nt">&lt;/option&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;b&quot;</span><span class="nt">&gt;</span>b<span class="nt">&lt;/option&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/optgroup&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;optgroup</span> <span class="na">label=</span><span class="s">&quot;B&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;c&quot;</span><span class="nt">&gt;</span>c<span class="nt">&lt;/option&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;d&quot;</span><span class="nt">&gt;</span>d<span class="nt">&lt;/option&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/optgroup&gt;</span>
+</span><span class='line'><span class="nt">&lt;/select&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>v-component</code>に<code>keep-alive</code>属性を指定するとインスタンスを破棄せずにキャッシュしておいてくれるようになります</h3>
+
+<p>Viewの切り替えを<code>v-component</code>で行うときに使うとよさそうです。使い方間違うとリークしそうですが&hellip;。</p>
+
+<h3><code>v-repeat</code>に<code>trackby</code>を指定することで、配列の値を再利用することが出来るようになりました</h3>
+
+<p>配列のdataにAPIのレスポンスなどを適用してswapされた場合など、今までは全部の要素を作りなおしていたのですがtrackbyを指定することで既存の値は再利用してくれるようになりました。React.jsのkeyみたいな感じ。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>  <span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="p">...</span> <span class="p">},</span>
+</span><span class='line'>  <span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="p">...</span> <span class="p">},</span>
+</span><span class='line'>  <span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="p">...</span> <span class="p">}</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;li</span> <span class="na">v-repeat=</span><span class="s">&quot;items&quot;</span> <span class="na">trackby=</span><span class="s">&quot;_id&quot;</span><span class="nt">&gt;</span>...<span class="nt">&lt;/li&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>v-with</code>で親と子のインスタンスの間で2wayバインディングされないようになりました</h3>
+
+<p><code>v-with</code>で作られた子のインスタンスの値を変更しても親には反映されなくなります。親のインスタンスの変更は子に反映されます。</p>
+
+<h3><code>v-el</code>が追加されました</h3>
+
+<p><code>v-ref</code>で似た感じですが、こちらは<code>vm.$$.xxx</code>とすることでDOM Nodeを参照することが出来ます。</p>
+
+<h3><code>twoWay</code>のオプションが追加されました</h3>
+
+<p>このオプションはdirectiveが2wayデータバインディングをするかどうかを指定します。
+これを指定することで<code>this.set(value)</code>をdirectiveの内部で使用することが出来ます。</p>
+
+<ul>
+<li>ちょっとどういう使われ方するのかよくわかってないです&hellip;</li>
+</ul>
+
+
+<h3><code>isEmpty</code>オプションが削除されました</h3>
+
+<h2>Interpolation change</h2>
+
+<h3>textのバインディング自動的にstringifyしなくなりました。</h3>
+
+<p><code>json</code>filterを使いましょう。</p>
+
+<h3>One time interpolationsが指定出来るようになりました</h3>
+
+<p>変更されない値に指定することでrenderingのパフォーマンスを向上させることが出来ます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;span&gt;</span>{{* hello }}<span class="nt">&lt;/span&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Config API change</h2>
+
+<h3>Vue.configがメソッド形式からpropertyアクセスに変更されました</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// old</span>
+</span><span class='line'><span class="c1">// Vue.config(&#39;debug&#39;, true)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// new</span>
+</span><span class='line'><span class="nx">Vue</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">debug</span> <span class="o">=</span> <span class="kc">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>config.prefix</code>の値にハイフンが必須になりました</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Vue</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">prefix</span> <span class="o">=</span> <span class="s2">&quot;data-&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>config.delimiters</code>が少し柔軟に指定出来るようになりました</h3>
+
+<p>これまでは<code>['{','}']</code>というような指定しか出来なかったのが<code>['(%', '%)']</code>という指定も出来るようになりました。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Vue</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">delimiters</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;(%&#39;</span><span class="p">,</span> <span class="s1">&#39;%)&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="c1">// tags now are (% %) for text</span>
+</span><span class='line'><span class="c1">// and ((% %)) for HTML</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>&lsquo;proto&#8217;optionをfalseにすることで<code>__proto__</code>の書き換えを禁止することが出来ます</h3>
+
+<p><code>data</code>に生のオブジェクトを指定している場合は問題ないけど、コンストラクタからインスタンス化したオブジェクトを指定している場合など<code>__proto__</code>が書き換えられると困る場合にfalseを指定することが出来るようになりました。</p>
+
+<h2>Transition API change</h2>
+
+<h3><code>v-transition</code>と<code>v-animation</code>と<code>v-effect</code>の違いはなくなりました</h3>
+
+<p>どれかに統一されるのかな？</p>
+
+<h3><code>Vue.config</code>でenter/leaveの指定が設定出来なくなりました</h3>
+
+<h3><code>Vue.effect</code>は<code>Vue.transition</code>に変更されました。<code>effects</code>オプションも<code>transitions</code>に変更されました。</h3>
+
+<h3><code>v-transition="my-transition"</code>とした場合、</h3>
+
+<ol>
+<li><code>Vue.transition(id, def)</code>で登録されているオブジェクトまたは、<code>transitions</code>オプションを&#8221;my-transition&#8221;をkeyとして探します。</li>
+<li>上記で見つからなかった場合、CSS transitionsまたはCSS animationsを適用します。</li>
+<li>上記でもアニメーションしなかった場合、DOM操作を即時に行われます。</li>
+</ol>
+
+
+<h3>JavaScript transitionsのAPIがAngular.jsっぽく変更されました</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Vue</span><span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="s1">&#39;fade&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">beforeEnter</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// a synchronous function called right before the</span>
+</span><span class='line'>    <span class="c1">// element is inserted into the document.</span>
+</span><span class='line'>    <span class="c1">// you can do some pre-styling here to avoid FOC.</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// element is already inserted into the DOM</span>
+</span><span class='line'>    <span class="c1">// call done when animation finishes.</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="nx">el</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;opacity&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">.</span><span class="nx">animate</span><span class="p">({</span> <span class="nx">opacity</span><span class="o">:</span> <span class="mi">1</span> <span class="p">},</span> <span class="mi">1000</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1">// optionally return a &quot;cancel&quot; function</span>
+</span><span class='line'>    <span class="c1">// to clean up if the animation is cancelled</span>
+</span><span class='line'>    <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="nx">el</span><span class="p">).</span><span class="nx">stop</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nx">leave</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// same as enter</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="nx">el</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">.</span><span class="nx">animate</span><span class="p">({</span> <span class="nx">opacity</span><span class="o">:</span> <span class="mi">0</span> <span class="p">},</span> <span class="mi">1000</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="nx">el</span><span class="p">).</span><span class="nx">stop</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Events API change</h2>
+
+<h3><code>$dispatch</code>と<code>broadcast</code>で発行されるイベントのコールバックでfalseを返すと、伝播を止めることが出来るようになりました。</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">()</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">parent</span><span class="o">:</span> <span class="nx">a</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">parent</span><span class="o">:</span> <span class="nx">b</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">a</span><span class="p">.</span><span class="nx">$on</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'><span class="nx">b</span><span class="p">.</span><span class="nx">$on</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kc">false</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'><span class="nx">c</span><span class="p">.</span><span class="nx">$on</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'><span class="nx">c</span><span class="p">.</span><span class="nx">$dispatch</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">// -&gt; &#39;c&#39;</span>
+</span><span class='line'><span class="c1">// -&gt; &#39;b&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Two Way filters</h2>
+
+<h3>filterに関数を渡すとreadのfilterとして扱われますが、<code>v-model</code>のような2wayバインディングのdirectiveと組み合わせることでwriteのfilterも定義出来るようになりました</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Vue</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="s1">&#39;format&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">read</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">val</span> <span class="o">+</span> <span class="s1">&#39;!&#39;</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nx">write</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">oldVal</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">val</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/ok/</span><span class="p">)</span> <span class="o">?</span> <span class="nx">val</span> <span class="o">:</span> <span class="nx">oldVal</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Block logic control</h2>
+
+<h3>template要素を制御ブロックとして扱うことが出来るようになりました</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;title-1&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">subtitle</span><span class="o">:</span> <span class="s1">&#39;subtitle-1&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">content</span><span class="o">:</span> <span class="s1">&#39;content-1&#39;</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;title-2&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">subtitle</span><span class="o">:</span> <span class="s1">&#39;subtitle-2&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">content</span><span class="o">:</span> <span class="s1">&#39;content-2&#39;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;template</span> <span class="na">v-repeat=</span><span class="s">&quot;item:items&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;h2&gt;</span><span class="nt">&lt;/h2&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;p&gt;</span><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;p&gt;</span><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;/template&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!--v-block-start--&gt;</span>
+</span><span class='line'><span class="nt">&lt;h2&gt;</span>title-1<span class="nt">&lt;/h2&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>subtitle-1<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>content-1<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="c">&lt;!--v-block-end--&gt;</span>
+</span><span class='line'><span class="c">&lt;!--v-block-start--&gt;</span>
+</span><span class='line'><span class="nt">&lt;h2&gt;</span>title-2<span class="nt">&lt;/h2&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>subtitle-2<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>content-2<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'><span class="c">&lt;!--v-block-end--&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Misc</h2>
+
+<h3><code>v-model</code>と一緒に<code>value</code>属性を指定するとvmの値を上書きして初期値として設定されます</h3>
+
+<hr />
+
+<p>vue.js bookもv0.11対応して続きを書かないと&hellip;.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[YAPC::ASIA 2014の前夜祭をやった]]></title>
