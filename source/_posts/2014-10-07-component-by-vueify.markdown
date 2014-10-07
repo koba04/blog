@@ -20,6 +20,7 @@ http://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browseri
 
 vueifyを使うと1つのファイルにHTMLとJavaScriptとCSSを全部まとめて書くようになり、1ファイルが1Componentという形になります。
 
+* src/app.vue
 ```
 <script lang="coffee">
   module.exports =
@@ -65,6 +66,21 @@ vueifyを使うと1つのファイルにHTMLとJavaScriptとCSSを全部まと�
       transform: scale(0)
       -webkit-transform: scale(0)
 </style>
+```
+
+```
+➜  tree src
+src
+├── app.vue
+├── artist.vue
+├── country.vue
+├── footer.vue
+├── index.js
+├── input-artist.vue
+├── nav.vue
+├── select-country.vue
+├── top.vue
+└── tracks.vue
 ```
 
 https://github.com/koba04/vue-boilerplate/tree/master/src
