@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vue.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/vue-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-10-07T14:13:10+09:00</updated>
+  <updated>2014-10-07T16:25:00+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,79 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[vueifyでcomponent化]]></title>
+    <link href="http://blog.koba04.com/post/2014/10/07/component-by-vueify/"/>
+    <updated>2014-10-07T15:29:06+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/10/07/component-by-vueify</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/vuejs/vueify">https://github.com/vuejs/vueify</a></p>
+
+<p>vueifyというVue.js用のbrowserifyのtransformが出てたので紹介。</p>
+
+<!-- more -->
+
+
+<p>以前にpartialifyやstylify、coffeeify、insert-cssなどを組み合わせてHTML、JavaScript、CSSをComponent化する方法を紹介しましたがそれをさらに進めて1つのファイルで完結することが出来るようになっています。</p>
+
+<p><a href="http://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browserify/">http://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browserify/</a></p>
+
+<h2>使い方</h2>
+
+<p>vueifyを使うと1つのファイルにHTMLとJavaScriptとCSSを全部まとめて書くようになり、1ファイルが1Componentという形になります。</p>
+
+<ul>
+<li>src/app.vue
+```</li>
+</ul>
+
+
+<script lang="coffee">
+  module.exports =
+    data: ->
+      view: "top"
+</script>
+
+
+<p><template>
+  <div v-component="" v-transition></div>
+</template></p>
+
+
+
+<p>```</p>
+
+<p><code>
+➜  tree src
+src
+├── app.vue
+├── artist.vue
+├── country.vue
+├── footer.vue
+├── index.js
+├── input-artist.vue
+├── nav.vue
+├── select-country.vue
+├── top.vue
+└── tracks.vue
+</code></p>
+
+<p><a href="https://github.com/koba04/vue-boilerplate/tree/master/src">https://github.com/koba04/vue-boilerplate/tree/master/src</a></p>
+
+<p>coffeescriptとstylus以外にも、less、scss(node-sass)、jadeなどを指定することが出来ます。</p>
+
+<h2>syntax highlight</h2>
+
+<p>1つにまとめて、vueっていう拡張子付けたりするとシンタックスハイライトどうするのかという問題になりますが、SublimeTextだとこれで大丈夫なようです
+(使ってないのでわからないですが)</p>
+
+<p><a href="https://gist.github.com/yyx990803/9194f92d96546cebd033">https://gist.github.com/yyx990803/9194f92d96546cebd033</a></p>
+
+<p>vimとかの場合は&hellip;</p>
+
+<p>まぁ、ちょっとしたものを作るときにvueify使ってみるのもいいのではないでしょうか。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Vue.js v0.11の変更点(予定)まとめ]]></title>
