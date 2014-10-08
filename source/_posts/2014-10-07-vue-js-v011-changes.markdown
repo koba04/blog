@@ -570,6 +570,8 @@ items: [
 
 ## Misc
 
+### `$destroy()`はdefaultだと`$el`はそのまま残すので、`$el`も削除したい場合は`$destroy(true)`としてください
+
 ### `v-model`と一緒に`value`属性を指定するとvmの値を上書きして初期値として設定されます
 
 
