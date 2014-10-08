@@ -420,7 +420,7 @@ NativeのArrayのsubclassなどを作っている場合で、`__proto__`の書�
 
 {% img /images/vue-config-proto.png 'Vue.config.proto = false' %}
 
-またrc2からオブジェクトの場合に`__proto__`の書き換えがされることはなくなりました。ただObject.prototypeに$addと$remove、Array.prototypeに$removeと$setが追加されています。
+またrc2からオブジェクトの場合に`__proto__`の書き換えがされることはなくなりました。ただObject.prototypeに$addと$delete、Array.prototypeに$removeと$setが追加されています。
 
 dataに生のオブジェクトを使っている場合には影響無いですが、Constructorから作ったオブジェクトを使っている場合にはprototypeが残るようになります。
 
