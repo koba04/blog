@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-10-07T16:25:00+09:00</updated>
+  <updated>2014-10-08T11:01:38+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -180,7 +180,15 @@
     <id>http://blog.koba04.com/post/2014/10/07/vue-js-v011-changes</id>
     <content type="html"><![CDATA[<p>Vue.js v0.11のrc版もリリースされて、v0.10からの変更点が多いのでchangesを参考にまとめてみました。</p>
 
+<p><strong> 書いた次の日にrc2がリリースされたので一部修正しました </strong></p>
+
 <p>APIの変更も多いですが、data継承の仕組みが完全に変わっているのでその辺りは注意が必要ですね。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install vue@0.11.0-rc2</span></code></pre></td></tr></table></div></figure>
+
+
+
 
 <!-- more -->
 
@@ -206,6 +214,11 @@
 </span><span class='line'><span class="c1">// in comparison, this will compile instantly just like before.</span>
 </span><span class='line'><span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span> <span class="nx">el</span><span class="o">:</span> <span class="s1">&#39;#app&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">}</span> <span class="p">})</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>$mount()</code>を引数なしで呼ぶと空の<code>&lt;div&gt;</code>が作成されます。</li>
+</ul>
 
 
 <h2>New Scope Inheritance Model</h2>
@@ -698,9 +711,29 @@ $emitで発行する独自イベント以外にも<code>hook:created</code>の�
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>&lsquo;proto&#8217;optionをfalseにすることで<code>__proto__</code>の書き換えを禁止することが出来ます</h3>
+<h3>&lsquo;proto&#8217;optionをfalseにすることでArrayの<code>__proto__</code>の書き換えを禁止することが出来ます</h3>
 
-<p><code>data</code>に生のオブジェクトを指定している場合は問題ないけど、コンストラクタからインスタンス化したオブジェクトを指定している場合など<code>__proto__</code>が書き換えられると困る場合にfalseを指定することが出来るようになりました。</p>
+<p>NativeのArrayのsubclassなどを作っている場合で、<code>__proto__</code>の書き換えされると困る場合にfalseにすることで<code>__proto__</code>の書き換えがされなくなります
+(配列のオブジェクトに追加される)</p>
+
+<p><img src="http://blog.koba04.com/images/vue-config-proto.png" title="'Vue.config.proto = false'" ></p>
+
+<p>またrc2からオブジェクトの場合に<code>__proto__</code>の書き換えがされることはなくなりました。ただObject.prototypeに$addと$remove、Array.prototypeに$removeと$setが追加されています。</p>
+
+<p>dataに生のオブジェクトを使っている場合には影響無いですが、Constructorから作ったオブジェクトを使っている場合にはprototypeが残るようになります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">Hoge</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;foo&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">Hoge</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span> <span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://blog.koba04.com/images/vue-object-prototype.png" title="'Vue object prototype'" ></p>
 
 <h2>Transition API change</h2>
 

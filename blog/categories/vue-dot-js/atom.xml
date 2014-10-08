@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vue.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/vue-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-10-07T16:25:00+09:00</updated>
+  <updated>2014-10-08T11:01:38+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -93,7 +93,13 @@ src
     <id>http://blog.koba04.com/post/2014/10/07/vue-js-v011-changes</id>
     <content type="html"><![CDATA[<p>Vue.js v0.11のrc版もリリースされて、v0.10からの変更点が多いのでchangesを参考にまとめてみました。</p>
 
+<p><strong> 書いた次の日にrc2がリリースされたので一部修正しました </strong></p>
+
 <p>APIの変更も多いですが、data継承の仕組みが完全に変わっているのでその辺りは注意が必要ですね。</p>
+
+<p><code>
+npm install vue@0.11.0-rc2
+</code></p>
 
 <!-- more -->
 
@@ -115,6 +121,11 @@ vm.$mount(&lsquo;#app&rsquo;) // actually compile the DOM</p>
 <p>// in comparison, this will compile instantly just like before.
 var vm = new Vue({ el: &lsquo;#app&rsquo;, data: {a: 1} })
 ```</p>
+
+<ul>
+<li><code>$mount()</code>を引数なしで呼ぶと空の<code>&lt;div&gt;</code>が作成されます。</li>
+</ul>
+
 
 <h2>New Scope Inheritance Model</h2>
 
@@ -513,9 +524,25 @@ Vue.config.delimiters = ['(%', '%)']
 // and ((% %)) for HTML
 </code></p>
 
-<h3>&lsquo;proto'optionをfalseにすることで<code>__proto__</code>の書き換えを禁止することが出来ます</h3>
+<h3>&lsquo;proto'optionをfalseにすることでArrayの<code>__proto__</code>の書き換えを禁止することが出来ます</h3>
 
-<p><code>data</code>に生のオブジェクトを指定している場合は問題ないけど、コンストラクタからインスタンス化したオブジェクトを指定している場合など<code>__proto__</code>が書き換えられると困る場合にfalseを指定することが出来るようになりました。</p>
+<p>NativeのArrayのsubclassなどを作っている場合で、<code>__proto__</code>の書き換えされると困る場合にfalseにすることで<code>__proto__</code>の書き換えがされなくなります
+(配列のオブジェクトに追加される)</p>
+
+<p><img src="/images/vue-config-proto.png" title="&lsquo;Vue.config.proto = false&rsquo;" ></p>
+
+<p>またrc2からオブジェクトの場合に<code>__proto__</code>の書き換えがされることはなくなりました。ただObject.prototypeに$addと$remove、Array.prototypeに$removeと$setが追加されています。</p>
+
+<p>dataに生のオブジェクトを使っている場合には影響無いですが、Constructorから作ったオブジェクトを使っている場合にはprototypeが残るようになります。</p>
+
+<p><code>js
+var Hoge = function () {
+  this.name = "foo";
+};
+Hoge.prototype.foo = function() { console.log(this.name) };
+</code></p>
+
+<p><img src="/images/vue-object-prototype.png" title="&lsquo;Vue object prototype&rsquo;" ></p>
 
 <h2>Transition API change</h2>
 
