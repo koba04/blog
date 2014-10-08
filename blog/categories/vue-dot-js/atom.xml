@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vue.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/vue-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-10-08T11:06:33+09:00</updated>
+  <updated>2014-10-08T11:15:18+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -721,6 +721,8 @@ content: 'content-2'
 <p>```</p>
 
 <h2>Misc</h2>
+
+<h3><code>$destroy()</code>はdefaultだと<code>$el</code>はそのまま残すので、<code>$el</code>も削除したい場合は<code>$destroy(true)</code>としてください</h3>
 
 <h3><code>v-model</code>と一緒に<code>value</code>属性を指定するとvmの値を上書きして初期値として設定されます</h3>
 
