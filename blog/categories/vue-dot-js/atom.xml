@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vue.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/vue-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-10-08T11:01:38+09:00</updated>
+  <updated>2014-10-08T11:06:33+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -531,7 +531,7 @@ Vue.config.delimiters = ['(%', '%)']
 
 <p><img src="/images/vue-config-proto.png" title="&lsquo;Vue.config.proto = false&rsquo;" ></p>
 
-<p>またrc2からオブジェクトの場合に<code>__proto__</code>の書き換えがされることはなくなりました。ただObject.prototypeに$addと$remove、Array.prototypeに$removeと$setが追加されています。</p>
+<p>またrc2からオブジェクトの場合に<code>__proto__</code>の書き換えがされることはなくなりました。ただObject.prototypeに$addと$delete、Array.prototypeに$removeと$setが追加されています。</p>
 
 <p>dataに生のオブジェクトを使っている場合には影響無いですが、Constructorから作ったオブジェクトを使っている場合にはprototypeが残るようになります。</p>
 

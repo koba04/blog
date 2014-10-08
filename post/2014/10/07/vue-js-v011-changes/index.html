@@ -658,7 +658,7 @@ $emitで発行する独自イベント以外にも<code>hook:created</code>の�
 
 <p><img src="/images/vue-config-proto.png" title="'Vue.config.proto = false'" ></p>
 
-<p>またrc2からオブジェクトの場合に<code>__proto__</code>の書き換えがされることはなくなりました。ただObject.prototypeに$addと$remove、Array.prototypeに$removeと$setが追加されています。</p>
+<p>またrc2からオブジェクトの場合に<code>__proto__</code>の書き換えがされることはなくなりました。ただObject.prototypeに$addと$delete、Array.prototypeに$removeと$setが追加されています。</p>
 
 <p>dataに生のオブジェクトを使っている場合には影響無いですが、Constructorから作ったオブジェクトを使っている場合にはprototypeが残るようになります。</p>
 
