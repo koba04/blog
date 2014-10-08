@@ -8,7 +8,13 @@ categories: vue.js
 
 Vue.js v0.11のrc版もリリースされて、v0.10からの変更点が多いのでchangesを参考にまとめてみました。
 
+** 書いた次の日にrc2がリリースされたので一部修正しました **
+
 APIの変更も多いですが、data継承の仕組みが完全に変わっているのでその辺りは注意が必要ですね。
+
+```
+npm install vue@0.11.0-rc2
+```
 
 <!-- more -->
 
@@ -29,6 +35,9 @@ vm.$mount('#app') // actually compile the DOM
 // in comparison, this will compile instantly just like before.
 var vm = new Vue({ el: '#app', data: {a: 1} })
 ```
+
+* `$mount()`を引数なしで呼ぶと空の`<div>`が作成されます。
+
 
 ## New Scope Inheritance Model
 
@@ -404,10 +413,25 @@ Vue.config.delimiters = ['(%', '%)']
 // and ((% %)) for HTML
 ```
 
-### 'proto'optionをfalseにすることで`__proto__`の書き換えを禁止することが出来ます
+### 'proto'optionをfalseにすることでArrayの`__proto__`の書き換えを禁止することが出来ます
 
-`data`に生のオブジェクトを指定している場合は問題ないけど、コンストラクタからインスタンス化したオブジェクトを指定している場合など`__proto__`が書き換えられると困る場合にfalseを指定することが出来るようになりました。
+NativeのArrayのsubclassなどを作っている場合で、`__proto__`の書き換えされると困る場合にfalseにすることで`__proto__`の書き換えがされなくなります
+(配列のオブジェクトに追加される)
 
+{% img /images/vue-config-proto.png 'Vue.config.proto = false' %}
+
+またrc2からオブジェクトの場合に`__proto__`の書き換えがされることはなくなりました。ただObject.prototypeに$addと$remove、Array.prototypeに$removeと$setが追加されています。
+
+dataに生のオブジェクトを使っている場合には影響無いですが、Constructorから作ったオブジェクトを使っている場合にはprototypeが残るようになります。
+
+```js
+var Hoge = function () {
+  this.name = "foo";
+};
+Hoge.prototype.foo = function() { console.log(this.name) };
+```
+
+{% img /images/vue-object-prototype.png 'Vue object prototype' %}
 
 ## Transition API change
 
