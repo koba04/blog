@@ -8,7 +8,7 @@ categories: vue.js
 
 Vue.js v0.11のrc版もリリースされて、v0.10からの変更点が多いのでchangesを参考にまとめてみました。
 
-** 書いた次の日にrc2がリリースされたので一部修正しました **
+** rc3がリリースされたので修正・追記しました **
 
 APIの変更も多いですが、data継承の仕組みが完全に変わっているのでその辺りは注意が必要ですね。
 
@@ -22,7 +22,7 @@ npm install vue@0.11.0-rc2
 
 今回の変更でも見えるのですが、Angular.js以外にもBackbone.jsやReact.jsなど様々なフレームワークからいいところを持ってきてるところがVue.jsの面白いところですね。
 
-https://github.com/yyx990803/vue/blob/0.11.0-rc/changes.md
+https://github.com/yyx990803/vue/blob/0.11.0-rc3/changes.md
 
 ## Instantiation process
 
@@ -108,6 +108,11 @@ vm.$emit('greeting', 'hi!')
 vm.$emit('bye')
 // -> goodbye!
 ```
+
+### `watch`オプションが追加されました
+
+`events`のようにwatchしたい対象の評価式とコールバックをオブジェクトの形式で定義することが出来ます。
+わかりやすく書けるようになっていいですね。
 
 ### `inherit`オプションが追加されました(デフォルトはfalse)
 
@@ -256,6 +261,12 @@ vm.$log() // logs entire ViewModel data
 vm.$log('item') // logs vm.item
 ```
 
+### `vm.$compile`が追加されました
+
+DOMをcompileすることが出来て、戻り値としてteardownするときに使うdecompileする関数を返します。
+decompile関数ではDOMは削除されません。
+主にカスタムdirectiveを書く人のためのメソッドです。
+
 
 ## Computed Properties API Change
 
@@ -365,7 +376,17 @@ items: [
 
 * ちょっとどういう使われ方するのかよくわかってないです...
 
-### `isEmpty`オプションが削除されました
+### `acceptStatement`のオプションが追加されました
+
+このオプションはdirectiveが`v-on`のようにインラインステートメントを受け付けるかどうかを指定します。
+
+```html
+<a v-on="click: a++"></a>
+```
+
+指定したステートメントは関数としてラップされてdirectiveの`update`関数に渡されます。
+
+### `isEmpty`と`isFn`オプションが削除されました
 
 
 ## Interpolation change
@@ -432,6 +453,10 @@ Hoge.prototype.foo = function() { console.log(this.name) };
 ```
 
 {% img /images/vue-object-prototype.png 'Vue object prototype' %}
+
+### async optionをtrueにすることで即時にDOMが更新することが出来ます
+
+通常は、batch方式によってDOMの更新はまとめて行われるのですが、このオプションをtrueにすることで即時にDOMに反映することが出来るようになります。
 
 ## Transition API change
 
@@ -567,6 +592,11 @@ items: [
 <!--v-block-end-->
 ```
 
+`v-partial`にtemplateと一緒に使うことが出来ますし、下記のようにすることでpartialを動的に選択することが出来ます
+
+```html
+<template v-partial="{{partialId}}"></template>
+```
 
 ## Misc
 
