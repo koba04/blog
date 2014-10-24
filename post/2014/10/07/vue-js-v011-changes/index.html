@@ -120,7 +120,7 @@
     <div class="span12">
       <p>Vue.js v0.11のrc版もリリースされて、v0.10からの変更点が多いのでchangesを参考にまとめてみました。</p>
 
-<p><strong> 書いた次の日にrc2がリリースされたので一部修正しました </strong></p>
+<p><strong> rc3がリリースされたので修正・追記しました </strong></p>
 
 <p>APIの変更も多いですが、data継承の仕組みが完全に変わっているのでその辺りは注意が必要ですね。</p>
 
@@ -137,7 +137,7 @@
 
 <p>今回の変更でも見えるのですが、Angular.js以外にもBackbone.jsやReact.jsなど様々なフレームワークからいいところを持ってきてるところがVue.jsの面白いところですね。</p>
 
-<p><a href="https://github.com/yyx990803/vue/blob/0.11.0-rc/changes.md">https://github.com/yyx990803/vue/blob/0.11.0-rc/changes.md</a></p>
+<p><a href="https://github.com/yyx990803/vue/blob/0.11.0-rc3/changes.md">https://github.com/yyx990803/vue/blob/0.11.0-rc3/changes.md</a></p>
 
 <h2>Instantiation process</h2>
 
@@ -269,6 +269,11 @@ $emitで発行する独自イベント以外にも<code>hook:created</code>の�
 </span><span class='line'><span class="c1">// -&gt; goodbye!</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<h3><code>watch</code>オプションが追加されました</h3>
+
+<p><code>events</code>のようにwatchしたい対象の評価式とコールバックをオブジェクトの形式で定義することが出来ます。
+わかりやすく書けるようになっていいですね。</p>
 
 <h3><code>inherit</code>オプションが追加されました(デフォルトはfalse)</h3>
 
@@ -449,6 +454,12 @@ $emitで発行する独自イベント以外にも<code>hook:created</code>の�
 </span></code></pre></td></tr></table></div></figure>
 
 
+<h3><code>vm.$compile</code>が追加されました</h3>
+
+<p>DOMをcompileすることが出来て、戻り値としてteardownするときに使うdecompileする関数を返します。
+decompile関数ではDOMは削除されません。
+主にカスタムdirectiveを書く人のためのメソッドです。</p>
+
 <h2>Computed Properties API Change</h2>
 
 <h3><code>$get</code>、<code>$set</code>は<code>get</code>、<code>set</code>になりました</h3>
@@ -597,7 +608,18 @@ $emitで発行する独自イベント以外にも<code>hook:created</code>の�
 </ul>
 
 
-<h3><code>isEmpty</code>オプションが削除されました</h3>
+<h3><code>acceptStatement</code>のオプションが追加されました</h3>
+
+<p>このオプションはdirectiveが<code>v-on</code>のようにインラインステートメントを受け付けるかどうかを指定します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">v-on=</span><span class="s">&quot;click: a++&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>指定したステートメントは関数としてラップされてdirectiveの<code>update</code>関数に渡されます。</p>
+
+<h3><code>isEmpty</code>と<code>isFn</code>オプションが削除されました</h3>
 
 <h2>Interpolation change</h2>
 
@@ -674,6 +696,10 @@ $emitで発行する独自イベント以外にも<code>hook:created</code>の�
 
 
 <p><img src="/images/vue-object-prototype.png" title="'Vue object prototype'" ></p>
+
+<h3>async optionをtrueにすることで即時にDOMが更新することが出来ます</h3>
+
+<p>通常は、batch方式によってDOMの更新はまとめて行われるのですが、このオプションをtrueにすることで即時にDOMに反映することが出来るようになります。</p>
 
 <h2>Transition API change</h2>
 
@@ -893,6 +919,13 @@ $emitで発行する独自イベント以外にも<code>hook:created</code>の�
 </span><span class='line'><span class="nt">&lt;p&gt;</span>subtitle-2<span class="nt">&lt;/p&gt;</span>
 </span><span class='line'><span class="nt">&lt;p&gt;</span>content-2<span class="nt">&lt;/p&gt;</span>
 </span><span class='line'><span class="c">&lt;!--v-block-end--&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>v-partial</code>にtemplateと一緒に使うことが出来ますし、下記のようにすることでpartialを動的に選択することが出来ます</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;template</span> <span class="na">v-partial=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/template&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
