@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: self | blog.koba04.com]]></title>
+  <link href="http://blog.koba04.com/blog/categories/self/atom.xml" rel="self"/>
+  <link href="http://blog.koba04.com/"/>
+  <updated>2014-11-09T16:59:10+09:00</updated>
+  <id>http://blog.koba04.com/</id>
+  <author>
+    <name><![CDATA[koba04]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Joining TOLOT]]></title>
+    <link href="http://blog.koba04.com/post/2014/11/08/joining-tolot/"/>
+    <updated>2014-11-08T23:19:00+09:00</updated>
+    <id>http://blog.koba04.com/post/2014/11/08/joining-tolot</id>
+    <content type="html"><![CDATA[<p>11月から<a href="http://tolot.com/">TOLOT</a>で働いています。</p>
+
+<p><a href="http://tolot.com/">http://tolot.com/</a></p>
+
+<!-- more -->
+
+
+<p>TOLOTは500円でフォトブックやカレンダーが作れるサービスで、1ユーザーとして好きなサービスだし中の人に話を聞いたりしてこれから面白くなっていきそうだなと思ったので決めた感じです。</p>
+
+<p>振り返ってみると高校の時にUS/UK RockのMix-CDを作ってあげたりするのが好きで、モノを作って自分を含む誰かにプレゼントすることが簡単に出来るサービスに対する思い入れが強いというのも背景にあったりします。</p>
+
+<p>今のところしばらくはサーバーサイドを中心にやる感じかなと思っていますが、そのうちフロントエンドとかAPI設計とか<a href="http://www.oreilly.co.jp/books/9784873116761/">ハイパフォーマンスブラウザネットワーキング</a>に書いてあるようなこととかを駆使してWebで面白いことやりたいなと思っています。</p>
+
+<p>まだ1週間ですが、技術的にも面白い人たちと一緒働けて楽しいです。</p>
+
+<p>色んな言語の色んなシステムがあって、やりたいこともいっぱいあるので興味ある人は是非声掛けてください！</p>
+
+<p>さて、来年のカレンダーもそろそろ作らないと。</p>
+
+<hr />
+
+<p><a href="http://www.amazon.co.jp/registry/wishlist/3RM30V69LJHUY">例のやつ</a></p>
+]]></content>
+  </entry>
+  
+</feed>
