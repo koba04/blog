@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2014-12-31T23:53:19+09:00</updated>
+  <updated>2015-01-13T18:53:56+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,330 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A combination of React.js and 6to5]]></title>
+    <link href="http://blog.koba04.com/post/2015/01/13/a-combination-of-reactjs-and-6to5/"/>
+    <updated>2015-01-13T18:50:28+09:00</updated>
+    <id>http://blog.koba04.com/post/2015/01/13/a-combination-of-reactjs-and-6to5</id>
+    <content type="html"><![CDATA[<p>今までは、react-toolsを使ってjsxのharmony optionを有効にして書くことで一部のES6のfeatureが使えて満足していたのですが、azuさんの記事を見て6to5を試したくなったのでReact.js + 6to5の組み合わせで書いてみました。</p>
+
+<ul>
+<li><a href="https://6to5.org/">https://6to5.org/</a></li>
+<li><a href="http://efcl.info/2015/01/09/write-es6/">http://efcl.info/2015/01/09/write-es6/</a></li>
+</ul>
+
+
+<p>結論から言うと6to5自体がjsxのサポートもしているので何も意識することなく書けていい感じでした。</p>
+
+<p>コードはこんな感じ。</p>
+
+<p><a href="https://github.com/koba04/react-boilerplate">https://github.com/koba04/react-boilerplate</a></p>
+
+<!-- more -->
+
+
+<h2>structure</h2>
+
+<h3>browserify + 6to5ify</h3>
+
+<p>変換の流れはbrowserifyのtransformである6to5ifyを使うので、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ES6  -&gt;   CommonJS(ES5)      -&gt;       bundle.js
+</span><span class='line'>    6to5                 browserify</span></code></pre></td></tr></table></div></figure>
+
+
+<p>な形になっています。</p>
+
+<p>AltJSで書くときと同じ流れです。</p>
+
+<h2>configuration</h2>
+
+<p><a href="https://github.com/koba04/react-boilerplate/blob/master/package.json">https://github.com/koba04/react-boilerplate/blob/master/package.json</a></p>
+
+<h3>bundle.js</h3>
+
+<p>bundle.jsの作成はただ、6to5ifyをtransformとして指定するだけです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="s2">&quot;scripts&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;watch&quot;</span><span class="o">:</span> <span class="s2">&quot;watchify app/index.js -o dist/bundle.js -v&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;build&quot;</span><span class="o">:</span> <span class="s2">&quot;browserify app/index.js &gt; dist/bundle.js&quot;</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="s2">&quot;browserify&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;transform&quot;</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>      <span class="p">[</span> <span class="s2">&quot;6to5ify&quot;</span> <span class="p">]</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>start server</h3>
+
+<p>serverを立ち上げる時は、entry pointとなるserver.jsもES6で書きたいので、6to5に含まれている<code>6to5-node</code>コマンドを利用します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="s2">&quot;scripts&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;start&quot;</span><span class="o">:</span> <span class="s2">&quot;6to5-node server&quot;</span>
+</span><span class='line'>  <span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これによってserver.jsもES6で書くことが出来るようになります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">import</span> <span class="nx">express</span>  <span class="nx">from</span> <span class="s1">&#39;express&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">React</span>    <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">App</span>      <span class="nx">from</span> <span class="s1">&#39;./app/components/App&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">let</span> <span class="nx">app</span>     <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+</span><span class='line'><span class="kd">let</span> <span class="nx">handler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">let</span> <span class="nx">html</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">renderToString</span><span class="p">(</span><span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">App</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">path</span><span class="o">:</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nx">name</span>
+</span><span class='line'>    <span class="p">}));</span>
+</span><span class='line'>    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span>        <span class="nx">handler</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">));</span>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/artist&#39;</span><span class="p">,</span>  <span class="nx">handler</span><span class="p">(</span><span class="s1">&#39;artist&#39;</span><span class="p">));</span>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/country&#39;</span><span class="p">,</span> <span class="nx">handler</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="nx">__dirname</span><span class="o">+</span><span class="s1">&#39;/dist&#39;</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">let</span> <span class="nx">port</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">5000</span><span class="p">;</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;listening...&quot;</span> <span class="o">+</span> <span class="nx">port</span><span class="p">);</span>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>test by Jest</h3>
+
+<p>Jestのテストについても<code>6to5-jest</code>というmoduleがあるのでそれをinstallして、scriptPreprocessorに指定するだけです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="s2">&quot;jest&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;scriptPreprocessor&quot;</span><span class="o">:</span> <span class="s2">&quot;&lt;rootDir&gt;/node_modules/6to5-jest&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんな感じで書けます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">jest</span><span class="p">.</span><span class="nx">dontMock</span><span class="p">(</span><span class="s1">&#39;../InputArtist&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">import</span> <span class="nx">React</span>                    <span class="nx">from</span> <span class="s1">&#39;react/addons&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">InputArtist</span>              <span class="nx">from</span> <span class="s1">&#39;../InputArtist&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">AppTracksActionCreators</span>  <span class="nx">from</span> <span class="s1">&#39;../../actions/AppTracksActionCreators&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">describe</span><span class="p">(</span><span class="s2">&quot;inputArtist&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">let</span> <span class="nx">inputArtist</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">beforeEach</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">inputArtist</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">addons</span><span class="p">.</span><span class="nx">TestUtils</span><span class="p">.</span><span class="nx">renderIntoDocument</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">InputArtist</span> <span class="o">/&gt;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">describe</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">,</span>  <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">it</span><span class="p">(</span><span class="s2">&quot;set inputArtist radiohead&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">expect</span><span class="p">(</span><span class="nx">inputArtist</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">inputArtist</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="s2">&quot;radiohead&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">describe</span><span class="p">(</span><span class="s2">&quot;handleSubmit&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">let</span> <span class="nx">preventDefault</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">beforeEach</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">preventDefault</span> <span class="o">=</span> <span class="nx">jest</span><span class="p">.</span><span class="nx">genMockFunction</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">inputArtist</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">inputArtist</span><span class="o">:</span> <span class="s1">&#39;travis&#39;</span> <span class="p">});</span>
+</span><span class='line'>      <span class="nx">React</span><span class="p">.</span><span class="nx">addons</span><span class="p">.</span><span class="nx">TestUtils</span><span class="p">.</span><span class="nx">Simulate</span><span class="p">.</span><span class="nx">submit</span><span class="p">(</span><span class="nx">inputArtist</span><span class="p">.</span><span class="nx">getDOMNode</span><span class="p">(),</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">preventDefault</span><span class="o">:</span> <span class="nx">preventDefault</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>    <span class="nx">it</span> <span class="p">(</span><span class="s2">&quot;calls AppTracksActionCreators.fetchByArtist with state.inputArtist&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">expect</span><span class="p">(</span><span class="nx">AppTracksActionCreators</span><span class="p">.</span><span class="nx">fetchByArtist</span><span class="p">).</span><span class="nx">toBeCalled</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">expect</span><span class="p">(</span><span class="nx">AppTracksActionCreators</span><span class="p">.</span><span class="nx">fetchByArtist</span><span class="p">).</span><span class="nx">toBeCalledWith</span><span class="p">(</span><span class="s1">&#39;travis&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>    <span class="nx">it</span> <span class="p">(</span><span class="s2">&quot;calls e.preventDefault&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">expect</span><span class="p">(</span><span class="nx">preventDefault</span><span class="p">).</span><span class="nx">toBeCalled</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>code</h2>
+
+<h3>JSX</h3>
+
+<p>6to5ではjsxもサポートしているので、何も意識することなくjsxを書いておくことが出来ます。</p>
+
+<p><a href="https://6to5.org/docs/usage/jsx/">https://6to5.org/docs/usage/jsx/</a></p>
+
+<h3>ES6 modules</h3>
+
+<p>今までは、ES6を感じながらcommonJS styleで書くのもちょっとなぁという気持ちがありましたがこれによってES6 modulesのstyleで書くことが出来ていい感じです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">import</span> <span class="nx">React</span>        <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">Nav</span>          <span class="nx">from</span> <span class="s1">&#39;./Nav&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">Footer</span>       <span class="nx">from</span> <span class="s1">&#39;./Footer&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">InputArtist</span>  <span class="nx">from</span> <span class="s1">&#39;./InputArtist&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">Tracks</span>       <span class="nx">from</span> <span class="s1">&#39;./Tracks&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">TrackStore</span>   <span class="nx">from</span> <span class="s1">&#39;../stores/TrackStore&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">export</span> <span class="k">default</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">displayName</span><span class="o">:</span> <span class="s1">&#39;Artist&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">let</span> <span class="nx">style</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">title</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">fontFamily</span><span class="o">:</span> <span class="s2">&quot;&#39;Poiret One&#39;, cursive&quot;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">header</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;page-header&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>          <span class="o">&lt;</span><span class="nx">h1</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Artist</span> <span class="nx">Top</span> <span class="nx">Tracks</span> <span class="o">&lt;</span><span class="nx">small</span><span class="o">&gt;</span><span class="nx">by</span> <span class="nx">Last</span><span class="p">.</span><span class="nx">FM</span><span class="o">&lt;</span><span class="err">/small&gt;&lt;/h1&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="err">/header&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">Nav</span> <span class="nx">current</span><span class="o">=</span><span class="s2">&quot;artist&quot;</span> <span class="o">/&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">article</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;main-content&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>          <span class="o">&lt;</span><span class="nx">InputArtist</span> <span class="o">/&gt;</span>
+</span><span class='line'>          <span class="o">&lt;</span><span class="nx">Tracks</span> <span class="o">/&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="err">/article&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">Footer</span> <span class="o">/&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>直接export defaultにComponentのClassを渡しているので、displayNameは明示的に指定しています。</p>
+
+<hr />
+
+<p>というわけでReact.jsのコードを6to5使ってES6で簡単に書くことが出来るという話でした。</p>
+
+<p>個人的には今後書くコードはES6で書いていきたい感じです。</p>
+
+<p>6to5シンプルに使えていいですね。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Looking back 2014]]></title>
