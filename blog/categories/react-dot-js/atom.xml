@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-01-13T18:53:56+09:00</updated>
+  <updated>2015-01-28T19:14:43+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,152 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React v0.13.0 Beta1でclassで書けるようになった]]></title>
+    <link href="http://blog.koba04.com/post/2015/01/28/published-react-v0.13.0-beta1/"/>
+    <updated>2015-01-28T17:20:35+09:00</updated>
+    <id>http://blog.koba04.com/post/2015/01/28/published-react-v0.13.0-beta1</id>
+    <content type="html"><![CDATA[<p>React.js Confの前日にv0.13.0 Beta1がnpmにpublishされました。</p>
+
+<p><a href="http://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html">http://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html</a></p>
+
+<p>featureは色々あるみたいですが、↑のブログにはその1つとしてClassによるReact Componentの作成が紹介されていたのでそれについて書きたいと思います。</p>
+
+<p>ちなみに<code>React.createClass</code>を使う場合はこれまでと同じままで大丈夫なはずです。</p>
+
+<!-- more -->
+
+
+<h2>ES6 Classes</h2>
+
+<p><code>React.createClass</code>ではなくて、ES6のclassを使って↓みたいな感じで書けるようになります。</p>
+
+<p>```js
+import {React} from &lsquo;react&rsquo;;</p>
+
+<p>export class Hello extends React.Component {
+  constructor(props) {</p>
+
+<pre><code>super(props);
+this.state = { val: props.foo * 2 };
+</code></pre>
+
+<p>  }
+  onClick() {</p>
+
+<pre><code>this.setState({ val: this.state.val * 2 });
+</code></pre>
+
+<p>  }
+  render() {</p>
+
+<pre><code>return (
+  &lt;div&gt;
+    &lt;p&gt;state is {this.state.val}. props is {this.props.foo}&lt;/p&gt;
+    &lt;button onClick={this.onClick.bind(this)}&gt;click&lt;/button&gt;
+  &lt;/div&gt;
+);
+</code></pre>
+
+<p>  }
+}
+Hello.propTypes = {
+  foo: React.PropTypes.number
+};
+```</p>
+
+<p>ポイントとしては</p>
+
+<ul>
+<li><code>React.Component</code>をextendsします。</li>
+<li><code>constructor</code>に<code>props</code>が引数として渡ってくるのでそれを使って必要に応じて<code>state</code>の初期化をする。
+
+<ul>
+<li><code>getInitialState</code>は使うことができません。(warnが出ます)</li>
+</ul>
+</li>
+<li>Autobindingはされなくなったので明示的に<code>this.onClick.bind(this)</code>のようにする必要があります。</li>
+<li><code>propTypes</code>や<code>defaultProps</code>はconstructorのpropertyとして指定する必要があります。</li>
+<li>現時点で<code>mixin</code>はclassで書いた場合は使うことができません。</li>
+</ul>
+
+
+<p>といった辺りです。</p>
+
+<h3>変換</h3>
+
+<p>ES6のコードの変換は、これまで通りreact-toolsでjsxの<code>--harmony</code>optionを有効にしたり6to5使ったりする感じです。</p>
+
+<h3>今後</h3>
+
+<p>今の書き方だと微妙に感じるところも結構あるのですが、最終的には↓のような形で書けるようにしたいみたいです。</p>
+
+<p>```js
+import {React} from &lsquo;react&rsquo;;</p>
+
+<p>export class Hello extends React.Component {
+  propTypes = { foo: React.PropTypes.number };
+  state = { val: this.props.foo * 2 };
+  onClick = () => {</p>
+
+<pre><code>this.setState({ val: this.state.val * 2 });
+</code></pre>
+
+<p>  };
+  render() {</p>
+
+<pre><code>return (
+  &lt;div&gt;
+    &lt;p&gt;state is {this.state.val}. props is {this.props.foo}&lt;/p&gt;
+    &lt;button onClick={this.onClick}&gt;click&lt;/button&gt;
+  &lt;/div&gt;
+);
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>mixinについてはreact-futureを見る限りこんな感じになるのかもしれないですね。</p>
+
+<p><a href="https://github.com/reactjs/react-future/blob/master/01%20-%20Core/02%20-%20Mixins.js">https://github.com/reactjs/react-future/blob/master/01%20-%20Core/02%20-%20Mixins.js</a></p>
+
+<p>```js
+import { mixin } from &ldquo;react-utils&rdquo;;
+import { Component } from &ldquo;react&rdquo;;</p>
+
+<p>const A = {
+  componentDidMount() {</p>
+
+<pre><code>super();
+console.log('A');
+</code></pre>
+
+<p>  }
+};</p>
+
+<p>class Hello extends mixin(Component, A) {
+  render() {</p>
+
+<pre><code>return &lt;div /&gt;;
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<h3>CoffeeScript &amp; TypeScript</h3>
+
+<p>ちなみにES6だけでなく、CoffeescriptやTypeScriptのClass syntaxでもかけます。</p>
+
+<hr />
+
+<p>React.js自体でやることを減らしてES6、7のfeatureに任せることが出来るところは任せようといった方向性を感じて個人的にはいいんじゃないかと思っています。</p>
+
+<p>Enjoy it!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A combination of React.js and 6to5]]></title>
