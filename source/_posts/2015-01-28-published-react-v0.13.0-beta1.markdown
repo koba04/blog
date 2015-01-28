@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "React v0.13.0 Beta1でclassで書けるようになった"
+title: "React v0.13.0 Beta1でclassでComponentが作れるようになった"
 date: 2015-01-28 17:20:35 +0900
 comments: true
 categories: react.js
