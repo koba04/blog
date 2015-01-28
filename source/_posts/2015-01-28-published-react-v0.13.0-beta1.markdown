@@ -115,5 +115,5 @@ class Hello extends mixin(Component, A) {
 
 React.js自体でやることを減らしてES6、7のfeatureに任せることが出来るところは任せようといった方向性を感じて個人的にはいいんじゃないかと思っています。
 
-Enjoy it!
+React.js Conf行きたかった...
 
