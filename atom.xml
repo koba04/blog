@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-01-28T19:14:43+09:00</updated>
+  <updated>2015-01-28T19:16:46+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[React v0.13.0 Beta1でclassで書けるようになった]]></title>
+    <title type="html"><![CDATA[React v0.13.0 Beta1でclassでComponentが作れるようになった]]></title>
     <link href="http://blog.koba04.com/post/2015/01/28/published-react-v0.13.0-beta1/"/>
     <updated>2015-01-28T17:20:35+09:00</updated>
     <id>http://blog.koba04.com/post/2015/01/28/published-react-v0.13.0-beta1</id>
