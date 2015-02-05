@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-01-28T19:19:27+09:00</updated>
+  <updated>2015-02-05T11:07:56+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -197,7 +197,9 @@
     <link href="http://blog.koba04.com/post/2015/01/13/a-combination-of-reactjs-and-6to5/"/>
     <updated>2015-01-13T18:50:28+09:00</updated>
     <id>http://blog.koba04.com/post/2015/01/13/a-combination-of-reactjs-and-6to5</id>
-    <content type="html"><![CDATA[<p>今までは、react-toolsを使ってjsxのharmony optionを有効にして書くことで一部のES6のfeatureが使えて満足していたのですが、azuさんの記事を見て6to5を試したくなったのでReact.js + 6to5の組み合わせで書いてみました。</p>
+    <content type="html"><![CDATA[<p>In English article is <a href="http://en.blog.koba04.com/2015/02/04/a-combination-of-reactjs-and-6to5/">here</a>.</p>
+
+<p>今までは、react-toolsを使ってjsxのharmony optionを有効にして書くことで一部のES6のfeatureが使えて満足していたのですが、azuさんの記事を見て6to5を試したくなったのでReact.js + 6to5の組み合わせで書いてみました。</p>
 
 <ul>
 <li><a href="https://6to5.org/">https://6to5.org/</a></li>
