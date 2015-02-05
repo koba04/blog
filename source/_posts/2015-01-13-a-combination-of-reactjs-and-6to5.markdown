@@ -6,6 +6,8 @@ comments: true
 categories: react.js es6
 ---
 
+In English article is [here](http://en.blog.koba04.com/2015/02/04/a-combination-of-reactjs-and-6to5/).
+
 今までは、react-toolsを使ってjsxのharmony optionを有効にして書くことで一部のES6のfeatureが使えて満足していたのですが、azuさんの記事を見て6to5を試したくなったのでReact.js + 6to5の組み合わせで書いてみました。
 
 * https://6to5.org/
