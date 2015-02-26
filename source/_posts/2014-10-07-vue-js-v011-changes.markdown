@@ -454,9 +454,11 @@ Hoge.prototype.foo = function() { console.log(this.name) };
 
 {% img /images/vue-object-prototype.png 'Vue object prototype' %}
 
-### async optionをtrueにすることで即時にDOMが更新することが出来ます
+### async optionをfalseにすることで即時にDOMが更新することが出来ます
 
-通常は、batch方式によってDOMの更新はまとめて行われるのですが、このオプションをtrueにすることで即時にDOMに反映することが出来るようになります。
+通常は、batch方式によってDOMの更新はまとめて行われるのですが、このオプションをfalseにすることで即時にDOMに反映することが出来るようになります。
+
+**当初は「trueにすると」と書いていたので修正しました(2015/02/26)**
 
 ## Transition API change
 
