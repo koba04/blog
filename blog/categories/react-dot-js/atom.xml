@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
+  <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
+  <link href="http://blog.koba04.com/"/>
+  <updated>2015-02-05T11:07:56+09:00</updated>
+  <id>http://blog.koba04.com/</id>
+  <author>
+    <name><![CDATA[koba04]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[React v0.13.0 Beta1でclassでComponentが作れるようになった]]></title>
+    <link href="http://blog.koba04.com/post/2015/01/28/published-react-v0.13.0-beta1/"/>
+    <updated>2015-01-28T17:20:35+09:00</updated>
+    <id>http://blog.koba04.com/post/2015/01/28/published-react-v0.13.0-beta1</id>
+    <content type="html"><![CDATA[<p>React.js Confの前日にv0.13.0 Beta1がnpmにpublishされました。</p>
+
+<p><a href="http://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html">http://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html</a></p>
+
+<p>featureは色々あるみたいですが、↑のブログにはその1つとしてClassによるReact Componentの作成が紹介されていたのでそれについて書きたいと思います。</p>
+
+<p>ちなみに<code>React.createClass</code>を使う場合はこれまでと同じままで大丈夫なはずです。</p>
+
+<!-- more -->
+
+
+<h2>ES6 Classes</h2>
+
+<p><code>React.createClass</code>ではなくて、ES6のclassを使って↓みたいな感じで書けるようになります。</p>
+
+<p>```js
+import {React} from &lsquo;react&rsquo;;</p>
+
+<p>export class Hello extends React.Component {
+  constructor(props) {</p>
+
+<pre><code>super(props);
+this.state = { val: props.foo * 2 };
+</code></pre>
+
+<p>  }
+  onClick() {</p>
+
+<pre><code>this.setState({ val: this.state.val * 2 });
+</code></pre>
+
+<p>  }
+  render() {</p>
+
+<pre><code>return (
+  &lt;div&gt;
+    &lt;p&gt;state is {this.state.val}. props is {this.props.foo}&lt;/p&gt;
+    &lt;button onClick={this.onClick.bind(this)}&gt;click&lt;/button&gt;
+  &lt;/div&gt;
+);
+</code></pre>
+
+<p>  }
+}
+Hello.propTypes = {
+  foo: React.PropTypes.number
+};
+```</p>
+
+<p>ポイントとしては</p>
+
+<ul>
+<li><code>React.Component</code>をextendsします。</li>
+<li><code>constructor</code>に<code>props</code>が引数として渡ってくるのでそれを使って必要に応じて<code>state</code>の初期化をする。
+
+<ul>
+<li><code>getInitialState</code>は使うことができません。(warnが出ます)</li>
+</ul>
+</li>
+<li>Autobindingはされなくなったので明示的に<code>this.onClick.bind(this)</code>のようにする必要があります。</li>
+<li><code>propTypes</code>や<code>defaultProps</code>はconstructorのpropertyとして指定する必要があります。</li>
+<li>現時点で<code>mixin</code>はclassで書いた場合は使うことができません。</li>
+</ul>
+
+
+<p>といった辺りです。</p>
+
+<h3>変換</h3>
+
+<p>ES6のコードの変換は、これまで通りreact-toolsでjsxの<code>--harmony</code>optionを有効にしたり6to5使ったりする感じです。</p>
+
+<h3>今後</h3>
+
+<p>今の書き方だと微妙に感じるところも結構あるのですが、最終的には↓のような形で書けるようにしたいみたいです。</p>
+
+<p>```js
+import {React} from &lsquo;react&rsquo;;</p>
+
+<p>export class Hello extends React.Component {
+  propTypes = { foo: React.PropTypes.number };
+  state = { val: this.props.foo * 2 };
+  onClick = () => {</p>
+
+<pre><code>this.setState({ val: this.state.val * 2 });
+</code></pre>
+
+<p>  };
+  render() {</p>
+
+<pre><code>return (
+  &lt;div&gt;
+    &lt;p&gt;state is {this.state.val}. props is {this.props.foo}&lt;/p&gt;
+    &lt;button onClick={this.onClick}&gt;click&lt;/button&gt;
+  &lt;/div&gt;
+);
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>mixinについてはreact-futureを見る限りこんな感じになるのかもしれないですね。</p>
+
+<p><a href="https://github.com/reactjs/react-future/blob/master/01%20-%20Core/02%20-%20Mixins.js">https://github.com/reactjs/react-future/blob/master/01%20-%20Core/02%20-%20Mixins.js</a></p>
+
+<p>```js
+import { mixin } from &ldquo;react-utils&rdquo;;
+import { Component } from &ldquo;react&rdquo;;</p>
+
+<p>const A = {
+  componentDidMount() {</p>
+
+<pre><code>super();
+console.log('A');
+</code></pre>
+
+<p>  }
+};</p>
+
+<p>class Hello extends mixin(Component, A) {
+  render() {</p>
+
+<pre><code>return &lt;div /&gt;;
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<h3>CoffeeScript &amp; TypeScript</h3>
+
+<p>ちなみにES6だけでなく、CoffeescriptやTypeScriptのClass syntaxでもかけます。</p>
+
+<hr />
+
+<p>React.js自体でやることを減らしてES6、7のfeatureに任せることが出来るところは任せようといった方向性を感じて個人的にはいいんじゃないかと思っています。</p>
+
+<p>React.js Conf行きたかった&hellip;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A combination of React.js and 6to5]]></title>
+    <link href="http://blog.koba04.com/post/2015/01/13/a-combination-of-reactjs-and-6to5/"/>
+    <updated>2015-01-13T18:50:28+09:00</updated>
+    <id>http://blog.koba04.com/post/2015/01/13/a-combination-of-reactjs-and-6to5</id>
+    <content type="html"><![CDATA[<p>In English article is <a href="http://en.blog.koba04.com/2015/02/04/a-combination-of-reactjs-and-6to5/">here</a>.</p>
+
+<p>今までは、react-toolsを使ってjsxのharmony optionを有効にして書くことで一部のES6のfeatureが使えて満足していたのですが、azuさんの記事を見て6to5を試したくなったのでReact.js + 6to5の組み合わせで書いてみました。</p>
+
+<ul>
+<li><a href="https://6to5.org/">https://6to5.org/</a></li>
+<li><a href="http://efcl.info/2015/01/09/write-es6/">http://efcl.info/2015/01/09/write-es6/</a></li>
+</ul>
+
+
+<p>結論から言うと6to5自体がjsxのサポートもしているので何も意識することなく書けていい感じでした。</p>
+
+<p>コードはこんな感じ。</p>
+
+<p><a href="https://github.com/koba04/react-boilerplate">https://github.com/koba04/react-boilerplate</a></p>
+
+<!-- more -->
+
+
+<h2>structure</h2>
+
+<h3>browserify + 6to5ify</h3>
+
+<p>変換の流れはbrowserifyのtransformである6to5ifyを使うので、</p>
+
+<p>```
+ES6  &ndash;>   CommonJS(ES5)      &ndash;>       bundle.js</p>
+
+<pre><code>6to5                 browserify
+</code></pre>
+
+<p>```</p>
+
+<p>な形になっています。</p>
+
+<p>AltJSで書くときと同じ流れです。</p>
+
+<h2>configuration</h2>
+
+<p><a href="https://github.com/koba04/react-boilerplate/blob/master/package.json">https://github.com/koba04/react-boilerplate/blob/master/package.json</a></p>
+
+<h3>bundle.js</h3>
+
+<p>bundle.jsの作成はただ、6to5ifyをtransformとして指定するだけです。</p>
+
+<p>```js
+  &ldquo;scripts&rdquo;: {</p>
+
+<pre><code>"watch": "watchify app/index.js -o dist/bundle.js -v",
+"build": "browserify app/index.js &gt; dist/bundle.js"
+</code></pre>
+
+<p>  },
+  &ldquo;browserify&rdquo;: {</p>
+
+<pre><code>"transform": [
+  [ "6to5ify" ]
+]
+</code></pre>
+
+<p>  }
+```</p>
+
+<h3>start server</h3>
+
+<p>serverを立ち上げる時は、entry pointとなるserver.jsもES6で書きたいので、6to5に含まれている<code>6to5-node</code>コマンドを利用します。</p>
+
+<p>```
+  &ldquo;scripts&rdquo;: {</p>
+
+<pre><code>"start": "6to5-node server"
+</code></pre>
+
+<p>  },
+```</p>
+
+<p>これによってserver.jsもES6で書くことが出来るようになります。</p>
+
+<p>```js
+&lsquo;use strict&rsquo;;</p>
+
+<p>import express  from &lsquo;express&rsquo;;
+import React    from &lsquo;react&rsquo;;
+import App      from &lsquo;./app/components/App&rsquo;;</p>
+
+<p>let app     = express();
+let handler = (name) => {
+  return (req, res) => {</p>
+
+<pre><code>let html = React.renderToString(React.createElement(App, {
+  path: "/" + name
+}));
+res.send(html);
+</code></pre>
+
+<p>  };
+};</p>
+
+<p>app.get(&lsquo;/&rsquo;,        handler(&lsquo;&rsquo;));
+app.get(&lsquo;/artist&rsquo;,  handler(&lsquo;artist&rsquo;));
+app.get(&lsquo;/country&rsquo;, handler(&lsquo;country&rsquo;));</p>
+
+<p>app.use(express.static(__dirname+&lsquo;/dist&rsquo;));</p>
+
+<p>let port = process.env.PORT || 5000;
+console.log(&ldquo;listening&hellip;&rdquo; + port);
+app.listen(port);
+```</p>
+
+<h3>test by Jest</h3>
+
+<p>Jestのテストについても<code>6to5-jest</code>というmoduleがあるのでそれをinstallして、scriptPreprocessorに指定するだけです。</p>
+
+<p>```js
+  &ldquo;jest&rdquo;: {</p>
+
+<pre><code>"scriptPreprocessor": "&lt;rootDir&gt;/node_modules/6to5-jest",
+</code></pre>
+
+<p>  }
+```</p>
+
+<p>こんな感じで書けます。</p>
+
+<p>```js
+&lsquo;use strict&rsquo;;</p>
+
+<p>jest.dontMock(&lsquo;../InputArtist&rsquo;);</p>
+
+<p>import React                    from &lsquo;react/addons&rsquo;;
+import InputArtist              from &lsquo;../InputArtist&rsquo;;
+import AppTracksActionCreators  from &lsquo;../../actions/AppTracksActionCreators&rsquo;;</p>
+
+<p>describe(&ldquo;inputArtist&rdquo;, () => {
+  let inputArtist;
+  beforeEach(() => {</p>
+
+<pre><code>inputArtist = React.addons.TestUtils.renderIntoDocument(&lt;InputArtist /&gt;);
+</code></pre>
+
+<p>  });</p>
+
+<p>  describe(&ldquo;state&rdquo;,  () => {</p>
+
+<pre><code>it("set inputArtist radiohead", () =&gt; {
+  expect(inputArtist.state.inputArtist).toBe("radiohead");
+});
+</code></pre>
+
+<p>  });</p>
+
+<p>  describe(&ldquo;handleSubmit&rdquo;, () => {</p>
+
+<pre><code>let preventDefault;
+beforeEach(() =&gt; {
+  preventDefault = jest.genMockFunction();
+  inputArtist.setState({ inputArtist: 'travis' });
+  React.addons.TestUtils.Simulate.submit(inputArtist.getDOMNode(), {
+    preventDefault: preventDefault
+  });
+});
+it ("calls AppTracksActionCreators.fetchByArtist with state.inputArtist", () =&gt; {
+  expect(AppTracksActionCreators.fetchByArtist).toBeCalled();
+  expect(AppTracksActionCreators.fetchByArtist).toBeCalledWith('travis');
+});
+it ("calls e.preventDefault", () =&gt; {
+  expect(preventDefault).toBeCalled();
+});
+</code></pre>
+
+<p>  });</p>
+
+<p>});
+```</p>
+
+<h2>code</h2>
+
+<h3>JSX</h3>
+
+<p>6to5ではjsxもサポートしているので、何も意識することなくjsxを書いておくことが出来ます。</p>
+
+<p><a href="https://6to5.org/docs/usage/jsx/">https://6to5.org/docs/usage/jsx/</a></p>
+
+<h3>ES6 modules</h3>
+
+<p>今までは、ES6を感じながらcommonJS styleで書くのもちょっとなぁという気持ちがありましたがこれによってES6 modulesのstyleで書くことが出来ていい感じです。</p>
+
+<p>```js
+&lsquo;use strict&rsquo;;</p>
+
+<p>import React        from &lsquo;react&rsquo;;
+import Nav          from &lsquo;./Nav&rsquo;;
+import Footer       from &lsquo;./Footer&rsquo;;
+import InputArtist  from &lsquo;./InputArtist&rsquo;;
+import Tracks       from &lsquo;./Tracks&rsquo;;
+import TrackStore   from &lsquo;../stores/TrackStore&rsquo;;</p>
+
+<p>export default React.createClass({
+  displayName: &lsquo;Artist&rsquo;,
+  render() {</p>
+
+<pre><code>let style = {
+  title: {
+    fontFamily: "'Poiret One', cursive"
+  }
+};
+return (
+  &lt;div&gt;
+    &lt;header className="page-header"&gt;
+      &lt;h1 style={style.title}&gt;Artist Top Tracks &lt;small&gt;by Last.FM&lt;/small&gt;&lt;/h1&gt;
+    &lt;/header&gt;
+    &lt;Nav current="artist" /&gt;
+    &lt;article className="main-content"&gt;
+      &lt;InputArtist /&gt;
+      &lt;Tracks /&gt;
+    &lt;/article&gt;
+    &lt;Footer /&gt;
+  &lt;/div&gt;
+);
+</code></pre>
+
+<p>  }
+});
+```</p>
+
+<p>直接export defaultにComponentのClassを渡しているので、displayNameは明示的に指定しています。</p>
+
+<hr />
+
+<p>というわけでReact.jsのコードを6to5使ってES6で簡単に書くことが出来るという話でした。</p>
+
+<p>個人的には今後書くコードはES6で書いていきたい感じです。</p>
+
+<p>6to5シンプルに使えていいですね。</p>
+]]></content>
+  </entry>
+  
+</feed>
