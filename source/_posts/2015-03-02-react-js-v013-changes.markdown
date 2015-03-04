@@ -18,7 +18,8 @@ React.js v0.13のRC2がリリースされたのでまとめてみます。
 
 ## Propを変更するとwarninngが出ます (Breaking Change)
 
-development環境で`props`をelement作成後に変更することはdeprecatedになってwarningが出るようになりました。
+development環境でPropをelement作成後に変更することはdeprecatedになってwarningが出るようになりました。
+つまりimmutableなものとして扱う必要があります。
 
 ```js
 var element = <Foo bar={false} />;
@@ -30,12 +31,12 @@ if (shouldUseFoo) {
 
 ### これまでの問題点
 
-* `props`を直接変更してしまうと元の値を破棄してしまうのでdiffがなくなってしまいます。この場合、`shouldComponentUpdate`での比較時に差分を検出出来なくてDOM構造に差分があるはずなのに実際には反映されない可能性がありました。
+* Propを直接変更してしまうと元の値を破棄してしまうのでdiffがなくなってしまいます。この場合、`shouldComponentUpdate`を実装している場合に比較時に差分を検出出来なくてDOM構造に差分があるはずなのに実際には反映されない可能性がありました。
 * またPropが変更されることがあるためcreateElementの時点でPropTypesのValidationも出来ず、それによってエラー時のstacktraceが深くなったりFlowによる静的解析にとっても都合がよくなかったりという面もありました。
 
 #### それに対しての提案
 
-* Propはimmutableなものとして扱いたいので変更するとwarningが出るようにしました。動的にしたい場合は↓のような形で書くことでも可能です。
+* 動的にしたい場合は↓のような形で書くことでも可能です。
 
 ```js
 if (shouldUseFoo) {
@@ -52,13 +53,13 @@ if (shouldUseFoo) {
 return <Foo {...props} />;
 ```
 
-* また、現時点ではネストしたオブジェクトについては変更してもwarningは出ません。基本的にはimmutable.jsなどを使って完全にimmutableに扱った方がいいですが、変更可能なオブジェクトは多くの場面で便利だし今回はネストしたオブジェクトはwarningの対象外となりました。
+* 現時点ではネストしたオブジェクトについては変更してもwarningは出ません。基本的にはimmutable.jsなどを使って完全にimmutableに扱った方がいいですが、mutableなオブジェクトは多くの場面で便利だし今回はネストしたオブジェクトはwarningの対象外となりました。
 
 ```js
 return <Foo nestedObject={this.state.myModel} />;
 ```
 
-* PropTypesのwarningをReactElementの作成時に行うなうようになりました。↓のようにcloneしてReactElementに新しいpropsを追加するのは正しい方法です。
+* PropTypesのwarningをReactElementの作成時に行うなうようになりました。Propを変更するために↓のようにcloneしてReactElementにPropに値を追加するのは正しい方法です。
 
 ```js
 var element1 = <Foo />; // extra prop is optional
@@ -68,7 +69,7 @@ var element2 = React.addons.cloneWithProps(element1, { extra: 'prop' });
 
 ## statics内のメソッドに対してautobindingされなくなりました (Breaking Change)
 
-`statics`に定義したメソッドをonClickなどにバインドした時に`this`にcomponentをバインドしなくなりました。
+`statics`に定義したメソッドをonClickなどにバインドした時にcomponentをバインドしなくなりました。
 
 ```js
 class Hello extends React.Component {
@@ -90,9 +91,9 @@ class Hello extends React.Component {
 ## refを設定する処理の順番が変わりました (Breaking Change)
 
 `ref`に指定されたcomponentの`componentDidMount`が呼ばれた後になります。
-これは親のcomponentのcallbackを`componentDidMount`の中で読んでいる場合だけ気にする必要があります。そもそれもこれはアンチパターンなので避けるべきですが...。
+これは親componentのcallbackを`componentDidMount`の中で読んでいる場合だけ気にする必要があります。そもそれもこれはアンチパターンなので避けるべきですが...。
 
-* `componentDidMount`は子のcomponentから順番に呼ばれるので下記の`refDiv`はChildの`componentDidMount`の時点では設定されていません。
+* `componentDidMount`は子componentから順番に呼ばれるので下記の`refDiv`はChildの`componentDidMount`の時点では設定されていません。
   
 ```js
 class Hello extends React.Component {
@@ -156,7 +157,7 @@ componentDidMount() {
 
 ## setStateとforceUpdateをunmountされたcomponentに対して呼んだ時に、エラーではなくwarningが出るようになりました (Breaking Change)
 
-`isMounted`でブロックしなくてもよくなったのはいいですね。
+非同期処理の結果を`setState`して反映させるときに、`isMounted`でブロックしなくてもよくなったのはいいですね。
 
 
 ## privateなプロパティが整理されました (Breaking Change)
@@ -166,7 +167,7 @@ componentDidMount() {
 
 ## ES6 classesによるReactComponentの作成がサポートされました
   
-これについては↓に書きましたが、ES6 classesによって作成されたComponentには`createClass`にはある`getDOMNode`、`setProps`、`replaceState`が含まれていなかったりmixinが指定出来ないなど注意点がいくつかあります。
+これについては↓に書きましたが、ES6 classesによって作成されたcomponentには`createClass`にはある`getDOMNode`、`setProps`、`replaceState`が含まれていなかったりmixinが指定出来ないなど注意点がいくつかあります。
 
 * http://blog.koba04.com/post/2015/01/28/published-react-v0.13.0-beta1/
 
@@ -292,7 +293,7 @@ class B {
 }
 ```
 
-* JSXがあるコードのscope内にReactが必要なのは、Reactが現在のownerを保持していてJSXの変換がそれに依存しているからという意外なところに問題があったりもします。
+* また、JSXが書いているscope内にReactが必要なのは、Reactが現在のownerを保持していてJSXの変換がそれに依存しているからという意外なところに影響があったりもします。
 
 ### それに対する提案
 
@@ -301,8 +302,8 @@ class B {
 
 ### 未解決
 
-* `refs`はまだownerベースのままで、これについてはまだ完全に解決出来ていません。
-  * v0.13ではcallbackでもrefが定義出来るようなりましたがこれまでの宣言的な定義方法も残されています。これに代わるいい方法がない限りこのAPIは廃止されません。
+* `ref`はまだownerベースのままで、これについてはまだ完全に解決出来ていません。
+  * v0.13ではcallbackでもrefが定義出来るようなりましたがこれまでの宣言的な定義方法も残されています。宣言的な定義方法に代わる何かいい方法がない限りこのAPIは廃止されません。
 
 
 ## `{key: element}`(Keyed Object)の形式でchildに渡すとwarningが出るようになりました
@@ -354,7 +355,7 @@ var newChildren = React.Children.map(this.props.children, function(child) {
 });
 ```
 
-このAPIはv0.13でpropがimmutableなものとして扱われるようになったことで、propを変更するためにelementをcloneする機会が増えたために必要となりました。
+このAPIはv0.13でPropがimmutableなものとして扱われるようになったことで、Propを変更するためにelementをcloneする機会が増えたため必要となりました。
 `React.addons.cloneWithProps`はそのうちdeprecateになりますが今回のタイミングではなりません。
 
 
@@ -366,7 +367,7 @@ var newChildren = React.Children.map(this.props.children, function(child) {
 ## jsxコマンドで`--target`optionとしてECMAScript versionを指定出来るようになりました。 (Breaking Change)
 
 `es5`がデフォルトです。
-`es3`はこれまでの挙動です。追加で予約語を安全に扱うようになりました(eg `this.static`は`this['static']`にIE8での互換性のために変換されます)。
+`es3`はこれまでの挙動ですが追加で予約語を安全に扱うようになりました(eg `this.static`は`this['static']`にIE8での互換性のために変換されます)。
 
 
 ## jsxコマンドでES6 syntaxで変換した際にclassメソッドがdefaultではenumerableではなくなりました
