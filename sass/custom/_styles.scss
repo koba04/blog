@@ -5,12 +5,6 @@ $header-sub-font-size: 20px;
 $header-sub-margin: 25px 0 10px 0;
 $nav-font-color: #FFF;
 
-
-
-li {
-  margin: 5px 0;
-}
-
 h1.link {
   font-size: $header-main-font-size;
   @media screen and (max-width: 480px) {
@@ -37,7 +31,36 @@ h3 {
   code {
     font-size: inherit;
   }
+}
 
+h4 {
+  border-bottom: solid 1px;
+  code {
+    font-size: inherit;
+  }
+}
+
+p {
+  line-height: 150%;
+}
+
+li {
+  line-height: 150%;
+  margin: 10px 0;
+}
+
+blockquote {
+  p {
+    font-size: 0.9em;
+  }
+}
+
+strong {
+  color: $primary-color;
+}
+
+code {
+  font-size: inherit;
 }
 
 
@@ -71,18 +94,4 @@ h3 {
       padding: 10px 15px 10px;
     }
   }
-}
-
-blockquote {
-  p {
-    font-size: 0.9em;
-  }
-}
-
-strong {
-  color: $primary-color;
-}
-
-code {
-  font-size: inherit;
 }
