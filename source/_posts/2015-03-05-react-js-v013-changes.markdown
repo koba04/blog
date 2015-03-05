@@ -493,7 +493,7 @@ function render() {
 ```
 
 
-### Tagging ReactElements]
+### Tagging ReactElements
 
 * https://github.com/facebook/react/issues/3227
 
