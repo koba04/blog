@@ -1,0 +1,1003 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>React.js v0.13 changes - blog.koba04.com</title>
+  <meta name="author" content="koba04">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="blog.koba04.com" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <meta property="og:title" content="React.js v0.13 changes - blog.koba04.com" />
+<meta property="og:description" content="" />
+<meta property="og:url" content="http://blog.koba04.com/post/2015/03/02/react-js-v013-changes/" />
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/250407" />
+<meta property="og:author" content="koba04" />
+<meta property="og:site_name" content="blog.koba04.com" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="fb:app_id" content="346463362115366" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-8875970-5']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <div class="nav-title"><a href="/">blog.koba04.com</a></div>
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/koba04" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://twitter.com/koba04" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    
+    <li><a href="http://d.hatena.ne.jp/koba04/">OldBlog</a></li>
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    React.js v0.13 changes
+	<h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2015-03-02T23:23:28+09:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2015</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>React.js v0.13のRC2がリリースされたのでまとめてみます。</p>
+
+<ul>
+<li><a href="http://facebook.github.io/react/blog/2015/02/24/react-v0.13-rc1.html">http://facebook.github.io/react/blog/2015/02/24/react-v0.13-rc1.html</a></li>
+<li><a href="http://facebook.github.io/react/blog/2015/03/03/react-v0.13-rc2.html">http://facebook.github.io/react/blog/2015/03/03/react-v0.13-rc2.html</a></li>
+<li><a href="http://facebook.github.io/react/blog/2015/02/24/streamlining-react-elements.html">http://facebook.github.io/react/blog/2015/02/24/streamlining-react-elements.html</a></li>
+</ul>
+
+
+<p>今回のバージョンで何か大きく変更があるというよりもv0.14でやりたいことに向けての布石が多いように感じます。</p>
+
+<!-- more -->
+
+
+<h2>Propを変更するとwarninngが出ます (Breaking Change)</h2>
+
+<p>development環境でPropをelement作成後に変更することはdeprecatedになってwarningが出るようになりました。
+つまりimmutableなものとして扱う必要があります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Foo</span> <span class="nx">bar</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">;</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">shouldUseFoo</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">element</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">element</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">bar</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>これまでの問題点</h3>
+
+<ul>
+<li>Propを直接変更してしまうと元の値を破棄してしまうのでdiffがなくなってしまいます。この場合、<code>shouldComponentUpdate</code>を実装している場合に比較時に差分を検出出来なくてDOM構造に差分があるはずなのに実際には反映されない可能性がありました。</li>
+<li>またPropが変更されることがあるためcreateElementの時点でPropTypesのValidationも出来ず、それによってエラー時のstacktraceが深くなったりFlowによる静的解析にとっても都合がよくなかったりという面もありました。</li>
+</ul>
+
+
+<h4>それに対しての提案</h4>
+
+<ul>
+<li>動的にしたい場合は↓のような形で書くことでも可能です。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">shouldUseFoo</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Foo</span> <span class="nx">foo</span><span class="o">=</span><span class="p">{</span><span class="mi">10</span><span class="p">}</span> <span class="nx">bar</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Foo</span> <span class="nx">bar</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">props</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">bar</span><span class="o">:</span> <span class="kc">false</span> <span class="p">};</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nx">shouldUseFoo</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">props</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">props</span><span class="p">.</span><span class="nx">bar</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">return</span> <span class="o">&lt;</span><span class="nx">Foo</span> <span class="p">{...</span><span class="nx">props</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>現時点ではネストしたオブジェクトについては変更してもwarningは出ません。基本的にはimmutable.jsなどを使って完全にimmutableに扱った方がいいですが、mutableなオブジェクトは多くの場面で便利だし今回はネストしたオブジェクトはwarningの対象外となりました。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="k">return</span> <span class="o">&lt;</span><span class="nx">Foo</span> <span class="nx">nestedObject</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">myModel</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>PropTypesのwarningをReactElementの作成時に行うなうようになりました。Propを変更するために↓のようにcloneしてReactElementにPropに値を追加するのは正しい方法です。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">element1</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Foo</span> <span class="o">/&gt;</span><span class="p">;</span> <span class="c1">// extra prop is optional</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">element2</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">addons</span><span class="p">.</span><span class="nx">cloneWithProps</span><span class="p">(</span><span class="nx">element1</span><span class="p">,</span> <span class="p">{</span> <span class="nx">extra</span><span class="o">:</span> <span class="s1">&#39;prop&#39;</span> <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>statics内のメソッドに対してautobindingされなくなりました (Breaking Change)</h2>
+
+<p><code>statics</code>に定義したメソッドをonClickなどにバインドした時にcomponentをバインドしなくなりました。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Hello</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">statics</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">bar</span><span class="p">();</span>  <span class="c1">// v0.13では呼べない</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">bar</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">hello</span> <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">Hello</span><span class="p">.</span><span class="nx">foo</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">click</span><span class="o">&lt;</span><span class="err">/button&gt;;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>refを設定する処理の順番が変わりました (Breaking Change)</h2>
+
+<p><code>ref</code>に指定されたcomponentの<code>componentDidMount</code>が呼ばれた後になります。
+これは親componentのcallbackを<code>componentDidMount</code>の中で読んでいる場合だけ気にする必要があります。そもそれもこれはアンチパターンなので避けるべきですが&hellip;。</p>
+
+<ul>
+<li><code>componentDidMount</code>は子componentから順番に呼ばれるので下記の<code>refDiv</code>はChildの<code>componentDidMount</code>の時点では設定されていません。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Hello</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">refs</span><span class="p">.</span><span class="nx">refDiv</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">Child</span> <span class="nx">foo</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">foo</span><span class="p">}</span> <span class="o">/&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">ref</span><span class="o">=</span><span class="s2">&quot;refDiv&quot;</span><span class="o">&gt;</span><span class="nx">hello</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">class</span> <span class="nx">Child</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">foo</span><span class="p">();</span> <span class="c1">// v0.13 &quot;undefined&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">child</span><span class="o">&lt;</span><span class="err">/div&gt;;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2><code>this.setState()</code>が第1引数に関数を受け取れるようになりました</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">((</span><span class="nx">state</span><span class="p">,</span> <span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span><span class="nx">count</span><span class="o">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>のようにすることで<code>this._pendingState</code>を使うことなくトランザクションが必要とされるstateの更新を行うことが出来ます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">)</span> <span class="c1">// 0</span>
+</span><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">count</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">})</span>
+</span><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">count</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">})</span>
+</span><span class='line'><span class="c1">// state.count will render as 1</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">)</span> <span class="c1">// 0</span>
+</span><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">props</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="p">{</span> <span class="nx">count</span><span class="o">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">});</span>
+</span><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">props</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="p">{</span> <span class="nx">count</span><span class="o">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">});</span>
+</span><span class='line'><span class="c1">// state.count will render as 2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>setStateの呼び出しが常に非同期になります (Breaking Change)</h2>
+
+<p>ライフサイクルメソッドの中での<code>setState</code>の呼び出しが常に非同期でバッチとして処理されます。以前は最初のマウント時の呼び出しは同期的に行われていました。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">)</span> <span class="c1">// 0</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">count</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">})</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">count</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">})</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">)</span> <span class="c1">// v0.13 is 2 (v0.12 is 0)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>setStateとforceUpdateをunmountされたcomponentに対して呼んだ時に、エラーではなくwarningが出るようになりました (Breaking Change)</h2>
+
+<p>非同期処理の結果を<code>setState</code>して反映させるときに、<code>isMounted</code>でブロックしなくてもよくなったのはいいですね。</p>
+
+<h2>privateなプロパティが整理されました (Breaking Change)</h2>
+
+<p><code>this._pendingState</code>や<code>this._rootNodeID</code>などのprivateなプロパティが削除されました。</p>
+
+<h2>ES6 classesによるReactComponentの作成がサポートされました</h2>
+
+<p>これについては↓に書きましたが、ES6 classesによって作成されたcomponentには<code>createClass</code>にはある<code>getDOMNode</code>、<code>setProps</code>、<code>replaceState</code>が含まれていなかったりmixinが指定出来ないなど注意点がいくつかあります。</p>
+
+<ul>
+<li><a href="http://blog.koba04.com/post/2015/01/28/published-react-v0.13.0-beta1/">http://blog.koba04.com/post/2015/01/28/published-react-v0.13.0-beta1/</a></li>
+</ul>
+
+
+<h2><code>React.findDOMNode(component)</code>のAPIが追加されました</h2>
+
+<p>これは既存の<code>component.getDOMNode()</code>を置き換えるAPIです。
+<code>getDOMNode()</code>はES6 classesによって作成されたcomponentでは提供されていません。</p>
+
+<h2><code>ref</code>がcallbackスタイルで指定できるようになりました。</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="o">&lt;</span><span class="nx">Photo</span> <span class="nx">ref</span><span class="o">=</span><span class="p">{(</span><span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">_photo</span> <span class="o">=</span> <span class="nx">c</span><span class="p">}</span> <span class="o">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この変更はこの後で書く<code>owner</code>の扱いの変更に関係しています。</p>
+
+<h2>childrenにiteratorやimmutable-jsのsequenceを指定出来るようになりました</h2>
+
+<p>immutable-jsを使っている人にとってはいいですね。</p>
+
+<h2><code>ComponentClass.type</code>はdeprecatedになりました</h2>
+
+<p>代わりに<code>ComponentClass</code>をそのまま使ってください。</p>
+
+<h2>ownerベースのcontextを使っていてparentベースのcontextと一致しない場合にwarningが出るようになります</h2>
+
+<p>そもそもowner? parent?という感じかと思うので簡単に説明します。</p>
+
+<h3>owner and parent</h3>
+
+<p>Reactは&#8221;parent&#8221;と&#8221;owner&#8221;を持っています。&#8221;owner&#8221;はReactElementを作ったcomponentです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Foo</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="o">/&gt;&lt;</span><span class="err">/div&gt;;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この場合、<code>span</code>のownerは<code>Foo</code>でparentは<code>div</code>になります。</p>
+
+<h3>context</h3>
+
+<p>これはdocument化されてないfeatureですが、&#8221;owner&#8221;から子や孫に渡すことが出来る&#8221;context&#8221;というものがあります。</p>
+
+<p>簡単にコードを書くとこんな感じです。見てもらえればどんなfeatureなのかわかるかと思います。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">Parent</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">childContextTypes</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">name</span><span class="o">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">age</span><span class="o">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">getChildContext</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;parent&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">age</span><span class="o">:</span> <span class="mi">50</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Child</span> <span class="o">/&gt;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">Child</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">contextTypes</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">name</span><span class="o">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">age</span><span class="o">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">componentDidMount</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Child&quot;</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">);</span> <span class="c1">// {name: &quot;parent&quot;, age: 50}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">&lt;</span><span class="nx">GrandChild</span> <span class="o">/&gt;</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">GrandChild</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">contextTypes</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">name</span><span class="o">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">componentDidMount</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;GrandChild&quot;</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">);</span> <span class="c1">// {name: &quot;parent&quot;}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">hello</span><span class="o">&lt;</span><span class="err">/div&gt;;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">React</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Parent</span> <span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>react-router</code>ではparentベースのcontextに依存していたので対応が大変そうでした。</p>
+
+<h3>問題点</h3>
+
+<ul>
+<li>ownerは密かにReactElementに追加されているので気づかないうちに挙動が変わることが発生します。↓の場合はそれぞれのinputのownerが異なりますし、<code>React.addons.cloneWithProps</code>を使った場合もownerが変わります。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span> <span class="o">/&gt;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">class</span> <span class="nx">Component</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">bar</span> <span class="o">?</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span> <span class="o">/&gt;</span> <span class="o">:</span> <span class="nx">foo</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>ownerは実行時のstackによって決定します。↓の場合、<code>span</code>のonwerは実際は<code>B</code>で<code>A</code>ではありません。これはcallbackが実行されたタイミングに依存するからです。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">A</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">B</span> <span class="nx">renderer</span><span class="o">=</span><span class="p">{</span><span class="nx">text</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">span</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">text</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/span&gt;} /</span><span class="o">&gt;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="kr">class</span> <span class="nx">B</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">renderer</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>また、JSXが書いているscope内にReactが必要なのは、Reactが現在のownerを保持していてJSXの変換がそれに依存しているからという意外なところに影響があったりもします。</li>
+</ul>
+
+
+<h3>それに対する提案</h3>
+
+<ul>
+<li>ownerベースのcontextの代わりにparentベースのcontextの導入を考えているのでそれを使うことです。ほとんどのケースはparentベースのcontextでも問題ないです。</li>
+<li>ownerベースのcontextが必要になる場合はほとんどないはずだしコードを見直すべきです。</li>
+</ul>
+
+
+<h3>未解決</h3>
+
+<ul>
+<li><code>ref</code>はまだownerベースのままで、これについてはまだ完全に解決出来ていません。
+
+<ul>
+<li>v0.13ではcallbackでもrefが定義出来るようなりましたがこれまでの宣言的な定義方法も残されています。宣言的な定義方法に代わる何かいい方法がない限りこのAPIは廃止されません。</li>
+</ul>
+</li>
+</ul>
+
+
+<h2><code>{key: element}</code>(Keyed Object)の形式でchildに渡すとwarningが出るようになりました</h2>
+
+<p>v0.12では<code>{key: element}</code>の形式でkeyが指定したらelementを渡すことが出来ましたが、これはあまり使われてないし問題となる場合があるので使うべきではないのでwarningが出るようになりました。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="p">{</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="o">/&gt;</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="o">/&gt;</span><span class="p">}</span> <span class="p">}</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>問題点</h3>
+
+<ul>
+<li>列挙される順番はkeyに数値を指定した場合を除いては仕様として定義されてないので実装次第になってしまいます。</li>
+<li>一般的にobjectをmapとして扱うことは型システムやVMの最適化やコンパイラーにとって好ましくないし、さらにセキュリティ上のリスクもあって↓のような場合にもし<code>item.title === '__proto__'</code> を指定されたら&hellip;.</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'><span class="nx">items</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="nx">children</span><span class="p">[</span><span class="nx">item</span><span class="p">.</span><span class="nx">title</span><span class="p">]</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="o">/&gt;</span><span class="p">);</span>
+</span><span class='line'><span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">children</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/div&gt;;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>それに対する解決</h3>
+
+<ul>
+<li>ほとんどの場合、<code>key</code>を設定したReactElementの配列にすれば問題ないはずです。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">items</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">children</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>this.props.children</code>を使った場合など、<code>key</code>を指定することが出来ない場合もあるかもしれません。その場合はv0.13で追加された<code>React.addons.createFragment</code>を使うことでKeyed ObjectからReactElementを作成することが出来ます。
+
+<ul>
+<li>注意として、これはまだrenderの戻り値として直接渡せるものではないので<div>などでラップしてあげる必要があります。</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">React</span><span class="p">.</span><span class="nx">addons</span><span class="p">.</span><span class="nx">createFragment</span><span class="p">({</span> <span class="nx">a</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">div</span> <span class="o">/&gt;</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span> <span class="p">})}</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2><code>React.cloneElement</code>が追加されました</h2>
+
+<p>これはこれまで<code>React.addons.cloneWithProps</code>と似たAPIです。
+異なる点としては、<code>style</code>や<code>className</code>のmergeが行われなかったり<code>ref</code>が保持される点があります。
+<code>cloneWithProps</code>を使ってchildrenを複製した時に<code>ref</code>が保持されなくて問題となるという報告が多くあったのでこのAPIでは<code>ref</code>を保持するようになりました。
+<code>cloneElement</code>時に<code>ref</code>を指定すると上書きされます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">newChildren</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Children</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">React</span><span class="p">.</span><span class="nx">cloneElement</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="p">{</span> <span class="nx">foo</span><span class="o">:</span> <span class="kc">true</span> <span class="p">})</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>このAPIはv0.13でPropがimmutableなものとして扱われるようになったことで、Propを変更するためにelementをcloneする機会が増えたため必要となりました。
+<code>React.addons.cloneWithProps</code>はそのうちdeprecateになりますが今回のタイミングではなりません。</p>
+
+<h2><code>React.addons.classSet</code>がdeprecatedになりました</h2>
+
+<p>必要な場合は<a href="https://www.npmjs.com/package/classnames">classnames</a>などを使用してください。</p>
+
+<h2>jsxコマンドで<code>--target</code>optionとしてECMAScript versionを指定出来るようになりました。 (Breaking Change)</h2>
+
+<p><code>es5</code>がデフォルトです。
+<code>es3</code>はこれまでの挙動ですが追加で予約語を安全に扱うようになりました(eg <code>this.static</code>は<code>this['static']</code>にIE8での互換性のために変換されます)。</p>
+
+<h2>jsxコマンドでES6 syntaxで変換した際にclassメソッドがdefaultではenumerableではなくなりました</h2>
+
+<p><code>Object.defineProperty</code>を使用しているため、IE8などをサポートしたい場合は<code>--target es3</code>optionを渡す必要があります。</p>
+
+<ul>
+<li>Original</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Hello</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">hello</span><span class="o">&lt;</span><span class="err">/div&gt;;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">Hello</span><span class="p">.</span><span class="kr">static</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">bar</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>ES5</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">____Class0</span><span class="o">=</span><span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">;</span><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">____Class0____Key</span> <span class="k">in</span> <span class="nx">____Class0</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="nx">____Class0</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">____Class0____Key</span><span class="p">)){</span><span class="nx">Hello</span><span class="p">[</span><span class="nx">____Class0____Key</span><span class="p">]</span><span class="o">=</span><span class="nx">____Class0</span><span class="p">[</span><span class="nx">____Class0____Key</span><span class="p">];}}</span><span class="kd">var</span> <span class="nx">____SuperProtoOf____Class0</span><span class="o">=</span><span class="nx">____Class0</span><span class="o">===</span><span class="kc">null</span><span class="o">?</span><span class="kc">null</span><span class="o">:</span><span class="nx">____Class0</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span><span class="nx">Hello</span><span class="p">.</span><span class="nx">prototype</span><span class="o">=</span><span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">____SuperProtoOf____Class0</span><span class="p">);</span><span class="nx">Hello</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span><span class="o">=</span><span class="nx">Hello</span><span class="p">;</span><span class="nx">Hello</span><span class="p">.</span><span class="nx">__superConstructor__</span><span class="o">=</span><span class="nx">____Class0</span><span class="p">;</span><span class="kd">function</span> <span class="nx">Hello</span><span class="p">(){</span><span class="s2">&quot;use strict&quot;</span><span class="p">;</span><span class="k">if</span><span class="p">(</span><span class="nx">____Class0</span><span class="o">!==</span><span class="kc">null</span><span class="p">){</span><span class="nx">____Class0</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="nx">arguments</span><span class="p">);}}</span>
+</span><span class='line'>  <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">Hello</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span><span class="s2">&quot;foo&quot;</span><span class="p">,{</span><span class="nx">writable</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="nx">configurable</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="nx">value</span><span class="o">:</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}});</span>
+</span><span class='line'>  <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">Hello</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span><span class="s2">&quot;render&quot;</span><span class="p">,{</span><span class="nx">writable</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="nx">configurable</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="nx">value</span><span class="o">:</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Hello</span><span class="p">.</span><span class="kr">static</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">bar</span><span class="o">:</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>ES3</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">____Class0</span><span class="o">=</span><span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">;</span><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">____Class0____Key</span> <span class="k">in</span> <span class="nx">____Class0</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="nx">____Class0</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">____Class0____Key</span><span class="p">)){</span><span class="nx">Hello</span><span class="p">[</span><span class="nx">____Class0____Key</span><span class="p">]</span><span class="o">=</span><span class="nx">____Class0</span><span class="p">[</span><span class="nx">____Class0____Key</span><span class="p">];}}</span><span class="kd">var</span> <span class="nx">____SuperProtoOf____Class0</span><span class="o">=</span><span class="nx">____Class0</span><span class="o">===</span><span class="kc">null</span><span class="o">?</span><span class="kc">null</span><span class="o">:</span><span class="nx">____Class0</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span><span class="nx">Hello</span><span class="p">.</span><span class="nx">prototype</span><span class="o">=</span><span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">____SuperProtoOf____Class0</span><span class="p">);</span><span class="nx">Hello</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span><span class="o">=</span><span class="nx">Hello</span><span class="p">;</span><span class="nx">Hello</span><span class="p">.</span><span class="nx">__superConstructor__</span><span class="o">=</span><span class="nx">____Class0</span><span class="p">;</span><span class="kd">function</span> <span class="nx">Hello</span><span class="p">(){</span><span class="s2">&quot;use strict&quot;</span><span class="p">;</span><span class="k">if</span><span class="p">(</span><span class="nx">____Class0</span><span class="o">!==</span><span class="kc">null</span><span class="p">){</span><span class="nx">____Class0</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="nx">arguments</span><span class="p">);}}</span>
+</span><span class='line'>  <span class="nx">Hello</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">foo</span><span class="o">=</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>  <span class="nx">Hello</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">render</span><span class="o">=</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Hello</span><span class="p">[</span><span class="s2">&quot;static&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">bar</span><span class="o">:</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>JSXによる変換でharmony optionを有効にすることでspread operatorを使えるようになりました</h2>
+
+<p>JSXの中ではこれまでもspread attributesとしてサポートしていましたが、JSのコード内でも使えるようになりました。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="p">...</span><span class="nx">other</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>JSXのparseに変更があります (Breaking Change)</h2>
+
+<p>elementの内側に<code>&gt;</code> or <code>}</code> を使った時に以前は文字列として扱われましたがparseエラーになるようになりました。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="p">}</span> <span class="nx">or</span> <span class="o">&gt;&lt;</span><span class="sr">/div&gt;; /</span><span class="o">/</span> <span class="nx">parse</span> <span class="nx">error</span><span class="o">!</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>v0.14に向けて</h2>
+
+<p>今回の変更を踏まえてReact v0.14では静的な要素においていくつかの最適化が可能になります。
+これらの最適化は以前はtemplate-baseなフレームワークでのみ可能でしたが、ReactでもJSXと<code>React.createElement/Factory</code>のどちらでも可能になります。</p>
+
+<p>詳細は下記のissueにあります。
+まだ議論もされてないので変わる可能性は大きいと思いますが。</p>
+
+<h3>Reuse Constant Value Types</h3>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/3226">https://github.com/facebook/react/issues/3226</a></li>
+</ul>
+
+
+<p>これは静的なelementに変更できないものとして扱うことでdiffのコストを減らすというものです。</p>
+
+<p>例えばこんな感じにするとか</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">function</span> <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>   <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span> <span class="o">/&gt;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="err">↓</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span> <span class="o">/&gt;</span><span class="p">;</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>   <span class="k">return</span> <span class="nx">foo</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Tagging ReactElements]</h3>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/3227">https://github.com/facebook/react/issues/3227</a></li>
+</ul>
+
+
+<p>これはReactElementにtag付けをしてそれを使ってdiffアルゴリズムを最適化するというもののようです。</p>
+
+<h3>Inline ReactElements</h3>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/3228">https://github.com/facebook/react/issues/3228</a></li>
+</ul>
+
+
+<p>これはproductionビルドのときに、React.createElementではなくてinline objectに変換することでReact.createElementのコストを削減するというものです。</p>
+
+<p>こんな感じ</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">bar</span><span class="p">}</span><span class="o">&lt;</span><span class="nx">Baz</span> <span class="nx">key</span><span class="o">=</span><span class="s2">&quot;baz&quot;</span> <span class="o">/&gt;&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'><span class="err">↓</span>
+</span><span class='line'><span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span> <span class="nx">className</span><span class="o">:</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="nx">children</span><span class="o">:</span>
+</span><span class='line'>  <span class="p">[</span> <span class="nx">bar</span><span class="p">,</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">Baz</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span> <span class="p">},</span> <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="nx">ref</span><span class="o">:</span> <span class="kc">null</span> <span class="p">}</span> <span class="p">]</span>
+</span><span class='line'><span class="p">},</span> <span class="nx">key</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">ref</span><span class="o">:</span> <span class="kc">null</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こうするとReact.createElementの時に行っているPropTypesやkeyに対するvalidationが出来ないので、developmentビルドの時には適用しないことを想定しているようです。</p>
+
+<hr />
+
+<p>というわけで、React v0.13をダラダラと書いてみました。</p>
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <hr>
+    
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
+
+
+
+  <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://blog.koba04.com/post/2015/03/02/react-js-v013-changes/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.koba04.com/post/2015/03/02/react-js-v013-changes/" data-via="koba04" data-counturl="http://blog.koba04.com/post/2015/03/02/react-js-v013-changes/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-href="http://blog.koba04.com/post/2015/03/02/react-js-v013-changes/" data-send="true" data-width="100" data-show-faces="false"></div>
+  
+</div>
+
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/post/2015/01/28/published-react-v0.13.0-beta1/" title="Previous Post: React v0.13.0 Beta1でclassでComponentが作れるようになった">&laquo; React v0.13.0 Beta1でclassでComponentが作れるようになった</a>
+          
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2015 - koba04 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'koba04log';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.koba04.com/post/2015/03/02/react-js-v013-changes/';
+        var disqus_url = 'http://blog.koba04.com/post/2015/03/02/react-js-v013-changes/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=346463362115366&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
