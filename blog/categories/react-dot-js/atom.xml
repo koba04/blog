@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-03-05T09:37:23+09:00</updated>
+  <updated>2015-03-05T10:07:24+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -114,10 +114,10 @@ var element2 = React.addons.cloneWithProps(element1, { extra: 'prop' });
 <p><code>statics</code>に定義したメソッドをonClickなどにバインドした時にcomponentをバインドしなくなりました。</p>
 
 <p>```js
-class Hello extends React.Component {
+var Hello = React.createClass({
   statics: {</p>
 
-<pre><code>foo() {
+<pre><code>foo () {
   this.bar();  // v0.13では呼べない
 },
 bar() {
@@ -125,14 +125,14 @@ bar() {
 }
 </code></pre>
 
-<p>  }
+<p>  },
   render() {</p>
 
-<pre><code>return &lt;div&gt;hello &lt;button onClick={Hello.foo}&gt;click&lt;/button&gt;;
+<pre><code>return &lt;div&gt;hello &lt;button onClick={Hello.foo}&gt;click&lt;/button&gt;&lt;/div&gt;;
 </code></pre>
 
 <p>  }
-}
+});
 ```</p>
 
 <h2>refを設定する処理の順番が変わりました (Breaking Change)</h2>
