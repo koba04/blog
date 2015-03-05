@@ -697,9 +697,11 @@ decompile関数ではDOMは削除されません。
 
 <p><img src="/images/vue-object-prototype.png" title="'Vue object prototype'" ></p>
 
-<h3>async optionをtrueにすることで即時にDOMが更新することが出来ます</h3>
+<h3>async optionをfalseにすることで即時にDOMが更新することが出来ます</h3>
 
-<p>通常は、batch方式によってDOMの更新はまとめて行われるのですが、このオプションをtrueにすることで即時にDOMに反映することが出来るようになります。</p>
+<p>通常は、batch方式によってDOMの更新はまとめて行われるのですが、このオプションをfalseにすることで即時にDOMに反映することが出来るようになります。</p>
+
+<p><strong>当初は「trueにすると」と書いていたので修正しました(2015/02/26)</strong></p>
 
 <h2>Transition API change</h2>
 
