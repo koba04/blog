@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "React.js v0.13 changes"
-date: 2015-03-02 23:23:28 +0900
+date: 2015-03-05 09:23:28 +0900
 comments: true
 categories: react.js 
 ---
@@ -13,6 +13,21 @@ React.js v0.13のRC2がリリースされたのでまとめてみます。
 * http://facebook.github.io/react/blog/2015/02/24/streamlining-react-elements.html
 
 今回のバージョンで何か大きく変更があるというよりもv0.14でやりたいことに向けての布石が多いように感じます。
+
+試すときはこの辺りから。
+
+```
+npm install react@0.13.0-rc2 
+npm install react-tools@0.13.0-rc2 
+```
+
+```
+http://fb.me/react-0.13.0-rc2.js
+http://fb.me/react-0.13.0-rc2.min.js
+http://fb.me/react-with-addons-0.13.0-rc2.js
+http://fb.me/react-with-addons-0.13.0-rc2.min.js
+http://fb.me/JSXTransformer-0.13.0-rc2.js
+```
 
 <!-- more -->
 
