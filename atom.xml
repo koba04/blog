@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-03-05T10:13:05+09:00</updated>
+  <updated>2015-03-05T10:18:27+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -758,7 +758,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>Tagging ReactElements]</h3>
+<h3>Tagging ReactElements</h3>
 
 <ul>
 <li><a href="https://github.com/facebook/react/issues/3227">https://github.com/facebook/react/issues/3227</a></li>
