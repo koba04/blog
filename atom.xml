@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-03-05T10:07:24+09:00</updated>
+  <updated>2015-03-05T10:13:05+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -203,10 +203,10 @@
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">Hello</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">Hello</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
 </span><span class='line'>  <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
 </span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">refs</span><span class="p">.</span><span class="nx">refDiv</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="p">},</span>
 </span><span class='line'>  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
 </span><span class='line'>    <span class="k">return</span> <span class="p">(</span>
 </span><span class='line'>      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
@@ -215,16 +215,16 @@
 </span><span class='line'>      <span class="o">&lt;</span><span class="err">/div&gt;</span>
 </span><span class='line'>    <span class="p">);</span>
 </span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
 </span><span class='line'>
-</span><span class='line'><span class="kr">class</span> <span class="nx">Child</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">Child</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
 </span><span class='line'>  <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
 </span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">foo</span><span class="p">();</span> <span class="c1">// v0.13 &quot;undefined&quot;</span>
-</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="p">},</span>
 </span><span class='line'>  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
 </span><span class='line'>    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">child</span><span class="o">&lt;</span><span class="err">/div&gt;;</span>
 </span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -272,7 +272,7 @@
 </span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">)</span> <span class="c1">// 0</span>
 </span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">count</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">})</span>
 </span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">count</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">})</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">)</span> <span class="c1">// v0.13 is 2 (v0.12 is 0)</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">count</span><span class="p">)</span> <span class="c1">// v0.13 is 0 (v0.12 is 2)</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
