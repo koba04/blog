@@ -111,10 +111,10 @@ var Hello = React.createClass({
 * `componentDidMount`は子componentから順番に呼ばれるので下記の`refDiv`はChildの`componentDidMount`の時点では設定されていません。
   
 ```js
-class Hello extends React.Component {
+var Hello = React.createClass({
   foo() {
     console.log(this.refs.refDiv);
-  }
+  },
   render() {
     return (
       <div>
@@ -123,16 +123,16 @@ class Hello extends React.Component {
       </div>
     );
   }
-}
+});
 
-class Child extends React.Component {
+var Child = React.createClass({
   componentDidMount() {
     this.props.foo(); // v0.13 "undefined"
-  }
+  },
   render() {
     return <div>child</div>;
   }
-}
+});
 ```
 
 ## `this.setState()`が第1引数に関数を受け取れるようになりました
@@ -165,7 +165,7 @@ componentDidMount() {
   console.log(this.state.count) // 0
   this.setState({ count: this.state.count + 1 })
   this.setState({ count: this.state.count + 1 })
-  console.log(this.state.count) // v0.13 is 2 (v0.12 is 0)
+  console.log(this.state.count) // v0.13 is 0 (v0.12 is 2)
 }
 ```
 
