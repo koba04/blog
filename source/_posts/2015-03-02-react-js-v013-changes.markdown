@@ -216,7 +216,7 @@ class Foo {
 
 ### context
 
-これはdocument化されてないfeatureですが、"owner"から子に渡すことが出来る"context"というものがあります。
+これはdocument化されてないfeatureですが、"owner"から子や孫に渡すことが出来る"context"というものがあります。
 
 簡単にコードを書くとこんな感じです。見てもらえればどんなfeatureなのかわかるかと思います。
 
@@ -264,6 +264,9 @@ var GrandChild = React.createClass({
 
 React.render(<Parent />, document.body);
 ```
+
+`react-router`ではparentベースのcontextに依存していたので対応が大変そうでした。
+
 
 ### 問題点
 
@@ -453,10 +456,53 @@ render() {
 これらの最適化は以前はtemplate-baseなフレームワークでのみ可能でしたが、ReactでもJSXと`React.createElement/Factory`のどちらでも可能になります。
 
 詳細は下記のissueにあります。
+まだ議論もされてないので変わる可能性は大きいと思いますが。
 
-- [Reuse Constant Value Types](https://github.com/facebook/react/issues/3226)
-- [Tagging ReactElements](https://github.com/facebook/react/issues/3227)
-- [Inline ReactElements](https://github.com/facebook/react/issues/3228)
+### Reuse Constant Value Types
+
+* https://github.com/facebook/react/issues/3226
+
+これは静的なelementに変更できないものとして扱うことでdiffのコストを減らすというものです。
+
+例えばこんな感じにするとか
+
+```js
+function render() {
+   return <div className="foo" />;
+}
+↓
+var foo = <div className="foo" />;
+function render() {
+   return foo;
+}
+```
+
+
+### Tagging ReactElements]
+
+* https://github.com/facebook/react/issues/3227
+
+これはReactElementにtag付けをしてそれを使ってdiffアルゴリズムを最適化するというもののようです。
+
+
+### Inline ReactElements
+
+* https://github.com/facebook/react/issues/3228
+
+これはproductionビルドのときに、React.createElementではなくてinline objectに変換することでReact.createElementのコストを削減するというものです。
+
+こんな感じ
+
+```js
+<div className="foo">{bar}<Baz key="baz" /></div>
+↓
+{ type: 'div', props: { className: 'foo', children:
+  [ bar, { type: Baz, props: { }, key: 'baz', ref: null } ]
+}, key: null, ref: null }
+```
+
+こうするとReact.createElementの時に行っているPropTypesやkeyに対するvalidationが出来ないので、developmentビルドの時には適用しないことを想定しているようです。
+
 
 ---------
 
