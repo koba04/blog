@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-03-05T09:32:21+09:00</updated>
+  <updated>2015-03-05T09:37:23+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[React.js v0.13 changes]]></title>
-    <link href="http://blog.koba04.com/post/2015/03/02/react-js-v013-changes/"/>
-    <updated>2015-03-02T23:23:28+09:00</updated>
-    <id>http://blog.koba04.com/post/2015/03/02/react-js-v013-changes</id>
+    <link href="http://blog.koba04.com/post/2015/03/05/react-js-v013-changes/"/>
+    <updated>2015-03-05T09:23:28+09:00</updated>
+    <id>http://blog.koba04.com/post/2015/03/05/react-js-v013-changes</id>
     <content type="html"><![CDATA[<p>React.js v0.13のRC2がリリースされたのでまとめてみます。</p>
 
 <ul>
@@ -28,6 +28,30 @@
 
 
 <p>今回のバージョンで何か大きく変更があるというよりもv0.14でやりたいことに向けての布石が多いように感じます。</p>
+
+<p>試すときはこの辺りから。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install react@0.13.0-rc2 
+</span><span class='line'>npm install react-tools@0.13.0-rc2 </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http://fb.me/react-0.13.0-rc2.js
+</span><span class='line'>http://fb.me/react-0.13.0-rc2.min.js
+</span><span class='line'>http://fb.me/react-with-addons-0.13.0-rc2.js
+</span><span class='line'>http://fb.me/react-with-addons-0.13.0-rc2.min.js
+</span><span class='line'>http://fb.me/JSXTransformer-0.13.0-rc2.js</span></code></pre></td></tr></table></div></figure>
+
+
+
 
 <!-- more -->
 
