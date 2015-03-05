@@ -87,19 +87,19 @@ var element2 = React.addons.cloneWithProps(element1, { extra: 'prop' });
 `statics`に定義したメソッドをonClickなどにバインドした時にcomponentをバインドしなくなりました。
 
 ```js
-class Hello extends React.Component {
+var Hello = React.createClass({
   statics: {
-    foo() {
+    foo () {
       this.bar();  // v0.13では呼べない
     },
     bar() {
       console.log("bar");
     }
-  }
+  },
   render() {
-    return <div>hello <button onClick={Hello.foo}>click</button>;
+    return <div>hello <button onClick={Hello.foo}>click</button></div>;
   }
-}
+});
 ```
 
 
