@@ -54,9 +54,9 @@ npm start
   "scripts": {
     "build": "NODE_ENV=production browserify index.js -t babelify | uglifyjs > public/bundle.js",
     "watch": "watchify -d index.js -t babelify -o public/bundle.js -v",
-    "browser": "browser-sync start --server public --files public/**/*",
+    "server": "browser-sync start --server public --files public/**/*",
     "test": "karma start",
-    "start": "npm run watch & npm run browser & npm test"
+    "start": "npm run watch & npm run server & npm test"
   },
 
   "dependencies": {
@@ -89,7 +89,7 @@ https://github.com/koba04/minimum-spa-boilerplate/blob/master/package.json
 watchifyによってファイルが変更されたら自動的にbrowserifyのビルドが走るようになっています。
 watchifyはキャッシュするので二回目以降のビルドが高速化されるのもポイントです。
 
-* `npm run browser`
+* `npm run server`
 
 BrowserSyncによって`public`をrootにしたserverを立ちあげつつ、`public`以下のファイルを監視してlivereloadするようになっています。
 
@@ -210,3 +210,4 @@ npm scriptでbrowserifyとwatchifyの引数に`babelify`を指定しています
 ------
 
 そこそこカジュアルな感じになっているかなぁと思います。
+
