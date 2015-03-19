@@ -31,6 +31,21 @@ npm start
 
 ## 概要
 
+### tree
+
+```
+➜  tree -L 1
+.
+├── README.md
+├── index.js         // エントリーポイント
+├── karma.conf.js    // karmaの設定
+├── lib              // ソース
+├── node_modules
+├── package.json     // 設定はこの中
+├── public           // document root
+└── test             // テスト
+```
+
 ### package.json
 
 基本的には`npm init`で作ったものに色々インストールしてnpm scriptの設定をしているだけです。
