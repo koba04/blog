@@ -4,7 +4,7 @@
   <title><![CDATA[Category: npm | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/npm/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-03-19T19:08:38+09:00</updated>
+  <updated>2015-03-20T00:22:02+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -45,6 +45,21 @@ npm start
 
 <h2>概要</h2>
 
+<h3>tree</h3>
+
+<p><code>
+➜  tree -L 1
+.
+├── README.md
+├── index.js         // エントリーポイント
+├── karma.conf.js    // karmaの設定
+├── lib              // ソース
+├── node_modules
+├── package.json     // 設定はこの中
+├── public           // document root
+└── test             // テスト
+</code></p>
+
 <h3>package.json</h3>
 
 <p>基本的には<code>npm init</code>で作ったものに色々インストールしてnpm scriptの設定をしているだけです。</p>
@@ -54,9 +69,9 @@ npm start
 
 <pre><code>"build": "NODE_ENV=production browserify index.js -t babelify | uglifyjs &gt; public/bundle.js",
 "watch": "watchify -d index.js -t babelify -o public/bundle.js -v",
-"browser": "browser-sync start --server public --files public/**/*",
+"server": "browser-sync start --server public --files public/**/*",
 "test": "karma start",
-"start": "npm run watch &amp; npm run browser &amp; npm test"
+"start": "npm run watch &amp; npm run server &amp; npm test"
 </code></pre>
 
 <p>  },</p>
@@ -104,7 +119,7 @@ npm start
 watchifyはキャッシュするので二回目以降のビルドが高速化されるのもポイントです。</p>
 
 <ul>
-<li><code>npm run browser</code></li>
+<li><code>npm run server</code></li>
 </ul>
 
 

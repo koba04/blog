@@ -2,106 +2,106 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://blog.koba04.com/post/2014/03/02/blog-renewal/</loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-08-30T01:42:45+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version/</loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-08-30T01:42:45+09:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.koba04.com/post/2014/03/23/browserify-in-backbone-marionette-project/
         </loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-08-30T01:42:45+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/03/23/marionette-behaivors/</loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-08-30T01:42:45+09:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browserify/
         </loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-08-30T01:42:45+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/05/01/book-review-of-webapp-mook/</loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-08-30T01:42:45+09:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.koba04.com/post/2014/06/17/dont-use-backbone-model-tojson-for-render/
         </loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-08-30T01:42:45+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/06/19/release-marionette-2_0/</loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-08-30T01:42:45+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/06/23/karma-for-javascript-test-runner/</loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-08-30T01:42:45+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/06/29/release-karma-say-reporter/</loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-08-30T01:42:45+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/07/12/talked-at-ten1club/</loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-08-30T01:42:45+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/07/25/book-review-of-the-launch-pad/</loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-08-30T01:42:45+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/08/30/hold-yapc-asia-2014-eve/</loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-08-30T02:06:23+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/10/07/vue-js-v011-changes/</loc>
-        <lastmod>2015-03-04T09:34:21+09:00</lastmod>
+        <lastmod>2015-02-26T21:25:34+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/10/07/component-by-vueify/</loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-10-07T16:24:59+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/11/08/joining-tolot/</loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-11-09T16:59:10+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2014/12/31/looking-back-2014/</loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-12-31T23:53:18+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2015/01/13/a-combination-of-reactjs-and-6to5/</loc>
-        <lastmod>2015-02-05T11:07:51+09:00</lastmod>
+        <lastmod>2015-02-26T21:21:32+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2015/01/28/published-react-v0.13.0-beta1/</loc>
-        <lastmod>2015-01-28T19:19:27+09:00</lastmod>
+        <lastmod>2015-02-26T21:21:32+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/post/2015/03/05/react-js-v013-changes/</loc>
-        <lastmod>2015-03-05T10:37:18+09:00</lastmod>
+        <lastmod>2015-03-20T00:13:40+09:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.koba04.com/post/2015/03/19/setting-up-minimum-single-page-application/
         </loc>
-        <lastmod>2015-03-19T19:08:38+09:00</lastmod>
+        <lastmod>2015-03-20T00:14:31+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/blog/archives/</loc>
-        <lastmod>2015-03-19T19:08:38+09:00</lastmod>
+        <lastmod>2015-03-20T00:14:31+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/</loc>
-        <lastmod>2015-03-19T19:08:38+09:00</lastmod>
+        <lastmod>2015-03-20T00:14:31+09:00</lastmod>
     </url>
     <url>
         <loc>http://blog.koba04.com/robots.txt</loc>
-        <lastmod>2015-01-13T14:36:18+09:00</lastmod>
+        <lastmod>2014-08-30T01:42:45+09:00</lastmod>
     </url>
 </urlset>

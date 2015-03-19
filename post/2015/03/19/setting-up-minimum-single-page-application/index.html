@@ -147,6 +147,30 @@
 
 <h2>概要</h2>
 
+<h3>tree</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>➜  tree -L 1
+</span><span class='line'>.
+</span><span class='line'>├── README.md
+</span><span class='line'>├── index.js         // エントリーポイント
+</span><span class='line'>├── karma.conf.js    // karmaの設定
+</span><span class='line'>├── lib              // ソース
+</span><span class='line'>├── node_modules
+</span><span class='line'>├── package.json     // 設定はこの中
+</span><span class='line'>├── public           // document root
+</span><span class='line'>└── test             // テスト</span></code></pre></td></tr></table></div></figure>
+
+
 <h3>package.json</h3>
 
 <p>基本的には<code>npm init</code>で作ったものに色々インストールしてnpm scriptの設定をしているだけです。</p>
@@ -180,9 +204,9 @@
 </pre></td><td class='code'><pre><code class='json'><span class='line'>  <span class="s2">&quot;scripts&quot;</span><span class="err">:</span> <span class="p">{</span>
 </span><span class='line'>    <span class="nt">&quot;build&quot;</span><span class="p">:</span> <span class="s2">&quot;NODE_ENV=production browserify index.js -t babelify | uglifyjs &gt; public/bundle.js&quot;</span><span class="p">,</span>
 </span><span class='line'>    <span class="nt">&quot;watch&quot;</span><span class="p">:</span> <span class="s2">&quot;watchify -d index.js -t babelify -o public/bundle.js -v&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;browser&quot;</span><span class="p">:</span> <span class="s2">&quot;browser-sync start --server public --files public/**/*&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;server&quot;</span><span class="p">:</span> <span class="s2">&quot;browser-sync start --server public --files public/**/*&quot;</span><span class="p">,</span>
 </span><span class='line'>    <span class="nt">&quot;test&quot;</span><span class="p">:</span> <span class="s2">&quot;karma start&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;npm run watch &amp; npm run browser &amp; npm test&quot;</span>
+</span><span class='line'>    <span class="nt">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;npm run watch &amp; npm run server &amp; npm test&quot;</span>
 </span><span class='line'>  <span class="p">}</span><span class="err">,</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="s2">&quot;dependencies&quot;</span><span class="err">:</span> <span class="p">{</span>
@@ -224,7 +248,7 @@
 watchifyはキャッシュするので二回目以降のビルドが高速化されるのもポイントです。</p>
 
 <ul>
-<li><code>npm run browser</code></li>
+<li><code>npm run server</code></li>
 </ul>
 
 
