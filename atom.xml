@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-04-25T23:22:57+09:00</updated>
+  <updated>2015-04-25T23:31:33+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -32,12 +32,17 @@
 <script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
+
+
+<!-- more -->
+
+
 <p>ある程度予想はしていたのですが、Talkが10分と短かったりで押して慌ただしい感じになってしまったのは申し訳なかったなぁと思ってます。
 ただ、色んなテーマのTalkを一度に聞くことが出来たのはよかったかなと思っています。</p>
 
 <h2>Talks</h2>
 
-<p>各Talkの資料についてはconpassのページに追加しておいたのでそちらを見て頂くとして簡単な一言感想。</p>
+<p>各Talkの資料についてはconpassのページに追加しておいたのでそちらを見て頂くとして簡単な一言感想です。</p>
 
 <p><a href="http://reactjs-meetup.connpass.com/event/11232/presentation/">http://reactjs-meetup.connpass.com/event/11232/presentation/</a></p>
 
