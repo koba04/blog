@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "React.js meetup #1を開催しました"
+title: "React.js meetup #1 を開催しました"
 date: 2015-04-25 17:11:35 +0900
 comments: true
 categories: react.js
