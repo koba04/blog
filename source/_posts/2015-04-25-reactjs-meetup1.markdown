@@ -25,7 +25,7 @@ http://reactjs-meetup.connpass.com/event/11232/
 
 ## Talks
 
-各Talkの資料についてはconpassのページに追加しておいたのでそちらを見て頂くとして簡単な一言感想。
+各Talkの資料についてはconpassのページに追加しておいたのでそちらを見て頂くとして簡単な一言感想です。
 
 http://reactjs-meetup.connpass.com/event/11232/presentation/
 
