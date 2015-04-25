@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-03-20T00:22:02+09:00</updated>
+  <updated>2015-04-25T23:22:57+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,110 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js meetup #1を開催しました]]></title>
+    <link href="http://blog.koba04.com/post/2015/04/25/reactjs-meetup1/"/>
+    <updated>2015-04-25T17:11:35+09:00</updated>
+    <id>http://blog.koba04.com/post/2015/04/25/reactjs-meetup1</id>
+    <content type="html"><![CDATA[<p><a href="http://reactjs-meetup.connpass.com/event/11232/">http://reactjs-meetup.connpass.com/event/11232/</a></p>
+
+<p>一人Advent Calendar書いた時にやりたいと言っていたのでReact.js meetup #1 を<a href="http://twitter.com/yosuke_furukawa">@yosuke_furukawa</a>さんと開催しました。</p>
+
+<p> DeNAさんが会場から懇親会のお酒や寿司、当日の運営まで全てやってくださったので自分はほとんど何もしてないですが..。
+ 本当にありがとうございました！！</p>
+
+<p>やりたいって言ってこの規模の勉強会を開催させてもらえるの本当にスゴいなぁと思います&hellip;。</p>
+
+<p> <blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/hashtag/reactjs_meetup?src=hash">#reactjs_meetup</a> <a href="https://twitter.com/hashtag/react_sushi?src=hash">#react_sushi</a> です <a href="http://t.co/GdpyF7Paqk">pic.twitter.com/GdpyF7Paqk</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/591580062702383107">April 24, 2015</a></blockquote></p>
+
+<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>ある程度予想はしていたのですが、Talkが10分と短かったりで押して慌ただしい感じになってしまったのは申し訳なかったなぁと思ってます。
+ただ、色んなテーマのTalkを一度に聞くことが出来たのはよかったかなと思っています。</p>
+
+<h2>Talks</h2>
+
+<p>各Talkの資料についてはconpassのページに追加しておいたのでそちらを見て頂くとして簡単な一言感想。</p>
+
+<p><a href="http://reactjs-meetup.connpass.com/event/11232/presentation/">http://reactjs-meetup.connpass.com/event/11232/presentation/</a></p>
+
+<h3><a href="https://twitter.com/naoya_ito">@naoya_ito</a> &ndash; React概論</h3>
+
+<p>Reactの特徴をわかりやすく説明していてReact.js触ってない人にとってもわかりやすい説明だったんじゃないかなと思います。</p>
+
+<h3><a href="https://twitter.com/hokaccha">@hokaccha</a> &ndash; react-rails</h3>
+
+<p>Railsと一緒に使いたい人にとってはかなり有益な情報だったんじゃないかなと思います。Turbolinksどうするのとか。</p>
+
+<h3><a href="https://twitter.com/azu_re">@azu_re</a> &ndash; 10分で実装するFlux</h3>
+
+<p>Fluxを最小限の構成にしてデータの流れを一方向にするということがどういうことなのか説明していてわかりやすかったです。console.traceを使っての説明もなるほどなぁと思いました。</p>
+
+<h3><a href="http://twitter.com/yosuke_furukawa">@yosuke_furukawa</a> &ndash; mercury/mithril.js</h3>
+
+<p>React.jsのVIRTUAL DOMのdiffアルゴリズムの説明からmercuryやmithril.jsといった他のライブラリがどうやってReact.jsより高速化しているのかという説明で面白かったです。</p>
+
+<h3><a href="https://twitter.com/mizchi">@mizchi</a> &ndash; React/FluxでSPAを開発してぶちあたった問題</h3>
+
+<p>KobitoをReact.js + Fluxで作った時の問題になった点と解決方法について説明していて、ないものは作る姿勢がスゴイなぁ思いました。</p>
+
+<h3><a href="https://twitter.com/sugyan">@sugyan</a> &ndash; React.jsと、 Railsとかアイドルとか (LT)</h3>
+
+<p>React.jsとRailsでReactRouter使ったり色々組み合わてみた話でツラいと言いながらちゃんと作ってしまうところがスゴイなぁと思いました。</p>
+
+<h3><a href="https://twitter.com/making">@making</a> &ndash; Java + React.jsでSever Side Rendering (LT)</h3>
+
+<p>SPAで作ったブログが検索に引っかからないからReact.js + Javaでserver-side renderingするようにしたという話で、最後のオチも含めて面白かったです。</p>
+
+<h3><a href="https://twitter.com/tyshgc">@tyshgc</a> &ndash; Rapid React Prototyping : React.jsでUIデザインプロトタイプを作る (LT)</h3>
+
+<p>React.jsでプロトタイプを作る話で、Photoshopのレイヤー情報からReact.jsのComponentを生成するようにしていてスゴかったです。</p>
+
+<h3><a href="https://twitter.com/teppeis">@teppeis</a> &ndash; Flowtype (LT)</h3>
+
+<p>懇親会の時にFlowtypeについてのLTをしてくれて、デモもあったりFacebookが開発中のElectron(旧:AtomShell)ベースのNuclideの話まであって面白かったです。</p>
+
+<h2>LiveCodingやった</h2>
+
+<p>ぼっちでも懇親会に参加して欲しかったので、ぼーっと見ていたり会話のネタになるかなと思ってLiveCodeingをやってみました。</p>
+
+<p>最近だとJSの環境を作るにも何を使えばいいのかわからないという声も聞くので、0から簡単なアプリを作るところまでの流れを伝えられればと思い、HackerNewsのAPIを使ってTopStoryの一覧を表示するものを作ってみました。</p>
+
+<p>あと、3分間クッキングみたいに事前に色々用意しておくのもライブ感がないなぁと思ったので<code>mkdir</code>から全部その場で作ることにしました。</p>
+
+<p><a href="https://github.com/koba04/react-hacker-news-stories/tree/meetup">https://github.com/koba04/react-hacker-news-stories/tree/meetup</a></p>
+
+<p>環境構築は、browserifyとwatchifyとbabelifyで変換を行ってlivereloadするためのbrowser-syncを使いました。</p>
+
+<p>LiveCodingの流れとしては</p>
+
+<ul>
+<li>ディレクトリ作ったり<code>npm init</code>したり<code>npm install</code>したりして環境を作る</li>
+<li>Hello Worldしてみる(Hellって書いたけど&hellip;)</li>
+<li>各Componentを作成する</li>
+<li>HackerNewsのAPI叩いて一覧が出るようにする</li>
+<li><code>React.addons.Perf</code>を使ってDOMが無駄に更新されていることとkeyが指定されていないwarningが出ていることを確認</li>
+<li>keyを指定することで無駄のDOM操作がなくなることを確認</li>
+<li>diffの時間を減らすために<code>Immutable.js</code>を使いつつ<code>shouldComponentUpdate</code>を実装</li>
+</ul>
+
+
+<p>という感じで行いました。</p>
+
+<p>ライブコーディングが初めてで緊張していたのとお酒が入っていたのもあって(言い訳)、いつもと同じ感覚でコーディング出来なくてtypoしまくってしまい、「これ終わらないかも&hellip;」とかなり駆け足になってしまったのは反省です&hellip;。
+(事前に練習はしたんですが&hellip;)</p>
+
+<p>でも、とりあえず最後まで出来てよかった&hellip;。</p>
+
+<h2>まとめ</h2>
+
+<p>イベントの管理者側でやるのは初めてだったので色々至らない点があったかもしれませんが、準備してくださったDeNAの方々、発表者の方々、参加者の皆様、本当にありがとうございました！！</p>
+
+<p>感想とかブログに書いてもらえると嬉しいです！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Setting up minimum single page application]]></title>
@@ -5023,191 +5127,6 @@ nyanやtapやmocha形式のような出力形式のカスタマイズ以外に�
 <li><a href="http://aeflash.com/2014-03/a-year-with-browserify.html">http://aeflash.com/2014-03/a-year-with-browserify.html</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[npmやbowerライブラリのバージョン管理]]></title>
-    <link href="http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version/"/>
-    <updated>2014-03-03T23:11:37+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/03/03/npm-and-bower-semantic-version</id>
-    <content type="html"><![CDATA[<h2>npmとbowerライブラリのバージョン管理</h2>
-
-<p>npmやbowerのライブラリをプロジェクトに導入するときは、&#8221;npm install &mdash;save xxx&#8221;や&#8221;bower install &mdash;save xxx&#8221;のような形で指定してインストールとpackage(bower).jsonへの記録をしたりします。</p>
-
-<p>その場合、package(bower).jsonには&#8221;xxx&#8221;: &ldquo;~x.y.z&#8221;という形式で記録されます。</p>
-
-<p>&ldquo;~x.y.z&#8221;という表記は、&rdquo;~1.2.3&#8221;だとすると1.2.3 &lt;= x.x.x &lt; 1.3.0 の間での最新バージョンがインストールされます。</p>
-
-<!-- more -->
-
-
-<ul>
-<li><a href="https://www.npmjs.org/doc/misc/semver.html">https://www.npmjs.org/doc/misc/semver.html</a></li>
-</ul>
-
-
-<p>なので&#8221;~&ldquo;で指定していると、同じpackage(bower).jsonでもインストールするタイミングによって微妙に異なるバージョンがインストールされることになります。</p>
-
-<p><del>npmやbowerにはGemのGemfile.lockやCartonのcpanfile.snapshotのように依存も含めたバージョンを固定するような仕組みはないと思います。</del></p>
-
-<p><del>かと言ってnode_modulesとかbower_componentsをrepositoryの中にも入れたくないので今のプロジェクトでは&#8221;x.y.z&#8221;とバージョンを固定しています。</del></p>
-
-<p><del>この辺りはみんなどうしてるんですかね？</del></p>
-
-<p><strong>[追記:2013-03-04] yosuke_furukawaさんに教えていただきました!ありがとうございます！</strong></p>
-
-<blockquote><p>npm shrinkwrapってコマンドがあって、それを使うとライブラリのバージョンを固定できる。bower shrinkwrapは実装待ち <a href="https://github.com/bower/bower/issues/505">https://github.com/bower/bower/issues/505</a></p></blockquote>
-
-<p>というわけでnpmはnpm-shrinkwrapを使って管理することにしました yosuke_furukawa++</p>
-
-<h2>npm-shrinkwrap</h2>
-
-<p><a href="https://www.npmjs.org/doc/cli/npm-shrinkwrap.html">https://www.npmjs.org/doc/cli/npm-shrinkwrap.html</a></p>
-
-<p>node_modulesにライブラリがインストールされている状態でnpm shrinkwrapするとnpm-shrinkwrap.jsonという依存しているライブラリのバージョンが記載されたファイルがつくられます。</p>
-
-<p>devDependenciesも含めたい場合は、&mdash;devオプションを付ける必要があります</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>% npm install
-</span><span class='line'>:
-</span><span class='line'>% npm shrinkwrap --dev
-</span><span class='line'>wrote npm-shrinkwrap.json
-</span><span class='line'>
-</span><span class='line'>% cat npm-shrinkwrap.json
-</span><span class='line'>{
-</span><span class='line'>  "name": "myapp",
-</span><span class='line'>  "version": "0.0.1",
-</span><span class='line'>  "dependencies": {
-</span><span class='line'>    "grunt-contrib-concat": {
-</span><span class='line'>      "version": "0.3.0",
-</span><span class='line'>      "from": "grunt-contrib-concat@"
-</span><span class='line'>    },
-</span><span class='line'>    "grunt-remove-logging": {
-</span><span class='line'>      "version": "0.1.1",
-</span><span class='line'>      "from": "grunt-remove-logging@",
-</span><span class='line'>      "resolved": "https://registry.npmjs.org/grunt-remove-logging/-/grunt-remove-logging-0.1.1.tgz"
-</span><span class='line'>    },
-</span><span class='line'>    "grunt-contrib-coffee": {
-</span><span class='line'>      "version": "0.7.0",
-</span><span class='line'>      "from": "grunt-contrib-coffee@",
-</span><span class='line'>      "dependencies": {
-</span><span class='line'>        "coffee-script": {
-</span><span class='line'>          "version": "1.6.3",
-</span><span class='line'>          "from": "coffee-script@~1.6.2"
-</span><span class='line'>        }
-</span><span class='line'>      }
-</span><span class='line'>    },
-</span><span class='line'>    "grunt-contrib-compass": {
-</span><span class='line'>      "version": "0.6.0",
-</span><span class='line'>      "from": "grunt-contrib-compass@",
-</span><span class='line'>      "resolved": "https://registry.npmjs.org/grunt-contrib-compass/-/grunt-contrib-compass-0.6.0.tgz",
-</span><span class='line'>      "dependencies": {
-</span><span class='line'>        "tmp": {
-</span><span class='line'>          "version": "0.0.21",
-</span><span class='line'>          "from": "tmp@0.0.21"
-</span><span class='line'>        },
-</span><span class='line'>        "dargs": {
-</span><span class='line'>          "version": "0.1.0",
-</span><span class='line'>          "from": "dargs@~0.1.0"
-</span><span class='line'>        },
-</span><span class='line'>        "async": {
-</span><span class='line'>          "version": "0.2.9",
-</span><span class='line'>          "from": "async@~0.2.0"
-</span><span class='line'>        }
-</span><span class='line'>      }
-</span><span class='line'>    },
-</span><span class='line'>:</span></code></pre></td></tr></table></div></figure>
-
-
-<p>npm-shrinkwrap.jsonがある状態でnpm installするとnpm-shrinkwrap.json記載されてるバージョンでインストールされます。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>% npm install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>package.jsonで&#8221;x.y.z&#8221;指定でバージョン固定した場合でもそのライブラリが依存しているライブラリは&#8221;~x.y.z&#8221;で指定されているためバージョンがズレることがあったのですが、npm-shrinkwrapを使うと依存しているライブラリのバージョンも固定出来て素晴らしい！</p>
-
-<h2>Semantic Versioning</h2>
-
-<p>上の辺りを調べているときにSemantic Versioningというサイトがあるのをしりました。</p>
-
-<ul>
-<li><a href="http://semver.org/">http://semver.org/</a></li>
-</ul>
-
-
-<p>これによるとバージョンニングをMAJOR.MINOR.PATCHと定義していて、</p>
-
-<ul>
-<li>MAJORは互換性のない変更</li>
-<li>MINORは後方互換性のある追加機能</li>
-<li>PATCHは後方互換性のあるBugFix</li>
-</ul>
-
-
-<p>とされています。(1.0.0未満は開発版なので上の限りではない)</p>
-
-<p>さきほどのnpmやbowerの&mdash;saveが&#8221;~x.y.z&#8221;となっているのも上のバージョニングだと考えると納得がいきます。</p>
-
-<p>ただ、実際その通りになっているライブラリばかりではなく、PATCHバージョンあげたら動かなくなることもありますし、そもそも1.0.0未満だと対象外なので&#8221;~x.y.z&#8221;の指定で大丈夫というわけにはいきません。</p>
-
-<p>BackboneにもSemantic Versioninigに従うべきというissueがあったりしますが、実際はなかなかむずかしそうです。(jashkenasもその通りにしていたらBackbone 43.0.0になってるとコメントしたりしています)</p>
-
-<p><a href="https://github.com/jashkenas/backbone/issues/2888">https://github.com/jashkenas/backbone/issues/2888</a></p>
-
-<p>普段使っているようなライブラリも依存関係を&#8221;~x.y.z&#8221;という形式で指定されていることが多いのですが、それによって依存ライブラリのPATCHレベルでの変更で壊れることもあったりして、なかなか難しい&hellip;</p>
-
-<p>(結論なし..)</p>
 ]]></content>
   </entry>
   
