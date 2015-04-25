@@ -18,6 +18,8 @@ http://reactjs-meetup.connpass.com/event/11232/
  <blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/hashtag/reactjs_meetup?src=hash">#reactjs_meetup</a> <a href="https://twitter.com/hashtag/react_sushi?src=hash">#react_sushi</a> です <a href="http://t.co/GdpyF7Paqk">pic.twitter.com/GdpyF7Paqk</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/591580062702383107">April 24, 2015</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
+<!-- more -->
+
 ある程度予想はしていたのですが、Talkが10分と短かったりで押して慌ただしい感じになってしまったのは申し訳なかったなぁと思ってます。
 ただ、色んなテーマのTalkを一度に聞くことが出来たのはよかったかなと思っています。
 
