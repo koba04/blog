@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: yapc | blog.koba04.com]]></title>
-  <link href="http://blog.koba04.com/blog/categories/yapc/atom.xml" rel="self"/>
+  <title><![CDATA[Category: frontend | blog.koba04.com]]></title>
+  <link href="http://blog.koba04.com/blog/categories/frontend/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
   <updated>2015-08-20T20:12:22+09:00</updated>
   <id>http://blog.koba04.com/</id>

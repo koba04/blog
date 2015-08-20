@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-04-26T01:01:48+09:00</updated>
+  <updated>2015-08-20T20:11:25+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[YAPC::Asia Tokyo 2015で「What's happening in frontend now?」という話をします]]></title>
+    <link href="http://blog.koba04.com/post/2015/08/20/talk-at-yapc-asia2015/"/>
+    <updated>2015-08-20T20:00:49+09:00</updated>
+    <id>http://blog.koba04.com/post/2015/08/20/talk-at-yapc-asia2015</id>
+    <content type="html"><![CDATA[<p><a href="http://yapcasia.org/2015/talk/show/94051590-fb11-11e4-a39d-8ab37d574c3a">http://yapcasia.org/2015/talk/show/94051590-fb11-11e4-a39d-8ab37d574c3a</a></p>
+
+<p>無事にTalkを採択していただけたので、<strong>2015-08-21 13:10からトラックB (701-702）</strong> にて「What&rsquo;s happening in frontend now?」という話をします。</p>
+
+<!-- more -->
+
+
+<p>主にJavaScriptの話を中心に、Ajaxが登場した2005年くらいからどのようにフロントエンドを取り巻く技術が変わってきたのかを話したいと思います。
+実際に書いてみると膨大な感じになってしまい50分で収まるように泣く泣く削ったトピックもかなりありますが、
+jQueryからReactまでそのライブラリをどのように使うのかではなくどのような流れで何を解決しようとしているのかを中心に話したいと思います。</p>
+
+<p>フロントエンドを普段からバリバリ書いている人ではなく、たまにフロントエンドを触ろうと思っても次から次へと色々なライブラリや技術が登場してきてよくわからないという人に対して、今何が起きているのかを伝えることが出来ればと思っています。</p>
+
+<p><img src="http://blog.koba04.com/images/yapc2015-slide.png" title="'YAPC Asia 2015 slide'" ></p>
+
+<p>是非来てください！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js meetup #1 を開催しました]]></title>
@@ -4781,357 +4805,6 @@ nyanやtapやmocha形式のような出力形式のカスタマイズ以外に�
 
 
 <p>View周りの処理をまとめやすくなっていいですね！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[browserify in Backbone.Marionette project]]></title>
-    <link href="http://blog.koba04.com/post/2014/03/23/browserify-in-backbone-marionette-project/"/>
-    <updated>2014-03-23T21:05:46+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/03/23/browserify-in-backbone-marionette-project</id>
-    <content type="html"><![CDATA[<h2>browserify</h2>
-
-<ul>
-<li><a href="http://browserify.org/">http://browserify.org/</a></li>
-</ul>
-
-
-<p>browserifyはbrowser環境でもnodeのようにrequire(&lsquo;xxx&rsquo;)というスタイルで依存しているライブラリを読み込むことが出来るようになるもので、最近盛り上がってますね。</p>
-
-<p>(Backboneなど色々なプロジェクトでbrowserifyについて議論されていたり)</p>
-
-<p>ここでは基本的な使い方は省略して、Backbone + Marionetteなサンプルプロジェクトをbrowserify対応してみたのでその構成についてを書きたいと思います。</p>
-
-<!-- more -->
-
-
-<p>(まだ全然理解出来てないので、もっといい方法があれば教えて欲しいです)</p>
-
-<h2>Sample Project</h2>
-
-<ul>
-<li><a href="https://github.com/koba04/backbone-boilerplate">https://github.com/koba04/backbone-boilerplate</a></li>
-</ul>
-
-
-<p><img src="http://blog.koba04.com/images/last-fm-top-tracks.png" title="'Atrist Top Tracks by Last.FM'" ></p>
-
-<ul>
-<li><a href="http://koba04.com/last-fm-top-tracks/">http://koba04.com/last-fm-top-tracks/</a></li>
-</ul>
-
-
-<p>サンプルプロジェクト過ぎると役に立たないと思うので、テストも書きつつwebアプリっぽくLast.FMのAPI使ってアーティストの人気の曲一覧を表示するようなアプリにしてみました。</p>
-
-<p>(testling対応はIssueにしているのでそのうちやります&hellip; <a href="https://ci.testling.com/">https://ci.testling.com/</a>)</p>
-
-<h2>grunt-browserify</h2>
-
-<ul>
-<li>Gruntfile.coffee</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">browserify:</span>
-</span><span class='line'>  <span class="nv">app:</span>
-</span><span class='line'>    <span class="nv">files: </span><span class="s">&quot;public/js/app.js&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s">&quot;coffee/**/*.coffee&quot;</span><span class="p">,</span> <span class="s">&quot;template/**/*.hbs&quot;</span> <span class="p">]</span>
-</span><span class='line'>    <span class="nv">options:</span>
-</span><span class='line'>      <span class="nv">ignore: </span><span class="p">[</span><span class="s">&quot;coffee/vendor.coffee&quot;</span><span class="p">]</span>
-</span><span class='line'>      <span class="nv">extensions: </span><span class="p">[</span><span class="s">&quot;.coffee&quot;</span><span class="p">,</span> <span class="s">&quot;.hbs&quot;</span><span class="p">]</span>
-</span><span class='line'>      <span class="nv">transform: </span><span class="p">[</span><span class="s">&quot;coffeeify&quot;</span><span class="p">,</span> <span class="s">&quot;hbsfy&quot;</span><span class="p">]</span>
-</span><span class='line'>      <span class="nv">aliasMappings: </span><span class="p">[</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>          <span class="nv">cwd: </span><span class="s">&#39;coffee&#39;</span>
-</span><span class='line'>          <span class="nv">dest: </span><span class="s">&#39;myapp&#39;</span>
-</span><span class='line'>          <span class="nv">src: </span><span class="p">[</span><span class="s">&#39;**/*.coffee&#39;</span><span class="p">]</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>        <span class="p">{</span>
-</span><span class='line'>          <span class="nv">cwd: </span><span class="s">&#39;template&#39;</span>
-</span><span class='line'>          <span class="nv">dest: </span><span class="s">&#39;template&#39;</span>
-</span><span class='line'>          <span class="nv">src: </span><span class="p">[</span><span class="s">&#39;**/*.hbs&#39;</span><span class="p">]</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>      <span class="p">]</span>
-</span><span class='line'>      <span class="nv">external: </span><span class="p">[</span>
-</span><span class='line'>        <span class="s">&quot;jquery&quot;</span>
-</span><span class='line'>        <span class="s">&quot;underscore&quot;</span>
-</span><span class='line'>        <span class="s">&quot;backbone&quot;</span>
-</span><span class='line'>        <span class="s">&quot;backbone.marionette&quot;</span>
-</span><span class='line'>        <span class="s">&quot;handlebars&quot;</span>
-</span><span class='line'>      <span class="p">]</span>
-</span><span class='line'>      <span class="nv">alias: </span><span class="p">[</span> <span class="s">&quot;hbsfy/runtime:handlebars&quot;</span> <span class="p">]</span>
-</span><span class='line'>  <span class="nv">vendor:</span>
-</span><span class='line'>    <span class="nv">files: </span><span class="s">&quot;public/js/vendor.js&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s">&quot;coffee/vendor.coffee&quot;</span><span class="p">]</span>
-</span><span class='line'>    <span class="nv">options:</span>
-</span><span class='line'>      <span class="nv">transform: </span><span class="p">[</span><span class="s">&quot;coffeeify&quot;</span><span class="p">]</span>
-</span><span class='line'>      <span class="nv">alias: </span><span class="p">[</span>
-</span><span class='line'>        <span class="s">&quot;jquery&quot;</span>
-</span><span class='line'>        <span class="s">&quot;underscore&quot;</span>
-</span><span class='line'>        <span class="s">&quot;backbone&quot;</span>
-</span><span class='line'>        <span class="s">&quot;backbone.marionette&quot;</span>
-</span><span class='line'>      <span class="p">]</span>
-</span><span class='line'>  <span class="nv">spec:</span>
-</span><span class='line'>    <span class="nv">files: </span><span class="s">&quot;specs/spec.js&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s">&quot;specs/**/*.coffee&quot;</span> <span class="p">]</span>
-</span><span class='line'>    <span class="nv">options: </span><span class="s">&quot;&lt;%= browserify.app.options %&gt;&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>transform</h3>
-
-<p>coffeescriptのcompileやhandlebarsのprecompileは、coffeeifyとhbsfyというtransformを使っています。</p>
-
-<p>coffeescriptやhandlebarsのgrunt pluginを別途使用する必要がなくていいですね。</p>
-
-<h3>separate files</h3>
-
-<p>ライブラリ(vendor)とアプリ(app)のjsを分けているのは、vendor.jsはほとんど変更されることがないので毎回ビルドに含まれるのは無駄なためです。</p>
-
-<h3>external</h3>
-
-<p>vendor.jsのaliasで指定して、app.jsのexternalでそれを指定することでapp.js側にライブラリが含まれないようになります。</p>
-
-<p>hbsfy/runtimeもそうしたかったのですが、どうしてもapp.js内で展開されてしまったのでapp.js内で指定しています&hellip;</p>
-
-<h3>aliasMappings</h3>
-
-<p>browserifyはそのファイルからの相対パスを指定する必要があるので階層が深くなってくると階層を意識するのが面倒になります。</p>
-
-<p>そこで、aliasmappingsを使ってどこからでも同じパス指定(<strong>require &lsquo;myapp/collections/users&rsquo;</strong>)のように指定出来るようにしています。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="c1"># coffee/view/items/hoge.coffee</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># before</span>
-</span><span class='line'><span class="nv">users = </span><span class="nx">require</span> <span class="s">&#39;../../collections/users&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># after (anywhere!)</span>
-</span><span class='line'><span class="nv">users = </span><span class="nx">require</span> <span class="s">&#39;myapp/collections/users&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>???</h3>
-
-<p>テスト用のspec.jsにアプリのjsも含まれてしまっているので、ホントはspec.jsにはテストだけが含まれてapp.jsを別に読み込むようにしたいのですがその方法がわからず・・・</p>
-
-<ul>
-<li>aliasで全部のmodelとかviewを指定すれば出来そうな気もするけどそれは面倒なのでやりたくない・・・。</li>
-</ul>
-
-
-<h2>Sample</h2>
-
-<ul>
-<li>App(coffee/views/layouts/top.coffee)</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="s">&#39;use strict&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">Backbone          = </span><span class="nx">require</span> <span class="s">&#39;backbone&#39;</span>
-</span><span class='line'><span class="nv">ArtistSearchView  = </span><span class="nx">require</span> <span class="s">&#39;myapp/views/items/artist_search&#39;</span>
-</span><span class='line'><span class="nv">TracksView        = </span><span class="nx">require</span> <span class="s">&#39;myapp/views/collections/tracks&#39;</span>
-</span><span class='line'><span class="nv">Artist            = </span><span class="nx">require</span> <span class="s">&#39;myapp/models/artist&#39;</span>
-</span><span class='line'><span class="nv">tracks            = </span><span class="nx">require</span> <span class="s">&#39;myapp/collections/tracks&#39;</span>
-</span><span class='line'><span class="nv">template          = </span><span class="nx">require</span> <span class="s">&#39;template/layouts/top&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">module.exports = </span><span class="k">class</span> <span class="k">extends</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Marionette</span><span class="p">.</span><span class="nx">Layout</span>
-</span><span class='line'>  <span class="nv">template: </span><span class="nx">template</span>
-</span><span class='line'>  <span class="nv">regions:</span>
-</span><span class='line'>    <span class="nv">artistSearch: </span><span class="s">&quot;.js-artist-search&quot;</span>
-</span><span class='line'>    <span class="nv">topTracks: </span>   <span class="s">&quot;.js-top-tracks&quot;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nv">onRender: </span><span class="nf">-&gt;</span>
-</span><span class='line'>    <span class="nx">@artistSearch</span><span class="p">.</span><span class="nx">show</span> <span class="k">new</span> <span class="nx">ArtistSearchView</span> <span class="nv">model: </span><span class="k">new</span> <span class="nx">Artist</span>
-</span><span class='line'>    <span class="nx">@listenTo</span> <span class="nx">tracks</span><span class="p">,</span> <span class="s">&#39;reset&#39;</span><span class="p">,</span> <span class="nx">@showTracks</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nv">showTracks: </span><span class="nf">-&gt;</span>
-</span><span class='line'>    <span class="nx">@topTracks</span><span class="p">.</span><span class="nx">show</span> <span class="k">new</span> <span class="nx">TracksView</span> <span class="nv">collection: </span><span class="nx">tracks</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Spec(specs/views/layouts/top_spec.coffee)</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">describe</span> <span class="s">&quot;views/layouts/top&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
-</span><span class='line'>  <span class="nv">expect            = </span><span class="nx">require</span> <span class="s">&#39;expect.js&#39;</span>
-</span><span class='line'>  <span class="nv">sinon             = </span><span class="nx">require</span> <span class="s">&#39;sinon&#39;</span>
-</span><span class='line'>  <span class="nv">Backbone          = </span><span class="nx">require</span> <span class="s">&#39;backbone&#39;</span>
-</span><span class='line'>  <span class="nv">TopView           = </span><span class="nx">require</span> <span class="s">&#39;myapp/views/layouts/top&#39;</span>
-</span><span class='line'>  <span class="nv">ArtistSearchView  = </span><span class="nx">require</span> <span class="s">&#39;myapp/views/items/artist_search&#39;</span>
-</span><span class='line'>  <span class="nv">TracksView        = </span><span class="nx">require</span> <span class="s">&#39;myapp/views/collections/tracks&#39;</span>
-</span><span class='line'>  <span class="nv">Artist            = </span><span class="nx">require</span> <span class="s">&#39;myapp/models/artist&#39;</span>
-</span><span class='line'>  <span class="nv">tracks            = </span><span class="nx">require</span> <span class="s">&#39;myapp/collections/tracks&#39;</span>
-</span><span class='line'>  <span class="nv">template          = </span><span class="nx">require</span> <span class="s">&#39;template/layouts/top&#39;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nv">view = </span><span class="kc">null</span>
-</span><span class='line'>  <span class="nx">beforeEach</span> <span class="nf">-&gt;</span>
-</span><span class='line'>    <span class="nv">view = </span><span class="k">new</span> <span class="nx">TopView</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">it</span> <span class="s">&quot;extends Marionette.Layout&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
-</span><span class='line'>    <span class="nx">expect</span><span class="p">(</span><span class="nx">view</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Marionette</span><span class="p">.</span><span class="nx">Layout</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">it</span> <span class="s">&quot;template is layouts/top&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
-</span><span class='line'>    <span class="nx">expect</span><span class="p">(</span><span class="nx">view</span><span class="p">.</span><span class="nx">template</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span> <span class="nx">template</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">describe</span> <span class="s">&quot;onRender&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
-</span><span class='line'>    <span class="nx">beforeEach</span> <span class="nf">-&gt;</span>
-</span><span class='line'>      <span class="nx">sinon</span><span class="p">.</span><span class="nx">spy</span> <span class="nx">view</span><span class="p">,</span> <span class="s">&quot;showTracks&quot;</span>
-</span><span class='line'>      <span class="nx">view</span><span class="p">.</span><span class="nx">onRender</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">it</span> <span class="s">&quot;artistSearch region has artist_search view&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
-</span><span class='line'>      <span class="nx">expect</span><span class="p">(</span><span class="nx">view</span><span class="p">.</span><span class="nx">artistSearch</span><span class="p">.</span><span class="nx">currentView</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span> <span class="nx">ArtistSearchView</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">it</span> <span class="s">&quot;artist_search view has models/artist&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
-</span><span class='line'>      <span class="nx">expect</span><span class="p">(</span><span class="nx">view</span><span class="p">.</span><span class="nx">artistSearch</span><span class="p">.</span><span class="nx">currentView</span><span class="p">.</span><span class="nx">model</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span> <span class="nx">Artist</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">it</span> <span class="s">&quot;listenTo tracks&#39;s reset event, trigger showTracks&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
-</span><span class='line'>      <span class="nx">tracks</span><span class="p">.</span><span class="nx">reset</span> <span class="p">[]</span>
-</span><span class='line'>      <span class="nx">expect</span><span class="p">(</span><span class="nx">view</span><span class="p">.</span><span class="nx">showTracks</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">ok</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">describe</span> <span class="s">&quot;showTracks&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
-</span><span class='line'>    <span class="nx">beforeEach</span> <span class="nf">-&gt;</span>
-</span><span class='line'>      <span class="nx">view</span><span class="p">.</span><span class="nx">showTracks</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">it</span> <span class="s">&quot;topTracks region has tracks view&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
-</span><span class='line'>      <span class="nx">expect</span><span class="p">(</span><span class="nx">view</span><span class="p">.</span><span class="nx">topTracks</span><span class="p">.</span><span class="nx">currentView</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span> <span class="nx">TracksView</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">it</span> <span class="s">&quot;tracks view has collections/tracks&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
-</span><span class='line'>      <span class="nx">expect</span><span class="p">(</span><span class="nx">view</span><span class="p">.</span><span class="nx">topTracks</span><span class="p">.</span><span class="nx">currentView</span><span class="p">.</span><span class="nx">collection</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span> <span class="nx">tracks</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Summary</h2>
-
-<p>まだまだ情報が少ない気がしますが、依存関係を意識せずrequireでライブラリを使えるのはわかりやすくてよさそうに感じました(実装を理解するともっと便利に使えそう)。</p>
-
-<p>npmで提供されているライブラリだけ使うのであればbowerを使わなくてよくなるのもいいなと思いました。</p>
-
-<p>repositoryはこちら</p>
-
-<ul>
-<li><a href="https://github.com/koba04/backbone-boilerplate">https://github.com/koba04/backbone-boilerplate</a></li>
-</ul>
-
-
-<h2>References</h2>
-
-<ul>
-<li><a href="http://aeflash.com/2014-03/a-year-with-browserify.html">http://aeflash.com/2014-03/a-year-with-browserify.html</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
