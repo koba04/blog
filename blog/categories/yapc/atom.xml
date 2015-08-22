@@ -4,7 +4,7 @@
   <title><![CDATA[Category: yapc | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/yapc/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-08-20T20:12:22+09:00</updated>
+  <updated>2015-08-22T15:30:08+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[YAPC::Asia Tokyo 2015で「今フロントエンドで何が起こっているのか」という話をしました]]></title>
+    <link href="http://blog.koba04.com/post/2015/08/22/yapc-asia-2015-whats-happening-in-frontend-now/"/>
+    <updated>2015-08-22T11:15:43+09:00</updated>
+    <id>http://blog.koba04.com/post/2015/08/22/yapc-asia-2015-whats-happening-in-frontend-now</id>
+    <content type="html"><![CDATA[<p>YAPC::Asia Tokyo 2015で「今フロントエンドで何が起こっているのか」という話をしました。</p>
+
+<p><a href="http://yapcasia.org/2015/talk/show/94051590-fb11-11e4-a39d-8ab37d574c3a">http://yapcasia.org/2015/talk/show/94051590-fb11-11e4-a39d-8ab37d574c3a</a></p>
+
+<p>満員になるほどたくさんの方に来て頂いてありがとうございました！</p>
+
+<p>よくフロントエンドの話について聞かれると「Grunt or gulp」、「browserify or webpack」、「Angular or React」のような内容が多いので、新しいライブラリや仕様がそれぞれがどういった流れで登場し何を解決しようとしているのかを流れをもって紹介するような構成にしました。</p>
+
+<p>jQuery以降というかなり広い範囲を対象にしたので、それを50minに収めるのために削ったトピックもかなりありますが&hellip;。</p>
+
+<p>それでもASTなど普段ライブラリを使っているだけだとなかなか見えないけど重要な要素については残しました。</p>
+
+<p>とりあげたトピックはこんな感じです。</p>
+
+<ul>
+<li>ES5</li>
+<li>CoffeeScript</li>
+<li>jQuery</li>
+<li>Backbone</li>
+<li>Node.js</li>
+<li>Grunt</li>
+<li>SinglePageApplication</li>
+<li>TypeScript</li>
+<li>AST</li>
+<li>Isomorphic</li>
+<li>Angular</li>
+<li>gulp</li>
+<li>browserify</li>
+<li>ES2015</li>
+<li>Babel・TC39</li>
+<li>Service Workers</li>
+<li>Extensible Web</li>
+<li>React, Flux</li>
+<li>FRP</li>
+<li>Redux</li>
+<li>Unix philosophy</li>
+</ul>
+
+
+<p>駆け足になったのでわかりにくい部分もあったと思いますが、少しでもその辺りが伝われば嬉しいです。</p>
+
+<p><a href="https://speakerdeck.com/koba04/whats-happening-in-frontend-now">https://speakerdeck.com/koba04/whats-happening-in-frontend-now</a></p>
+
+<script async class="speakerdeck-embed" data-id="4d78b0afe4fa4e078544e80db2eb8bd1" data-ratio="1.33333333333333" src="http://blog.koba04.com//speakerdeck.com/assets/embed.js"></script>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[YAPC::Asia Tokyo 2015で「What's happening in frontend now?」という話をします]]></title>
@@ -31,7 +84,7 @@ jQueryからReactまでそのライブラリをどのように使うのかでは
 
 <p>フロントエンドを普段からバリバリ書いている人ではなく、たまにフロントエンドを触ろうと思っても次から次へと色々なライブラリや技術が登場してきてよくわからないという人に対して、今何が起きているのかを伝えることが出来ればと思っています。</p>
 
-<p>{% img /images/yapc2015-slide.png &lsquo;YAPC Asia 2015 slide&rsquo; %}</p>
+<p><img src="/images/yapc2015-slide.png" title="&lsquo;YAPC Asia 2015 slide&rsquo;" ></p>
 
 <p>是非来てください！</p>
 ]]></content>

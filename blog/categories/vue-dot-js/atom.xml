@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vue.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/vue-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-08-20T20:12:22+09:00</updated>
+  <updated>2015-08-22T15:30:08+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -47,7 +47,7 @@
 
 
 <p><template>
-  <div v-component="{{view}}" v-transition></div>
+  <div v-component="" v-transition></div>
 </template></p>
 
 
@@ -349,7 +349,7 @@ var value = vm.$eval('msg | uppercase')
 <p>template文字列を評価することが出来ます。</p>
 
 <p>```js
-var markup = vm.$interpolate(&lsquo;<p>{{msg | uppercase}}</p>&rsquo;)</p>
+var markup = vm.$interpolate(&lsquo;<p></p>&rsquo;)</p>
 
 <p>```</p>
 
@@ -390,14 +390,14 @@ set: function () {}
 
 <p>こんな感じでv-viewみたいなことが出来るようになりました</p>
 
-<p>{% raw %}
+<p>
 ```html</p>
 
 <div v-component="{{test}}"></div>
 
 
 <p>```
-{% endraw %}</p>
+</p>
 
 <p>今サポートしているのは<code>v-component</code>だけで、独自directiveを作る時は<code>update</code>関数を実装することでハンドリング出来ます。</p>
 
@@ -511,11 +511,11 @@ items: [
 
 <p>変更されない値に指定することでrenderingのパフォーマンスを向上させることが出来ます。</p>
 
-<p>{% raw %}
+<p>
 <code>html
 &lt;span&gt;{{* hello }}&lt;/span&gt;
 </code>
-{% endraw %}</p>
+</p>
 
 <h2>Config API change</h2>
 
@@ -550,7 +550,7 @@ Vue.config.delimiters = ['(%', '%)']
 <p>NativeのArrayのsubclassなどを作っている場合で、<code>__proto__</code>の書き換えされると困る場合にfalseにすることで<code>__proto__</code>の書き換えがされなくなります
 (配列のオブジェクトに追加される)</p>
 
-<p>{% img /images/vue-config-proto.png &lsquo;Vue.config.proto = false&rsquo; %}</p>
+<p><img src="/images/vue-config-proto.png" title="&lsquo;Vue.config.proto = false&rsquo;" ></p>
 
 <p>またrc2からオブジェクトの場合に<code>__proto__</code>の書き換えがされることはなくなりました。ただObject.prototypeに$addと$delete、Array.prototypeに$removeと$setが追加されています。</p>
 
@@ -563,7 +563,7 @@ var Hoge = function () {
 Hoge.prototype.foo = function() { console.log(this.name) };
 </code></p>
 
-<p>{% img /images/vue-object-prototype.png &lsquo;Vue object prototype&rsquo; %}</p>
+<p><img src="/images/vue-object-prototype.png" title="&lsquo;Vue object prototype&rsquo;" ></p>
 
 <h3>async optionをfalseにすることで即時にDOMが更新することが出来ます</h3>
 
@@ -707,9 +707,9 @@ content: 'content-2'
 
 <p><code>html
 &lt;template v-repeat="item:items"&gt;
-  &lt;h2&gt;{{item.title}}&lt;/h2&gt;
-  &lt;p&gt;{{item.subtitle}}&lt;/p&gt;
-  &lt;p&gt;{{item.content}}&lt;/p&gt;
+  &lt;h2&gt;&lt;/h2&gt;
+  &lt;p&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;/p&gt;
 &lt;/template&gt;
 </code></p>
 
@@ -750,7 +750,7 @@ content: 'content-2'
 <p><code>v-partial</code>にtemplateと一緒に使うことが出来ますし、下記のようにすることでpartialを動的に選択することが出来ます</p>
 
 <p><code>html
-&lt;template v-partial="{{partialId}}"&gt;&lt;/template&gt;
+&lt;template v-partial=""&gt;&lt;/template&gt;
 </code></p>
 
 <h2>Misc</h2>
