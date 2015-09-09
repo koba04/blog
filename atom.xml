@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-08-22T15:30:08+09:00</updated>
+  <updated>2015-09-09T23:40:42+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -14,6 +14,69 @@
 
   
   <entry>
+    <title type="html"><![CDATA[React.js meetup #2を開催しました]]></title>
+    <link href="http://blog.koba04.com/post/2015/09/09/reactjs-meetup2/"/>
+    <updated>2015-09-09T22:53:58+09:00</updated>
+    <id>http://blog.koba04.com/post/2015/09/09/reactjs-meetup2</id>
+    <content type="html"><![CDATA[<p><a href="http://reactjs-meetup.connpass.com/event/19504/">http://reactjs-meetup.connpass.com/event/19504/</a></p>
+
+<p>4月に#1をやってから約4ヶ月くらい経ちましたがReact.js meetup #2を開催しました。</p>
+
+<p>雨の中来てくださった方、発表者の方、運営のお手伝いをしてくださった方ありがとうございました！</p>
+
+<!-- more -->
+
+
+<h2>開催の経緯</h2>
+
+<p>最初は今回発表してくださったViktorさんが来日されるのでそれにあわせてイベントをやるという話があり、せっかくなのでということでReact.js meetupの2回目としてやることになりました。</p>
+
+<h2>dots</h2>
+
+<p>開催予定日まで時間もなくてその時点で話す人も決まっていたので後は会場を決めればなんとかなりそうということで、いくつかの選択肢の中から今回はdotsさんで開催することになりました。
+渋谷の駅から近くて、人数も200人近く入れるし会場もオシャレな感じだったのでここだ！という感じで決めました。</p>
+
+<blockquote class="twitter-tweet" lang="en"><p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/reactjs_meetup?src=hash">#reactjs_meetup</a> #2 at dots!! (@ dots. in 渋谷区, 東京都) <a href="https://t.co/os56mGdfFu">https://t.co/os56mGdfFu</a> <a href="http://t.co/2BhpBeIK9H">pic.twitter.com/2BhpBeIK9H</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/641186091891073024">September 8, 2015</a></blockquote>
+
+
+<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>dotsさん、ありがとうございました！</p>
+
+<h2>準備など</h2>
+
+<p>今回は <a href="https://twitter.com/yoshiko_pg">@yoshiko_pg</a> さんから話をもらって、その後の色々な準備もほとんどやってもらって本当に感謝でした。ありがとうございます！
+当日の準備や受付は <a href="http://goodpatch.com/jp">Goodpatch</a> の方々がやってくださり、お菓子も提供して頂いて本当にありがたかったです。仲良さそうな感じが印象的でした。ありがとうございます！</p>
+
+<h2>Talk</h2>
+
+<p>各Talkのスライドはここにあるので見てください。</p>
+
+<p><a href="http://reactjs-meetup.connpass.com/event/19504/">http://reactjs-meetup.connpass.com/event/19504/</a></p>
+
+<p>自分のTalkはReactの次のバージョンである0.14での変更点について話しました。予想としてはRC版が出てるはずだったのですが&hellip;。
+Stateless Componentsが加わったりはしていますが、基本的には無駄な機能は削ぎ落としたりメンテナンス性を維持していくための変更が多い印象で正しい方向に向かっている印象を持っています。</p>
+
+<p>全体を通してReduxのような最近注目されているようなTopicから、Flowtypeのような型付けやDDDなどReact.jsやFluxを使って実際に大規模なアプリを作っていく中で求められるようなTopicについての話まであって面白かったです。</p>
+
+<p>FlowtypeがもっとFacebook以外でも使いやすくコントリビュートしやすくなっていくといいなーと思いながら、それには壁がいくつもありそうだなとViktorさんと話して感じたり。</p>
+
+<p>後、LTを一句で締めるのとてもよかったです。</p>
+
+<h2>当日の様子</h2>
+
+<p><a href="http://togetter.com/li/871189">http://togetter.com/li/871189</a></p>
+
+<p>感想とか書いてもらえると嬉しいです！</p>
+
+<h2>次回？</h2>
+
+<p>まったく何も考えていないので、聞きたいテーマなどあれば教えてもらえると嬉しいです！</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[YAPC::Asia Tokyo 2015で「今フロントエンドで何が起こっているのか」という話をしました]]></title>
     <link href="http://blog.koba04.com/post/2015/08/22/yapc-asia-2015-whats-happening-in-frontend-now/"/>
     <updated>2015-08-22T11:15:43+09:00</updated>
@@ -21,6 +84,9 @@
     <content type="html"><![CDATA[<p>YAPC::Asia Tokyo 2015で「今フロントエンドで何が起こっているのか」という話をしました。</p>
 
 <p><a href="http://yapcasia.org/2015/talk/show/94051590-fb11-11e4-a39d-8ab37d574c3a">http://yapcasia.org/2015/talk/show/94051590-fb11-11e4-a39d-8ab37d574c3a</a></p>
+
+<!-- more -->
+
 
 <p>満員になるほどたくさんの方に来て頂いてありがとうございました！</p>
 
@@ -4428,346 +4494,6 @@ nyanやtapやmocha形式のような出力形式のカスタマイズ以外に�
 <p>紹介されている本もいい本ばかりなので、この本を読んだあとに紹介されている本を読んで知識を深めていくとよさそうだと思いました。</p>
 
 <iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=musicfanclub-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=4774163678" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Reusable components by Vue.js and Browserify]]></title>
-    <link href="http://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browserify/"/>
-    <updated>2014-04-17T01:27:24+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browserify</id>
-    <content type="html"><![CDATA[<p>最近Vue.jsについて調べたり試したりしていて、browserifyと組み合わせたexampleがなかなか興味深かったので参考に自分でも作ってみました。</p>
-
-<p>参考</p>
-
-<ul>
-<li><a href="https://github.com/vuejs/vue-browserify-example">https://github.com/vuejs/vue-browserify-example</a></li>
-</ul>
-
-
-<p>作ったサンプル</p>
-
-<ul>
-<li><a href="https://github.com/koba04/vue-boilerplate">https://github.com/koba04/vue-boilerplate</a></li>
-<li><a href="http://koba04.com/vue-boilerplate/">http://koba04.com/vue-boilerplate/</a></li>
-</ul>
-
-
-<!-- more -->
-
-
-<h2>browserify</h2>
-
-<p>Vue.js自体はビルドに<a href="https://github.com/component/component">Compoment</a>を使っているのですが、ここでは個人的な好みによりbrowserifyを使っています。</p>
-
-<p>上記のexampleではbrowserifyにプラスしてwatchifyとpartialifyを使っていたのですが、今回はlivereloadもしたかったのでwatchifyではなくて<a href="https://github.com/chrisdickinson/beefy">beefy</a>にして、さらにcoffeeifyとstylifyも使ってcoffeescriptとstylusのcompileも任せることにしました。</p>
-
-<p>その結果の起動scriptはこんな感じで、<strong>npm run dev</strong>するとlivereload + auto buildな環境が立ち上がり、<strong>npm run build</strong>するとbundle.jsが生成されるようになっています。</p>
-
-<ul>
-<li><a href="https://github.com/koba04/vue-boilerplate/blob/master/package.json">https://github.com/koba04/vue-boilerplate/blob/master/package.json</a></li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'>  <span class="s2">&quot;scripts&quot;</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="s2">&quot;dev&quot;</span><span class="o">:</span> <span class="s2">&quot;beefy src/index.coffee:bundle.js --live -- -t partialify -t coffeeify -t stylify --extension=coffee&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s2">&quot;build&quot;</span><span class="o">:</span> <span class="s2">&quot;browserify src/index.coffee -t partialify -t coffeeify -t stylify --extension=coffee &gt; bundle.js&quot;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ちなみに<a href="https://github.com/bclinkinbeard/partialify">partialify</a>はhtmlをrequireで読み込むのに使っています。</p>
-
-<p>これで、gruntを使うことなくbrowserifyだけでlivereload + auto buildが出来るようになりました。便利！</p>
-
-<h2>Reusable components</h2>
-
-<p>Vue.jsを使っていると、ViewModelをCompomentとして組み合わせてアプリケーションを作る感じになっていくので、Component単位でhtml、js、cssをまとめたくなります(ならない？)。</p>
-
-<p>Vue.jsにはcompomentという概念があるのでこんな感じでViewModelをcompomentとして登録することが出来ます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="c1"># グローバルにcompomentを登録</span>
-</span><span class='line'><span class="nx">Vue</span><span class="p">.</span><span class="nx">component</span> <span class="s">&#39;artist&#39;</span><span class="p">,</span>   <span class="nx">require</span> <span class="s">&#39;./artist/index.coffee&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># or</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># ViewModelに紐づけて登録</span>
-</span><span class='line'><span class="nv">module.exports = </span><span class="nx">Vue</span><span class="p">.</span><span class="nx">extend</span>
-</span><span class='line'>  <span class="nv">components:</span>
-</span><span class='line'>    <span class="s">&quot;nav&quot;</span><span class="o">:</span>          <span class="nx">require</span> <span class="s">&#39;../nav/index.coffee&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>exampleでもそのようになっていて、partialifyでhtmlとcssをrequireして読み込んでcssの方はinsert-cssで追加する感じになっています。</p>
-
-<ul>
-<li>insert-cssというのはsubstackが作っているライブラリで、CSSを渡すとDOMにstyle要素を作ってhead要素にappendしてくれるというライブラリです。
-
-<ul>
-<li><a href="https://www.npmjs.org/package/insert-css">https://www.npmjs.org/package/insert-css</a></li>
-</ul>
-</li>
-</ul>
-
-
-<p>ただCSSはグローバルに作用してしまいます。なので名前ベースで解決したくなりますがCSSではネストした記述をサポートしていません。そこでstylusを使ってネストで書きやすくしてみました。</p>
-
-<ul>
-<li><a href="https://github.com/koba04/vue-boilerplate/blob/master/src/top/index.coffee">https://github.com/koba04/vue-boilerplate/blob/master/src/top/index.coffee</a></li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">require</span><span class="p">(</span><span class="s">&#39;insert-css&#39;</span><span class="p">)(</span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;./index.styl&#39;</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">Vue = </span><span class="nx">require</span> <span class="s">&#39;vue&#39;</span>
-</span><span class='line'><span class="nv">module.exports = </span><span class="nx">Vue</span><span class="p">.</span><span class="nx">extend</span>
-</span><span class='line'>  <span class="nv">template: </span><span class="nx">require</span> <span class="s">&#39;./index.html&#39;</span>
-</span><span class='line'>  <span class="nv">className: </span><span class="s">&#39;top&#39;</span>
-</span><span class='line'>  <span class="nv">components:</span>
-</span><span class='line'>    <span class="s">&quot;nav&quot;</span><span class="o">:</span>          <span class="nx">require</span> <span class="s">&#39;../nav/index.coffee&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><a href="https://github.com/koba04/vue-boilerplate/blob/master/src/top/index.styl">https://github.com/koba04/vue-boilerplate/blob/master/src/top/index.styl</a></li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nc">.top</span>
-</span><span class='line'>  <span class="nt">h1</span>
-</span><span class='line'>    <span class="na">font-family</span><span class="o">:</span> <span class="s1">&#39;</span><span class="s2">Playfair Display SC&#39;</span><span class="o">,</span> <span class="no">serif</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>こんな感じにすると、Compoment単位でディレクトリ作ってindex.coffeeの中でinsert-cssを使ってcssを追加しつつpartialifyでhtmlをtemplateとして設定することで、javascriptとhtmlとcssをまとめることが出来ます。</p>
-
-<ul>
-<li><p>ファイル名の付け方は悩ましいですが・・・。</p></li>
-<li><p><a href="https://github.com/koba04/vue-boilerplate">https://github.com/koba04/vue-boilerplate</a></p></li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>src
-</span><span class='line'>├── artist
-</span><span class='line'>│   ├── components
-</span><span class='line'>│   │   └── input-artist
-</span><span class='line'>│   │       ├── index.coffee
-</span><span class='line'>│   │       ├── index.html
-</span><span class='line'>│   │       └── index.styl
-</span><span class='line'>│   ├── index.coffee
-</span><span class='line'>│   ├── index.html
-</span><span class='line'>│   └── index.styl
-</span><span class='line'>├── country
-</span><span class='line'>│   ├── components
-</span><span class='line'>│   │   └── <span class="k">select</span>-country
-</span><span class='line'>│   │       ├── index.coffee
-</span><span class='line'>│   │       ├── index.html
-</span><span class='line'>│   │       └── index.styl
-</span><span class='line'>│   ├── index.coffee
-</span><span class='line'>│   ├── index.html
-</span><span class='line'>│   └── index.styl
-</span><span class='line'>├── index.coffee
-</span><span class='line'>├── index.html
-</span><span class='line'>├── index.styl
-</span><span class='line'>├── nav
-</span><span class='line'>│   ├── index.coffee
-</span><span class='line'>│   ├── index.html
-</span><span class='line'>│   └── index.styl
-</span><span class='line'>├── partials
-</span><span class='line'>│   └── footer.html
-</span><span class='line'>├── top
-</span><span class='line'>│   ├── index.coffee
-</span><span class='line'>│   ├── index.html
-</span><span class='line'>│   └── index.styl
-</span><span class='line'>└── tracks
-</span><span class='line'>    ├── index.coffee
-</span><span class='line'>    ├── index.html
-</span><span class='line'>    └── index.styl
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>まぁ実際はcompoment化してもなかなか再利用は難しいのですが、こういう分け方もありかなーと思いました。</p>
-
-<h2>routing animation by v-view and css animation</h2>
-
-<p>余談ですが、今回作ったサンプルの遷移時のウザイアニメーションは、v-viewとv-animationを組み合わせています。</p>
-
-<ul>
-<li><a href="http://koba04.com/vue-boilerplate/">http://koba04.com/vue-boilerplate/</a></li>
-</ul>
-
-
-<p>routingは<a href="https://www.npmjs.org/package/director">director</a>とv-viewとVue.compomentを組み合わせています。</p>
-
-<ul>
-<li>angular.jsのng-animateみたいな感じでv-enterとv-leaveというクラスがあてられるのでそれを使ってアニメーションさせています。</li>
-</ul>
-
-
-<p>v-viewとv-animationの組み合わせについては、v-leaveのanimation-endで要素が削除されるためアニメーションが指定されていないと古い要素が残ったりと若干ハマりどころもあるのですが、それはまた別の機会にまとめたいと思います。</p>
-
-<ul>
-<li><a href="https://github.com/koba04/vue-boilerplate/blob/master/src/index.html">https://github.com/koba04/vue-boilerplate/blob/master/src/index.html</a></li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">v-view=</span><span class="s">&quot;view&quot;</span> <span class="na">v-animation</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><a href="https://github.com/koba04/vue-boilerplate/blob/master/src/index.styl">https://github.com/koba04/vue-boilerplate/blob/master/src/index.styl</a></li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class='sass'><span class='line'><span class="nn">#app</span>
-</span><span class='line'>  <span class="nc">.v-enter</span>
-</span><span class='line'>    <span class="na">-webkit-animation</span><span class="o">:</span> <span class="n">fadein</span> <span class="mi">0</span><span class="mf">.5</span><span class="kt">s</span>
-</span><span class='line'>    <span class="na">-webkit-animation-delay</span><span class="o">:</span> <span class="mi">0</span><span class="mf">.2</span><span class="kt">s</span>
-</span><span class='line'>    <span class="na">animation</span><span class="o">:</span> <span class="n">fadein</span> <span class="mi">0</span><span class="mf">.5</span><span class="kt">s</span>
-</span><span class='line'>    <span class="na">animation-delay</span><span class="o">:</span> <span class="mi">0</span><span class="mf">.2</span><span class="kt">s</span>
-</span><span class='line'>    <span class="na">opacity</span><span class="o">:</span> <span class="mi">0</span>
-</span><span class='line'>  <span class="nc">.v-leave</span>
-</span><span class='line'>    <span class="na">-webkit-animation</span><span class="o">:</span> <span class="n">fadeout</span> <span class="mi">0</span><span class="mf">.2</span><span class="kt">s</span>
-</span><span class='line'>    <span class="na">animation</span><span class="o">:</span> <span class="n">fadeout</span> <span class="mi">0</span><span class="mf">.2</span><span class="kt">s</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@keyframes</span> <span class="nt">fadein</span>
-</span><span class='line'>  <span class="nt">0</span><span class="err">%</span>
-</span><span class='line'>    <span class="na">transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">0</span><span class="mf">.5</span><span class="p">)</span>
-</span><span class='line'>    <span class="na">-webkit-transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">0</span><span class="mf">.5</span><span class="p">)</span>
-</span><span class='line'>    <span class="na">opacity</span><span class="o">:</span> <span class="mi">0</span>
-</span><span class='line'>  <span class="nt">50</span><span class="err">%</span>
-</span><span class='line'>    <span class="na">transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">1</span><span class="mf">.2</span><span class="p">)</span>
-</span><span class='line'>    <span class="na">-webkit-transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">1</span><span class="mf">.2</span><span class="p">)</span>
-</span><span class='line'>    <span class="na">opacity</span><span class="o">:</span> <span class="mi">0</span><span class="mf">.7</span>
-</span><span class='line'>  <span class="nt">100</span><span class="err">%</span>
-</span><span class='line'>    <span class="na">transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>    <span class="na">-webkit-transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>    <span class="na">opacity</span><span class="o">:</span> <span class="mi">1</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@keyframes</span> <span class="nt">fadeout</span>
-</span><span class='line'>  <span class="nt">0</span><span class="err">%</span>
-</span><span class='line'>    <span class="na">transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>    <span class="na">-webkit-transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>  <span class="nt">100</span><span class="err">%</span>
-</span><span class='line'>    <span class="na">transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span class='line'>    <span class="na">-webkit-transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>追記</h3>
-
-<p>ちなみにネストしたViewの場合は色々な解決方法があると思うのですが、v-viewとv-refを組み合わせて実現することも出来ます</p>
-
-<p>v-refを使うことで子のViewを参照することができるのでそれを使って同じようにv-componentを更新する感じです</p>
-
-<p>サンプルはこんな感じ</p>
-
-<p><a href="http://jsfiddle.net/koba04/WgSK9/1/">http://jsfiddle.net/koba04/WgSK9/1/</a></p>
-
-<h2>more?</h2>
-
-<p>本当はここにtestling + mocha + power-assertな組み合わせのテストも含めたかったのですが間に合わず・・。</p>
-
-<p>Vue.js自体についても下記のメモをスライドにでもまとめようかなと思っています..そのうち..</p>
-
-<ul>
-<li><a href="https://gist.github.com/koba04/9776792">https://gist.github.com/koba04/9776792</a></li>
-</ul>
 
 ]]></content>
   </entry>
