@@ -6,7 +6,8 @@ comments: true
 categories: react.js
 ---
 
-http://reactjs-meetup.connpass.com/event/19504/
+* http://reactjs-meetup.connpass.com/event/19504/
+* http://eventdots.jp/eventreport/568979
 
 4月に#1をやってから約4ヶ月くらい経ちましたがReact.js meetup #2を開催しました。
 
