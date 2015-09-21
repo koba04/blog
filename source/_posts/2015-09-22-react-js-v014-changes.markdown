@@ -112,7 +112,7 @@ ReactDOM.unstable_batchedUpdates(() => {
 
 ### DOMComponentに対するrefによる参照でDOM Nodeが取得出来るようになりました
 
-これまでDOM node`React.findDOMNode(this.refs.div)` のようにする必要がありましたが、`this.refs.div`で直接DOM nodeを取得することが出来るようになりました。
+これまでDOM nodeを取得したい場合には`React.findDOMNode(this.refs.div)` のようにする必要がありましたが、`this.refs.div`で直接DOM nodeを取得することが出来るようになりました。
 findDOMNodeの呼び出しを書かなくてもいいというだけですが簡単になりました。
 それと同時にrefでのComponentの参照はDOM Component以外では使わないようにしておかないと混乱を招きそうではあります。
 
@@ -466,7 +466,8 @@ onProgress、onRateChange、onSeeked、onSeeking、onStalled、onSuspend、onTim
 https://github.com/facebook/react/pull/4832
 
 Reactではv0.14から`React.createElement`でReactElementのインスタンスではなくてただのオブジェクトが返ってくるようになっていたり、上の方で紹介したBabelによるinlineElementsの最適化によってcreateElementの呼び出しがただのオブジェクトに変換されることからも分かる通り、オブジェクトをそのままVIRTUAL DOMとして扱いDOMを生成することが出来ます。
-前提としてユーザーが任意のオブジェクトをそのままReactElementとして描画出来ること自体が問題でありますが、ユーザーによって作成されるオブジェクトをそのままrenderに渡していると意図しないコンテンツを表示されたりXSSのリスクがあります。
+そのためユーザーによって作成されるオブジェクトをそのままrenderに渡していると意図しないコンテンツを表示されたりXSSのリスクがあります。
+(ユーザーが任意のオブジェクトをそのままReactElementとして描画出来ること自体が問題ではありますが)
 
 * [How Much XSS Vulnerability Protection is React Responsible For? #3473](https://github.com/facebook/react/issues/3473)
 
@@ -500,7 +501,7 @@ v0.14ではSymbolを使って信頼されたReactElementかどうかを判定す
 var TYPE_SYMBOL = (typeof Symbol === 'function' && Symbol.for &&
                   Symbol.for('react.element')) || 0xeac7;
 ```
-* https://github.com/sebmarkbage/react/blob/031fc24daeae6bcdc5e5f6959b778e1c2ed5f378/src/isomorphic/classic/element/ReactElement.js#L20-L21
+* https://github.com/facebook/react/blob/d54fa9e563d968112f5461274dc4e9d2aa6ed35c/src/isomorphic/classic/element/ReactElement.js#L20-L22
 
 上記のようにSymbolを保持していおいて、それを`React.createElement`で作成したObjectにも`$$typeof`というpropertyとして渡しておいて、ReactElementが有効であるかを返す`isValidElement`という関数の中の比較で利用しています。
 
