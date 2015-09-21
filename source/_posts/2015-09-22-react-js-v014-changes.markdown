@@ -114,7 +114,7 @@ ReactDOM.unstable_batchedUpdates(() => {
 
 これまでDOM nodeを取得したい場合には`React.findDOMNode(this.refs.div)` のようにする必要がありましたが、`this.refs.div`で直接DOM nodeを取得することが出来るようになりました。
 findDOMNodeの呼び出しを書かなくてもいいというだけですが簡単になりました。
-それと同時にrefでのComponentの参照はDOM Component以外では使わないようにしておかないと混乱を招きそうではあります。
+それと同時にrefでのComponentの参照はなるべくDOM Component以外では使わないようにしておかないと混乱を招きそうではあります。
 
 また、`ReactDOM.render(<div>foo</div>)` とした場合の返り値もDOM Nodeになります。
 ReactDOM.findDOMNodeは以降もComposite Componentに対するDOM nodeを取得する場合に利用することが出来ます。
