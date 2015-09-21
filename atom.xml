@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-09-21T23:55:52+09:00</updated>
+  <updated>2015-09-22T00:09:06+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -164,7 +164,7 @@ scriptタグで読み込むための<code>react-with-addons</code>のJSにはこ
 
 <h3>DOMComponentに対するrefによる参照でDOM Nodeが取得出来るようになりました</h3>
 
-<p>これまでDOM node<code>React.findDOMNode(this.refs.div)</code> のようにする必要がありましたが、<code>this.refs.div</code>で直接DOM nodeを取得することが出来るようになりました。
+<p>これまでDOM nodeを取得したい場合には<code>React.findDOMNode(this.refs.div)</code> のようにする必要がありましたが、<code>this.refs.div</code>で直接DOM nodeを取得することが出来るようになりました。
 findDOMNodeの呼び出しを書かなくてもいいというだけですが簡単になりました。
 それと同時にrefでのComponentの参照はDOM Component以外では使わないようにしておかないと混乱を招きそうではあります。</p>
 
@@ -715,7 +715,8 @@ v0.14以降ではStateless ComponentsがComponent定義の第一の選択肢に�
 <p><a href="https://github.com/facebook/react/pull/4832">https://github.com/facebook/react/pull/4832</a></p>
 
 <p>Reactではv0.14から<code>React.createElement</code>でReactElementのインスタンスではなくてただのオブジェクトが返ってくるようになっていたり、上の方で紹介したBabelによるinlineElementsの最適化によってcreateElementの呼び出しがただのオブジェクトに変換されることからも分かる通り、オブジェクトをそのままVIRTUAL DOMとして扱いDOMを生成することが出来ます。
-前提としてユーザーが任意のオブジェクトをそのままReactElementとして描画出来ること自体が問題でありますが、ユーザーによって作成されるオブジェクトをそのままrenderに渡していると意図しないコンテンツを表示されたりXSSのリスクがあります。</p>
+そのためユーザーによって作成されるオブジェクトをそのままrenderに渡していると意図しないコンテンツを表示されたりXSSのリスクがあります。
+(ユーザーが任意のオブジェクトをそのままReactElementとして描画出来ること自体が問題ではありますが)</p>
 
 <ul>
 <li><a href="https://github.com/facebook/react/issues/3473">How Much XSS Vulnerability Protection is React Responsible For? #3473</a></li>
@@ -771,7 +772,7 @@ v0.14以降ではStateless ComponentsがComponent定義の第一の選択肢に�
 
 
 <ul>
-<li><a href="https://github.com/sebmarkbage/react/blob/031fc24daeae6bcdc5e5f6959b778e1c2ed5f378/src/isomorphic/classic/element/ReactElement.js#L20-L21">https://github.com/sebmarkbage/react/blob/031fc24daeae6bcdc5e5f6959b778e1c2ed5f378/src/isomorphic/classic/element/ReactElement.js#L20-L21</a></li>
+<li><a href="https://github.com/facebook/react/blob/d54fa9e563d968112f5461274dc4e9d2aa6ed35c/src/isomorphic/classic/element/ReactElement.js#L20-L22">https://github.com/facebook/react/blob/d54fa9e563d968112f5461274dc4e9d2aa6ed35c/src/isomorphic/classic/element/ReactElement.js#L20-L22</a></li>
 </ul>
 
 
