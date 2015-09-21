@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "React.js v0.14 changes"
-date: 2015-09-18 16:33:58 +0900
+date: 2015-09-22 00:00:00 +0900
 comments: true
-categories:
+categories: react.js
 ---
 
 React v0.14のRC版が出たので紹介したいと思います。
@@ -34,6 +34,7 @@ or
 `react-native`や`react-canvas`など、DOM以外の環境で使われるようになってくる中で、Reactのコアの部分とDOMに関わる部分がパッケージとして分割されるようになりました。
 
 Reactのパッケージには、`React.createElement`、`React.createClass`、`React.Component`、`React.PropTypes`、`React.Children`が含まれています。
+
 ReactDOMのパッケージには、`ReactDOM.render`、`ReactDOM.unmountComponentAtNode`、`ReactDOM.findDOMNod`が含まれています。
 また、ReactDOMのパッケージには`react-dom/server`として`ReactDOMServer.renderToString`と`ReactDOMServer.renderToStaticMarkup`が含まれています。
 
@@ -71,12 +72,12 @@ ReactDOM.render(React.createElement(App), document.getElementById('app'));
 </script>
 ```
 
-codemodも提供されているので一括で変更を既存のコードに適用したい場合は使ってみるといいかもしれません。
+codemodも提供されているので既存のコードを一括で変換したい場合は使ってみるといいかもしれません。
 https://github.com/facebook/react/blob/master/packages/react-codemod/README.md
 
 #### Addons
 
-また、Addonもそれぞれ個別のパッケージには分割されたので必要に応じてnpmでインストールするようになりました。
+また、Addonもそれぞれ個別のパッケージに分割されたので必要に応じてnpmでインストールするようになりました。
 
 * react-addons-clone-with-props
 * react-addons-create-fragment
@@ -89,7 +90,8 @@ https://github.com/facebook/react/blob/master/packages/react-codemod/README.md
 * react-addons-transition-group
 * react-addons-update
 
-`react-with-addons`のJSにはこれまで通り全てのAddonが含まれています。
+これによって、1つのAddonを使いたい時にその他全部のAddonがbundleされることがなくなりました。
+scriptタグで読み込むための`react-with-addons`のJSにはこれまで通り全てのAddonが含まれています。
 
 また、`batched_updates`としてあったReactのイベントやライフサイクル以外でもバッチによる一括アップデートを行えるAddonは`ReactDOM.unstable_batchedUpdates`に移動しました。
 
@@ -102,12 +104,17 @@ ReactDOM.unstable_batchedUpdates(() => {
 });
 ```
 
-**ReactとReactDOM** のパッケージは意図しない挙動を避けるために同じバージョンを使うことが推奨されています。
+ちなみにunstable_batchedUpdatesという名前になっているけど今後どうする予定なのかを聞いたところ、全ての更新をバッチ更新にしたいということだったので最終的には不必要にしたいようです。
+
+
+**ReactとReactDOMやAddon** のパッケージは意図しない挙動を避けるために同じバージョンを使うことが推奨されています。
+
 
 ### DOMComponentに対するrefによる参照でDOM Nodeが取得出来るようになりました
 
 これまでDOM node`React.findDOMNode(this.refs.div)` のようにする必要がありましたが、`this.refs.div`で直接DOM nodeを取得することが出来るようになりました。
-findDOMNodeの呼び出しを書かなくてもいいというだけですが簡単になりました。それと同時にrefでのComponentの参照はDOM Component以外では使わないようにしておかないと混乱を招きそうではあります。
+findDOMNodeの呼び出しを書かなくてもいいというだけですが簡単になりました。
+それと同時にrefでのComponentの参照はDOM Component以外では使わないようにしておかないと混乱を招きそうではあります。
 
 また、`ReactDOM.render(<div>foo</div>)` とした場合の返り値もDOM Nodeになります。
 ReactDOM.findDOMNodeは以降もComposite Componentに対するDOM nodeを取得する場合に利用することが出来ます。
@@ -157,7 +164,8 @@ Hello.contextTypes = {
 }
 ```
 
-v0.14では最低限の実装のみになったため入りませんでしたが、以降のバージョンではStateless Componentsで書いておくことでパフォーマンス最適化の恩恵が受けられるようになる予定です。
+v0.14では最低限の実装のみになっていますが、以降のバージョンではStateless Componentsで書いておくことでパフォーマンス最適化の恩恵が受けられるようになる予定です。
+v0.14以降ではStateless ComponentsがComponent定義の第一の選択肢になっていきそうです。
 
 ### react-toolsは廃止されました
 
@@ -165,9 +173,9 @@ v0.14では最低限の実装のみになったため入りませんでしたが
 
 http://facebook.github.io/react/blog/2015/06/12/deprecating-jstransform-and-react-tools.html
 
-* jsxコマンドはbabelコマンドになります。
-* browserifyのtransformであるreactifyはbabelifyになります。
-* webpackのjsx-loaderはbabel-loaderになります
+* jsxコマンドは`babel`コマンドになります。
+* browserifyのtransformであるreactifyは`babelify`になります。
+* webpackのjsx-loaderは`babel-loader`になります
 * Node.jsのサーバー上で動かすときに`require('node-jsx').install()`としていたものは`require('babel/register')`になります。
 * ブラウザでJSXを変換するために使うJSXTransformはbabel-core/browser.jsを読み込んでtypeを`text/babel`にして使用します。
 
@@ -347,12 +355,12 @@ var App = (function (_React$Component) {
 
 以下はv0.13でwarningが出力されていなかったものですが、簡単に修正することが出来る変更点です。
 
-* `React.initializeTouchEvents`は不要になったので削除してください。タッチイベントもデフォルトでサポートされています。
-* 前述したDOM Componentに対するrefの変更により、`TestUtils.findAllInRenderedTree`とそれに関連するhelperはCustom Componentのみを受け取るようになりました。(`scryRendered〜`、`findRendered〜`系のTestUtils)
+* `React.initializeTouchEvents`は不要になったので削除してください。タッチイベントはデフォルトでサポートされるようになりました。
+* 前述したDOM Componentに対するrefの変更により、`TestUtils.findAllInRenderedTree`とそれに関連するhelperはComposite Componentのみを受け取るようになりました。(`scryRendered〜`、`findRendered〜`系のTestUtils)
 
 ## Deprecations
 
-* `getDOMNode`は非推奨になり、代わりに`ReactDOM.findDOMNode`を利用してください。但し、ほとんどの場合`ReactDOM.findDOMNode`も使う必要はなくなりました。
+* `getDOMNode`は非推奨になったので代わりに`ReactDOM.findDOMNode`を利用してください。前述したとおりDOM Componentの場合は`ReactDOM.findDOMNode`も不要です。
 * `setProps`と`replaceProps`は非推奨になります。代わりに親のComponentから再度`ReactDOM.render`を呼んでください。
 * ES6 ClassesによるComponent定義で`React.Component`を継承することが必須になりました。[ES3 module pattern](http://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#other-languages)はまだ使用することが出来ます。
 * `style`のPropsを別のrenderと共有し変更することはPropsが変更不可として扱われる影響で非推奨となりました。
@@ -431,7 +439,7 @@ onProgress、onRateChange、onSeeked、onSeeking、onStalled、onSuspend、onTim
 
 * `document.body`に対して`ReactDOM.render`使用するとwarningを出力するようになりました。
 
-* 複数の異なるReactを同時に利用しようとした場合に、warningを出力するようになりました。これはnpmとbrowserifyなどを組み合わせている場合に意図せずに起こってしまうことがありました。
+* 複数の異なるReactのオブジェクトを同時に利用しようとした場合に、warningを出力するようになりました。これはnpmとbrowserifyなどを組み合わせている場合に意図せずに起こってしまうことがあります。
 
 ## Bug fixes
 
@@ -443,9 +451,9 @@ onProgress、onRateChange、onSeeked、onSeeking、onStalled、onSuspend、onTim
 
 * サーバーサイドレンダリング時にselectタグのvalueがoptionタグのselectedとして反映されるようになりました。
 
-* 同じdocumentに対して複数のReactで要素を追加した状態の場合にイベントハンドリングでエラーを投げていたのを投げないようになりました。但し、radio buttonを同じnameでrenderしていた場合などエラーになる場合は残っています。
+* 同じdocumentに対して複数のReactのオブジェクトで要素を追加した状態になった時、イベントハンドリングのタイミングで発生していたエラーがなるべく起きないようになりました。但し、radio buttonを同じnameでrenderしていた場合などエラーになる状況は残っています。
 
-* 小文字でないHTMLタグ名をReactDOMで使った場合でも問題にならないようになりました。ただしDOM Componentの場合には小文字にすることを変わらずに推奨します。
+* 小文字でないHTMLタグ名をReactDOMで使った場合でも問題にならないようになりました。ただしDOM Componentの場合には小文字で指定することを変わらずに推奨します。
 
 * ReactDOMが`animationIterationCount`、`boxOrdinalGroup`、`flexOrder`、`tabSize`、`stopOpacity`のCSSプロパティに対して'px'を追加しないようになりました。
 
@@ -457,8 +465,8 @@ onProgress、onRateChange、onSeeked、onSeeking、onStalled、onSuspend、onTim
 
 https://github.com/facebook/react/pull/4832
 
-Reactではv0.14から`React.createElement`でReactElementではなくてただのオブジェクトが返ってくるようになっていたり、上の方で紹介したBabelによるinlineElementsの最適化によってただのオブジェクトに変換されることからも分かる通り、オブジェクトをそのままVIRTUAL DOMとして扱いDOMを生成することが出来ます。
-前提として任意のオブジェクトをそのままReactElementとして描画出来ること自体が問題でありますが、ユーザーによってお作成されるオブジェクトをそのままrenderに渡していると意図しないコンテンツを表示されたりXSSのリスクがあります。
+Reactではv0.14から`React.createElement`でReactElementのインスタンスではなくてただのオブジェクトが返ってくるようになっていたり、上の方で紹介したBabelによるinlineElementsの最適化によってcreateElementの呼び出しがただのオブジェクトに変換されることからも分かる通り、オブジェクトをそのままVIRTUAL DOMとして扱いDOMを生成することが出来ます。
+前提としてユーザーが任意のオブジェクトをそのままReactElementとして描画出来ること自体が問題でありますが、ユーザーによって作成されるオブジェクトをそのままrenderに渡していると意図しないコンテンツを表示されたりXSSのリスクがあります。
 
 * [How Much XSS Vulnerability Protection is React Responsible For? #3473](https://github.com/facebook/react/issues/3473)
 
@@ -466,7 +474,7 @@ Reactではv0.14から`React.createElement`でReactElementではなくてただ�
 
 * [[RFC] Trusted sources for React elements. #3583](https://github.com/facebook/react/pull/3583)
 
-Reactでは最初はinstanceofでReactElementかどうかのチェックが行われていたのですが、その場合常にReactElementのインスタンスである必要がありオブジェクト化による最適化や複数のReactを使っていた場合にチェックが失敗するなど制限が多くなってしまいます。そのため、`_isReactElement`というがtrueかどうかをみるように変わりましたがこれでは信頼されたオブジェクトであるかを判定することは出来ません。
+Reactでは最初はinstanceofでReactElementかどうかのチェックが行われていたのですが、それだと常にReactElementのインスタンスである必要がありオブジェクト化による最適化や複数のReactを使っていた場合にチェックが失敗するなど制限が多くなってしまいます。そのため、`_isReactElement`というがtrueかどうかをみるように変わりましたがこれでは信頼されたオブジェクトであるかを判定することは出来ません。
 
 ユーザーが`_isReactElement`をオブジェクトに指定することでReactElementとして評価され、さらにReactには`dangerouslySetInnerHTML`というPropでHTMLをそのまま渡すことが出来るので...。
 
@@ -497,7 +505,7 @@ var TYPE_SYMBOL = (typeof Symbol === 'function' && Symbol.for &&
 上記のようにSymbolを保持していおいて、それを`React.createElement`で作成したObjectにも`$$typeof`というpropertyとして渡しておいて、ReactElementが有効であるかを返す`isValidElement`という関数の中の比較で利用しています。
 
 `Symbol.for`は指定されたSymbolがあればそれを返しなければ作成して返すので、グローバルなSymbolとして扱うことが出来ます。これによってただのオブジェクトも複数のReactを使っていた場合もサポートすることが出来ます。
-(複数のReactがある場合は既に書いた通りwarningが出ます)
+(複数のReactがある場合は既に書いた通り別途warningが出ます)
 
 Symbolが実装されていないような環境だと固定の値(0xeac7)になるので、この機能を有効にしたい場合はSymbolのpolyfillを入れておく必要があります。
 
