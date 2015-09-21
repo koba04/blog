@@ -266,7 +266,7 @@ scriptタグで読み込むための<code>react-with-addons</code>のJSにはこ
 
 <p>これまでDOM nodeを取得したい場合には<code>React.findDOMNode(this.refs.div)</code> のようにする必要がありましたが、<code>this.refs.div</code>で直接DOM nodeを取得することが出来るようになりました。
 findDOMNodeの呼び出しを書かなくてもいいというだけですが簡単になりました。
-それと同時にrefでのComponentの参照はDOM Component以外では使わないようにしておかないと混乱を招きそうではあります。</p>
+それと同時にrefでのComponentの参照はなるべくDOM Component以外では使わないようにしておかないと混乱を招きそうではあります。</p>
 
 <p>また、<code>ReactDOM.render(&lt;div&gt;foo&lt;/div&gt;)</code> とした場合の返り値もDOM Nodeになります。
 ReactDOM.findDOMNodeは以降もComposite Componentに対するDOM nodeを取得する場合に利用することが出来ます。</p>
