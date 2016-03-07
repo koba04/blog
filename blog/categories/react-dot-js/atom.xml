@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2015-09-22T00:46:06+09:00</updated>
+  <updated>2016-03-07T19:28:05+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js meetup #3を開催しました]]></title>
+    <link href="http://blog.koba04.com/post/2016/03/07/reactjs-meetup3/"/>
+    <updated>2016-03-07T17:08:38+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/03/07/reactjs-meetup3</id>
+    <content type="html"><![CDATA[<p>前回開催したのが9月だったみたいなので半年くらい経ちましたがReact.js meetup #3を開催しました。</p>
+
+<ul>
+<li><a href="http://reactjs-meetup.connpass.com/event/26229/">http://reactjs-meetup.connpass.com/event/26229/</a></li>
+</ul>
+
+
+<p>今回はサイボウズさんに会場を提供して頂き開催することができました。
+サイボウズの皆様、参加者の皆様、発表者の皆様ありがとうございました！！</p>
+
+<p>connpassの管理画面によると<strong>75/80人</strong>の方が参加してくださいました。感謝！</p>
+
+<p><img src="/images/reactjs-meetup3.jpg" title="&lsquo;React.js meetup #3&rsquo;" ></p>
+
+<!-- more -->
+
+
+<h2>開催の経緯</h2>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/koba04">@koba04</a> hey! I&#39;ll be in Tokyo in February. Are there any ReactJS or general JavaScript meetups happening during that time?</p>&mdash; Christoph Pojer (@cpojer) <a href="https://twitter.com/cpojer/status/691698537306796032">January 25, 2016</a></blockquote>
+
+
+<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>というmentionがきっかけで急遽の開催となりました。前回と全く同じような経緯です。</p>
+
+<p><a href="http://blog.koba04.com/post/2015/09/09/reactjs-meetup2/">http://blog.koba04.com/post/2015/09/09/reactjs-meetup2/</a></p>
+
+<h2>準備など</h2>
+
+<p><a href="https://twitter.com/yosuke_furukawa">@yusuke_furukawa</a>会長と相談しつつ、サイボウズさんに会場が決まってからは当日の準備や受付、懇親会の手配までサイボウズの方々にお任せしてしまって本当に助かりました！
+というわけで今回も自分はあまり何もしてないのですがイベントの構成を考えたりしていました。</p>
+
+<p>募集に関しては募集開始日に埋まることは予想していたのですが、2分持たずに埋まることまでは想定していなかったので次回の募集方法については考えようかなと思っています。
+（先着・抽選50%ずつなど）</p>
+
+<h2>Talk</h2>
+
+<p>Talkに関しては、<a href="https://twitter.com/cpojer">@cpojer</a>さんのTalkは事前に相談して得意分野であるというjscodeshitについてのTalkをお願いしてReactなどについてはQ&amp;Aでという形になりました。
+Q&amp;Aについては<a href="https://twitter.com/yando">@yando</a>さんが通訳してくださったので本当に助かりました。ありがとうございました！！</p>
+
+<p>今回のTalkはJSConf EU 2015でのTalkがベースになっているので興味のある方はそちらも参照してください。</p>
+
+<p><a href="https://www.youtube.com/watch?v=d0pOgY8__JM">https://www.youtube.com/watch?v=d0pOgY8__JM</a></p>
+
+<p>その他のTalkについても自分が聞きたいなぁと思った内容について個別にTalkをお願いしました。
+どのTalkも15分では短いくらいで面白かったです。</p>
+
+<p>LTもどれも面白かったですね。</p>
+
+<p>全部のTalkの資料が公開されているわけではないですが、下記のブログやtogetterによるまとめを見てください！</p>
+
+<ul>
+<li><a href="http://blog.cybozu.io/entry/2016/03/04/080000">http://blog.cybozu.io/entry/2016/03/04/080000</a></li>
+<li><a href="http://togetter.com/li/942145">http://togetter.com/li/942145</a></li>
+</ul>
+
+
+<h2>参加者</h2>
+
+<p>挙手でアンケートを取ったのですが、</p>
+
+<ul>
+<li>Reactを使っている人 &hellip; ほとんど全員</li>
+<li>仕事でReact使っているという人 &hellip; 半分くらい</li>
+<li>Redux使っている人 &hellip; 半分くらい</li>
+<li>Facebook Flux使っている人 &hellip; 1割くらい</li>
+<li>GraphQL、Relay使っている人 &hellip; 1人？</li>
+<li>ReactNative使っている人 &hellip; 1人？</li>
+</ul>
+
+
+<p>みたいな感じでした。
+GraphQL、Relay、ReactNativeなんかは英語の記事ではそこそこ見るのですがやはり導入のハードルが高いので実際に踏み込んでいる人はそんなに多くなさそうです。</p>
+
+<p>ReactNativeはGitHubを見てる限り今も活発にメンテナンスされていて、React.js Conf 2016でもTalkが多かったので今後どうなるのかは注目しています。</p>
+
+<h2>次回&hellip;?</h2>
+
+<p>次回はなんとなく6月の頭にあるReact Europe後くらいがいいかなと思っていますが、何か話したいネタがあったり聞きたいテーマなどあれば教えてもらえるとそれまでに開催するかもしれないのでよろしくお願いします！</p>
+
+<p>Reactの勉強会が少ない気がするという声も聞いたのでやりたい人がいたら是非やるといいんじゃないかなと思います！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js v0.14 changes]]></title>
@@ -1042,658 +1133,6 @@ assert(
 <hr />
 
 <p>そこそこカジュアルな感じになっているかなぁと思います。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[React.js v0.13 changes]]></title>
-    <link href="http://blog.koba04.com/post/2015/03/05/react-js-v013-changes/"/>
-    <updated>2015-03-05T09:23:28+09:00</updated>
-    <id>http://blog.koba04.com/post/2015/03/05/react-js-v013-changes</id>
-    <content type="html"><![CDATA[<p>React.js v0.13のRC2がリリースされたのでまとめてみます。</p>
-
-<ul>
-<li><a href="http://facebook.github.io/react/blog/2015/02/24/react-v0.13-rc1.html">http://facebook.github.io/react/blog/2015/02/24/react-v0.13-rc1.html</a></li>
-<li><a href="http://facebook.github.io/react/blog/2015/03/03/react-v0.13-rc2.html">http://facebook.github.io/react/blog/2015/03/03/react-v0.13-rc2.html</a></li>
-<li><a href="http://facebook.github.io/react/blog/2015/02/24/streamlining-react-elements.html">http://facebook.github.io/react/blog/2015/02/24/streamlining-react-elements.html</a></li>
-</ul>
-
-
-<p>今回のバージョンで何か大きく変更があるというよりもv0.14でやりたいことに向けての布石が多いように感じます。</p>
-
-<p>試すときはこの辺りから。</p>
-
-<p><code>
-npm install react@0.13.0-rc2
-npm install react-tools@0.13.0-rc2
-</code></p>
-
-<p><code>
-http://fb.me/react-0.13.0-rc2.js
-http://fb.me/react-0.13.0-rc2.min.js
-http://fb.me/react-with-addons-0.13.0-rc2.js
-http://fb.me/react-with-addons-0.13.0-rc2.min.js
-http://fb.me/JSXTransformer-0.13.0-rc2.js
-</code></p>
-
-<!-- more -->
-
-
-<h2>Propを変更するとwarninngが出ます (Breaking Change)</h2>
-
-<p>development環境でPropをelement作成後に変更することはdeprecatedになってwarningが出るようになりました。
-つまりimmutableなものとして扱う必要があります。</p>
-
-<p><code>js
-var element = &lt;Foo bar={false} /&gt;;
-if (shouldUseFoo) {
-  element.props.foo = 10;
-  element.props.bar = true;
-}
-</code></p>
-
-<h3>これまでの問題点</h3>
-
-<ul>
-<li>Propを直接変更してしまうと元の値を破棄してしまうのでdiffがなくなってしまいます。この場合、<code>shouldComponentUpdate</code>を実装している場合に比較時に差分を検出出来なくてDOM構造に差分があるはずなのに実際には反映されない可能性がありました。</li>
-<li>またPropが変更されることがあるためcreateElementの時点でPropTypesのValidationも出来ず、それによってエラー時のstacktraceが深くなったりFlowによる静的解析にとっても都合がよくなかったりという面もありました。</li>
-</ul>
-
-
-<h4>それに対しての提案</h4>
-
-<ul>
-<li>動的にしたい場合は↓のような形で書くことでも可能です。</li>
-</ul>
-
-
-<p>```js
-if (shouldUseFoo) {
-  return <Foo foo={10} bar={true} />;
-} else {
-  return <Foo bar={false} />;
-}</p>
-
-<p>var props = { bar: false };
-if (shouldUseFoo) {
-  props.foo = 10;
-  props.bar = true;
-}
-return <Foo {...props} />;
-```</p>
-
-<ul>
-<li>現時点ではネストしたオブジェクトについては変更してもwarningは出ません。基本的にはimmutable.jsなどを使って完全にimmutableに扱った方がいいですが、mutableなオブジェクトは多くの場面で便利だし今回はネストしたオブジェクトはwarningの対象外となりました。</li>
-</ul>
-
-
-<p><code>js
-return &lt;Foo nestedObject={this.state.myModel} /&gt;;
-</code></p>
-
-<ul>
-<li>PropTypesのwarningをReactElementの作成時に行うなうようになりました。Propを変更するために↓のようにcloneしてReactElementにPropに値を追加するのは正しい方法です。</li>
-</ul>
-
-
-<p><code>js
-var element1 = &lt;Foo /&gt;; // extra prop is optional
-var element2 = React.addons.cloneWithProps(element1, { extra: 'prop' });
-</code></p>
-
-<h2>statics内のメソッドに対してautobindingされなくなりました (Breaking Change)</h2>
-
-<p><code>statics</code>に定義したメソッドをonClickなどにバインドした時にcomponentをバインドしなくなりました。</p>
-
-<p>```js
-var Hello = React.createClass({
-  statics: {</p>
-
-<pre><code>foo () {
-  this.bar();  // v0.13では呼べない
-},
-bar() {
-  console.log("bar");
-}
-</code></pre>
-
-<p>  },
-  render() {</p>
-
-<pre><code>return &lt;div&gt;hello &lt;button onClick={Hello.foo}&gt;click&lt;/button&gt;&lt;/div&gt;;
-</code></pre>
-
-<p>  }
-});
-```</p>
-
-<h2>refを設定する処理の順番が変わりました (Breaking Change)</h2>
-
-<p><code>ref</code>に指定されたcomponentの<code>componentDidMount</code>が呼ばれた後になります。
-これは親componentのcallbackを<code>componentDidMount</code>の中で読んでいる場合だけ気にする必要があります。そもそれもこれはアンチパターンなので避けるべきですが&hellip;。</p>
-
-<ul>
-<li><code>componentDidMount</code>は子componentから順番に呼ばれるので下記の<code>refDiv</code>はChildの<code>componentDidMount</code>の時点では設定されていません。</li>
-</ul>
-
-
-<p>```js
-var Hello = React.createClass({
-  foo() {</p>
-
-<pre><code>console.log(this.refs.refDiv);
-</code></pre>
-
-<p>  },
-  render() {</p>
-
-<pre><code>return (
-  &lt;div&gt;
-    &lt;Child foo={this.foo} /&gt;
-    &lt;div ref="refDiv"&gt;hello&lt;/div&gt;
-  &lt;/div&gt;
-);
-</code></pre>
-
-<p>  }
-});</p>
-
-<p>var Child = React.createClass({
-  componentDidMount() {</p>
-
-<pre><code>this.props.foo(); // v0.13 "undefined"
-</code></pre>
-
-<p>  },
-  render() {</p>
-
-<pre><code>return &lt;div&gt;child&lt;/div&gt;;
-</code></pre>
-
-<p>  }
-});
-```</p>
-
-<h2><code>this.setState()</code>が第1引数に関数を受け取れるようになりました</h2>
-
-<p><code>js
-this.setState((state, props) =&gt; ({count: state.count + 1}));
-</code></p>
-
-<p>のようにすることで<code>this._pendingState</code>を使うことなくトランザクションが必要とされるstateの更新を行うことが出来ます。</p>
-
-<p>```js
-console.log(this.state.count) // 0
-this.setState({ count: this.state.count + 1 })
-this.setState({ count: this.state.count + 1 })
-// state.count will render as 1</p>
-
-<p>console.log(this.state.count) // 0
-this.setState(function(state, props) { return { count: state.count + 1 } });
-this.setState(function(state, props) { return { count: state.count + 1 } });
-// state.count will render as 2
-```</p>
-
-<h2>setStateの呼び出しが常に非同期になります (Breaking Change)</h2>
-
-<p>ライフサイクルメソッドの中での<code>setState</code>の呼び出しが常に非同期でバッチとして処理されます。以前は最初のマウント時の呼び出しは同期的に行われていました。</p>
-
-<p><code>
-componentDidMount() {
-  console.log(this.state.count) // 0
-  this.setState({ count: this.state.count + 1 })
-  this.setState({ count: this.state.count + 1 })
-  console.log(this.state.count) // v0.13 is 0 (v0.12 is 2)
-}
-</code></p>
-
-<h2>setStateとforceUpdateをunmountされたcomponentに対して呼んだ時に、エラーではなくwarningが出るようになりました (Breaking Change)</h2>
-
-<p>非同期処理の結果を<code>setState</code>して反映させるときに、<code>isMounted</code>でブロックしなくてもよくなったのはいいですね。</p>
-
-<h2>privateなプロパティが整理されました (Breaking Change)</h2>
-
-<p><code>this._pendingState</code>や<code>this._rootNodeID</code>などのprivateなプロパティが削除されました。</p>
-
-<h2>ES6 classesによるReactComponentの作成がサポートされました</h2>
-
-<p>これについては↓に書きましたが、ES6 classesによって作成されたcomponentには<code>createClass</code>にはある<code>getDOMNode</code>、<code>setProps</code>、<code>replaceState</code>が含まれていなかったりmixinが指定出来ないなど注意点がいくつかあります。</p>
-
-<ul>
-<li><a href="http://blog.koba04.com/post/2015/01/28/published-react-v0.13.0-beta1/">http://blog.koba04.com/post/2015/01/28/published-react-v0.13.0-beta1/</a></li>
-</ul>
-
-
-<h2><code>React.findDOMNode(component)</code>のAPIが追加されました</h2>
-
-<p>これは既存の<code>component.getDOMNode()</code>を置き換えるAPIです。
-<code>getDOMNode()</code>はES6 classesによって作成されたcomponentでは提供されていません。</p>
-
-<h2><code>ref</code>がcallbackスタイルで指定できるようになりました。</h2>
-
-<p><code>js
-&lt;Photo ref={(c) =&gt; this._photo = c} /&gt;
-</code></p>
-
-<p>この変更はこの後で書く<code>owner</code>の扱いの変更に関係しています。</p>
-
-<h2>childrenにiteratorやimmutable-jsのsequenceを指定出来るようになりました</h2>
-
-<p>immutable-jsを使っている人にとってはいいですね。</p>
-
-<h2><code>ComponentClass.type</code>はdeprecatedになりました</h2>
-
-<p>代わりに<code>ComponentClass</code>をそのまま使ってください。</p>
-
-<h2>ownerベースのcontextを使っていてparentベースのcontextと一致しない場合にwarningが出るようになります</h2>
-
-<p>そもそもowner? parent?という感じかと思うので簡単に説明します。</p>
-
-<h3>owner and parent</h3>
-
-<p>Reactは"parent"と"owner"を持っています。"owner"はReactElementを作ったcomponentです。</p>
-
-<p>```js
-class Foo {
-  render() {</p>
-
-<pre><code>return &lt;div&gt;&lt;span /&gt;&lt;/div&gt;;
-</code></pre>
-
-<p>  }
-}
-```</p>
-
-<p>この場合、<code>span</code>のownerは<code>Foo</code>でparentは<code>div</code>になります。</p>
-
-<h3>context</h3>
-
-<p>これはdocument化されてないfeatureですが、"owner"から子や孫に渡すことが出来る"context"というものがあります。</p>
-
-<p>簡単にコードを書くとこんな感じです。見てもらえればどんなfeatureなのかわかるかと思います。</p>
-
-<p>```js
-var Parent = React.createClass({</p>
-
-<pre><code>childContextTypes: {
-  name: React.PropTypes.string,
-  age: React.PropTypes.number
-},
-getChildContext: function() {
-  return {
-    name: "parent",
-    age: 50
-  };
-</code></pre>
-
-<p>  },
-  render: function() {</p>
-
-<pre><code>return &lt;Child /&gt;;
-</code></pre>
-
-<p>  }
-});</p>
-
-<p>var Child = React.createClass({</p>
-
-<pre><code>contextTypes: {
-  name: React.PropTypes.string,
-  age: React.PropTypes.number
-},
-componentDidMount: function() {
-  console.log("Child",this.context); // {name: "parent", age: 50}
-},
-render: function() {
-  return &lt;GrandChild /&gt;;
-}
-</code></pre>
-
-<p>});</p>
-
-<p>var GrandChild = React.createClass({</p>
-
-<pre><code>contextTypes: {
-  name: React.PropTypes.string
-},
-componentDidMount: function() {
-  console.log("GrandChild",this.context); // {name: "parent"}
-},
-render: function() {
-  return &lt;div&gt;hello&lt;/div&gt;;
-}
-</code></pre>
-
-<p>});</p>
-
-<p>React.render(<Parent />, document.body);
-```</p>
-
-<p><code>react-router</code>ではparentベースのcontextに依存していたので対応が大変そうでした。</p>
-
-<h3>問題点</h3>
-
-<ul>
-<li>ownerは密かにReactElementに追加されているので気づかないうちに挙動が変わることが発生します。↓の場合はそれぞれのinputのownerが異なりますし、<code>React.addons.cloneWithProps</code>を使った場合もownerが変わります。</li>
-</ul>
-
-
-<p>```js
-var foo = <input className="foo" />;
-class Component {
-  render() {</p>
-
-<pre><code>return bar ? &lt;input className="bar" /&gt; : foo;
-</code></pre>
-
-<p>  }
-}
-```</p>
-
-<ul>
-<li>ownerは実行時のstackによって決定します。↓の場合、<code>span</code>のonwerは実際は<code>B</code>で<code>A</code>ではありません。これはcallbackが実行されたタイミングに依存するからです。</li>
-</ul>
-
-
-<p>```js
-class A {
-  render() {</p>
-
-<pre><code>return &lt;B renderer={text =&gt; &lt;span&gt;{text}&lt;/span&gt;} /&gt;;
-</code></pre>
-
-<p>  }
-}
-class B {
-  render() {</p>
-
-<pre><code>return this.props.renderer('foo');
-</code></pre>
-
-<p>  }
-}
-```</p>
-
-<ul>
-<li>また、JSXが書いているscope内にReactが必要なのは、Reactが現在のownerを保持していてJSXの変換がそれに依存しているからという意外なところに影響があったりもします。</li>
-</ul>
-
-
-<h3>それに対する提案</h3>
-
-<ul>
-<li>ownerベースのcontextの代わりにparentベースのcontextの導入を考えているのでそれを使うことです。ほとんどのケースはparentベースのcontextでも問題ないです。</li>
-<li>ownerベースのcontextが必要になる場合はほとんどないはずだしコードを見直すべきです。</li>
-</ul>
-
-
-<h3>未解決</h3>
-
-<ul>
-<li><code>ref</code>はまだownerベースのままで、これについてはまだ完全に解決出来ていません。
-
-<ul>
-<li>v0.13ではcallbackでもrefが定義出来るようなりましたがこれまでの宣言的な定義方法も残されています。宣言的な定義方法に代わる何かいい方法がない限りこのAPIは廃止されません。</li>
-</ul>
-</li>
-</ul>
-
-
-<h2><code>{key: element}</code>(Keyed Object)の形式でchildに渡すとwarningが出るようになりました</h2>
-
-<p>v0.12では<code>{key: element}</code>の形式でkeyが指定したらelementを渡すことが出来ましたが、これはあまり使われてないし問題となる場合があるので使うべきではないのでwarningが出るようになりました。</p>
-
-<p>```js</p>
-
-<div>{ {a: <span />, b: <span />} }</div>
-
-
-<p>```</p>
-
-<h3>問題点</h3>
-
-<ul>
-<li>列挙される順番はkeyに数値を指定した場合を除いては仕様として定義されてないので実装次第になってしまいます。</li>
-<li>一般的にobjectをmapとして扱うことは型システムやVMの最適化やコンパイラーにとって好ましくないし、さらにセキュリティ上のリスクもあって↓のような場合にもし<code>item.title === '__proto__'</code> を指定されたら&hellip;.</li>
-</ul>
-
-
-<p><code>js
-var children = {};
-items.forEach(item =&gt; children[item.title] = &lt;span /&gt;);
-return &lt;div&gt;{children}&lt;/div&gt;;
-</code></p>
-
-<h3>それに対する解決</h3>
-
-<ul>
-<li>ほとんどの場合、<code>key</code>を設定したReactElementの配列にすれば問題ないはずです。</li>
-</ul>
-
-
-<p>```js
-var children = items.map(item => <span key={item.title} />);</p>
-
-<div>{children}</div>
-
-
-<p>```</p>
-
-<ul>
-<li><code>this.props.children</code>を使った場合など、<code>key</code>を指定することが出来ない場合もあるかもしれません。その場合はv0.13で追加された<code>React.addons.createFragment</code>を使うことでKeyed ObjectからReactElementを作成することが出来ます。
-
-<ul>
-<li>注意として、これはまだrenderの戻り値として直接渡せるものではないので<div>などでラップしてあげる必要があります。</li>
-</ul>
-</li>
-</ul>
-
-
-<p>```js</p>
-
-<p><div>{React.addons.createFragment({ a: <div />, b: this.props.children })}</div>
-```</p>
-
-<h2><code>React.cloneElement</code>が追加されました</h2>
-
-<p>これはこれまで<code>React.addons.cloneWithProps</code>と似たAPIです。
-異なる点としては、<code>style</code>や<code>className</code>のmergeが行われなかったり<code>ref</code>が保持される点があります。
-<code>cloneWithProps</code>を使ってchildrenを複製した時に<code>ref</code>が保持されなくて問題となるという報告が多くあったのでこのAPIでは<code>ref</code>を保持するようになりました。
-<code>cloneElement</code>時に<code>ref</code>を指定すると上書きされます。</p>
-
-<p><code>js
-var newChildren = React.Children.map(this.props.children, function(child) {
-  return React.cloneElement(child, { foo: true })
-});
-</code></p>
-
-<p>このAPIはv0.13でPropがimmutableなものとして扱われるようになったことで、Propを変更するためにelementをcloneする機会が増えたため必要となりました。
-<code>React.addons.cloneWithProps</code>はそのうちdeprecateになりますが今回のタイミングではなりません。</p>
-
-<h2><code>React.addons.classSet</code>がdeprecatedになりました</h2>
-
-<p>必要な場合は<a href="https://www.npmjs.com/package/classnames">classnames</a>などを使用してください。</p>
-
-<h2>jsxコマンドで<code>--target</code>optionとしてECMAScript versionを指定出来るようになりました。 (Breaking Change)</h2>
-
-<p><code>es5</code>がデフォルトです。
-<code>es3</code>はこれまでの挙動ですが追加で予約語を安全に扱うようになりました(eg <code>this.static</code>は<code>this['static']</code>にIE8での互換性のために変換されます)。</p>
-
-<h2>jsxコマンドでES6 syntaxで変換した際にclassメソッドがdefaultではenumerableではなくなりました</h2>
-
-<p><code>Object.defineProperty</code>を使用しているため、IE8などをサポートしたい場合は<code>--target es3</code>optionを渡す必要があります。</p>
-
-<ul>
-<li>Original</li>
-</ul>
-
-
-<p>```js
-class Hello extends React.Component {
-  foo() {</p>
-
-<pre><code>console.log("foo");
-</code></pre>
-
-<p>  }
-  render() {</p>
-
-<pre><code>return &lt;div&gt;hello&lt;/div&gt;;
-</code></pre>
-
-<p>  }
-}
-Hello.static = {
-  bar() {</p>
-
-<pre><code>console.log("bar");
-</code></pre>
-
-<p>  }
-};
-```</p>
-
-<ul>
-<li>ES5</li>
-</ul>
-
-
-<p>```js
-var <strong><strong>Class0=React.Component;for(var </strong></strong>Class0<strong><strong>Key in </strong></strong>Class0){if(<strong><strong>Class0.hasOwnProperty(</strong></strong>Class0<strong><strong>Key)){Hello[</strong></strong>Class0<strong><strong>Key]=</strong></strong>Class0[<strong><strong>Class0</strong></strong>Key];}}var <strong><strong>SuperProtoOf</strong></strong>Class0=<strong><strong>Class0===null?null:</strong></strong>Class0.prototype;Hello.prototype=Object.create(<strong><strong>SuperProtoOf</strong></strong>Class0);Hello.prototype.constructor=Hello;Hello.<strong>superConstructor</strong>=<strong><strong>Class0;function Hello(){&ldquo;use strict&rdquo;;if(</strong></strong>Class0!==null){____Class0.apply(this,arguments);}}
-  Object.defineProperty(Hello.prototype,&ldquo;foo&rdquo;,{writable:true,configurable:true,value:function() {&ldquo;use strict&rdquo;;</p>
-
-<pre><code>console.log("foo");
-</code></pre>
-
-<p>  }});
-  Object.defineProperty(Hello.prototype,&ldquo;render&rdquo;,{writable:true,configurable:true,value:function() {&ldquo;use strict&rdquo;;</p>
-
-<pre><code>return React.createElement("div", null, "hello");
-</code></pre>
-
-<p>  }});</p>
-
-<p>Hello.static = {
-  bar:function() {</p>
-
-<pre><code>console.log("bar");
-</code></pre>
-
-<p>  }
-};
-```</p>
-
-<ul>
-<li>ES3</li>
-</ul>
-
-
-<p>```js
-var <strong><strong>Class0=React.Component;for(var </strong></strong>Class0<strong><strong>Key in </strong></strong>Class0){if(<strong><strong>Class0.hasOwnProperty(</strong></strong>Class0<strong><strong>Key)){Hello[</strong></strong>Class0<strong><strong>Key]=</strong></strong>Class0[<strong><strong>Class0</strong></strong>Key];}}var <strong><strong>SuperProtoOf</strong></strong>Class0=<strong><strong>Class0===null?null:</strong></strong>Class0.prototype;Hello.prototype=Object.create(<strong><strong>SuperProtoOf</strong></strong>Class0);Hello.prototype.constructor=Hello;Hello.<strong>superConstructor</strong>=<strong><strong>Class0;function Hello(){&ldquo;use strict&rdquo;;if(</strong></strong>Class0!==null){____Class0.apply(this,arguments);}}
-  Hello.prototype.foo=function() {&ldquo;use strict&rdquo;;</p>
-
-<pre><code>console.log("foo");
-</code></pre>
-
-<p>  };
-  Hello.prototype.render=function() {&ldquo;use strict&rdquo;;</p>
-
-<pre><code>return React.createElement("div", null, "hello");
-</code></pre>
-
-<p>  };</p>
-
-<p>Hello[&ldquo;static&rdquo;] = {
-  bar:function() {</p>
-
-<pre><code>console.log("bar");
-</code></pre>
-
-<p>  }
-};
-```</p>
-
-<h2>JSXによる変換でharmony optionを有効にすることでspread operatorを使えるようになりました</h2>
-
-<p>JSXの中ではこれまでもspread attributesとしてサポートしていましたが、JSのコード内でも使えるようになりました。</p>
-
-<p><code>js
-var [a, b, ...other] = [1,2,3,4,5];
-</code></p>
-
-<h2>JSXのparseに変更があります (Breaking Change)</h2>
-
-<p>elementの内側に<code>&gt;</code> or <code>}</code> を使った時に以前は文字列として扱われましたがparseエラーになるようになりました。</p>
-
-<p><code>js
-render() {
-  return &lt;div&gt;} or &gt;&lt;/div&gt;; // parse error!
-}
-</code></p>
-
-<h2>v0.14に向けて</h2>
-
-<p>今回の変更を踏まえてReact v0.14では静的な要素においていくつかの最適化が可能になります。
-これらの最適化は以前はtemplate-baseなフレームワークでのみ可能でしたが、ReactでもJSXと<code>React.createElement/Factory</code>のどちらでも可能になります。</p>
-
-<p>詳細は下記のissueにあります。
-まだ議論もされてないので変わる可能性は大きいと思いますが。</p>
-
-<h3>Reuse Constant Value Types</h3>
-
-<ul>
-<li><a href="https://github.com/facebook/react/issues/3226">https://github.com/facebook/react/issues/3226</a></li>
-</ul>
-
-
-<p>これは静的なelementに変更できないものとして扱うことでdiffのコストを減らすというものです。</p>
-
-<p>例えばこんな感じにするとか</p>
-
-<p><code>js
-function render() {
-   return &lt;div className="foo" /&gt;;
-}
-↓
-var foo = &lt;div className="foo" /&gt;;
-function render() {
-   return foo;
-}
-</code></p>
-
-<h3>Tagging ReactElements</h3>
-
-<ul>
-<li><a href="https://github.com/facebook/react/issues/3227">https://github.com/facebook/react/issues/3227</a></li>
-</ul>
-
-
-<p>これはReactElementにtag付けをしてそれを使ってdiffアルゴリズムを最適化するというもののようです。</p>
-
-<h3>Inline ReactElements</h3>
-
-<ul>
-<li><a href="https://github.com/facebook/react/issues/3228">https://github.com/facebook/react/issues/3228</a></li>
-</ul>
-
-
-<p>これはproductionビルドのときに、React.createElementではなくてinline objectに変換することでReact.createElementのコストを削減するというものです。</p>
-
-<p>こんな感じ</p>
-
-<p><code>js
-&lt;div className="foo"&gt;{bar}&lt;Baz key="baz" /&gt;&lt;/div&gt;
-↓
-{ type: 'div', props: { className: 'foo', children:
-  [ bar, { type: Baz, props: { }, key: 'baz', ref: null } ]
-}, key: null, ref: null }
-</code></p>
-
-<p>こうするとReact.createElementの時に行っているPropTypesやkeyに対するvalidationが出来ないので、developmentビルドの時には適用しないことを想定しているようです。</p>
-
-<hr />
-
-<p>というわけで、React v0.13をダラダラと書いてみました。</p>
 ]]></content>
   </entry>
   
