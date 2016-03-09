@@ -87,7 +87,7 @@ jQueryからReactまでそのライブラリをどのように使うのかでは
 
 <p>フロントエンドを普段からバリバリ書いている人ではなく、たまにフロントエンドを触ろうと思っても次から次へと色々なライブラリや技術が登場してきてよくわからないという人に対して、今何が起きているのかを伝えることが出来ればと思っています。</p>
 
-<p>{% img /images/yapc2015-slide.png &lsquo;YAPC Asia 2015 slide&rsquo; %}</p>
+<p><img src="/images/yapc2015-slide.png" title="&lsquo;YAPC Asia 2015 slide&rsquo;" ></p>
 
 <p>是非来てください！</p>
 ]]></content>

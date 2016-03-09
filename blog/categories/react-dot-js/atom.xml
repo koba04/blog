@@ -30,7 +30,7 @@
 
 <p>connpassの管理画面によると<strong>75/80人</strong>の方が参加してくださいました。感謝！</p>
 
-<p>{% img /images/reactjs-meetup3.jpg &lsquo;React.js meetup #3&rsquo; %}</p>
+<p><img src="/images/reactjs-meetup3.jpg" title="&lsquo;React.js meetup #3&rsquo;" ></p>
 
 <!-- more -->
 

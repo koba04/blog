@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-03-09T13:30:15+09:00</updated>
+  <updated>2016-03-09T13:30:21+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,247 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js v0.15 changes]]></title>
+    <link href="http://blog.koba04.com/post/2016/03/09/react-js-v15-changes/"/>
+    <updated>2016-03-09T13:07:52+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/03/09/react-js-v15-changes</id>
+    <content type="html"><![CDATA[<p>React.js v15のRC版がリリースされたので変更内容などを整理したいと思います。</p>
+
+<p><a href="https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html">https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>% npm install --save react@15.0.0-rc.1 react-dom@15.0.0-rc.1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>今回の一番大きな変更はバージョン番号かなと思います。</p>
+
+<p>0.14から15に。</p>
+
+<p>0.x系だとproduction readyではないと思われることから一気に15.0になりましたが0.がなくなっただけで大きな変化があるわけでもないです。
+なぜ1.0ではないのかというと1.0というバージョン番号は特別意味のあるものとして扱われるので、そうではなくてすでにproduction readyでありsemverに従っているということを明確にするために0.を取って15.0になりました。</p>
+
+<p><a href="https://facebook.github.io/react/blog/2016/02/19/new-versioning-scheme.html">https://facebook.github.io/react/blog/2016/02/19/new-versioning-scheme.html</a></p>
+
+<p>ちなみにこれまでもminor version(0.13 &ndash;> 0.14)などでは破壊的な変更がありましたがpatch version(0.14.1 &ndash;> 0.14.2)などは基本的には破壊的な変更はなかったのでバージョンアップのサイクルなどが変わることはないと思います。
+（patch versionの更新でUndocumentedなfeatureで破壊的な変更が入ることはありましたが&hellip;）</p>
+
+<p>これまでも破壊的な変更をする際は基本的には前のバージョンでwarningを入れてから更新するので、今回もすでに0.14.7を使っていて特にwarningなどが出力されていないのであれば問題なく15.0にアップデートできると思います。</p>
+
+<!-- more -->
+
+
+<p>ちなみにIE8のサポートについてはまだIE8対応のコードは削除されていないので動作するはずですが、今後はIE8のためだけのバグFixなどは行わないというステータスです。</p>
+
+<p><a href="https://facebook.github.io/react/blog/2016/01/12/discontinuing-ie8-support.html">https://facebook.github.io/react/blog/2016/01/12/discontinuing-ie8-support.html</a></p>
+
+<h2>Major changes</h2>
+
+<h3>document.createElement is in and data-reactid is out</h3>
+
+<p>これまではReactで構築した全てのDOMに対して<code>data-reactid</code>という属性が付与されていましたがそれが付与されなくなりました。すっきりしていいですね。
+ReactDOM.renderを行ったルートの要素には<code>data-reactroot</code>という属性が付与されます。</p>
+
+<p>またこれまでは多くの場合で<code>document.createElement</code>を使うよりも高速であるという理由から初期マウント時にはHTML文字列を生成してinnerHTMLで流し込んでいましたが、ブラウザーの改善などにより必ずしもそうとも言えなくなってきたので<code>document.createElement</code>を使って作成するように変更されました。</p>
+
+<p><code>data-reactid</code>がなぜ必要だったのかはReactのイベントの仕組みに関係しています。
+ReactではイベントハンドリングはそれぞれのReactElementと対応付けられたDOM要素にイベントリスナーを登録してハンドリングするのではなく、<code>ReactDOM.render</code>で指定したルートのDOM要素だけにイベントリスナーを登録してそこで全てのイベントをハンドリングしています。
+ルートで受け取ったイベントがどのReactElementと対応付けられたDOMで発生したのかを判定するために<code>data-reactid</code>が使用されていました。</p>
+
+<p>イベントは頻繁に発生するため内部ではキャッシュなどを駆使して高速化が図られていたのですがそれによるバグも多く、今回HTML文字列ではなくDOM要素を作成するようになり、DOM要素を保持しておけばいいので<code>data-reactid</code>を使ったマッピング情報を保持しておく必要がなくなりました。</p>
+
+<p>ちなみに<code>ReactDOM.renderToString</code>を使って生成したHTML文字列には変わらず<code>data-reactid</code>が付与されています。</p>
+
+<h3>No more extra <span>s</h3>
+
+<p><code>{name}</code>などのように変数を文字列として埋め込んだ際にこれまでは差分更新のために<code>span</code>タグで囲まれていたのがcomment nodeに変更されました。</p>
+
+<ul>
+<li>v0.14</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;app&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">data-reactid=</span><span class="s">&quot;.0&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;span</span> <span class="na">data-reactid=</span><span class="s">&quot;.0.0&quot;</span><span class="nt">&gt;</span>Hello <span class="nt">&lt;/span&gt;</span>
+</span><span class='line'><span class="nt">&lt;span</span> <span class="na">data-reactid=</span><span class="s">&quot;.0.1&quot;</span><span class="nt">&gt;</span>React<span class="nt">&lt;/span&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>v15</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;app&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;div</span> <span class="na">data-reactroot=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="c">&lt;!-- react-text: 2 --&gt;</span>Hello <span class="c">&lt;!-- /react-text --&gt;</span>
+</span><span class='line'><span class="c">&lt;!-- react-text: 3 --&gt;</span>React<span class="c">&lt;!-- /react-text --&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この変更はマークアップ構造の変更を生むので更新する際には注意が必要です。
+特にCSS周りやテストでspanが挿入されることに依存したコードを書いていると壊れます。</p>
+
+<p>元々が意図しないマークアップが挿入されていたのでそれがなくなってよかったんじゃないでしょうか。</p>
+
+<h3>Rendering null now uses comment nodes</h3>
+
+<p>renderメソッドでnullを返した場合に、これまでは<code>&lt;noscript&gt;</code>タグがrenderされていましたがcomment nodeに変更されました。
+この変更もマークアップ構造の変更を生むので特に<code>:nth-child</code>などのセレクターを使っている場合には注意が必要です。</p>
+
+<p>また下記のエントリーにもあるように無駄に<code>&lt;noscript&gt;</code>タグが更新されていたような場合に対するパフォーマンスの改善となります。</p>
+
+<p><a href="http://benchling.engineering/deep-dive-react-perf-debugging/">http://benchling.engineering/deep-dive-react-perf-debugging/</a></p>
+
+<h3>Improved SVG support</h3>
+
+<p>全てのSVGタグがサポートされるようになりました。一般的ではないタグは<code>React.DOM</code>のヘルパーとしては提供されていませんが、<code>React.createElement</code>で全てのSVGタグを作成できます。
+全てのSVGタグはキャメルケースやハイフンなどそのままの指定で作成できます。
+<code>gradientTransform</code>は<code>gradientTransform</code>のままで<code>clip-path</code>は<code>clip-path</code>のまま指定します。</p>
+
+<p>ちなみにクラスを指定する場合は<code>className</code>ではなくて、<code>class</code>で指定します。custom elementsと同じです。
+それに関するissueはこちら。</p>
+
+<p><a href="https://github.com/facebook/react/issues/6211">https://github.com/facebook/react/issues/6211</a></p>
+
+<h2>Breaking changes</h2>
+
+<p>v15で最も大きなBreaking changeは上に書いたspanタグを使わなくなったことによるマークアップ構造の変化です。</p>
+
+<p>その他では、v0.14でwaringsを出力していたDeprecatedなAPIが完全に削除されました。</p>
+
+<ul>
+<li><p>Reactのパッケージから<code>findDOMNode</code>, <code>render</code>, <code>renderToString</code>, <code>renderToStaticMarkup</code>, <code>unmountComponentAtNode</code>が削除されました。代わりにReactDOMのパッケージにある同名のAPIを使います。</p></li>
+<li><p>Addonとして提供されていた<code>batchedUpdates</code>と<code>cloneWithProps</code>が削除されました。</p></li>
+<li><p><code>setProps</code>, <code>replaceProps</code>, <code>getDOMNode</code>のAPIが削除されました。</p></li>
+</ul>
+
+
+<h2>New deprecations, introduced with a warning</h2>
+
+<p><code>LinkedStateMixin</code>と<code>valueLink</code>はほとんど使われておらず、v16で廃止するためのwarningを追加されます。</p>
+
+<p><a href="https://facebook.github.io/react/docs/two-way-binding-helpers.html">https://facebook.github.io/react/docs/two-way-binding-helpers.html</a></p>
+
+<p>必要な場合は下記のパッケージを利用してください。</p>
+
+<p><a href="https://www.npmjs.com/package/react-linked-input">https://www.npmjs.com/package/react-linked-input</a></p>
+
+<h2>New helpful warnings</h2>
+
+<ul>
+<li>developmentビルド(<code>NODE_ENV</code>が<code>production</code>でない)にも関わらずminifiedされている場合はproductionビルドを使うようにwarningが出ます。
+
+<ul>
+<li>Reactの中のコードを見たことがある人であればproductionビルドにする必要性がわかるはず&hellip;。developmentビルドには大量のデバッグやwarning用のコードが含まれています。</li>
+</ul>
+</li>
+<li>styleのwidthやmarginに数値を渡すと自動で単位(px)を付与してくれますが、その際に数値を文字列として渡しているとwarningが出ます。将来のバージョンでは文字列の場合は単位が自動で付与されなくなります。
+
+<ul>
+<li><code>&lt;div style={ {width: 10} }&gt;</code>はOK、<code>&lt;div style={ {width: "10"} }&gt;</code>はwarningが出ます。</li>
+</ul>
+</li>
+<li>SyntheticEventに追加でpropertyをセットしようとしたり、すでに解放されているのにアクセスしようとするとwarningが出力されます。
+
+<ul>
+<li>追加でpropertyをセットした場合にwarningが出るのはES2015のProxiesがサポートされている環境のみです。ちなみに自分が実装しました。</li>
+</ul>
+</li>
+<li>ReactElementの<code>ref</code>と<code>key</code>のPropにアクセスしようとするとwarningが出力されます。これらはReact自体が使うためのPropでkeyで使った値が必要な場合は別途Propとして設定する必要があります。</li>
+<li>DOM ElementのPropに対して、<code>onClick</code>を<code>onclick</code>のように大文字・小文字の指定が間違っている場合にはwarningが出力されるようになりました。</li>
+</ul>
+
+
+<h2>Notable bug fixes</h2>
+
+<ul>
+<li>幾つかのメモリリークが修正されています。</li>
+</ul>
+
+
+<hr />
+
+<p>SyntheticEventでのメモリリークについては自分が修正したので紹介しておくとSyntheticEventの<code>target</code>属性が正しく解放されるようになりました。</p>
+
+<p>SyntheticEventはPoolingされており、イベントハンドラーの処理が終了すると初期化されPoolに戻るのですが一番よく使う<code>target</code>属性だけ解放されていませんでした。
+したがって、下記のようなコードはv0.14では動作していましたがv15では動作しません。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">const</span> <span class="nx">Component</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">));</span> <span class="c1">// &lt;div&gt;click&lt;/div&gt;</span>
+</span><span class='line'>    <span class="p">}}</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="nx">click</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これは<code>onClick</code>が実行された時点でSyntheticEvent(<code>e</code>)が初期化されており、setTimeoutのコールバック実行時にはすでにtargetの値が初期化(null)されているためです。
+上記の場合、<code>target</code>をローカル変数として保持するか<code>e.persist()</code>を使って保持する必要があります。</p>
+
+<p>SyntheticEventがPoolingされているのは大量のイベントオブジェクトを作成することで発生するGCを避けるなどパフォーマンス上の理由からなのですが、モダンなブラウザーではもう必要ないのではないかということでPoolingをやめることが検討されています。</p>
+
+<p>SyntheticEvent周りは自分が追加したProxyを使ったコードなどかなり混沌としてきているのでPoolingやめてリファクタリングするのはとてもいいと思います。やりたい&hellip;。</p>
+
+<p><a href="https://github.com/facebook/react/issues/6190">https://github.com/facebook/react/issues/6190</a></p>
+
+<hr />
+
+<ul>
+<li>Mobile SafariやIE10, 11などでのイベントの扱いが改善されています。</li>
+<li><code>cite</code>と<code>profile</code>の属性がサポートされました。</li>
+<li><code>onAnimationStart</code>, <code>onAnimationEnd</code>, <code>onAnimationIteration</code>, <code>onTransitionEnd</code>, <code>onInvalid</code>のイベントがサポートされました。また<code>object</code>要素に<code>onLoad</code>イベントが追加されました。</li>
+<li>ReactTransitionGroupで同時に複数要素を削除しようとした場合にも正しくハンドリングできるようになりました。</li>
+<li>shallowCompareなどのいくつかの場所で<code>Object.is</code>による比較が行われるようになりました(実際にはpolyfill)。これにより、<code>+0 !== -0</code>となったり<code>NaN === NaN</code>となります。
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is</a></li>
+</ul>
+</li>
+<li><p>ReactDOMがデフォルトではpropertyとしてではなくattributeとして扱うようになります。これによるEdge caseなバグが修正されました。また属性値が<code>null</code>の場合に属性が完全に削除されるようになりました。これによりブラウザーがデフォルト値を設定しないようになります。</p></li>
+<li><p>あとblogにはありませんでしたが、Stateless Componentsが<code>null</code>を返せるようになったのは地味に嬉しいですね！</p></li>
+</ul>
+
+
+<h2>Regression?</h2>
+
+<ul>
+<li>15.0.0-rc.1では<code>onTouchTap</code>が動作していないようなので使っている人は注意した方がよさそうです。
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/6221">https://github.com/facebook/react/issues/6221</a></li>
+</ul>
+</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js meetup #3を開催しました]]></title>
@@ -5122,65 +5363,6 @@ nyanやtapやmocha形式のような出力形式のカスタマイズ以外に�
 <p>コミットログはこの辺り。 <a href="https://github.com/koba04/backbone-boilerplate/commit/2fadec43e46f99cce0d3d828c66d4b12d758f4f0">https://github.com/koba04/backbone-boilerplate/commit/2fadec43e46f99cce0d3d828c66d4b12d758f4f0</a></p>
 
 <p><img src="http://blog.koba04.com/images/power-assert.png" title="'power-assert'" ></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Release Marionette 2.0!]]></title>
-    <link href="http://blog.koba04.com/post/2014/06/19/release-marionette-2_0/"/>
-    <updated>2014-06-19T00:53:03+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/06/19/release-marionette-2_0</id>
-    <content type="html"><![CDATA[<p>Marionette.jsの2.0がリリースされましたね！(2.0.1も出ましたが..)</p>
-
-<p>1.x系では入れることが出来なかったbreakingな変更がかなりあるので内容を確認してみました。</p>
-
-<p><a href="https://github.com/marionettejs/backbone.marionette/releases/tag/v2.0.0">https://github.com/marionettejs/backbone.marionette/releases/tag/v2.0.0</a></p>
-
-<!-- more -->
-
-
-<h2>Translate release note in Japanese</h2>
-
-<p>というわけで、上記のリリースノートをざっくり日本語に訳してみたのを @samccone が公開してもいいと言ってくれたので公開します。
-実際に動作確認して確証を取るまではやってないので間違っているところがあれば指摘してもらえるとありがたいです。</p>
-
-<p><a href="https://gist.github.com/koba04/c375231f871a6cd1a42c">https://gist.github.com/koba04/c375231f871a6cd1a42c</a></p>
-
-<p>view.closeがview.destoryになったり、LayoutがLayoutViewに変わったりといったI/Fがガッツリ変わるものから、triggerMethodがmethodが呼ばれたあとにeventがtriggerされるように順番が変わったなど、地味だけどハマりそうな変更まで色々あります。</p>
-
-<p>ただ、基本的には大きな機能追加というよりはbreakingになるため出来なかったわかりにくいかった部分の改善などが主な感じです。</p>
-
-<p>わかりやすくなってよくなったと思います。</p>
-
-<h2>1.x to 2.0</h2>
-
-<p>実際にどうかなと思って、1系で作ってたMarionetteのサンプルプロジェクトを2.0に移行してみました。</p>
-
-<ul>
-<li><p>2.0対応したコミットログはこの辺り</p>
-
-<ul>
-<li><a href="https://github.com/koba04/backbone-boilerplate/commit/7eb3ae0537be2c8a004aed31743bc7ece46c6f95">https://github.com/koba04/backbone-boilerplate/commit/7eb3ae0537be2c8a004aed31743bc7ece46c6f95</a></li>
-</ul>
-</li>
-</ul>
-
-
-<p>LayoutをLayoutViewにしたりitemViewをchildViewにしたりと機械的に出来る変更だけでいけるかなと思いましたが、regionのelがDOMに存在しない時に例外を投げるようになった変更の影響でテストの時にDOMへの反映をちゃんとやってなくてエラーになり、その対応に地味に時間を取られたりしました。</p>
-
-<p>実際のプロダクトの方はちょっと大変かもと思いましたが、テスト書いてあればまぁ移行できそうな印象です。</p>
-
-<h2>Upgrade Guide</h2>
-
-<p>あた、ここにpython製の1.xから2.0への移行scriptがあるのでそれを試してみるのもいいかもしれないですね。</p>
-
-<p><a href="https://github.com/marionettejs/Marionette.Upgrade">https://github.com/marionettejs/Marionette.Upgrade</a></p>
-
-<h2>Announce</h2>
-
-<p>蛇足ですが、「天下一クライアントサイドJS MV*フレームワーク武道会」でMarionette派としてLTします。2.0がいいタイミングで出たので2.0のコードベースで出来るのでよかったです。</p>
-
-<p><a href="http://connpass.com/event/6910/">http://connpass.com/event/6910/</a></p>
 ]]></content>
   </entry>
   

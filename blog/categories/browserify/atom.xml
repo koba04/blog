@@ -297,7 +297,7 @@ assert(
 
 
 <p><template>
-  <div v-component="{{view}}" v-transition></div>
+  <div v-component="" v-transition></div>
 </template></p>
 
 
@@ -635,7 +635,7 @@ opacity: 1
 </ul>
 
 
-<p>{% img /images/last-fm-top-tracks.png &lsquo;Atrist Top Tracks by Last.FM&rsquo; %}</p>
+<p><img src="/images/last-fm-top-tracks.png" title="&lsquo;Atrist Top Tracks by Last.FM&rsquo;" ></p>
 
 <ul>
 <li><a href="http://koba04.com/last-fm-top-tracks/">http://koba04.com/last-fm-top-tracks/</a></li>
