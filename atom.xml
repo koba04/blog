@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-03-09T13:30:21+09:00</updated>
+  <updated>2016-03-09T13:38:07+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -64,7 +64,7 @@ ReactではイベントハンドリングはそれぞれのReactElementと対応
 
 <p>ちなみに<code>ReactDOM.renderToString</code>を使って生成したHTML文字列には変わらず<code>data-reactid</code>が付与されています。</p>
 
-<h3>No more extra <span>s</h3>
+<h3>No more extra <code>&lt;span&gt;</code>s</h3>
 
 <p><code>{name}</code>などのように変数を文字列として埋め込んだ際にこれまでは差分更新のために<code>span</code>タグで囲まれていたのがcomment nodeに変更されました。</p>
 
