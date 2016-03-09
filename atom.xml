@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-03-09T13:38:07+09:00</updated>
+  <updated>2016-03-09T18:59:12+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[React.js v0.15 changes]]></title>
+    <title type="html"><![CDATA[React.js v15.0 changes]]></title>
     <link href="http://blog.koba04.com/post/2016/03/09/react-js-v15-changes/"/>
     <updated>2016-03-09T13:07:52+09:00</updated>
     <id>http://blog.koba04.com/post/2016/03/09/react-js-v15-changes</id>
-    <content type="html"><![CDATA[<p>React.js v15のRC版がリリースされたので変更内容などを整理したいと思います。</p>
+    <content type="html"><![CDATA[<p>React.js v15.0のRC版がリリースされたので変更内容などを整理したいと思います。</p>
 
 <p><a href="https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html">https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html</a></p>
 
@@ -28,7 +28,7 @@
 
 <p>今回の一番大きな変更はバージョン番号かなと思います。</p>
 
-<p>0.14から15に。</p>
+<p>0.14から15.0に。</p>
 
 <p>0.x系だとproduction readyではないと思われることから一気に15.0になりましたが0.がなくなっただけで大きな変化があるわけでもないです。
 なぜ1.0ではないのかというと1.0というバージョン番号は特別意味のあるものとして扱われるので、そうではなくてすでにproduction readyでありsemverに従っているということを明確にするために0.を取って15.0になりました。</p>
