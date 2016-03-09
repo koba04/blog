@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "React.js v0.15 changes"
+title: "React.js v15.0 changes"
 date: 2016-03-09 13:07:52 +0900
 comments: true
 categories:
 ---
 
-React.js v15のRC版がリリースされたので変更内容などを整理したいと思います。
+React.js v15.0のRC版がリリースされたので変更内容などを整理したいと思います。
 
 https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html
 
@@ -16,7 +16,7 @@ https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html
 
 今回の一番大きな変更はバージョン番号かなと思います。
 
-0.14から15に。
+0.14から15.0に。
 
 0.x系だとproduction readyではないと思われることから一気に15.0になりましたが0.がなくなっただけで大きな変化があるわけでもないです。
 なぜ1.0ではないのかというと1.0というバージョン番号は特別意味のあるものとして扱われるので、そうではなくてすでにproduction readyでありsemverに従っているということを明確にするために0.を取って15.0になりました。
