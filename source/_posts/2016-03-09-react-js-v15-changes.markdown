@@ -52,7 +52,7 @@ ReactではイベントハンドリングはそれぞれのReactElementと対応
 
 ちなみに`ReactDOM.renderToString`を使って生成したHTML文字列には変わらず`data-reactid`が付与されています。
 
-### No more extra <span>s
+### No more extra `<span>`s
 
 `{name}`などのように変数を文字列として埋め込んだ際にこれまでは差分更新のために`span`タグで囲まれていたのがcomment nodeに変更されました。
 
