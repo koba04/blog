@@ -6,12 +6,20 @@ comments: true
 categories:
 ---
 
+------------------------
+**RC2が出たので追記**
+
+**RC2** ではIE、Edgeでマークアップの構造によって一部のテキストが表示されないバグ([#6246](https://github.com/facebook/react/issues/6246))とSVGに関する変更がrevertされました。
+
+------------------------
+
 React.js v15.0のRC版がリリースされたので変更内容などを整理したいと思います。
 
-https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html
+* https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html
+* http://facebook.github.io/react/blog/2016/03/16/react-v15-rc2.html
 
 ```
-% npm install --save react@15.0.0-rc.1 react-dom@15.0.0-rc.1
+% npm install --save react@15.0.0-rc.2 react-dom@15.0.0-rc.2
 ```
 
 今回の一番大きな変更はバージョン番号かなと思います。
@@ -94,14 +102,21 @@ http://benchling.engineering/deep-dive-react-perf-debugging/
 
 ### Improved SVG support
 
-全てのSVGタグがサポートされるようになりました。一般的ではないタグは`React.DOM`のヘルパーとしては提供されていませんが、`React.createElement`で全てのSVGタグを作成できます。
-全てのSVGタグはキャメルケースやハイフンなどそのままの指定で作成できます。
-`gradientTransform`は`gradientTransform`のままで`clip-path`は`clip-path`のまま指定します。
+**[更新]RC2でrevertされました**
 
-ちなみにクラスを指定する場合は`className`ではなくて、`class`で指定します。custom elementsと同じです。
-それに関するissueはこちら。
+~~全てのSVGタグがサポートされるようになりました。一般的ではないタグは`React.DOM`のヘルパーとしては提供されていませんが、`React.createElement`で全てのSVGタグを作成できます。~~
+~~全てのSVGタグはキャメルケースやハイフンなどそのままの指定で作成できます。~~
+~~`gradientTransform`は`gradientTransform`のままで`clip-path`は`clip-path`のまま指定します。~~
 
-https://github.com/facebook/react/issues/6211
+~~ちなみにクラスを指定する場合は`className`ではなくて、`class`で指定します。custom elementsと同じです。~~
+~~それに関するissueはこちら。~~
+
+~~ https://github.com/facebook/react/issues/6211 ~~
+
+このSVGに対する挙動の変更はcustom elementsの挙動と同様であったのですが、HTMLElementとの整合性(`class` -> `className`など)がなくなってしまうことが問題だということでrevertされました。
+なのでサポートされていないsvgの要素や属性があれば引き続きPRして反映する必要があります。こんな感じで。([#6267](https://github.com/facebook/react/pull/6267))
+
+将来的にはSVGもHTMLも普段SVGやHTMLと同じようにclassはclassのままで指定できるようになるのではないかなと思います。具体的な予定は示されていませんが...。
 
 ## Breaking changes
 
