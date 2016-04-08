@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-03-17T09:47:05+09:00</updated>
+  <updated>2016-04-08T10:00:00+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -18,7 +18,9 @@
     <link href="http://blog.koba04.com/post/2016/03/09/react-js-v15-changes/"/>
     <updated>2016-03-09T13:07:52+09:00</updated>
     <id>http://blog.koba04.com/post/2016/03/09/react-js-v15-changes</id>
-    <content type="html"><![CDATA[<hr />
+    <content type="html"><![CDATA[<p><strong>v15.0.0がリリースされました(2016/04/08)</strong></p>
+
+<hr />
 
 <p><strong>RC2が出たので追記</strong></p>
 
@@ -26,16 +28,17 @@
 
 <hr />
 
-<p>React.js v15.0のRC版がリリースされたので変更内容などを整理したいと思います。</p>
+<p>React.js v15.0がリリースされたので変更内容などを整理したいと思います。</p>
 
 <ul>
 <li><a href="https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html">https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html</a></li>
 <li><a href="http://facebook.github.io/react/blog/2016/03/16/react-v15-rc2.html">http://facebook.github.io/react/blog/2016/03/16/react-v15-rc2.html</a></li>
+<li><a href="http://facebook.github.io/react/blog/2016/04/07/react-v15.html">http://facebook.github.io/react/blog/2016/04/07/react-v15.html</a></li>
 </ul>
 
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>% npm install --save react@15.0.0-rc.2 react-dom@15.0.0-rc.2</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>% npm install --save react@15.0.0 react-dom@15.0.0</span></code></pre></td></tr></table></div></figure>
 
 
 <p>今回の一番大きな変更はバージョン番号かなと思います。</p>
@@ -244,10 +247,9 @@ ReactではイベントハンドリングはそれぞれのReactElementと対応
 <hr />
 
 <ul>
-<li>Mobile SafariやIE10, 11などでのイベントの扱いが改善されています。</li>
+<li>IE10, 11などでのイベントの扱いが改善されています。</li>
 <li><code>cite</code>と<code>profile</code>の属性がサポートされました。</li>
 <li><code>onAnimationStart</code>, <code>onAnimationEnd</code>, <code>onAnimationIteration</code>, <code>onTransitionEnd</code>, <code>onInvalid</code>のイベントがサポートされました。また<code>object</code>要素に<code>onLoad</code>イベントが追加されました。</li>
-<li>ReactTransitionGroupで同時に複数要素を削除しようとした場合にも正しくハンドリングできるようになりました。</li>
 <li>shallowCompareなどのいくつかの場所で<code>Object.is</code>による比較が行われるようになりました(実際にはpolyfill)。これにより、<code>+0 !== -0</code>となったり<code>NaN === NaN</code>となります。
 
 <ul>
