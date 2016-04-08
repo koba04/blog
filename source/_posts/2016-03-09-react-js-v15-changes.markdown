@@ -6,6 +6,8 @@ comments: true
 categories:
 ---
 
+**v15.0.0がリリースされました(2016/04/08)**
+
 ------------------------
 **RC2が出たので追記**
 
@@ -13,13 +15,14 @@ categories:
 
 ------------------------
 
-React.js v15.0のRC版がリリースされたので変更内容などを整理したいと思います。
+React.js v15.0がリリースされたので変更内容などを整理したいと思います。
 
 * https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html
 * http://facebook.github.io/react/blog/2016/03/16/react-v15-rc2.html
+* http://facebook.github.io/react/blog/2016/04/07/react-v15.html
 
 ```
-% npm install --save react@15.0.0-rc.2 react-dom@15.0.0-rc.2
+% npm install --save react@15.0.0 react-dom@15.0.0
 ```
 
 今回の一番大きな変更はバージョン番号かなと思います。
@@ -183,10 +186,9 @@ https://github.com/facebook/react/issues/6190
 
 ---------------------
 
-* Mobile SafariやIE10, 11などでのイベントの扱いが改善されています。
+* IE10, 11などでのイベントの扱いが改善されています。
 * `cite`と`profile`の属性がサポートされました。
 * `onAnimationStart`, `onAnimationEnd`, `onAnimationIteration`, `onTransitionEnd`, `onInvalid`のイベントがサポートされました。また`object`要素に`onLoad`イベントが追加されました。
-* ReactTransitionGroupで同時に複数要素を削除しようとした場合にも正しくハンドリングできるようになりました。
 * shallowCompareなどのいくつかの場所で`Object.is`による比較が行われるようになりました(実際にはpolyfill)。これにより、`+0 !== -0`となったり`NaN === NaN`となります。
   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
 * ReactDOMがデフォルトではpropertyとしてではなくattributeとして扱うようになります。これによるEdge caseなバグが修正されました。また属性値が`null`の場合に属性が完全に削除されるようになりました。これによりブラウザーがデフォルト値を設定しないようになります。
