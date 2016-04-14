@@ -6,14 +6,11 @@ comments: true
 categories: react.js react-links
 ---
 
-これはReactに関する記事やきになるissueなどのリンクを紹介する記事です。
-
-
-# React Links vol.1 4/6〜4/14
-
+これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。
 
 今週はF8があったのでReact Native関連の記事が多くありました。
 
+<!-- more -->
 
 ## React v15
 
