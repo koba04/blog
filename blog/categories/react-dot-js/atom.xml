@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-04-08T10:00:00+09:00</updated>
+  <updated>2016-04-14T14:06:16+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,173 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React Links vol.1 4/16〜4/14]]></title>
+    <link href="http://blog.koba04.com/post/2016/04/14/reactjs-links-vol1/"/>
+    <updated>2016-04-14T13:17:31+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/04/14/reactjs-links-vol1</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事やきになるissueなどのリンクを紹介する記事です。</p>
+
+<h1>React Links vol.1 4/6〜4/14</h1>
+
+<p>今週はF8があったのでReact Native関連の記事が多くありました。</p>
+
+<h2>React v15</h2>
+
+<ul>
+<li><a href="http://facebook.github.io/react/blog/2016/04/07/react-v15.html">http://facebook.github.io/react/blog/2016/04/07/react-v15.html</a></li>
+<li><a href="https://facebook.github.io/react/blog/2016/04/08/react-v15.0.1.html">https://facebook.github.io/react/blog/2016/04/08/react-v15.0.1.html</a></li>
+</ul>
+
+
+<p>React v15がリリースされました。バグがあったのですぐに15.0.1がリリースされています。インストールする際には15.0.1を使用してください。</p>
+
+<p>細かいfeatureについてはブログ書いたのでそちらをみてください</p>
+
+<ul>
+<li><a href="http://blog.koba04.com/post/2016/03/09/react-js-v15-changes/">http://blog.koba04.com/post/2016/03/09/react-js-v15-changes/</a></li>
+</ul>
+
+
+<h2>React Native: A year in review</h2>
+
+<ul>
+<li><a href="https://code.facebook.com/posts/597378980427792/react-native-a-year-in-review/">https://code.facebook.com/posts/597378980427792/react-native-a-year-in-review/</a></li>
+</ul>
+
+
+<p>React Nativeが2013年の夏に社内の(?)hackathonで誕生してから、30,000以上のstarをgithubで得るようになるまでのStoryが書かれています。
+&ldquo;The React Native team has grown from around 10 to around 20 engineers in the past year"や"we are 1 percent finished. "とあるように、今後も力を入れていくことがわかります。
+Facebookのエンジニア以外からのcommitも30%くらいあって、Facebook以外でも使われていることがわかります。</p>
+
+<p>また、facebookがreact-nativeのリポジトリをどのように管理しているのかや、たくさんのissueやPRを処理するために作ったmention-botなどについても書かれていて、巨大なOSSをgithubでどう管理するかという点でも面白いです。</p>
+
+<p><a href="https://github.com/facebook/mention-bot">https://github.com/facebook/mention-bot</a></p>
+
+<h2>Building the F8 2016 App</h2>
+
+<ul>
+<li><a href="http://makeitopen.com/">http://makeitopen.com/</a></li>
+</ul>
+
+
+<p>ReactNativeを使ってF8のiOSとAndroidのアプリを作った際のことを、チュートリアルとして紹介しています。
+どのような構成にするのかを検討して、マルチプラットフォーム対応をどうするか、データ管理をどうするか、テストをどうするかなどが書かれていてとても参考になります。</p>
+
+<p>React使っている人は一度見てみるといいんじゃないかと思います。</p>
+
+<p>ReactNative + Flow + Redux + Jestな構成でサーバーサイドにはOSSのParse Serverを使っているようです。
+エディターはNuclideだそうです。</p>
+
+<h2>React Native on the Universal Windows Platform</h2>
+
+<ul>
+<li><a href="https://blogs.windows.com/buildingapps/2016/04/13/react-native-on-the-universal-windows-platform/">https://blogs.windows.com/buildingapps/2016/04/13/react-native-on-the-universal-windows-platform/</a></li>
+</ul>
+
+
+<p>MicroSoftがUniversal Windows Platform (UWP)対応をReactNativeに追加することが書かれています。
+これにより、WindowsのPCがモバイルだけでなく、Xbox OneやHoloLensのためのアプリをReactNativeで作れるようになります。
+記事では、F8のアプリをWindows 10 mobileとDesktop向けに作ったことが紹介されています。</p>
+
+<p>JavaScriptのランタイムにはChakraが使われているみたいです。</p>
+
+<p>また、VSCodeのReactNative拡張やReactNativeを使ったWindowsアプリに対するCodePush対応などを行っているようです。</p>
+
+<ul>
+<li><a href="http://microsoft.github.io/code-push/articles/ReactNativeWindows.html">http://microsoft.github.io/code-push/articles/ReactNativeWindows.html</a></li>
+</ul>
+
+
+<p>現在はforkしたrepositoryになっていますが、将来的にはReactNative本体と同期が取れるようにうまくやっていくようです。</p>
+
+<p><a href="https://github.com/ReactWindows/react-native">https://github.com/ReactWindows/react-native</a></p>
+
+<h2>core note 4/7</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-04/april-7.md">https://github.com/reactjs/core-notes/blob/master/2016-04/april-7.md</a></li>
+</ul>
+
+
+<p>Reactのcoreチームのmeeting noteが公開されています。
+以前はあったものの途中で削除されたBrowser Testingについて言及されているのは注目です。</p>
+
+<p>その他では、<em>ReactDOM.render() return value being <del>deprecated</del> legacy</em> (<a href="https://github.com/facebook/react/pull/6400">#6400</a>) も注目です。
+内部的なアルゴリズムの見直しをするために、ReactDOM.renderが将来的に戻り値を返さなくなります。
+戻り値を使いたい場合は、Refsを指定して取得することになりそうです。</p>
+
+<p>また、<em>Sebastian is moving some files from React Native to React</em> (<a href="https://github.com/facebook/react/pull/6338">#6338</a>)としてReactNativeのrenderer周りをreactのrepositoryに持ってきて、<code>react-native-renderer</code>として別パッケージにすることも予定されています。
+さらに<code>react-dom</code>から<code>react-dom-renderer</code>も切り離すことを検討されています。</p>
+
+<p>これによってカスタムrendererを作る時のI/Fが整備されて、わかりやすくなるといいなと思います。
+Windows対応もあったりでこの辺りを整理する優先度は高そうです。</p>
+
+<h2>Improve React performance with Babel</h2>
+
+<ul>
+<li><a href="https://medium.com/doctolib-engineering/improve-react-performance-with-babel-16f1becfaa25">https://medium.com/doctolib-engineering/improve-react-performance-with-babel-16f1becfaa25</a></li>
+</ul>
+
+
+<p>productionビルドやBabelの最適化を使った場合のパフォーマンスについてのエントリーです。当たり前ですが、developmentビルドとproductionビルドのパフォーマンスの違いが目立っています。
+Babelを使った最適化の場合でも数%の向上が見られますが、アプリケーションによるので利用する際は計測してみて導入することをおすすめします。</p>
+
+<h2>unofficial React Router docs</h2>
+
+<ul>
+<li><a href="http://knowbody.github.io/react-router-docs/">http://knowbody.github.io/react-router-docs/</a></li>
+</ul>
+
+
+<p><a href="https://github.com/knowbody">knowbody</a>さんによる非公式なReact Routerのドキュメントです。WIPですが、公式を読んでよくわからなかった人は確認してみるといいかもしれません。</p>
+
+<h2>React Router is dead. Long live rrtr.</h2>
+
+<p><strong>下のエントリーは現在は削除されています。</strong></p>
+
+<ul>
+<li><del><a href="https://medium.com/@taion/react-router-is-dead-long-live-rrtr-d229ca30e318#.vd0qjkccc">https://medium.com/@taion/react-router-is-dead-long-live-rrtr-d229ca30e318#.vd0qjkccc</a></del></li>
+</ul>
+
+
+<p>React Routerでここ数ヶ月中心的にcontributeしていた<a href="https://github.com/taion">taion</a>さんがリリースのサイクルの遅さやプロセスに不満を抱いてforkして<a href="https://github.com/taion/rrtr">rrtr</a>を作ったことを表明したエントリーです。</p>
+
+<p>それに対して、React Routerのオーナーである<a href="https://github.com/ryanflorence">ryanflorence</a>さんもgistでリアクションしています。</p>
+
+<ul>
+<li><del><a href="https://gist.github.com/ryanflorence/08a056374e24a7cda3c459e3d7d63e6e">https://gist.github.com/ryanflorence/08a056374e24a7cda3c459e3d7d63e6e</a></del> (<strong>これも削除済み</strong>)</li>
+</ul>
+
+
+<p>で下の通り、結局丸く収まりました。</p>
+
+<ul>
+<li><a href="https://medium.com/rackt-and-roll/rrtr-is-dead-long-live-react-router-ce982f6f1c10">https://medium.com/rackt-and-roll/rrtr-is-dead-long-live-react-router-ce982f6f1c10</a></li>
+</ul>
+
+
+<p>結果的に、PRをmergeするプロセスや定期的なリリースなど、プロジェクトの運営方針が行われました。</p>
+
+<p>ちなみにtaionさんはhistoryと組み合わせてscroll位置の復元などをサポートするscroll-behaviorというライブラリーも公開しています。</p>
+
+<ul>
+<li><a href="https://github.com/taion/scroll-behavior">https://github.com/taion/scroll-behavior</a></li>
+</ul>
+
+
+<h2>crysislinux/chrome-react-perf</h2>
+
+<ul>
+<li><a href="https://github.com/crysislinux/chrome-react-perf">https://github.com/crysislinux/chrome-react-perf</a></li>
+</ul>
+
+
+<p>Perfによる計測をChrome Developer Toolsで行うことができるライブラリーです。
+カジュアルに計測が出来そうなのでよさそうです。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js meetup #3を開催しました]]></title>
@@ -883,256 +1050,6 @@ Stateless Componentsが加わったりはしていますが、基本的には無
 <p>イベントの管理者側でやるのは初めてだったので色々至らない点があったかもしれませんが、準備してくださったDeNAの方々、発表者の方々、参加者の皆様、本当にありがとうございました！！</p>
 
 <p>感想とかブログに書いてもらえると嬉しいです！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Setting up minimum single page application]]></title>
-    <link href="http://blog.koba04.com/post/2015/03/19/setting-up-minimum-single-page-application/"/>
-    <updated>2015-03-19T18:54:49+09:00</updated>
-    <id>http://blog.koba04.com/post/2015/03/19/setting-up-minimum-single-page-application</id>
-    <content type="html"><![CDATA[<p>React.jsなどを試そうとするときに、browserify? gulp? grunt? webpack? どれ使えばいいのとか、テストは何を使えばいいのかとかよくわからないというのをたまに聞くので、最低限の設定だけどES6で書けたりautobuildやlivereloadが出来る構成のサンプルを作ってみました。</p>
-
-<p>あと、テストはkarma + mocha + power-assertでchromeでテスト出来るようにしています。</p>
-
-<!-- more -->
-
-
-<p>本当はpackage.jsonだけにしたかったのですがkarmaの設定だけは別ファイルになってます&hellip;。
-テストが必要ない場合は、package.jsonの指定だけで大丈夫です。</p>
-
-<ul>
-<li><a href="https://github.com/koba04/minimum-spa-boilerplate">https://github.com/koba04/minimum-spa-boilerplate</a></li>
-</ul>
-
-
-<p>git cloneして<code>npm install</code>して<code>npm start</code>すればいいだけの設定になっています。</p>
-
-<p><code>
-git clone git@github.com:koba04/minimum-spa-boilerplate.git
-npm install
-npm start
-</code></p>
-
-<p><img src="http://i.gyazo.com/f906464bfb325437c5c905f80a5b976d.gif" alt="gif" /></p>
-
-<h2>概要</h2>
-
-<h3>tree</h3>
-
-<p><code>
-➜  tree -L 1
-.
-├── README.md
-├── index.js         // エントリーポイント
-├── karma.conf.js    // karmaの設定
-├── lib              // ソース
-├── node_modules
-├── package.json     // 設定はこの中
-├── public           // document root
-└── test             // テスト
-</code></p>
-
-<h3>package.json</h3>
-
-<p>基本的には<code>npm init</code>で作ったものに色々インストールしてnpm scriptの設定をしているだけです。</p>
-
-<p>```json
-  &ldquo;scripts&rdquo;: {</p>
-
-<pre><code>"build": "NODE_ENV=production browserify index.js -t babelify | uglifyjs &gt; public/bundle.js",
-"watch": "watchify -d index.js -t babelify -o public/bundle.js -v",
-"server": "browser-sync start --server public --files public/**/*",
-"test": "karma start",
-"start": "npm run watch &amp; npm run server &amp; npm test"
-</code></pre>
-
-<p>  },</p>
-
-<p>  &ldquo;dependencies&rdquo;: {</p>
-
-<pre><code>"react": "^0.13.1"
-</code></pre>
-
-<p>  },
-  &ldquo;devDependencies&rdquo;: {</p>
-
-<pre><code>"babelify": "^5.0.4",
-"browser-sync": "^2.3.1",
-"browserify": "^9.0.3",
-"espowerify": "^0.10.0",
-"karma": "^0.12.31",
-"karma-browserify": "^4.0.0",
-"karma-chrome-launcher": "^0.1.7",
-"karma-cli": "0.0.4",
-"karma-mocha": "^0.1.10",
-"mocha": "^2.2.1",
-"power-assert": "^0.10.2",
-"uglify-js": "^2.4.17",
-"watchify": "^2.4.0"
-</code></pre>
-
-<p>  }
-```
-<a href="https://github.com/koba04/minimum-spa-boilerplate/blob/master/package.json">https://github.com/koba04/minimum-spa-boilerplate/blob/master/package.json</a></p>
-
-<ul>
-<li><code>npm run build</code></li>
-</ul>
-
-
-<p>これはReactに依存したビルドになっているのですが、production用にビルドされたファイルを生成することを想定しています。</p>
-
-<ul>
-<li><code>npm run watch</code></li>
-</ul>
-
-
-<p>watchifyによってファイルが変更されたら自動的にbrowserifyのビルドが走るようになっています。
-watchifyはキャッシュするので二回目以降のビルドが高速化されるのもポイントです。</p>
-
-<ul>
-<li><code>npm run server</code></li>
-</ul>
-
-
-<p>BrowserSyncによって<code>public</code>をrootにしたserverを立ちあげつつ、<code>public</code>以下のファイルを監視してlivereloadするようになっています。</p>
-
-<ul>
-<li><code>npm test</code></li>
-</ul>
-
-
-<p>テストはkarmaを使うので<code>karma start</code>しているだけです。<code>karma</code>の設定は<code>karma.conf.js</code>にあります。</p>
-
-<ul>
-<li><code>npm start</code></li>
-</ul>
-
-
-<p>上記のweatchとbrowserとtestをまとめて実行するコマンドで、これだけ実行すれば開発を始められるようになっています。</p>
-
-<h3>karma</h3>
-
-<p>karmaは<code>karma init</code>で対話的に作成出来る<code>karma.conf.js</code>にbrowserifyの設定を追加したくらいです。</p>
-
-<p>```js
-// frameworks to use
-// available frameworks: <a href="https://npmjs.org/browse/keyword/karma-adapter">https://npmjs.org/browse/keyword/karma-adapter</a>
-frameworks: [&lsquo;mocha&rsquo;, &lsquo;browserify&rsquo;],</p>
-
-<p>// list of files / patterns to load in the browser
-files: [
-  &lsquo;test/<em>*/</em>.js&rsquo;
-],</p>
-
-<p>// list of files to exclude
-exclude: [
-],</p>
-
-<p>// preprocess matching files before serving them to the browser
-// available preprocessors: <a href="https://npmjs.org/browse/keyword/karma-preprocessor">https://npmjs.org/browse/keyword/karma-preprocessor</a>
-preprocessors: {
-  &lsquo;test/<em>*/</em>.js&rsquo;: &lsquo;browserify&rsquo;
-},</p>
-
-<p>browserify: {
-  debug: true,
-  transform: [</p>
-
-<pre><code>"babelify",
-"espowerify"
-</code></pre>
-
-<p>  ]
-},
-```</p>
-
-<p>karmaについては以前にも書いたのでそちらも。</p>
-
-<ul>
-<li><a href="http://blog.koba04.com/post/2014/06/23/karma-for-javascript-test-runner/">http://blog.koba04.com/post/2014/06/23/karma-for-javascript-test-runner/</a></li>
-</ul>
-
-
-<p>今回はカジュアルさを優先したので設定していませんが、travis-ciを使いたい場合は、<code>karma-phantomjs-launcher</code>を入れて<code>npm test</code>でPhantomJSで実行出来るようにすればOKだと思います。</p>
-
-<h3>Code</h3>
-
-<p>コードはこんな感じで書けます。</p>
-
-<p>```js
-import React from &lsquo;react&rsquo;;</p>
-
-<p>export default class App extends React.Component {
-  render() {</p>
-
-<pre><code>return &lt;div&gt;Hello World&lt;/div&gt;;
-</code></pre>
-
-<p>  }
-}
-```
-<a href="https://github.com/koba04/minimum-spa-boilerplate/blob/master/lib/components/app.js">https://github.com/koba04/minimum-spa-boilerplate/blob/master/lib/components/app.js</a></p>
-
-<h3>Test</h3>
-
-<p>テストはこんな感じ</p>
-
-<p>```js
-import assert from &lsquo;power-assert&rsquo;;
-import React from &lsquo;react/addons&rsquo;;
-import App from &lsquo;../../lib/components/app&rsquo;;</p>
-
-<p>const {TestUtils} = React.addons;</p>
-
-<p>describe(&ldquo;App&rdquo;, () => {
-  let component;</p>
-
-<p>  beforeEach(() => {</p>
-
-<pre><code>component = TestUtils.renderIntoDocument(&lt;App /&gt;);
-</code></pre>
-
-<p>  });</p>
-
-<p>  it(&ldquo;returns Hello World in div&rdquo;, () => {</p>
-
-<pre><code>const div = TestUtils.findRenderedDOMComponentWithTag(component, 'div');
-assert(
-  React.findDOMNode(div).textContent
-  ===
-  'Hello World'
-);
-</code></pre>
-
-<p>  });
-});
-```</p>
-
-<h2>おまけ</h2>
-
-<h3>karma-browserify + power-assert + babel</h3>
-
-<p>npm scriptでbrowserifyとwatchifyの引数に<code>babelify</code>を指定していますが、本当は↓のようにbrowserifyのtransformフィールドにだけ指定してkarmaには<code>espowerify</code>だけを指定したいところなのですが、<code>karma-browserify</code>に指定するtransformはbrowserifyにoptionとしてそのまま渡されるのではなくて事前にtransformするので、<code>espowerify</code>が<code>babelify</code>される前のコードを対象としてしまいエラーになります&hellip;。</p>
-
-<p>なのでここでは、それぞれに個別に設定する形になっています&hellip;。
-レアケースですがなんとかしたいなぁと思いつつ&hellip;。</p>
-
-<p>```
-&ldquo;browserify&rdquo;: {
-  &ldquo;transform&rdquo;: [</p>
-
-<pre><code>["babelify"]
-</code></pre>
-
-<p>  ]
-}
-```</p>
-
-<hr />
-
-<p>そこそこカジュアルな感じになっているかなぁと思います。</p>
 ]]></content>
   </entry>
   
