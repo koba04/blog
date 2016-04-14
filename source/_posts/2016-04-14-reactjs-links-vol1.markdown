@@ -51,6 +51,9 @@ React使っている人は一度見てみるといいんじゃないかと思い
 ReactNative + Flow + Redux + Jestな構成でサーバーサイドにはOSSのParse Serverを使っているようです。
 エディターはNuclideだそうです。
 
+アプリのソースコードもgithubで公開されています。
+
+* https://github.com/fbsamples/f8app
 
 ## React Native on the Universal Windows Platform
 
