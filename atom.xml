@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-04-14T14:06:16+09:00</updated>
+  <updated>2016-04-14T19:24:37+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -18,11 +18,12 @@
     <link href="http://blog.koba04.com/post/2016/04/14/reactjs-links-vol1/"/>
     <updated>2016-04-14T13:17:31+09:00</updated>
     <id>http://blog.koba04.com/post/2016/04/14/reactjs-links-vol1</id>
-    <content type="html"><![CDATA[<p>これはReactに関する記事やきになるissueなどのリンクを紹介する記事です。</p>
-
-<h1>React Links vol.1 4/6〜4/14</h1>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
 
 <p>今週はF8があったのでReact Native関連の記事が多くありました。</p>
+
+<!-- more -->
+
 
 <h2>React v15</h2>
 
@@ -70,6 +71,13 @@ Facebookのエンジニア以外からのcommitも30%くらいあって、Facebo
 
 <p>ReactNative + Flow + Redux + Jestな構成でサーバーサイドにはOSSのParse Serverを使っているようです。
 エディターはNuclideだそうです。</p>
+
+<p>アプリのソースコードもgithubで公開されています。</p>
+
+<ul>
+<li><a href="https://github.com/fbsamples/f8app">https://github.com/fbsamples/f8app</a></li>
+</ul>
+
 
 <h2>React Native on the Universal Windows Platform</h2>
 

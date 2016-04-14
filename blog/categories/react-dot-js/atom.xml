@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-04-14T19:21:51+09:00</updated>
+  <updated>2016-04-14T19:24:37+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -205,7 +205,7 @@ Babelを使った最適化の場合でも数%の向上が見られますが、�
 
 <p>connpassの管理画面によると<strong>75/80人</strong>の方が参加してくださいました。感謝！</p>
 
-<p>{% img /images/reactjs-meetup3.jpg &lsquo;React.js meetup #3&rsquo; %}</p>
+<p><img src="/images/reactjs-meetup3.jpg" title="&lsquo;React.js meetup #3&rsquo;" ></p>
 
 <!-- more -->
 
