@@ -16,6 +16,12 @@ categories: react.js react-links
 
 あんまり内容はありませんが、NashornとNode環境でReactを使った例を紹介するドキュメントが追加されました。
 
+## Two Weird Tricks with Redux
+
+* http://jlongster.com/Two-Weird-Tricks-with-Redux
+
+Firefox Developer Toolの開発をしている[@jlongster](https://twitter.com/jlongster)さんによるFirefox Developer Toolsの開発にReduxを使った時の話です。
+非同期処理をどうやって扱ったかということが書かれています。
 
 ## React Flip Move
 
