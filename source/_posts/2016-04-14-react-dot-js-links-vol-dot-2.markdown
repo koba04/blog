@@ -33,10 +33,3 @@ ReactとCSSをどのように組み合わせるのかを開設したエントリ
 MethodologiesとPreprocessorsとPostprocessorsとInline Style Helpersのアプローチに分けて、それぞれどんな特徴でどんなライブラリーがあるということが解説されています。
 ReactとCSSの扱いに悩んでいる人は見てみるといいかもしれません。
 
-
-## [DO NOT MERGE] Deprecate nested routes with absolute paths #3319 (react-router)
-
-* https://github.com/reactjs/react-router/pull/3319
-
-3.0でネストしたRoute定義での絶対パス指定廃止したいというPRです。
-むしろ出来たのかという感じですが..
