@@ -10,6 +10,19 @@ categories: react.js react-links
 
 <!-- more -->
 
+## Server-side Environments (React documentation)
+
+* http://facebook.github.io/react/docs/environments.html
+
+あんまり内容はありませんが、NashornとNode環境でReactを使った例を紹介するドキュメントが追加されました。
+
+## React Flip Move
+
+* https://github.com/joshwcomeau/react-flip-move/
+
+React Componentをアニメーションさせるためのライブラリーです。
+READMEを見る限り、シンプルで使いやすそうです。react-motionを使っているのかと思ったけど独自実装でした。
+
 ## [DO NOT MERGE] Deprecate nested routes with absolute paths #3319 (react-router)
 
 * https://github.com/reactjs/react-router/pull/3319
