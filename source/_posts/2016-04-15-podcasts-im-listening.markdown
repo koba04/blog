@@ -10,3 +10,47 @@ categories: podcast
 日本語だとRebuild.fmとかmozaic.fmとかを聴いてるけどまぁ言うまでもないので。
 
 <!-- more -->
+
+## Software Engineering Daily
+
+* http://softwareengineeringdaily.com/
+
+## JavaScript Jabber
+
+* https://devchat.tv/js-jabber
+
+## 5 Minutes of JavaScript
+
+* https://fivejs.codeschool.com/
+
+## Modern Web
+
+* http://www.modern-web.org/#/modern-web-podcast
+
+## JavaScript Air
+
+* https://javascriptair.com/
+
+## The Web Platform Podcast
+
+* http://www.thewebplatformpodcast.com/
+
+## The Changelog
+
+* https://changelog.com/podcast/
+
+## NodeUp
+
+* http://nodeup.com/
+
+## Software Engineering Radio
+
+* http://www.se-radio.net/
+
+## React Native Radio
+
+* https://devchat.tv/react-native-radio
+
+## Soft Skills Engineering
+
+* https://itunes.apple.com/us/podcast/soft-skills-engineering/id1091341048?mt=2
