@@ -3,7 +3,7 @@ layout: post
 title: "React.js v15.0 changes"
 date: 2016-03-09 13:07:52 +0900
 comments: true
-categories:
+categories: react.js
 ---
 
 **v15.0.0がリリースされました(2016/04/08)**
