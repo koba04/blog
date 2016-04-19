@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "React.js Links vol.2"
-date: 2016-04-14 19:27:37 +0900
+title: "React.js Links vol.2 4/15〜4/19"
+date: 2016-04-19 19:19:19 +0900
 comments: true
 categories: react.js react-links
 ---
@@ -9,7 +9,6 @@ categories: react.js react-links
 これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。
 
 <!-- more -->
-
 
 ## Server-side Environments (React documentation)
 
