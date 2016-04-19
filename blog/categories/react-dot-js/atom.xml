@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-04-14T19:24:37+09:00</updated>
+  <updated>2016-04-19T19:19:00+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -14,7 +14,139 @@
 
   
   <entry>
-    <title type="html"><![CDATA[React Links vol.1 4/16〜4/14]]></title>
+    <title type="html"><![CDATA[React.js Links vol.2 4/15〜4/19]]></title>
+    <link href="http://blog.koba04.com/post/2016/04/19/reactjs-links-vol2/"/>
+    <updated>2016-04-19T19:19:19+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/04/19/reactjs-links-vol2</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
+
+<!-- more -->
+
+
+<h2>Server-side Environments (React documentation)</h2>
+
+<ul>
+<li><a href="http://facebook.github.io/react/docs/environments.html">http://facebook.github.io/react/docs/environments.html</a></li>
+</ul>
+
+
+<p>あまり内容はありませんが、NashornとNode環境でReactを使った例を紹介するドキュメントが追加されました。</p>
+
+<h2>Error reporting in production #2686 (React Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/2686">https://github.com/facebook/react/issues/2686</a></li>
+</ul>
+
+
+<p>かなり前のIssueですが、最近また盛り上がっているので紹介します。</p>
+
+<p>Reactでは、warningとerrorの2種類のログレベルがありますが、現在は<code>NODE_ENV</code>がproductionであるかどうかでログを有効にするか無効にするかを切り替えることしかできません。
+このissueはその辺りの改善に関するものです。</p>
+
+<p>前回紹介したリンクでも、developmentビルドとproductionビルドのパフォーマンスの違いについてありましたが、developmentビルドでは実行速度を気にせずにデバッグログを出力していて、productionビルドでは速度優先で不要なチェックは一切行われていません。
+その結果、パフォーマンスに大きな違いがあります。</p>
+
+<p>そのため、developmentビルドのままで本番に投入することも難しく、かといってproductionビルドのままでerrorのログを確認したいという場面に対応できていません。
+現在作り直しが行われているPerf周りでもPROFILEフラグをという話もあるので、その辺りとあわせて<code>REACT_ENV</code>のような新しい仕組みが入るかもしれません。</p>
+
+<h2>Two Weird Tricks with Redux (Blog)</h2>
+
+<ul>
+<li><a href="http://jlongster.com/Two-Weird-Tricks-with-Redux">http://jlongster.com/Two-Weird-Tricks-with-Redux</a></li>
+</ul>
+
+
+<p>Firefox Developer Toolの開発をしている<a href="https://twitter.com/jlongster">@jlongster</a>さんによるFirefox Developer Toolsの開発にReduxを使った時の話です。
+非同期処理をどうやって扱ったかということが書かれています。</p>
+
+<p>言及されているソースはこのあたりにあるので気になる人は見るといいと思います。</p>
+
+<ul>
+<li><a href="https://github.com/mozilla/gecko-dev/tree/master/devtools/client/debugger/content">https://github.com/mozilla/gecko-dev/tree/master/devtools/client/debugger/content</a></li>
+</ul>
+
+
+<h2>React Flip Move (Library)</h2>
+
+<ul>
+<li><a href="https://github.com/joshwcomeau/react-flip-move/">https://github.com/joshwcomeau/react-flip-move/</a></li>
+</ul>
+
+
+<p>React Componentをアニメーションさせるためのライブラリーです。
+READMEを見る限り、シンプルで使いやすそうです。react-motionを使っているのかと思ったけど独自実装でした。</p>
+
+<h2>What to use for React styling? (Blog)</h2>
+
+<ul>
+<li><a href="http://andrewhfarmer.com/how-to-style-react/">http://andrewhfarmer.com/how-to-style-react/</a></li>
+</ul>
+
+
+<p>ReactとCSSをどのように組み合わせるのかを解説したエントリーです。
+MethodologiesとPreprocessorsとPostprocessorsとInline Style Helpersのアプローチに分けて、それぞれどんな特徴でどんなライブラリーがあるということが解説されています。
+ReactとCSSの扱いに悩んでいる人は見てみるといいかもしれません。</p>
+
+<h2>Proposal: Add support for observable spec interop point #1631 (Redux Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/issues/1631">https://github.com/reactjs/redux/issues/1631</a></li>
+<li><a href="https://github.com/reactjs/redux/pull/1632">https://github.com/reactjs/redux/pull/1632</a></li>
+</ul>
+
+
+<p>ReduxのStoreを現在stage1のes-observableの<code>Symbol.observable</code>に対応させるIssueとPRです。
+これにより、RxJS 5やその他のライブラリーとも組み合わせやすくなります。</p>
+
+<p>PR出してるのはRxJS 5のメインの開発者である<a href="https://github.com/blesh">blesh</a>さんです。
+<code>Symbol.observable</code>のponyfillには<a href="https://github.com/blesh/symbol-observable">blesh/symbol-observable</a>が使われています。</p>
+
+<h2>eslint-config-airbnb 7,0 (Library)</h2>
+
+<ul>
+<li><a href="https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb/CHANGELOG.md#700--2016-04-11">https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb/CHANGELOG.md#700--2016-04-11</a></li>
+</ul>
+
+
+<p>Reactに関するLintも含んでいるeslint-config-airbnbの7.0がリリースされています。
+React Componentのaccessibilityを検査する<code>eslint-plugin-a11y</code>が依存に追加されたので、アップデートする際は追加でインストールする必要があります。</p>
+
+<ul>
+<li><a href="https://github.com/evcohen/eslint-plugin-jsx-a11y">https://github.com/evcohen/eslint-plugin-jsx-a11y</a></li>
+</ul>
+
+
+<h2>5 Open Source React Native Projects To Learn From (React Native Blog)</h2>
+
+<ul>
+<li><a href="https://medium.com/@bilalbudhani/5-open-source-react-native-projects-to-learn-from-fb7e5cfe29f2">https://medium.com/@bilalbudhani/5-open-source-react-native-projects-to-learn-from-fb7e5cfe29f2</a></li>
+</ul>
+
+
+<p>ソースが公開されている5つのReactNativeのアプリが紹介されています。</p>
+
+<h2>React Hot Loader 3.0 alpha demo (Library)</h2>
+
+<ul>
+<li><a href="https://github.com/gaearon/react-hot-loader/pull/240">https://github.com/gaearon/react-hot-loader/pull/240</a></li>
+</ul>
+
+
+<p>React Hot Loaderの3.0のalpha版がリリースされています。2は飛ばして一気に3になったようです。
+3.0のデモは下記で紹介されていますので使っている人は確認してみるといいと思います。</p>
+
+<ul>
+<li><a href="https://github.com/gaearon/react-hot-boilerplate/pull/61">https://github.com/gaearon/react-hot-boilerplate/pull/61</a></li>
+</ul>
+
+
+<p>個人的には使っていないので詳細はわからないですが、Stateless ComponentsやHOC辺りのサポートや設定周りが改善されたようです。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[React Links vol.1 4/6〜4/14]]></title>
     <link href="http://blog.koba04.com/post/2016/04/14/reactjs-links-vol1/"/>
     <updated>2016-04-14T13:17:31+09:00</updated>
     <id>http://blog.koba04.com/post/2016/04/14/reactjs-links-vol1</id>
@@ -185,6 +317,258 @@ Babelを使った最適化の場合でも数%の向上が見られますが、�
 
 <p>Perfによる計測をChrome Developer Toolsで行うことができるライブラリーです。
 カジュアルに計測が出来そうなのでよさそうです。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[React.js v15.0 changes]]></title>
+    <link href="http://blog.koba04.com/post/2016/03/09/react-js-v15-changes/"/>
+    <updated>2016-03-09T13:07:52+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/03/09/react-js-v15-changes</id>
+    <content type="html"><![CDATA[<p><strong>v15.0.0がリリースされました(2016/04/08)</strong></p>
+
+<hr />
+
+<p><strong>RC2が出たので追記</strong></p>
+
+<p><strong>RC2</strong> ではIE、Edgeでマークアップの構造によって一部のテキストが表示されないバグ(<a href="https://github.com/facebook/react/issues/6246">#6246</a>)とSVGに関する変更がrevertされました。</p>
+
+<hr />
+
+<p>React.js v15.0がリリースされたので変更内容などを整理したいと思います。</p>
+
+<ul>
+<li><a href="https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html">https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html</a></li>
+<li><a href="http://facebook.github.io/react/blog/2016/03/16/react-v15-rc2.html">http://facebook.github.io/react/blog/2016/03/16/react-v15-rc2.html</a></li>
+<li><a href="http://facebook.github.io/react/blog/2016/04/07/react-v15.html">http://facebook.github.io/react/blog/2016/04/07/react-v15.html</a></li>
+</ul>
+
+
+<p><code>
+% npm install --save react@15.0.0 react-dom@15.0.0
+</code></p>
+
+<p>今回の一番大きな変更はバージョン番号かなと思います。</p>
+
+<p>0.14から15.0に。</p>
+
+<p>0.x系だとproduction readyではないと思われることから一気に15.0になりましたが0.がなくなっただけで大きな変化があるわけでもないです。
+なぜ1.0ではないのかというと1.0というバージョン番号は特別意味のあるものとして扱われるので、そうではなくてすでにproduction readyでありsemverに従っているということを明確にするために0.を取って15.0になりました。</p>
+
+<p><a href="https://facebook.github.io/react/blog/2016/02/19/new-versioning-scheme.html">https://facebook.github.io/react/blog/2016/02/19/new-versioning-scheme.html</a></p>
+
+<p>ちなみにこれまでもminor version(0.13 &ndash;> 0.14)などでは破壊的な変更がありましたがpatch version(0.14.1 &ndash;> 0.14.2)などは基本的には破壊的な変更はなかったのでバージョンアップのサイクルなどが変わることはないと思います。
+（patch versionの更新でUndocumentedなfeatureで破壊的な変更が入ることはありましたが&hellip;）</p>
+
+<p>これまでも破壊的な変更をする際は基本的には前のバージョンでwarningを入れてから更新するので、今回もすでに0.14.7を使っていて特にwarningなどが出力されていないのであれば問題なく15.0にアップデートできると思います。</p>
+
+<!-- more -->
+
+
+<p>ちなみにIE8のサポートについてはまだIE8対応のコードは削除されていないので動作するはずですが、今後はIE8のためだけのバグFixなどは行わないというステータスです。</p>
+
+<p><a href="https://facebook.github.io/react/blog/2016/01/12/discontinuing-ie8-support.html">https://facebook.github.io/react/blog/2016/01/12/discontinuing-ie8-support.html</a></p>
+
+<h2>Major changes</h2>
+
+<h3>document.createElement is in and data-reactid is out</h3>
+
+<p>これまではReactで構築した全てのDOMに対して<code>data-reactid</code>という属性が付与されていましたがそれが付与されなくなりました。すっきりしていいですね。
+ReactDOM.renderを行ったルートの要素には<code>data-reactroot</code>という属性が付与されます。</p>
+
+<p>またこれまでは多くの場合で<code>document.createElement</code>を使うよりも高速であるという理由から初期マウント時にはHTML文字列を生成してinnerHTMLで流し込んでいましたが、ブラウザーの改善などにより必ずしもそうとも言えなくなってきたので<code>document.createElement</code>を使って作成するように変更されました。</p>
+
+<p><code>data-reactid</code>がなぜ必要だったのかはReactのイベントの仕組みに関係しています。
+ReactではイベントハンドリングはそれぞれのReactElementと対応付けられたDOM要素にイベントリスナーを登録してハンドリングするのではなく、<code>ReactDOM.render</code>で指定したルートのDOM要素だけにイベントリスナーを登録してそこで全てのイベントをハンドリングしています。
+ルートで受け取ったイベントがどのReactElementと対応付けられたDOMで発生したのかを判定するために<code>data-reactid</code>が使用されていました。</p>
+
+<p>イベントは頻繁に発生するため内部ではキャッシュなどを駆使して高速化が図られていたのですがそれによるバグも多く、今回HTML文字列ではなくDOM要素を作成するようになり、DOM要素を保持しておけばいいので<code>data-reactid</code>を使ったマッピング情報を保持しておく必要がなくなりました。</p>
+
+<p>ちなみに<code>ReactDOM.renderToString</code>を使って生成したHTML文字列には変わらず<code>data-reactid</code>が付与されています。</p>
+
+<h3>No more extra <code>&lt;span&gt;</code>s</h3>
+
+<p><code>{name}</code>などのように変数を文字列として埋め込んだ際にこれまでは差分更新のために<code>span</code>タグで囲まれていたのがcomment nodeに変更されました。</p>
+
+<ul>
+<li>v0.14</li>
+</ul>
+
+
+<p>```html</p>
+
+<div id="app">
+<div data-reactid=".0">
+<span data-reactid=".0.0">Hello </span>
+<span data-reactid=".0.1">React</span>
+</div>
+</div>
+
+
+<p>```</p>
+
+<ul>
+<li>v15</li>
+</ul>
+
+
+<p>```html</p>
+
+<div id="app">
+<div data-reactroot="">
+<!-- react-text: 2 -->Hello <!-- /react-text -->
+<!-- react-text: 3 -->React<!-- /react-text -->
+</div>
+</div>
+
+
+<p>```</p>
+
+<p>この変更はマークアップ構造の変更を生むので更新する際には注意が必要です。
+特にCSS周りやテストでspanが挿入されることに依存したコードを書いていると壊れます。</p>
+
+<p>元々が意図しないマークアップが挿入されていたのでそれがなくなってよかったんじゃないでしょうか。</p>
+
+<h3>Rendering null now uses comment nodes</h3>
+
+<p>renderメソッドでnullを返した場合に、これまでは<code>&lt;noscript&gt;</code>タグがrenderされていましたがcomment nodeに変更されました。
+この変更もマークアップ構造の変更を生むので特に<code>:nth-child</code>などのセレクターを使っている場合には注意が必要です。</p>
+
+<p>また下記のエントリーにもあるように無駄に<code>&lt;noscript&gt;</code>タグが更新されていたような場合に対するパフォーマンスの改善となります。</p>
+
+<p><a href="http://benchling.engineering/deep-dive-react-perf-debugging/">http://benchling.engineering/deep-dive-react-perf-debugging/</a></p>
+
+<h3>Improved SVG support</h3>
+
+<p><strong>[更新]RC2でrevertされました</strong></p>
+
+<p><del>全てのSVGタグがサポートされるようになりました。一般的ではないタグは<code>React.DOM</code>のヘルパーとしては提供されていませんが、<code>React.createElement</code>で全てのSVGタグを作成できます。</del>
+<del>全てのSVGタグはキャメルケースやハイフンなどそのままの指定で作成できます。</del>
+<del><code>gradientTransform</code>は<code>gradientTransform</code>のままで<code>clip-path</code>は<code>clip-path</code>のまま指定します。</del></p>
+
+<p><del>ちなみにクラスを指定する場合は<code>className</code>ではなくて、<code>class</code>で指定します。custom elementsと同じです。</del>
+<del>それに関するissueはこちら。</del></p>
+
+<p><del> <a href="https://github.com/facebook/react/issues/6211">https://github.com/facebook/react/issues/6211</a> </del></p>
+
+<p>このSVGに対する挙動の変更はcustom elementsの挙動と同様であったのですが、HTMLElementとの整合性(<code>class</code> &ndash;> <code>className</code>など)がなくなってしまうことが問題だということでrevertされました。
+なのでサポートされていないsvgの要素や属性があれば引き続きPRして反映する必要があります。こんな感じで。(<a href="https://github.com/facebook/react/pull/6267">#6267</a>)</p>
+
+<p>将来的にはSVGもHTMLも普段SVGやHTMLと同じようにclassはclassのままで指定できるようになるのではないかなと思います。具体的な予定は示されていませんが&hellip;。</p>
+
+<h2>Breaking changes</h2>
+
+<p>v15で最も大きなBreaking changeは上に書いたspanタグを使わなくなったことによるマークアップ構造の変化です。</p>
+
+<p>その他では、v0.14でwaringsを出力していたDeprecatedなAPIが完全に削除されました。</p>
+
+<ul>
+<li><p>Reactのパッケージから<code>findDOMNode</code>, <code>render</code>, <code>renderToString</code>, <code>renderToStaticMarkup</code>, <code>unmountComponentAtNode</code>が削除されました。代わりにReactDOMのパッケージにある同名のAPIを使います。</p></li>
+<li><p>Addonとして提供されていた<code>batchedUpdates</code>と<code>cloneWithProps</code>が削除されました。</p></li>
+<li><p><code>setProps</code>, <code>replaceProps</code>, <code>getDOMNode</code>のAPIが削除されました。</p></li>
+</ul>
+
+
+<h2>New deprecations, introduced with a warning</h2>
+
+<p><code>LinkedStateMixin</code>と<code>valueLink</code>はほとんど使われておらず、v16で廃止するためのwarningを追加されます。</p>
+
+<p><a href="https://facebook.github.io/react/docs/two-way-binding-helpers.html">https://facebook.github.io/react/docs/two-way-binding-helpers.html</a></p>
+
+<p>必要な場合は下記のパッケージを利用してください。</p>
+
+<p><a href="https://www.npmjs.com/package/react-linked-input">https://www.npmjs.com/package/react-linked-input</a></p>
+
+<h2>New helpful warnings</h2>
+
+<ul>
+<li>developmentビルド(<code>NODE_ENV</code>が<code>production</code>でない)にも関わらずminifiedされている場合はproductionビルドを使うようにwarningが出ます。
+
+<ul>
+<li>Reactの中のコードを見たことがある人であればproductionビルドにする必要性がわかるはず&hellip;。developmentビルドには大量のデバッグやwarning用のコードが含まれています。</li>
+</ul>
+</li>
+<li>styleのwidthやmarginに数値を渡すと自動で単位(px)を付与してくれますが、その際に数値を文字列として渡しているとwarningが出ます。将来のバージョンでは文字列の場合は単位が自動で付与されなくなります。
+
+<ul>
+<li><code>&lt;div style={ {width: 10} }&gt;</code>はOK、<code>&lt;div style={ {width: "10"} }&gt;</code>はwarningが出ます。</li>
+</ul>
+</li>
+<li>SyntheticEventに追加でpropertyをセットしようとしたり、すでに解放されているのにアクセスしようとするとwarningが出力されます。
+
+<ul>
+<li>追加でpropertyをセットした場合にwarningが出るのはES2015のProxiesがサポートされている環境のみです。ちなみに自分が実装しました。</li>
+</ul>
+</li>
+<li>ReactElementの<code>ref</code>と<code>key</code>のPropにアクセスしようとするとwarningが出力されます。これらはReact自体が使うためのPropでkeyで使った値が必要な場合は別途Propとして設定する必要があります。</li>
+<li>DOM ElementのPropに対して、<code>onClick</code>を<code>onclick</code>のように大文字・小文字の指定が間違っている場合にはwarningが出力されるようになりました。</li>
+</ul>
+
+
+<h2>Notable bug fixes</h2>
+
+<ul>
+<li>幾つかのメモリリークが修正されています。</li>
+</ul>
+
+
+<hr />
+
+<p>SyntheticEventでのメモリリークについては自分が修正したので紹介しておくとSyntheticEventの<code>target</code>属性が正しく解放されるようになりました。</p>
+
+<p>SyntheticEventはPoolingされており、イベントハンドラーの処理が終了すると初期化されPoolに戻るのですが一番よく使う<code>target</code>属性だけ解放されていませんでした。
+したがって、下記のようなコードはv0.14では動作していましたがv15では動作しません。</p>
+
+<p>```js
+const Component = () => (</p>
+
+<pre><code>&lt;div onClick={e =&gt; {
+  setTimeout(() =&gt; console.log(e.target)); // &lt;div&gt;click&lt;/div&gt;
+}}&gt;
+  click
+&lt;/div&gt;
+</code></pre>
+
+<p>);
+```</p>
+
+<p>これは<code>onClick</code>が実行された時点でSyntheticEvent(<code>e</code>)が初期化されており、setTimeoutのコールバック実行時にはすでにtargetの値が初期化(null)されているためです。
+上記の場合、<code>target</code>をローカル変数として保持するか<code>e.persist()</code>を使って保持する必要があります。</p>
+
+<p>SyntheticEventがPoolingされているのは大量のイベントオブジェクトを作成することで発生するGCを避けるなどパフォーマンス上の理由からなのですが、モダンなブラウザーではもう必要ないのではないかということでPoolingをやめることが検討されています。</p>
+
+<p>SyntheticEvent周りは自分が追加したProxyを使ったコードなどかなり混沌としてきているのでPoolingやめてリファクタリングするのはとてもいいと思います。やりたい&hellip;。</p>
+
+<p><a href="https://github.com/facebook/react/issues/6190">https://github.com/facebook/react/issues/6190</a></p>
+
+<hr />
+
+<ul>
+<li>IE10, 11などでのイベントの扱いが改善されています。</li>
+<li><code>cite</code>と<code>profile</code>の属性がサポートされました。</li>
+<li><code>onAnimationStart</code>, <code>onAnimationEnd</code>, <code>onAnimationIteration</code>, <code>onTransitionEnd</code>, <code>onInvalid</code>のイベントがサポートされました。また<code>object</code>要素に<code>onLoad</code>イベントが追加されました。</li>
+<li>shallowCompareなどのいくつかの場所で<code>Object.is</code>による比較が行われるようになりました(実際にはpolyfill)。これにより、<code>+0 !== -0</code>となったり<code>NaN === NaN</code>となります。
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is</a></li>
+</ul>
+</li>
+<li><p>ReactDOMがデフォルトではpropertyとしてではなくattributeとして扱うようになります。これによるEdge caseなバグが修正されました。また属性値が<code>null</code>の場合に属性が完全に削除されるようになりました。これによりブラウザーがデフォルト値を設定しないようになります。</p></li>
+<li><p>あとblogにはありませんでしたが、Stateless Componentsが<code>null</code>を返せるようになったのは地味に嬉しいですね！</p></li>
+</ul>
+
+
+<h2>Regression?</h2>
+
+<ul>
+<li>15.0.0-rc.1では<code>onTouchTap</code>が動作していないようなので使っている人は注意した方がよさそうです。
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/6221">https://github.com/facebook/react/issues/6221</a></li>
+</ul>
+</li>
+</ul>
+
 ]]></content>
   </entry>
   
@@ -882,182 +1266,6 @@ var TYPE_SYMBOL = (typeof Symbol === &lsquo;function&rsquo; &amp;&amp; Symbol.fo
 <h2>v0.15?</h2>
 
 <p>v0.15はGarbage collection releaseと位置づけられていて、つまりAPIの整理などに重点が置かれたリリースになる予定でv0.14のリリースから遠くないタイミングで出るそうです。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[React.js meetup #2を開催しました]]></title>
-    <link href="http://blog.koba04.com/post/2015/09/09/reactjs-meetup2/"/>
-    <updated>2015-09-09T22:53:58+09:00</updated>
-    <id>http://blog.koba04.com/post/2015/09/09/reactjs-meetup2</id>
-    <content type="html"><![CDATA[<ul>
-<li><a href="http://reactjs-meetup.connpass.com/event/19504/">http://reactjs-meetup.connpass.com/event/19504/</a></li>
-<li><a href="http://eventdots.jp/eventreport/568979">http://eventdots.jp/eventreport/568979</a></li>
-</ul>
-
-
-<p>4月に#1をやってから約4ヶ月くらい経ちましたがReact.js meetup #2を開催しました。</p>
-
-<p>雨の中来てくださった方、発表者の方、運営のお手伝いをしてくださった方ありがとうございました！</p>
-
-<!-- more -->
-
-
-<h2>開催の経緯</h2>
-
-<p>最初は今回発表してくださったViktorさんが来日されるのでそれにあわせてイベントをやるという話があり、せっかくなのでということでReact.js meetupの2回目としてやることになりました。</p>
-
-<h2>dots</h2>
-
-<p>開催予定日まで時間もなくてその時点で話す人も決まっていたので後は会場を決めればなんとかなりそうということで、いくつかの選択肢の中から今回はdotsさんで開催することになりました。
-渋谷の駅から近くて、人数も200人近く入れるし会場もオシャレな感じだったのでここだ！という感じで決めました。</p>
-
-<blockquote class="twitter-tweet" lang="en"><p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/reactjs_meetup?src=hash">#reactjs_meetup</a> #2 at dots!! (@ dots. in 渋谷区, 東京都) <a href="https://t.co/os56mGdfFu">https://t.co/os56mGdfFu</a> <a href="http://t.co/2BhpBeIK9H">pic.twitter.com/2BhpBeIK9H</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/641186091891073024">September 8, 2015</a></blockquote>
-
-
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>募集開始の際にはご迷惑をお掛けしましたが&hellip;dotsさん、ありがとうございました！</p>
-
-<h2>準備など</h2>
-
-<p>今回は <a href="https://twitter.com/yoshiko_pg">@yoshiko_pg</a> さんから話をもらって、その後の色々な準備もほとんどやってもらって本当に感謝でした。ありがとうございます！
-当日の準備や受付は <a href="http://goodpatch.com/jp">Goodpatch</a> の方々がやってくださり、お菓子も提供して頂いて本当にありがたかったです。仲良さそうな感じが印象的でした。ありがとうございます！</p>
-
-<h2>Talk</h2>
-
-<p>各Talkのスライドはここにあるので見てください。</p>
-
-<p><a href="http://reactjs-meetup.connpass.com/event/19504/">http://reactjs-meetup.connpass.com/event/19504/</a></p>
-
-<p>自分のTalkはReactの次のバージョンである0.14での変更点について話しました。予想としてはRC版が出てるはずだったのですが&hellip;。
-Stateless Componentsが加わったりはしていますが、基本的には無駄な機能は削ぎ落としたりメンテナンス性を維持していくための変更が多い印象で正しい方向に向かっている印象を持っています。</p>
-
-<p>全体を通してReduxのような最近注目されているようなTopicから、Flowtypeのような型付けやDDDなどReact.jsやFluxを使って実際に大規模なアプリを作っていく中で求められるようなTopicについての話まであって面白かったです。</p>
-
-<p>FlowtypeがもっとFacebook以外でも使いやすくコントリビュートしやすくなっていくといいなーと思いながら、それには壁がいくつもありそうだなとViktorさんと話して感じたり。</p>
-
-<p>後、LTを一句で締めるのとてもよかったです。</p>
-
-<h2>当日の様子</h2>
-
-<p><a href="http://togetter.com/li/871189">http://togetter.com/li/871189</a></p>
-
-<p>感想とか書いてもらえると嬉しいです！</p>
-
-<h2>次回？</h2>
-
-<p>まったく何も考えていないので、聞きたいテーマなどあれば教えてもらえると嬉しいです！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[React.js meetup #1 を開催しました]]></title>
-    <link href="http://blog.koba04.com/post/2015/04/25/reactjs-meetup1/"/>
-    <updated>2015-04-25T17:11:35+09:00</updated>
-    <id>http://blog.koba04.com/post/2015/04/25/reactjs-meetup1</id>
-    <content type="html"><![CDATA[<p><a href="http://reactjs-meetup.connpass.com/event/11232/">http://reactjs-meetup.connpass.com/event/11232/</a></p>
-
-<p>一人Advent Calendar書いた時にやりたいと言っていたのでReact.js meetup #1 を<a href="http://twitter.com/yosuke_furukawa">@yosuke_furukawa</a>さんと開催しました。</p>
-
-<p> DeNAさんが会場から懇親会のお酒や寿司、当日の運営まで全てやってくださったので自分はほとんど何もしてないですが..。
- 本当にありがとうございました！！</p>
-
-<p>やりたいって言ってこの規模の勉強会を開催させてもらえるの本当にスゴいなぁと思います&hellip;。</p>
-
-<p> <blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/hashtag/reactjs_meetup?src=hash">#reactjs_meetup</a> <a href="https://twitter.com/hashtag/react_sushi?src=hash">#react_sushi</a> です <a href="http://t.co/GdpyF7Paqk">pic.twitter.com/GdpyF7Paqk</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/591580062702383107">April 24, 2015</a></blockquote></p>
-
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-
-
-<!-- more -->
-
-
-<p>ある程度予想はしていたのですが、Talkが10分と短かったりで押して慌ただしい感じになってしまったのは申し訳なかったなぁと思ってます。
-ただ、色んなテーマのTalkを一度に聞くことが出来たのはよかったかなと思っています。</p>
-
-<h2>Talks</h2>
-
-<p>各Talkの資料についてはconpassのページに追加しておいたのでそちらを見て頂くとして簡単な一言感想です。</p>
-
-<p><a href="http://reactjs-meetup.connpass.com/event/11232/presentation/">http://reactjs-meetup.connpass.com/event/11232/presentation/</a></p>
-
-<h3><a href="https://twitter.com/naoya_ito">@naoya_ito</a> &ndash; React概論</h3>
-
-<p>Reactの特徴をわかりやすく説明していてReact.js触ってない人にとってもわかりやすい説明だったんじゃないかなと思います。</p>
-
-<h3><a href="https://twitter.com/hokaccha">@hokaccha</a> &ndash; react-rails</h3>
-
-<p>Railsと一緒に使いたい人にとってはかなり有益な情報だったんじゃないかなと思います。Turbolinksどうするのとか。</p>
-
-<h3><a href="https://twitter.com/azu_re">@azu_re</a> &ndash; 10分で実装するFlux</h3>
-
-<p>Fluxを最小限の構成にしてデータの流れを一方向にするということがどういうことなのか説明していてわかりやすかったです。console.traceを使っての説明もなるほどなぁと思いました。</p>
-
-<h3><a href="http://twitter.com/yosuke_furukawa">@yosuke_furukawa</a> &ndash; mercury/mithril.js</h3>
-
-<p>React.jsのVIRTUAL DOMのdiffアルゴリズムの説明からmercuryやmithril.jsといった他のライブラリがどうやってReact.jsより高速化しているのかという説明で面白かったです。</p>
-
-<h3><a href="https://twitter.com/mizchi">@mizchi</a> &ndash; React/FluxでSPAを開発してぶちあたった問題</h3>
-
-<p>KobitoをReact.js + Fluxで作った時の問題になった点と解決方法について説明していて、ないものは作る姿勢がスゴイなぁ思いました。</p>
-
-<h3><a href="https://twitter.com/sugyan">@sugyan</a> &ndash; React.jsと、 Railsとかアイドルとか (LT)</h3>
-
-<p>React.jsとRailsでReactRouter使ったり色々組み合わてみた話でツラいと言いながらちゃんと作ってしまうところがスゴイなぁと思いました。</p>
-
-<h3><a href="https://twitter.com/making">@making</a> &ndash; Java + React.jsでSever Side Rendering (LT)</h3>
-
-<p>SPAで作ったブログが検索に引っかからないからReact.js + Javaでserver-side renderingするようにしたという話で、最後のオチも含めて面白かったです。</p>
-
-<h3><a href="https://twitter.com/tyshgc">@tyshgc</a> &ndash; Rapid React Prototyping : React.jsでUIデザインプロトタイプを作る (LT)</h3>
-
-<p>React.jsでプロトタイプを作る話で、Photoshopのレイヤー情報からReact.jsのComponentを生成するようにしていてスゴかったです。</p>
-
-<h3><a href="https://twitter.com/teppeis">@teppeis</a> &ndash; Flowtype (LT)</h3>
-
-<p>懇親会の時にFlowtypeについてのLTをしてくれて、デモもあったりFacebookが開発中のElectron(旧:AtomShell)ベースのNuclideの話まであって面白かったです。</p>
-
-<h2>LiveCodingやった</h2>
-
-<p>ぼっちでも懇親会に参加して欲しかったので、ぼーっと見ていたり会話のネタになるかなと思ってLiveCodeingをやってみました。</p>
-
-<p>最近だとJSの環境を作るにも何を使えばいいのかわからないという声も聞くので、0から簡単なアプリを作るところまでの流れを伝えられればと思い、HackerNewsのAPIを使ってTopStoryの一覧を表示するものを作ってみました。</p>
-
-<p>あと、3分間クッキングみたいに事前に色々用意しておくのもライブ感がないなぁと思ったので<code>mkdir</code>から全部その場で作ることにしました。</p>
-
-<p><a href="https://github.com/koba04/react-hacker-news-stories/tree/meetup">https://github.com/koba04/react-hacker-news-stories/tree/meetup</a></p>
-
-<p>環境構築は、browserifyとwatchifyとbabelifyで変換を行ってlivereloadするためのbrowser-syncを使いました。</p>
-
-<p>LiveCodingの流れとしては</p>
-
-<ul>
-<li>ディレクトリ作ったり<code>npm init</code>したり<code>npm install</code>したりして環境を作る</li>
-<li>Hello Worldしてみる(Hellって書いたけど&hellip;)</li>
-<li>各Componentを作成する</li>
-<li>HackerNewsのAPI叩いて一覧が出るようにする</li>
-<li><code>React.addons.Perf</code>を使ってDOMが無駄に更新されていることとkeyが指定されていないwarningが出ていることを確認</li>
-<li>keyを指定することで無駄のDOM操作がなくなることを確認</li>
-<li>diffの時間を減らすために<code>Immutable.js</code>を使いつつ<code>shouldComponentUpdate</code>を実装</li>
-</ul>
-
-
-<p>という感じで行いました。</p>
-
-<p>ライブコーディングが初めてで緊張していたのとお酒が入っていたのもあって(言い訳)、いつもと同じ感覚でコーディング出来なくてtypoしまくってしまい、「これ終わらないかも&hellip;」とかなり駆け足になってしまったのは反省です&hellip;。
-(事前に練習はしたんですが&hellip;)</p>
-
-<p>でも、とりあえず最後まで出来てよかった&hellip;。</p>
-
-<h2>まとめ</h2>
-
-<p>イベントの管理者側でやるのは初めてだったので色々至らない点があったかもしれませんが、準備してくださったDeNAの方々、発表者の方々、参加者の皆様、本当にありがとうございました！！</p>
-
-<p>感想とかブログに書いてもらえると嬉しいです！</p>
 ]]></content>
   </entry>
   
