@@ -24,11 +24,13 @@ categories: react.js react-links
 
 かなり前のIssueですが、最近また盛り上がっているので紹介します。
 
-Reactでは、warningとerrorの2種類のログレベルがありますが、現在はどちらも`NODE_ENV`がproductionであるかどうかで有効・無効を切り替えることしかできません。
+Reactでは、warningとerrorの2種類のログレベルがありますが、現在は`NODE_ENV`がproductionであるかどうかでログを有効にするか無効にするかを切り替えることしかできません。
 このissueはその辺りの改善に関するものです。
 
-前回紹介したリンクでも、developmentビルドとproductionビルドでのパフォーマンスの違いについてありましたが、現在はdevelopmentビルドでは実行速度を気にせずにデバッグログを出力していて、productionビルドでは速度優先で不要なチェックは一切行われていません。
+前回紹介したリンクでも、developmentビルドとproductionビルドのパフォーマンスの違いについてありましたが、developmentビルドでは実行速度を気にせずにデバッグログを出力していて、productionビルドでは速度優先で不要なチェックは一切行われていません。
+その結果、パフォーマンスに大きな違いがあります。
 
+そのため、developmentビルドのままで本番に投入することも難しく、かといってproductionビルドのままでerrorのログを確認したいという場面に対応できていません。
 現在作り直しが行われているPerf周りでもPROFILEフラグをという話もあるので、その辺りとあわせて`REACT_ENV`のような新しい仕組みが入るかもしれません。
 
 ## Two Weird Tricks with Redux (Blog)
@@ -68,7 +70,7 @@ ReactとCSSの扱いに悩んでいる人は見てみるといいかもしれま
 ReduxのStoreを現在stage1のes-observableの`Symbol.observable`に対応させるIssueとPRです。
 これにより、RxJS 5やその他のライブラリーとも組み合わせやすくなります。
 
-PR出してるのがRxJS 5のメインの開発者である[blesh](https://github.com/blesh)なのも面白いですね。
+PR出してるのはRxJS 5のメインの開発者である[blesh](https://github.com/blesh)さんです。
 `Symbol.observable`のponyfillには[blesh/symbol-observable](https://github.com/blesh/symbol-observable)が使われています。
 
 
@@ -92,7 +94,7 @@ React Componentのaccessibilityを検査する`eslint-plugin-a11y`が依存に�
 
 * https://github.com/gaearon/react-hot-loader/pull/240
 
-React Hot Loaderの3.0のalpha版がリリースされています。2は飛ばして一気に3になったんですね。
+React Hot Loaderの3.0のalpha版がリリースされています。2は飛ばして一気に3になったようです。
 3.0のデモは下記で紹介されていますので使っている人は確認してみるといいと思います。
 
 * https://github.com/gaearon/react-hot-boilerplate/pull/61
