@@ -15,7 +15,7 @@ categories: react.js react-links
 
 * http://facebook.github.io/react/docs/environments.html
 
-あんまり内容はありませんが、NashornとNode環境でReactを使った例を紹介するドキュメントが追加されました。
+あまり内容はありませんが、NashornとNode環境でReactを使った例を紹介するドキュメントが追加されました。
 
 
 ## Error reporting in production #2686 (React Issue)
