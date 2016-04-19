@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "React Links vol.1 4/16〜4/14"
+title: "React Links vol.1 4/6〜4/14"
 date: 2016-04-14 13:17:31 +0900
 comments: true
 categories: react.js react-links
