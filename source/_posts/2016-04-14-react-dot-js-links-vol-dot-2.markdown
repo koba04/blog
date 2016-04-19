@@ -18,9 +18,11 @@ categories: react.js react-links
 あんまり内容はありませんが、NashornとNode環境でReactを使った例を紹介するドキュメントが追加されました。
 
 
-## Error reporting in production
+## Error reporting in production #2686 (React Issue)
 
 * https://github.com/facebook/react/issues/2686
+
+かなり前のIssueですが、最近また盛り上がっているので紹介します。
 
 Reactでは、warningとerrorの2種類のログレベルがありますが、現在はどちらも`NODE_ENV`がproductionであるかどうかで有効・無効を切り替えることしかできません。
 このissueはその辺りの改善に関するものです。
@@ -29,7 +31,7 @@ Reactでは、warningとerrorの2種類のログレベルがありますが、�
 
 現在作り直しが行われているPerf周りでもPROFILEフラグをという話もあるので、その辺りとあわせて`REACT_ENV`のような新しい仕組みが入るかもしれません。
 
-## Two Weird Tricks with Redux
+## Two Weird Tricks with Redux (Blog)
 
 * http://jlongster.com/Two-Weird-Tricks-with-Redux
 
@@ -41,7 +43,7 @@ Firefox Developer Toolの開発をしている[@jlongster](https://twitter.com/j
 * https://github.com/mozilla/gecko-dev/tree/master/devtools/client/debugger/content
 
 
-## React Flip Move
+## React Flip Move (Library)
 
 * https://github.com/joshwcomeau/react-flip-move/
 
@@ -49,7 +51,7 @@ React Componentをアニメーションさせるためのライブラリーで�
 READMEを見る限り、シンプルで使いやすそうです。react-motionを使っているのかと思ったけど独自実装でした。
 
 
-## What to use for React styling?
+## What to use for React styling? (Blog)
 
 * http://andrewhfarmer.com/how-to-style-react/
 
@@ -58,7 +60,7 @@ MethodologiesとPreprocessorsとPostprocessorsとInline Style Helpersのアプ�
 ReactとCSSの扱いに悩んでいる人は見てみるといいかもしれません。
 
 
-## Proposal: Add support for observable spec interop point #1631 (Redux)
+## Proposal: Add support for observable spec interop point #1631 (Redux Issue)
 
 * https://github.com/reactjs/redux/issues/1631
 * https://github.com/reactjs/redux/pull/1632
@@ -70,7 +72,7 @@ PR出してるのがRxJS 5のメインの開発者である[blesh](https://githu
 `Symbol.observable`のponyfillには[blesh/symbol-observable](https://github.com/blesh/symbol-observable)が使われています。
 
 
-## eslint-config-airbnb 7,0
+## eslint-config-airbnb 7,0 (Library)
 
 * https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb/CHANGELOG.md#700--2016-04-11
 
@@ -80,13 +82,13 @@ React Componentのaccessibilityを検査する`eslint-plugin-a11y`が依存に�
 * https://github.com/evcohen/eslint-plugin-jsx-a11y
 
 
-## 5 Open Source React Native Projects To Learn From
+## 5 Open Source React Native Projects To Learn From (React Native Blog)
 
 * https://medium.com/@bilalbudhani/5-open-source-react-native-projects-to-learn-from-fb7e5cfe29f2
 
 ソースが公開されている5つのReactNativeのアプリが紹介されています。
 
-## React Hot Loader 3.0 alpha demo
+## React Hot Loader 3.0 alpha demo (Library)
 
 * https://github.com/gaearon/react-hot-loader/pull/240
 
