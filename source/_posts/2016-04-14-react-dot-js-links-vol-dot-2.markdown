@@ -18,6 +18,17 @@ categories: react.js react-links
 あんまり内容はありませんが、NashornとNode環境でReactを使った例を紹介するドキュメントが追加されました。
 
 
+## Error reporting in production
+
+* https://github.com/facebook/react/issues/2686
+
+Reactでは、warningとerrorの2種類のログレベルがありますが、現在はどちらも`NODE_ENV`がproductionであるかどうかで有効・無効を切り替えることしかできません。
+このissueはその辺りの改善に関するものです。
+
+前回紹介したリンクでも、developmentビルドとproductionビルドでのパフォーマンスの違いについてありましたが、現在はdevelopmentビルドでは実行速度を気にせずにデバッグログを出力していて、productionビルドでは速度優先で不要なチェックは一切行われていません。
+
+現在作り直しが行われているPerf周りでもPROFILEフラグをという話もあるので、その辺りとあわせて`REACT_ENV`のような新しい仕組みが入るかもしれません。
+
 ## Two Weird Tricks with Redux
 
 * http://jlongster.com/Two-Weird-Tricks-with-Redux
