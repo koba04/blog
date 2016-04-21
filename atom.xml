@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-04-19T19:19:00+09:00</updated>
+  <updated>2016-04-21T18:51:13+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,151 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Podcasts I'm listening]]></title>
+    <link href="http://blog.koba04.com/post/2016/04/21/podcasts-im-listening/"/>
+    <updated>2016-04-21T18:39:19+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/04/21/podcasts-im-listening</id>
+    <content type="html"><![CDATA[<p>以前Qiitaで少し書きましたが、最近聴いている英語のPodcastの一覧のメモ。
+日本語だとRebuild.fmとかmozaic.fmとかを聴いてますがまぁ言うまでもないので。</p>
+
+<p>英語力の問題で内容と話す人によっては全く意味がわからないこともありますが、こんな感じのPodcastをsubscribeしていて、気になったエピソードだけを通勤時に聞いています。
+週に1〜2エピソードくらいしか聴いてないですが&hellip;。</p>
+
+<p>なんとなく、よく聴いている順番に並べてみました。</p>
+
+<!-- more -->
+
+
+<h2>Software Engineering Daily</h2>
+
+<ul>
+<li><a href="http://softwareengineeringdaily.com/">http://softwareengineeringdaily.com/</a></li>
+</ul>
+
+
+<p>本当にデイリーで1hくらいのエピソードが配信されていてすごいです。
+基本的には1on1のインタビュー形式で、オーナーの人がゆっくり話してくれるのでわかりやすいです。</p>
+
+<p>内容はサーバーサイドからフロントエンド、Netflixなどの開発スタイルなど幅広い感じです。ただ、JavaScript系の話が多いような気もします。</p>
+
+<p>英語の聞き取りやすさもそうですが、What is Flux?のようなすごいシンプルな質問から入っていったりするので内容もわかりやすいです。</p>
+
+<h2>JavaScript Jabber</h2>
+
+<ul>
+<li><a href="https://devchat.tv/js-jabber">https://devchat.tv/js-jabber</a></li>
+</ul>
+
+
+<p>JavaScript系のPodcastだと一番有名な気がします。
+レギュラーのパネリストもゲストも複数なことが多く、盛り上がってくると複数人がわーっと話すので、ついていけないことも多いです。</p>
+
+<p>個人的には取り上げているトピックやゲストが興味深いことが多いです。</p>
+
+<p>最近音楽が変わったのですが、個人的には前の曲の方が好きでした。あの曲なんだったんだろう&hellip;。</p>
+
+<h2>5 Minutes of JavaScript</h2>
+
+<ul>
+<li><a href="https://fivejs.codeschool.com/">https://fivejs.codeschool.com/</a></li>
+</ul>
+
+
+<p>Podcastのスポンサーとして個人的にはおなじみのCode SchoolがやっているPodcastです。
+毎週JavaScriptに関するトピックを30s〜60sくらいで何個か取り上げていくPodcastです。</p>
+
+<p>たいてい7minくらいなので気軽に聞けます。</p>
+
+<h2>Modern Web</h2>
+
+<ul>
+<li><a href="http://www.modern-web.org/#/modern-web-podcast">http://www.modern-web.org/#/modern-web-podcast</a></li>
+</ul>
+
+
+<p>最近聴き始めたPodcastです。
+JavaScriptのフロントエンド周りが中心です。Emberの話とFRPとかRxJSとかObservableとかの話が多い印象です。
+まぁ1〜2エピソードしか聞いてないですが、聴きやすい気がしています。</p>
+
+<h2>JavaScript Air</h2>
+
+<ul>
+<li><a href="https://javascriptair.com/">https://javascriptair.com/</a></li>
+</ul>
+
+
+<p>JavaScriptに関する、話題になっているライブラリーなどを取り上げてレギュラーのパネリストとゲスト複数人でワイワイ話すスタイルのPodcastです。</p>
+
+<p>Google Hangoutで収録しているようですが、人によっては音がかなり悪くて聞き取りにくいことも&hellip;。
+ただ、内容はフロントエンドやっている人には面白いものが多いです。</p>
+
+<p>ちなみにレギュラーのパネリストにReduxの作者のDan Abramovがいて、たまに出てます。あんまり話さないけど。</p>
+
+<h2>The Web Platform Podcast</h2>
+
+<ul>
+<li><a href="http://www.thewebplatformpodcast.com/">http://www.thewebplatformpodcast.com/</a></li>
+</ul>
+
+
+<p>Webに関する話題を取り上げるPodcastです。
+フロントエンド系の話が多い印象がありますが、Platformの話やWebなど広い範囲のテーマを取り上げている印象です。</p>
+
+<h2>The Changelog</h2>
+
+<ul>
+<li><a href="https://changelog.com/podcast/">https://changelog.com/podcast/</a></li>
+</ul>
+
+
+<p>Webやプログラミングに関する話題を広く取り上げているPodcastです。
+DHHが出たりなどおおっ、思う人がたまに出て来て面白いです。</p>
+
+<h2>NodeUp</h2>
+
+<ul>
+<li><a href="http://nodeup.com/">http://nodeup.com/</a></li>
+</ul>
+
+
+<p>Node.js自体に関する話題が多いPodcastです。</p>
+
+<h2>Software Engineering Radio</h2>
+
+<ul>
+<li><a href="http://www.se-radio.net/">http://www.se-radio.net/</a></li>
+</ul>
+
+
+<p>名前の通り、Software Engineeringに関するテーマを取り上げたPodcastです。DevOpsとか。
+Dave Thomasが出たりもしてました。</p>
+
+<h2>React Native Radio</h2>
+
+<ul>
+<li><a href="https://devchat.tv/react-native-radio">https://devchat.tv/react-native-radio</a></li>
+</ul>
+
+
+<p>React Nativeに関する話題を取り上げるPodcastです。
+React Native以外にもAndre Staltzが出てCycle.jsの話をしたり、Facebookの人が出てGraphQLの話をしたリもしています。</p>
+
+<h2>Soft Skills Engineering</h2>
+
+<ul>
+<li><a href="https://itunes.apple.com/us/podcast/soft-skills-engineering/id1091341048?mt=2">https://itunes.apple.com/us/podcast/soft-skills-engineering/id1091341048?mt=2</a></li>
+</ul>
+
+
+<p>まだ1話して聞いてないですが&hellip;。
+Softとある通り、tech以外の話題を取り上げているPodcastです。
+キャリアについてなど他のPodcastではあまり話題にならないような内容について話されています。</p>
+
+<p>おわり。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.2 4/15〜4/19]]></title>
@@ -5221,50 +5366,6 @@ decompile関数ではDOMは削除されません。
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[天下一クライアントサイドJS MV*レームワーク武道会で話しました #ten1club]]></title>
-    <link href="http://blog.koba04.com/post/2014/07/12/talked-at-ten1club/"/>
-    <updated>2014-07-12T23:13:39+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/07/12/talked-at-ten1club</id>
-    <content type="html"><![CDATA[<p><a href="http://connpass.com/event/6910/">http://connpass.com/event/6910/</a></p>
-
-<p>「天下一クライアントサイドJS MV*フレームワーク武道会」でMarionette.jsについてのLTとパネルディスカッションをさせて頂きました。</p>
-
-<!-- more -->
-
-
-<p>JavaScriptについて外部で話すの初めてだったのでドキドキしてましたが本当にとても面白いイベントでした。</p>
-
-<p><a href="https://twitter.com/yosuke_furukawa">@yosuke_furukawa</a>さんに感謝です。++</p>
-
-<p>ありがとうございます！</p>
-
-<h2>LT</h2>
-
-<p>Marionette.jsについてを簡単に説明した感じです。面白みがないですが&hellip;。興味があれば見てみてください。</p>
-
-<p><a href="https://speakerdeck.com/koba04/5fen-dewakarumarionette-dot-jsfalseiitokoro">5分でわかるMarionette.jsのいいところ</a></p>
-
-<p>他の方の発表もみんな面白かったです。Reactが気になっていたのでその辺りも少し聞けてよかったです。</p>
-
-<h2>パネルディスカッション</h2>
-
-<p><a href="https://twitter.com/mizchi">@mizchi</a>さん、<a href="https://twitter.com/damele0n">@damele0n</a>さん、<a href="https://twitter.com/hokaccha">@hokaccha</a>さん、<a href="https://twitter.com/teppeis">@teppeis</a>さんという豪華なメンバーに紛れて参加させて頂いたいのですが、うまく伝えられず反省する点もありましたが聞いていてとても楽しくてあっという間の1時間でした。また機会があれば続きをやりたいです。</p>
-
-<h2>懇親会</h2>
-
-<p>色んな方に声を掛けて頂き、面白い話がいっぱい聞けて楽しかったです。ブログ見たと言ってもらえたのが嬉しかったのと、意外とMarionette.js使われていて同じようなところで悩んでるなぁとわかってよかったです。懇親会後のWebComponents話も面白かったです。</p>
-
-<h2>最強のフレームワーク??</h2>
-
-<p>まぁぶっちゃけ、このフレームワーク使っておけばいいというものはなくて、「誰が触るのか」、「どんなアプリなのか」によって全く答えは変わってくるので、選択肢を自分の中で持っておくことが大切なんじゃないかなと思いました。</p>
-
-<h2>蛇足</h2>
-
-<p>ちなみに個人的には、Vue.js、browserify辺りを使って、テストはkarma、mocha、power-assertとか組み合わせるのが今は好きです。</p>
 ]]></content>
   </entry>
   
