@@ -19,7 +19,7 @@ React NativeのReactとの連携部分がReactのリポジトリの中に含ま�
 
 (実際なかなかそこまでうまく分割できていないようですが...)
 
-## Add comments/attribute indicating which component was rendered #6559
+## Add comments/attribute indicating which component was rendered #6559 (React Issue)
 
 * https://github.com/facebook/react/issues/6559
 
