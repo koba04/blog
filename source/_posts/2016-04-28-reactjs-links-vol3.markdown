@@ -27,3 +27,23 @@ ChromeとFirefox以外のReactのDevToolsを持っていないブラウザーだ
 もちろん開発環境のみで、別のフラグでOn/Offできるような感じで。
 
 いるのかな...。
+
+## Remove unneeded code #1640 (Redux Issue)
+
+* https://github.com/reactjs/redux/pull/1640
+
+Reduxのutils/warningがなぜ↓のようなことをしているのか。
+
+```js
+  try {
+    // This error was thrown as a convenience so that if you enable
+    // "break on all exceptions" in your console,
+    // it would pause the execution at this line.
+    throw new Error(message)
+  /* eslint-disable no-empty */
+  } catch (e) { }
+```
+
+https://github.com/reactjs/redux/blob/master/src/utils/warning.js#L13-L19
+
+"break on all exceptions"を有効にしている時にここで止まるようにしているんですね。なるほど。
