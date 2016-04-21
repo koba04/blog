@@ -10,7 +10,7 @@ categories: react.js react-links
 
 <!-- more -->
 
-# Move React Core Integration and Injection to the Core Repo #6338 (React Issue)
+## Move React Core Integration and Injection to the Core Repo #6338 (React Issue)
 
 * https://github.com/facebook/react/pull/6338
 
@@ -18,3 +18,12 @@ React NativeのReactとの連携部分がReactのリポジトリの中に含ま�
 特に何か変わることはないと思いますが、よりReact Nativeはreact-domのようにただのrendererの1つであるという位置付けになっていく流れなのかなと思います。
 
 (実際なかなかそこまでうまく分割できていないようですが...)
+
+## Add comments/attribute indicating which component was rendered #6559
+
+* https://github.com/facebook/react/issues/6559
+
+ChromeとFirefox以外のReactのDevToolsを持っていないブラウザーだと、どのComponentがrenderされたのかわからないので、`data-reactcomponent`のような属性をDOMに付与するのはどうかという提案です。
+もちろん開発環境のみで、別のフラグでOn/Offできるような感じで。
+
+いるのかな...。
