@@ -6,8 +6,8 @@ comments: true
 categories: podcast
 ---
 
-最近聴いている英語のPodcastの一覧です。
-日本語だとRebuild.fmとかmozaic.fmとかを聴いてるけどまぁ言うまでもないので。
+最近聴いている英語のPodcastの一覧のメモ。
+日本語だとRebuild.fmとかmozaic.fmとかを聴いてますがまぁ言うまでもないので。
 
 英語力の問題で内容と話す人によっては全く意味がわからないこともありますが、こんな感じのPodcastをsubscribeしていて、気になったエピソードだけを通勤時に聞いています。
 
