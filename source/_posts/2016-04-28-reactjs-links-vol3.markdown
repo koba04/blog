@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "React.js Links vol.3 4/20〜4/29"
+title: "React.js Links vol.3 4/20〜4/25"
 date: 2016-04-28 19:19:19 +0900
 comments: true
 categories: react.js react-links
@@ -14,7 +14,8 @@ categories: react.js react-links
 
 * https://github.com/reactjs/core-notes/blob/master/2016-04/april-21.md
 
-ReactのCore Teamによるmeeting noteが公開されています。
+ReactのCore Teamによるmeeting note(4/21)が公開されています。
+
 特に大きな何かがあるわけではないですが、いくつかのbugをfixした`15.0.2`が今週にも出そうです。
 その他では、v15のリリース時にバタバタしたのでリリースプロセスの見直しなどが検討されているようです。
 あとは、ReactのコードベースをFlow化することも議題に挙がっていました。
@@ -51,12 +52,16 @@ ChromeとFirefox以外のReactのDevToolsを持っていないブラウザーだ
 
 いるのかな...。
 
-## QA with Dan Abramov in Reactiflux
+## QA with Dan Abramov in Reactiflux (Link)
 
 * https://github.com/reactiflux/q-and-a/blob/master/dan-abramov_react-core.md
 
 Dan AbramovがReactifluxのDiscordで行ったQ&Aのまとめです。
 Facebookで何をやってるとかRedux、Reactについての質問に答えています。
+
+今後の予定は下記で確認できます。Ben Alpertの会が個人的に楽しみです。そして何気にJonathan Carterが。
+
+* https://paper.dropbox.com/doc/Reactiflux-QA-Schedule-7QAfGzEqfKjtN9UmhYYM9
 
 ## Remove unneeded code #1640 (Redux Issue)
 
@@ -89,7 +94,7 @@ Reduxの質問に解答しているのをよく見るのでわからないこと
 Stateと管理する必要はなくて、必要となった時にURLから値を取得して使えばいいという答えです。
 StateにすることでActionになるので、リプレイなどがやりやすくなるメリットはありますが、必要でない場合は複雑になるだけです。
 
-## MobX
+## MobX (Library)
 
 * https://github.com/mobxjs/mobx
 
@@ -104,7 +109,7 @@ Reactと組み合わせることが想定されているようで、Reactとbind
 ちゃんと中身見てないので、イマイチどのあたりが素晴らしいのかわからかなったので、気が向いたらまた見てみます。
 `@observable decorator (ES2015)`って書いたのがとても気になりました...。
 
-## AMA with Lee Byron
+## AMA with Lee Byron (Link)
 
 * https://hashnode.com/ama/with-lee-byron-cin0kpe8p0073rb53b19emcda
 
