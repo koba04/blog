@@ -10,6 +10,29 @@ categories: react.js react-links
 
 <!-- more -->
 
+## React core meeting notes April 21 (React)
+
+* https://github.com/reactjs/core-notes/blob/master/2016-04/april-21.md
+
+ReactのCore Teamによるmeeting noteが公開されています。
+特に大きな何かがあるわけではないですが、いくつかのbugをfixした`15.0.2`が今週にも出そうです。
+その他では、v15のリリース時にバタバタしたのでリリースプロセスの見直しなどが検討されているようです。
+あとは、ReactのコードベースをFlow化することも議題に挙がっていました。
+
+次の大きなfeatureとしては下のNew Core AlgorithmのIssueです。
+詳細はまだわかりませんが、現在一度にまとめて行っているDOMの更新を分割して行うような感じになるなのかなと思います。
+最初に表示されている部分だけを更新して、その後に非表示エリアのDOMを非同期で更新するみたいな。
+
+この内容はこの後で紹介するDan AbamovのQ&Aでも言及されていたので興味のある人は見てみるといいと思います。
+
+* https://github.com/facebook/react/issues/6170
+
+## Disabled inputs should not respond to clicks in IE (React Issue)
+
+* https://github.com/facebook/react/pull/6215
+
+IE11でdisableだった場合にもonChageイベントが発行されるバグを修正するPRがmergeされました。
+
 ## Move React Core Integration and Injection to the Core Repo #6338 (React Issue)
 
 * https://github.com/facebook/react/pull/6338
@@ -27,6 +50,13 @@ ChromeとFirefox以外のReactのDevToolsを持っていないブラウザーだ
 もちろん開発環境のみで、別のフラグでOn/Offできるような感じで。
 
 いるのかな...。
+
+## QA with Dan Abramov in Reactiflux
+
+* https://github.com/reactiflux/q-and-a/blob/master/dan-abramov_react-core.md
+
+Dan AbramovがReactifluxのDiscordで行ったQ&Aのまとめです。
+Facebookで何をやってるとかRedux、Reactについての質問に答えています。
 
 ## Remove unneeded code #1640 (Redux Issue)
 
@@ -58,3 +88,24 @@ Reduxの質問に解答しているのをよく見るのでわからないこと
 
 Stateと管理する必要はなくて、必要となった時にURLから値を取得して使えばいいという答えです。
 StateにすることでActionになるので、リプレイなどがやりやすくなるメリットはありますが、必要でない場合は複雑になるだけです。
+
+## MobX
+
+* https://github.com/mobxjs/mobx
+
+Observableを活用したReduxライクなState Managementのライブラリーです。
+TypeScriptで書かれています。
+Reactと組み合わせることが想定されているようで、Reactとbindingするためのライブラリーもあります。
+
+10分でわかる説明
+
+* https://mobxjs.github.io/mobx/getting-started.html
+
+ちゃんと中身見てないので、イマイチどのあたりが素晴らしいのかわからかなったので、気が向いたらまた見てみます。
+`@observable decorator (ES2015)`って書いたのがとても気になりました...。
+
+## AMA with Lee Byron
+
+* https://hashnode.com/ama/with-lee-byron-cin0kpe8p0073rb53b19emcda
+
+GraphQLやImmutable.jsのメンテナーであるLee Byronが 4/28 AM3:00(何時間??)にAMAやるみたいなので質問がある人は書いてみるといいと思います。
