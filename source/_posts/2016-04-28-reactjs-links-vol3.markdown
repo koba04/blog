@@ -43,6 +43,13 @@ React NativeのReactとの連携部分がReactのリポジトリの中に含ま�
 
 (実際なかなかそこまでうまく分割できていないようですが...)
 
+## Provide info about component tree to devtools #6549 (React Issue)
+
+* https://github.com/facebook/react/pull/6549
+
+React Perfの再構築に伴って、React DevToolのようなものを作るための環境が整備されてきています。
+ソースを見る感じ、EventHandlerを登録しておくことで、Reactの中で起こるイベントをlistenすることができるようになるのでthird partyのライブラリーも作りやすくなるのかなと思います。
+
 ## Add comments/attribute indicating which component was rendered #6559 (React Issue)
 
 * https://github.com/facebook/react/issues/6559
