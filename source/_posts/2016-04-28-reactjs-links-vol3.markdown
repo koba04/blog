@@ -70,6 +70,21 @@ Facebookで何をやってるとかRedux、Reactについての質問に答え�
 
 * https://paper.dropbox.com/doc/Reactiflux-QA-Schedule-7QAfGzEqfKjtN9UmhYYM9
 
+## Add Redux Logo #1671 (Redux Issue)
+
+* https://github.com/reactjs/redux/pull/1671
+* https://github.com/reactjs/redux/issues/151 (ロゴのアイデア)
+
+ようやくReduxのロゴが決まったようです。
+
+## Redux FAQ (Redux documentation)
+
+* http://redux.js.org/docs/FAQ.html
+
+少し前に追加されたReduxのFAQページです。
+
+*Do I have to put all my state into Redux? Should I ever use React’s setState()?*や、*How can I represent “side effects” such as AJAX calls? Why do we need things like “action creators”, “thunks”, and “middleware” to do async behavior?*など、Reduxでアプリケーションを作る時に気になるような質問があるので、Reduxを使っている人は見てみることをオススメします。
+
 ## Remove unneeded code #1640 (Redux Issue)
 
 * https://github.com/reactjs/redux/pull/1640
