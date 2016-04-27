@@ -83,7 +83,7 @@ Facebookで何をやってるとかRedux、Reactについての質問に答え�
 
 少し前に追加されたReduxのFAQページです。
 
-*Do I have to put all my state into Redux? Should I ever use React’s setState()?*や、*How can I represent “side effects” such as AJAX calls? Why do we need things like “action creators”, “thunks”, and “middleware” to do async behavior?*など、Reduxでアプリケーションを作る時に気になるような質問があるので、Reduxを使っている人は見てみることをオススメします。
+**Do I have to put all my state into Redux? Should I ever use React’s setState()?**や、**How can I represent “side effects” such as AJAX calls? Why do we need things like “action creators”, “thunks”, and “middleware” to do async behavior?**など、Reduxでアプリケーションを作る時に気になるような質問があるので、Reduxを使っている人は見てみることをオススメします。
 
 ## Remove unneeded code #1640 (Redux Issue)
 
