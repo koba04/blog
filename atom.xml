@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-04-21T18:51:13+09:00</updated>
+  <updated>2016-04-28T19:11:19+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,200 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js Links vol.3 4/20〜4/28]]></title>
+    <link href="http://blog.koba04.com/post/2016/04/28/reactjs-links-vol3/"/>
+    <updated>2016-04-28T19:19:19+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/04/28/reactjs-links-vol3</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
+
+<!-- more -->
+
+
+<h2>React core meeting notes April 21 (React)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-04/april-21.md">https://github.com/reactjs/core-notes/blob/master/2016-04/april-21.md</a></li>
+</ul>
+
+
+<p>ReactのCore Teamによるmeeting note(4/21)が公開されています。</p>
+
+<p>特に大きな何かがあるわけではないですが、いくつかのbugをfixした<code>15.0.2</code>が今週にも出そうです。
+その他では、v15のリリース時にバタバタしたのでリリースプロセスの見直しなどが検討されているようです。
+あとは、ReactのコードベースをFlow化することも議題に挙がっていました。</p>
+
+<p>次の大きなfeatureとしては下のNew Core AlgorithmのIssueです。
+詳細はまだわかりませんが、現在一度にまとめて行っているDOMの更新を分割して行うような感じになるなのかなと思います。
+最初に表示されている部分だけを更新して、その後に非表示エリアのDOMを非同期で更新するみたいな。</p>
+
+<p>この内容はこの後で紹介するDan AbamovのQ&amp;Aでも言及されていたので興味のある人は見てみるといいと思います。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/6170">https://github.com/facebook/react/issues/6170</a></li>
+</ul>
+
+
+<h2>Disabled inputs should not respond to clicks in IE (React Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6215">https://github.com/facebook/react/pull/6215</a></li>
+</ul>
+
+
+<p>IE11でdisableだった場合にもonChageイベントが発行されるバグを修正するPRがmergeされました。</p>
+
+<h2>Move React Core Integration and Injection to the Core Repo #6338 (React Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6338">https://github.com/facebook/react/pull/6338</a></li>
+</ul>
+
+
+<p>React NativeのReactとの連携部分がReactのリポジトリの中に含まれるようになりました。
+特に何か変わることはないと思いますが、よりReact Nativeはreact-domのようにただのrendererの1つであるという位置付けになっていく流れなのかなと思います。</p>
+
+<p>(実際なかなかそこまでうまく分割できていないようですが&hellip;)</p>
+
+<h2>Provide info about component tree to devtools #6549 (React Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6549">https://github.com/facebook/react/pull/6549</a></li>
+</ul>
+
+
+<p>React Perfの再構築に伴って、React DevToolのようなものを作るための環境が整備されてきています。
+ソースを見る感じ、EventHandlerを登録しておくことで、Reactの中で起こるイベントをlistenすることができるようになるのでthird partyのライブラリーも作りやすくなるのかなと思います。</p>
+
+<h2>Add comments/attribute indicating which component was rendered #6559 (React Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/6559">https://github.com/facebook/react/issues/6559</a></li>
+</ul>
+
+
+<p>ChromeとFirefox以外のReactのDevToolsを持っていないブラウザーだと、どのComponentがrenderされたのかわからないので、<code>data-reactcomponent</code>のような属性をDOMに付与するのはどうかという提案です。
+もちろん開発環境のみで、別のフラグでOn/Offできるような感じで。</p>
+
+<p>いるのかな&hellip;。</p>
+
+<h2>QA with Dan Abramov in Reactiflux (Link)</h2>
+
+<ul>
+<li><a href="https://github.com/reactiflux/q-and-a/blob/master/dan-abramov_react-core.md">https://github.com/reactiflux/q-and-a/blob/master/dan-abramov_react-core.md</a></li>
+</ul>
+
+
+<p>Dan AbramovがReactifluxのDiscordで行ったQ&amp;Aのまとめです。
+Facebookで何をやってるとかRedux、Reactについての質問に答えています。</p>
+
+<p>今後の予定は下記で確認できます。Ben Alpertの会が個人的に楽しみです。そして何気にJonathan Carterが。</p>
+
+<ul>
+<li><a href="https://paper.dropbox.com/doc/Reactiflux-QA-Schedule-7QAfGzEqfKjtN9UmhYYM9">https://paper.dropbox.com/doc/Reactiflux-QA-Schedule-7QAfGzEqfKjtN9UmhYYM9</a></li>
+</ul>
+
+
+<h2>AMA with Lee Byron (Link)</h2>
+
+<ul>
+<li><a href="https://hashnode.com/ama/with-lee-byron-cin0kpe8p0073rb53b19emcda">https://hashnode.com/ama/with-lee-byron-cin0kpe8p0073rb53b19emcda</a></li>
+</ul>
+
+
+<p>GraphQLやImmutable.jsのメンテナーであるLee Byronが色々質問に答えています。
+GraphQLやImmutable.jsだけでなく、Facebook内での開発についてやReactについてやCSS modulesどう思うかなど色々答えているので面白いです。
+GraphQLとFalcor比べてどう？TypeScriptがあるのになんでFlowを作っているのか？
+Burnoutにどう対処すべきかなどなど。(FacebookにはHack-a-monthという仕組みがあるらしい)</p>
+
+<h2>Add Redux Logo #1671 (Redux Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/pull/1671">https://github.com/reactjs/redux/pull/1671</a></li>
+<li><a href="https://github.com/reactjs/redux/issues/151">https://github.com/reactjs/redux/issues/151</a> (ロゴのアイデア)</li>
+</ul>
+
+
+<p>ようやくReduxのロゴが決まったようです。</p>
+
+<h2>Redux FAQ (Redux documentation)</h2>
+
+<ul>
+<li><a href="http://redux.js.org/docs/FAQ.html">http://redux.js.org/docs/FAQ.html</a></li>
+</ul>
+
+
+<p>少し前に追加されたReduxのFAQページです。</p>
+
+<p><strong>Do I have to put all my state into Redux? Should I ever use React’s setState()?</strong>や、<strong>How can I represent “side effects” such as AJAX calls? Why do we need things like “action creators”, “thunks”, and “middleware” to do async behavior?</strong>など、Reduxでアプリケーションを作る時に気になるような質問があるので、Reduxを使っている人は見てみることをオススメします。</p>
+
+<h2>Remove unneeded code #1640 (Redux Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/pull/1640">https://github.com/reactjs/redux/pull/1640</a></li>
+</ul>
+
+
+<p>Reduxのutils/warningがなぜ↓のようなことをしているのか。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="k">try</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// This error was thrown as a convenience so that if you enable</span>
+</span><span class='line'>    <span class="c1">// &quot;break on all exceptions&quot; in your console,</span>
+</span><span class='line'>    <span class="c1">// it would pause the execution at this line.</span>
+</span><span class='line'>    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+</span><span class='line'>  <span class="cm">/* eslint-disable no-empty */</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/reactjs/redux/blob/master/src/utils/warning.js#L13-L19">https://github.com/reactjs/redux/blob/master/src/utils/warning.js#L13-L19</a></p>
+
+<p>&ldquo;break on all exceptions&#8221;を有効にしている時にここで止まるようにしているんですね。なるほど。</p>
+
+<h2>How to sync Redux state and url hash tag params (Redux Stackoverflow)</h2>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/36722584/how-to-sync-redux-state-and-url-hash-tag-params/36749963#36749963">http://stackoverflow.com/questions/36722584/how-to-sync-redux-state-and-url-hash-tag-params/36749963#36749963</a></li>
+</ul>
+
+
+<p>ReduxでURLのqueryやhashで状態を管理したい時にStateとどう同期すればいいの？<code>react-router-redux</code>使えばいいの？という質問です。
+それに対して作者のDan Abramovが解答しています。
+Reduxの質問に解答しているのをよく見るのでわからないことがあったらstackoverflowで聞いてみるといいかもしれないですね。</p>
+
+<p>Stateと管理する必要はなくて、必要となった時にURLから値を取得して使えばいいという答えです。
+StateにすることでActionになるので、リプレイなどがやりやすくなるメリットはありますが、必要でない場合は複雑になるだけです。</p>
+
+<h2>MobX (Library)</h2>
+
+<ul>
+<li><a href="https://github.com/mobxjs/mobx">https://github.com/mobxjs/mobx</a></li>
+</ul>
+
+
+<p>Observableを活用したReduxライクなState Managementのライブラリーです。
+TypeScriptで書かれています。
+Reactと組み合わせることが想定されているようで、Reactとbindingするためのライブラリーもあります。</p>
+
+<p>10分でわかる説明</p>
+
+<ul>
+<li><a href="https://mobxjs.github.io/mobx/getting-started.html">https://mobxjs.github.io/mobx/getting-started.html</a></li>
+</ul>
+
+
+<p>ちゃんと中身見てないので、イマイチどのあたりが素晴らしいのかわからかなったので、気が向いたらまた見てみます。
+<code>@observable decorator (ES2015)</code>って書いたのがとても気になりました&hellip;。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Podcasts I'm listening]]></title>
@@ -5312,60 +5506,6 @@ decompile関数ではDOMは削除されません。
 <p>すこしでもWebアプリ作ろうと思った人がいれば嬉しいです！</p>
 
 <p>※参加してくださった方は感想を書いて頂けると嬉しいです。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[「Yコンビネーター シリコンバレー最強のスタートアップ養成スクール」を読んだ]]></title>
-    <link href="http://blog.koba04.com/post/2014/07/25/book-review-of-the-launch-pad/"/>
-    <updated>2014-07-25T00:06:17+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/07/25/book-review-of-the-launch-pad</id>
-    <content type="html"><![CDATA[<p>37Signals本を読んだりしていて、たまたま本屋でこの本を発見して読んでみました。</p>
-
-<p>Yコンビネーターは「ハッカーと画家」やLispプログラマーとしても有名なポール・グレアムがやっているスタートアップを支援する組織で、この本はそこに集まった起業家が3ヶ月後のデモ・デーに挑むまでのドキュメンタリーが中心の内容になっています。</p>
-
-<!-- more -->
-
-
-<h2>エンジニア目線で</h2>
-
-<p>ここに起業家として登場するのはまさに選ばれた天才ばかりで、ハッカーも多くいますが技術的な内容はほとんどないです。</p>
-
-<p>この本では37Signalsの本にあるようなチームのあり方についてなどもありますが、それよりもサービスのアイデアの生み出し方やマネタイズ、どう育てていくのかといったことのヒントを創業者の悩みやポール・グレアムの助言を通じて学ぶことが出来ます。</p>
-
-<p>また、Yコンビネーターの先輩として、<a href="https://www.dropbox.com/">Dropbox</a>や<a href="https://www.heroku.com/">Heroku</a>などのメンバーが登場したり、
-今回の創業者の中にも<a href="https://www.mongohq.com/">MongoHQ</a>や<a href="https://parse.com/">Parse</a>や<a href="http://www.codecademy.com/">Codecademy</a>がいてそのエピソードはとても興味深いです。</p>
-
-<p>SnapjoyのメンバーはHerokuを使っていて、サービスが急成長しているときにDynoを急いで増やしてもらうためにHerokuの創業者にインスタントメッセージで直接お願いしたというエピソードもあったりします。</p>
-
-<p>プログラミングしてサービスを作れることがどんなに強みであるかやその楽しさを改めて再確認させてくれます。</p>
-
-<h2>リアルさ</h2>
-
-<p>この本は密着取材という形で書かれていて、全64チームのうちいくつかメインとなるチームがありながら様々なチームが登場し、海外からの参加者や結婚して子どももいる人など様々なバックグラウンドを持っている人たちが登場します。</p>
-
-<p>それらについて、とてもリアルにまるでその場にいるような形で書かれています。基本的には3ヶ月間ひたすらコードを書き続けるという感じなのでドラマチックなことが何か起きるわけではなく、サービスを作りポール・グレアムなどに相談してまた作るということを繰り返していく感じです。</p>
-
-<p>ですが、実際にサービスに対してどういう考えを持っているかといった部分や何に力を注いでいるのかといった部分がとても勉強になります。</p>
-
-<h2>ヒットするサービス</h2>
-
-<p>ポール・グレアムでもヒットするサービスを見極めることは難しいので少額(数万ドル)でも全チームに投資していたり、デモ・デーまでの3ヶ月でもサービスを何度も変えて作り直すチームがいくつもあったり、サービスを作ることの難しさや厳しさを感じさせてくれます。</p>
-
-<h2>分析</h2>
-
-<p>取材した内容をただ書いているだけでなく、なぜシリコンバレーである必要があるのかといった疑問に対する分析も含まれていてそれもとても面白いです。</p>
-
-<h2>最後に</h2>
-
-<p>400ページ以上となかなかのボリュームですが、読み始めると面白くて一気に最後まで読んでしまう本でした。</p>
-
-<p>サービスを作っている人が読むと、開発者であっても得られるものが多い本だと思いました。</p>
-
-<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=musicfanclub-22&o=9&p=8&l=as4&m=amazon&f=ifr&ref=ss_til&asins=4822249468" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-
-
-
 ]]></content>
   </entry>
   

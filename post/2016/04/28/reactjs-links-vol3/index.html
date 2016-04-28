@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>React.js Links vol.3 4/20〜4/28 - blog.koba04.com</title>
+  <meta name="author" content="koba04">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="blog.koba04.com" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <meta property="og:title" content="React.js Links vol.3 4/20〜4/28 - blog.koba04.com" />
+<meta property="og:description" content="" />
+<meta property="og:url" content="http://blog.koba04.com/post/2016/04/28/reactjs-links-vol3/" />
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/250407" />
+<meta property="og:author" content="koba04" />
+<meta property="og:site_name" content="blog.koba04.com" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="fb:app_id" content="346463362115366" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-8875970-5']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <div class="nav-title"><a href="/">blog.koba04.com</a></div>
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/koba04" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://twitter.com/koba04" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    
+    <li><a href="http://d.hatena.ne.jp/koba04/">OldBlog</a></li>
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    React.js Links vol.3 4/20〜4/28
+	<h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2016-04-28T19:19:19+09:00" pubdate data-updated="true">Apr 28<span>th</span>, 2016</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
+
+<!-- more -->
+
+
+<h2>React core meeting notes April 21 (React)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-04/april-21.md">https://github.com/reactjs/core-notes/blob/master/2016-04/april-21.md</a></li>
+</ul>
+
+
+<p>ReactのCore Teamによるmeeting note(4/21)が公開されています。</p>
+
+<p>特に大きな何かがあるわけではないですが、いくつかのbugをfixした<code>15.0.2</code>が今週にも出そうです。
+その他では、v15のリリース時にバタバタしたのでリリースプロセスの見直しなどが検討されているようです。
+あとは、ReactのコードベースをFlow化することも議題に挙がっていました。</p>
+
+<p>次の大きなfeatureとしては下のNew Core AlgorithmのIssueです。
+詳細はまだわかりませんが、現在一度にまとめて行っているDOMの更新を分割して行うような感じになるなのかなと思います。
+最初に表示されている部分だけを更新して、その後に非表示エリアのDOMを非同期で更新するみたいな。</p>
+
+<p>この内容はこの後で紹介するDan AbamovのQ&amp;Aでも言及されていたので興味のある人は見てみるといいと思います。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/6170">https://github.com/facebook/react/issues/6170</a></li>
+</ul>
+
+
+<h2>Disabled inputs should not respond to clicks in IE (React Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6215">https://github.com/facebook/react/pull/6215</a></li>
+</ul>
+
+
+<p>IE11でdisableだった場合にもonChageイベントが発行されるバグを修正するPRがmergeされました。</p>
+
+<h2>Move React Core Integration and Injection to the Core Repo #6338 (React Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6338">https://github.com/facebook/react/pull/6338</a></li>
+</ul>
+
+
+<p>React NativeのReactとの連携部分がReactのリポジトリの中に含まれるようになりました。
+特に何か変わることはないと思いますが、よりReact Nativeはreact-domのようにただのrendererの1つであるという位置付けになっていく流れなのかなと思います。</p>
+
+<p>(実際なかなかそこまでうまく分割できていないようですが&hellip;)</p>
+
+<h2>Provide info about component tree to devtools #6549 (React Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6549">https://github.com/facebook/react/pull/6549</a></li>
+</ul>
+
+
+<p>React Perfの再構築に伴って、React DevToolのようなものを作るための環境が整備されてきています。
+ソースを見る感じ、EventHandlerを登録しておくことで、Reactの中で起こるイベントをlistenすることができるようになるのでthird partyのライブラリーも作りやすくなるのかなと思います。</p>
+
+<h2>Add comments/attribute indicating which component was rendered #6559 (React Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/6559">https://github.com/facebook/react/issues/6559</a></li>
+</ul>
+
+
+<p>ChromeとFirefox以外のReactのDevToolsを持っていないブラウザーだと、どのComponentがrenderされたのかわからないので、<code>data-reactcomponent</code>のような属性をDOMに付与するのはどうかという提案です。
+もちろん開発環境のみで、別のフラグでOn/Offできるような感じで。</p>
+
+<p>いるのかな&hellip;。</p>
+
+<h2>QA with Dan Abramov in Reactiflux (Link)</h2>
+
+<ul>
+<li><a href="https://github.com/reactiflux/q-and-a/blob/master/dan-abramov_react-core.md">https://github.com/reactiflux/q-and-a/blob/master/dan-abramov_react-core.md</a></li>
+</ul>
+
+
+<p>Dan AbramovがReactifluxのDiscordで行ったQ&amp;Aのまとめです。
+Facebookで何をやってるとかRedux、Reactについての質問に答えています。</p>
+
+<p>今後の予定は下記で確認できます。Ben Alpertの会が個人的に楽しみです。そして何気にJonathan Carterが。</p>
+
+<ul>
+<li><a href="https://paper.dropbox.com/doc/Reactiflux-QA-Schedule-7QAfGzEqfKjtN9UmhYYM9">https://paper.dropbox.com/doc/Reactiflux-QA-Schedule-7QAfGzEqfKjtN9UmhYYM9</a></li>
+</ul>
+
+
+<h2>AMA with Lee Byron (Link)</h2>
+
+<ul>
+<li><a href="https://hashnode.com/ama/with-lee-byron-cin0kpe8p0073rb53b19emcda">https://hashnode.com/ama/with-lee-byron-cin0kpe8p0073rb53b19emcda</a></li>
+</ul>
+
+
+<p>GraphQLやImmutable.jsのメンテナーであるLee Byronが色々質問に答えています。
+GraphQLやImmutable.jsだけでなく、Facebook内での開発についてやReactについてやCSS modulesどう思うかなど色々答えているので面白いです。
+GraphQLとFalcor比べてどう？TypeScriptがあるのになんでFlowを作っているのか？
+Burnoutにどう対処すべきかなどなど。(FacebookにはHack-a-monthという仕組みがあるらしい)</p>
+
+<h2>Add Redux Logo #1671 (Redux Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/pull/1671">https://github.com/reactjs/redux/pull/1671</a></li>
+<li><a href="https://github.com/reactjs/redux/issues/151">https://github.com/reactjs/redux/issues/151</a> (ロゴのアイデア)</li>
+</ul>
+
+
+<p>ようやくReduxのロゴが決まったようです。</p>
+
+<h2>Redux FAQ (Redux documentation)</h2>
+
+<ul>
+<li><a href="http://redux.js.org/docs/FAQ.html">http://redux.js.org/docs/FAQ.html</a></li>
+</ul>
+
+
+<p>少し前に追加されたReduxのFAQページです。</p>
+
+<p><strong>Do I have to put all my state into Redux? Should I ever use React’s setState()?</strong>や、<strong>How can I represent “side effects” such as AJAX calls? Why do we need things like “action creators”, “thunks”, and “middleware” to do async behavior?</strong>など、Reduxでアプリケーションを作る時に気になるような質問があるので、Reduxを使っている人は見てみることをオススメします。</p>
+
+<h2>Remove unneeded code #1640 (Redux Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/pull/1640">https://github.com/reactjs/redux/pull/1640</a></li>
+</ul>
+
+
+<p>Reduxのutils/warningがなぜ↓のようなことをしているのか。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="k">try</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// This error was thrown as a convenience so that if you enable</span>
+</span><span class='line'>    <span class="c1">// &quot;break on all exceptions&quot; in your console,</span>
+</span><span class='line'>    <span class="c1">// it would pause the execution at this line.</span>
+</span><span class='line'>    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+</span><span class='line'>  <span class="cm">/* eslint-disable no-empty */</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/reactjs/redux/blob/master/src/utils/warning.js#L13-L19">https://github.com/reactjs/redux/blob/master/src/utils/warning.js#L13-L19</a></p>
+
+<p>&ldquo;break on all exceptions&#8221;を有効にしている時にここで止まるようにしているんですね。なるほど。</p>
+
+<h2>How to sync Redux state and url hash tag params (Redux Stackoverflow)</h2>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/36722584/how-to-sync-redux-state-and-url-hash-tag-params/36749963#36749963">http://stackoverflow.com/questions/36722584/how-to-sync-redux-state-and-url-hash-tag-params/36749963#36749963</a></li>
+</ul>
+
+
+<p>ReduxでURLのqueryやhashで状態を管理したい時にStateとどう同期すればいいの？<code>react-router-redux</code>使えばいいの？という質問です。
+それに対して作者のDan Abramovが解答しています。
+Reduxの質問に解答しているのをよく見るのでわからないことがあったらstackoverflowで聞いてみるといいかもしれないですね。</p>
+
+<p>Stateと管理する必要はなくて、必要となった時にURLから値を取得して使えばいいという答えです。
+StateにすることでActionになるので、リプレイなどがやりやすくなるメリットはありますが、必要でない場合は複雑になるだけです。</p>
+
+<h2>MobX (Library)</h2>
+
+<ul>
+<li><a href="https://github.com/mobxjs/mobx">https://github.com/mobxjs/mobx</a></li>
+</ul>
+
+
+<p>Observableを活用したReduxライクなState Managementのライブラリーです。
+TypeScriptで書かれています。
+Reactと組み合わせることが想定されているようで、Reactとbindingするためのライブラリーもあります。</p>
+
+<p>10分でわかる説明</p>
+
+<ul>
+<li><a href="https://mobxjs.github.io/mobx/getting-started.html">https://mobxjs.github.io/mobx/getting-started.html</a></li>
+</ul>
+
+
+<p>ちゃんと中身見てないので、イマイチどのあたりが素晴らしいのかわからかなったので、気が向いたらまた見てみます。
+<code>@observable decorator (ES2015)</code>って書いたのがとても気になりました&hellip;。</p>
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <hr>
+    
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
+
+
+
+  <a href="/blog/categories/react-links/"><span class="badge">react-links</span></a>
+
+  <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://blog.koba04.com/post/2016/04/28/reactjs-links-vol3/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.koba04.com/post/2016/04/28/reactjs-links-vol3/" data-via="koba04" data-counturl="http://blog.koba04.com/post/2016/04/28/reactjs-links-vol3/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-href="http://blog.koba04.com/post/2016/04/28/reactjs-links-vol3/" data-send="true" data-width="100" data-show-faces="false"></div>
+  
+</div>
+
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/post/2016/04/21/podcasts-im-listening/" title="Previous Post: Podcasts I'm listening">&laquo; Podcasts I'm listening</a>
+          
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2016 - koba04 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'koba04log';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.koba04.com/post/2016/04/28/reactjs-links-vol3/';
+        var disqus_url = 'http://blog.koba04.com/post/2016/04/28/reactjs-links-vol3/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=346463362115366&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
