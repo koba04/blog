@@ -75,7 +75,9 @@ Facebookで何をやってるとかRedux、Reactについての質問に答え�
 * https://hashnode.com/ama/with-lee-byron-cin0kpe8p0073rb53b19emcda
 
 GraphQLやImmutable.jsのメンテナーであるLee Byronが色々質問に答えています。
-GraphQLやImmutable.jsだけでなく、ReactについてやCSS modulesどう思うかなど色々答えているので面白いです。
+GraphQLやImmutable.jsだけでなく、Facebook内での開発についてやReactについてやCSS modulesどう思うかなど色々答えているので面白いです。
+GraphQLとFalcor比べてどう？TypeScriptがあるのになんでFlowを作っているのか？
+Burnoutにどう対処すべきかなどなど。(FacebookにはHack-a-monthという仕組みがあるらしい)
 
 ## Add Redux Logo #1671 (Redux Issue)
 
