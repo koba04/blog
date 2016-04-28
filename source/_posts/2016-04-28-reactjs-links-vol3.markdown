@@ -70,6 +70,13 @@ Facebookで何をやってるとかRedux、Reactについての質問に答え�
 
 * https://paper.dropbox.com/doc/Reactiflux-QA-Schedule-7QAfGzEqfKjtN9UmhYYM9
 
+## AMA with Lee Byron (Link)
+
+* https://hashnode.com/ama/with-lee-byron-cin0kpe8p0073rb53b19emcda
+
+GraphQLやImmutable.jsのメンテナーであるLee Byronが色々質問に答えています。
+GraphQLやImmutable.jsだけでなく、ReactについてやCSS modulesどう思うかなど色々答えているので面白いです。
+
 ## Add Redux Logo #1671 (Redux Issue)
 
 * https://github.com/reactjs/redux/pull/1671
@@ -130,9 +137,3 @@ Reactと組み合わせることが想定されているようで、Reactとbind
 
 ちゃんと中身見てないので、イマイチどのあたりが素晴らしいのかわからかなったので、気が向いたらまた見てみます。
 `@observable decorator (ES2015)`って書いたのがとても気になりました...。
-
-## AMA with Lee Byron (Link)
-
-* https://hashnode.com/ama/with-lee-byron-cin0kpe8p0073rb53b19emcda
-
-GraphQLやImmutable.jsのメンテナーであるLee Byronが 4/28 AM3:00(何時間??)にAMAやるみたいなので質問がある人は書いてみるといいと思います。
