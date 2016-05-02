@@ -42,3 +42,12 @@ categories: react.js react-links
 
 TwitterのモバイルWeb版がいつの間にかリニューアルされていて、Reactが使われています。
 React Developer Toolsで見る限り、`react-router`と`redux`も使われているようです。
+
+## State management is easy - Introduction to MobX (Slide)
+
+* https://speakerdeck.com/mweststrate/state-management-is-easy-introduction-to-mobx
+
+Mendixというところが作ったMobXの紹介スライドです。
+Storeとなるクラスの値をobservableにして、Compnentがobserveとなるような感じです。
+これだとデータの流れが不明確になって大規模だと辛そうですが...。
+
