@@ -55,6 +55,12 @@ import { View } from 'react-native';
 
 のようにView部分だけを`react-native`からimportする形になり、rendererの1つとしてのReact Nativeという形に近づきました。
 
+## Flux 3.0 (Flux Release)
+
+* https://github.com/facebook/flux/blob/master/CHANGELOG.md#300
+
+大きなところでは、Immutable.jsのMapをStateとして使うためのMapStoreが削除されました。
+
 ## React Native Express (React Native Tutorial)
 
 * http://www.reactnativeexpress.com/
