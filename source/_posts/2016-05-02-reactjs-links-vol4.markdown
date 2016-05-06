@@ -32,6 +32,10 @@ categories: react.js react-links
 
 * https://github.com/facebook/react/pull/5746
 
+## RFC: New Reconciler Infra (React PR)
+
+* https://github.com/facebook/react/pull/6690
+
 ## React Native 0.25.1 (React Native Release)
 
 * https://github.com/facebook/react-native/releases/tag/v0.25.1
