@@ -32,6 +32,25 @@ categories: react.js react-links
 
 * https://github.com/facebook/react/pull/5746
 
+## React Native 0.25.1 (React Native Release)
+
+* https://github.com/facebook/react-native/releases/tag/v0.25.1
+
+これまでは、
+
+```js
+import React, { Component, View } from 'react-native';
+```
+
+と`react-native`からReactもComponentもimportする必要あったのが、
+
+```js
+import React, { Component } from 'react';
+import { View } from 'react-native';
+```
+
+のようにView部分だけを`react-native`からimportする形になり、rendererの1つとしてのReact Nativeという形に近づきました。
+
 ## React Native Express (React Native Tutorial)
 
 * http://www.reactnativeexpress.com/
