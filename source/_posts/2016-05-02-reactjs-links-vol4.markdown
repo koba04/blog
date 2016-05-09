@@ -20,6 +20,11 @@ categories: react.js react-links
 * https://github.com/reactjs/core-notes/blob/master/2016-04/april-28.md
 * https://github.com/reactjs/core-notes/pull/10
 
+## React Core Meeting Note May 5 (React Meeting Note)
+
+* https://github.com/reactjs/core-notes/blob/master/2016-05/may-05.md
+* https://github.com/reactjs/core-notes/pull/13
+
 ## Add new ReactPerf #6046 (React PR)
 
 * https://github.com/facebook/react/pull/6046
