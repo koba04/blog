@@ -70,6 +70,10 @@ import { View } from 'react-native';
 
 * http://www.reactnativeexpress.com/
 
+## Proof of Concept: Enhancer Overhaul #1702 (Redux PR)
+
+* https://github.com/reactjs/redux/pull/1702
+
 ## Mobile Twitter Web(React Users)
 
 * https://mobile.twitter.com/
