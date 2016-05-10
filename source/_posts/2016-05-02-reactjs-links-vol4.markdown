@@ -15,15 +15,29 @@ categories: react.js react-links
 
 * https://github.com/facebook/react/releases/tag/v15.0.2
 
+Reactのv15.0.2がリリースされています。Bug fixが中心です。
+
 ## React Core Meeting Note April 28 (React Meeting Note)
 
 * https://github.com/reactjs/core-notes/blob/master/2016-04/april-28.md
 * https://github.com/reactjs/core-notes/pull/10
 
+React Coreチームのmeeting noteです。
+v15になったこともあり、リリースサイクルについての議論が行われているようです。
+
+また、`Experimenting with StyleSheet.create() on the web`のようなトピックもあり、こちらも興味深いです。
+
 ## React Core Meeting Note May 5 (React Meeting Note)
 
 * https://github.com/reactjs/core-notes/blob/master/2016-05/may-05.md
 * https://github.com/reactjs/core-notes/pull/13
+
+React Coreチームのmeeting noteです。
+Dan Abramovが作業していたReact Perfのrewriteがmasterにmergeされました。気になる人はmasterを試してみるといいと思います。
+
+また、`airbnb/enzyme`をofficialのTestUtilsに？みたいな話もあってこちらも注目です。
+
+あとは、Server Side RenderingやCSSのvendor prefixについての議論もされています。
 
 ## Add new ReactPerf #6046 (React PR)
 
