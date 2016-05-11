@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-04-28T19:11:19+09:00</updated>
+  <updated>2016-05-11T23:15:36+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,149 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js Links vol.4 4/29〜5/11]]></title>
+    <link href="http://blog.koba04.com/post/2016/05/11/reactjs-links-vol4/"/>
+    <updated>2016-05-11T18:41:13+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/05/11/reactjs-links-vol4</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
+
+<!-- more -->
+
+
+<h2>React v15.0.2 (React Release)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/releases/tag/v15.0.2">https://github.com/facebook/react/releases/tag/v15.0.2</a></li>
+</ul>
+
+
+<p>Reactのv15.0.2がリリースされています。Bug fixが中心です。</p>
+
+<h2>React Core Meeting Note April 28 (React Meeting Note)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-04/april-28.md">https://github.com/reactjs/core-notes/blob/master/2016-04/april-28.md</a></li>
+<li><a href="https://github.com/reactjs/core-notes/pull/10">https://github.com/reactjs/core-notes/pull/10</a></li>
+</ul>
+
+
+<p>React Coreチームのmeeting noteです。
+v15になったこともあり、リリースサイクルについての議論が行われているようです。</p>
+
+<p>また、<code>Experimenting with StyleSheet.create() on the web</code>のようなトピックもあり、こちらも興味深いです。</p>
+
+<h2>React Core Meeting Note May 5 (React Meeting Note)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-05/may-05.md">https://github.com/reactjs/core-notes/blob/master/2016-05/may-05.md</a></li>
+<li><a href="https://github.com/reactjs/core-notes/pull/13">https://github.com/reactjs/core-notes/pull/13</a></li>
+</ul>
+
+
+<p>React Coreチームのmeeting noteです。</p>
+
+<p>また、<code>airbnb/enzyme</code>をofficialのTestUtilsに？みたいな話もあってこちらも注目です。</p>
+
+<p>あとは、Server Side RenderingやCSSのvendor prefixについての議論もされています。</p>
+
+<h2>Add new ReactPerf #6046 (React PR)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6046">https://github.com/facebook/react/pull/6046</a></li>
+</ul>
+
+
+<p>Dan Abramovが作業していたReactPerfのrewriteされたものがmergeされました。
+<code>react@15.1.0-alpha.1</code>で試すことができます。</p>
+
+<h2>RFC: New Reconciler Infra (React PR)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6690">https://github.com/facebook/react/pull/6690</a></li>
+</ul>
+
+
+<p>Reactのコア部分であるReconcilerと呼ばれているComponentの更新処理を管理する部分の新しいアウトラインとなる実装がmergeされました。まだ初期という感じですが。。
+通常、Reactを使う場合にこのReconcilerは使われないので、コンセプトを共有するための実装という感じです。</p>
+
+<p>後、コードベースがFlowになっていますね。ReactNativeのコードはFlowが使われていたりするので、今後Reactの本体のコードにもFlowが使われていくようになるかもしれません。</p>
+
+<h2>React Native 0.25.1 (React Native Release)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react-native/releases/tag/v0.25.1">https://github.com/facebook/react-native/releases/tag/v0.25.1</a></li>
+</ul>
+
+
+<p>これまでは、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">View</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;react-native&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>と<code>react-native</code>からReactもComponentもimportする必要あったのが、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="p">{</span> <span class="nx">View</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;react-native&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>のようにView部分だけを<code>react-native</code>からimportする形になり、rendererの1つとしてのReact Nativeという形に近づきました。</p>
+
+<h2>Flux 3.0 (Flux Release)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/flux/blob/master/CHANGELOG.md#300">https://github.com/facebook/flux/blob/master/CHANGELOG.md#300</a></li>
+</ul>
+
+
+<p>大きなところでは、Immutable.jsのMapをStateとして使うためのMapStoreが削除されました。</p>
+
+<h2>React Native Express (React Native Tutorial)</h2>
+
+<ul>
+<li><a href="http://www.reactnativeexpress.com/">http://www.reactnativeexpress.com/</a></li>
+</ul>
+
+
+<p>ReactNativeのためのチュートリアル的なサイトです。サンプルが<code>react-native-web</code>を使って確認できるのは面白いですね。</p>
+
+<h2>Proof of Concept: Enhancer Overhaul #1702 (Redux PR)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/pull/1702">https://github.com/reactjs/redux/pull/1702</a></li>
+</ul>
+
+
+<p>Storeを拡張する辺りについての新しいコンセプトについて議論されています。</p>
+
+<h2>Mobile Twitter Web(React Users)</h2>
+
+<ul>
+<li><a href="https://mobile.twitter.com/">https://mobile.twitter.com/</a></li>
+</ul>
+
+
+<p>TwitterのモバイルWeb版がいつの間にかリニューアルされていて、Reactが使われています。
+React Developer Toolsで見る限り、<code>react-router</code>と<code>redux</code>も使われているようです。</p>
+
+<h2>State management is easy &ndash; Introduction to MobX (Slide)</h2>
+
+<ul>
+<li><a href="https://speakerdeck.com/mweststrate/state-management-is-easy-introduction-to-mobx">https://speakerdeck.com/mweststrate/state-management-is-easy-introduction-to-mobx</a></li>
+</ul>
+
+
+<p>Mendixというところが作ったMobXの紹介スライドです。
+Storeとなるクラスの値をobservableにして、Compnentがobserveとなるような感じです。
+これだとデータの流れが不明確になって大規模だと辛そうですが&hellip;。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.3 4/20〜4/28]]></title>
@@ -5369,143 +5512,6 @@ decompile関数ではDOMは削除されません。
 <hr />
 
 <p>vue.js bookもv0.11対応して続きを書かないと&hellip;.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[YAPC::ASIA 2014の前夜祭をやった]]></title>
-    <link href="http://blog.koba04.com/post/2014/08/30/hold-yapc-asia-2014-eve/"/>
-    <updated>2014-08-30T01:30:49+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/08/30/hold-yapc-asia-2014-eve</id>
-    <content type="html"><![CDATA[<p><a href="http://yapcasia.org/2014/talk/show/bc6052f4-0c8b-11e4-aec0-ad686aeab6a4">http://yapcasia.org/2014/talk/show/bc6052f4-0c8b-11e4-aec0-ad686aeab6a4</a></p>
-
-<p>YAPC::ASIA 2014の前夜祭の企画・進行をやってきました。</p>
-
-<p><a href="http://gihyo.jp/news/report/01/yapcasia2014/0000">http://gihyo.jp/news/report/01/yapcasia2014/0000</a></p>
-
-<!-- more -->
-
-
-<h2>突然のオファー</h2>
-
-<p>そもそも何でやっていたかですが、</p>
-
-<p><a href="https://twitter.com/yusukebe">@yusukebe</a>さんからWebアプリのコンテストみたいなのやりたいから企画と当日の仕切りをお願いしますというオファーが来たので、なんか大変そうな気もするけど楽しそうなので受けることにしました。</p>
-
-<h2>企画を考える</h2>
-
-<p>結局、10minのTalkを10本ぶっ続けという形式に落ち着きましたが、@yusukebeさんの他にも<a href="https://twitter.com/uzulla">@uzulla</a>さん、<a href="https://twitter.com/kfly8">@kfly8</a>さんと相談しながらかなり悩んでいました。</p>
-
-<ul>
-<li>投票形式にする？</li>
-<li>LT(5min)にする？</li>
-<li>パネルディスカッションにする？</li>
-<li>一般募集する？</li>
-<li>:</li>
-</ul>
-
-
-<p>ですが最終的には、「前夜祭はYAPC::ASIA 2014一番目のイベント」なので勢いのある感じにしたいということで、Talk(10min)を10本ぶっ通しで行うという形に落ち着きました。</p>
-
-<p>なんとなく、今回はYAPC初参加のPerlを使っていない人もそこそこいると思ったのと、前夜祭は初参加の人にとってはYAPCを印象付けるものになると思ったので、誰でも楽しめるようなイベントになるようにとは考えていました。</p>
-
-<h2>オファーする</h2>
-
-<p>誰にオファーするかは、一度上記のメンバーで集まった時にひたすら面白いサービス作っている人の名前を挙げていって、そのリストから自分が聞きたい！と思った人に順番に声を掛けていきました。(一応PerlメインになりそうなTalkのバランスも考えましたが)</p>
-
-<p><img src="http://blog.koba04.com/images/oretoku.png"></p>
-
-<p>皆さん快くお受け頂いて本当に感謝しています。</p>
-
-<h2>そして当日</h2>
-
-<p>司会とタイムキーパーをやっていたので100%聞けていたわけではないですが、全部のTalkが面白くて3分前と1分前に出していた案内が遅れることも&hellip;。</p>
-
-<p>準備不足で若干もたついたところもあり申し訳なかったです&hellip;。</p>
-
-<h3>@__papix__ / GeekDojo</h3>
-
-<p>Pamon2という独自にAmon2を拡張したライブラリを使っていたり、チームでの開発での話も聞けそうで面白そうだなと思いお願いしました。</p>
-
-<p>一発目のTalkでしたがさすがの盛り上げっぷりでPerlの話もありつつ楽しませてもらいました。</p>
-
-<h3>@hondallica / hrhm.info</h3>
-
-<p>Heavymetal好きのためのサービスということでかなり濃いこだわりが聞けるのではないかなと思いお願いしました。</p>
-
-<p>Talkが本当に面白くてHeavymetalに対する愛が詰まった発表で素晴らしかったです。</p>
-
-<h3>@ppworks / pplog</h3>
-
-<p>この企画を考えた際にまず思いついたのが個人的にも好きなサービスであるpplogで、下記のエントリを見て話を聞きたいなと思いお願いしました。</p>
-
-<ul>
-<li><a href="http://ppworks.hatenablog.jp/entry/2014/07/13/012855">http://ppworks.hatenablog.jp/entry/2014/07/13/012855</a></li>
-</ul>
-
-
-<p>自分たちが使いたいものを作るというはっきりとした意思があり、それをPOEMとして文章にしておくなどサービスを育てていくことに対するヒントがいっぱいあってとても勉強になりました。</p>
-
-<h3>@syachi / ゴミ収集カレンダー</h3>
-
-<p>YAPCに応募されていたトークで、「札幌市のWebページに掲載されている&#8221;ごみ収集日カレンダー&#8221;をperlを使ってparseする」という暮らしを便利にするコンセプトが面白そうだなと思いお願いしました。</p>
-
-<p>まさかの号泣ネタもありながら、ごみ収集カレンダーと戦っていく様子がとても面白かったです。</p>
-
-<h3>@masuidrive / wri.pe</h3>
-
-<p>wri.peは個人的にも愛用しているシンプルで使いやすくて完成度の高いアプリで、個人でどうやって作っていったのかという過程に興味があって今回お願いしました。</p>
-
-<p>GW中に作ろうと思って作り始めてそこからたくさんの人に使われていく流れが面白く、デザインを考えた時の話などとても参考になりました。</p>
-
-<h3>@hika69 / プライベートで3年間チーム開発した話</h3>
-
-<p>CastoやStoryBoardsなど面白いサービスたくさん作られていて、Rendrなど色々な技術を使われているのもすごいなぁと思ってお願いしました。あとuzullaさんの強烈なpushもありｗ</p>
-
-<p>技術をサービスに活用するのが本当に上手いなぁというのと、チーム開発に対するヒントがたくさん詰まった発表でとても勉強になりました。</p>
-
-<h3>@sugyan / ttyrecからGIFアニメを作る話</h3>
-
-<p>golangを学びながらサービスを作ってしまって、その上Web対応もやってすごいなぁと思ってお願いしました。</p>
-
-<p>デモを交えながらの発表で、さらっとすごいことをやっていてさすがだなという発表でした。</p>
-
-<h3>@razokulover / GIFMAGAZINEの話</h3>
-
-<p>GIFMAGAZINEをはじめ面白いサービスをたくさん作られていて、どういうことを考えてサービスを作っていることに興味があってお願いしました。</p>
-
-<p>GIFアニメ好きのために作るという明確な意思がGIFMAGAZINEを支えていて、一番使って欲しい人のためにサービスを作ることの大事さを感じる発表でした。</p>
-
-<h3>@yositosi / togetter</h3>
-
-<p>AdminsBarというpodcastで出演されているのを聞いて是非話を聞いてみたいと思ったのでお願いしました。</p>
-
-<ul>
-<li><a href="http://admins.bar/2/">http://admins.bar/2/</a></li>
-</ul>
-
-
-<p>togetter誕生からたくさんの人に使われていくまでの流れをpodcastの時と同様に面白くTalkされていてあっという間の時間でした。</p>
-
-<p>podcast聴いてない人はWebサービスを作る楽しさが詰まっているので是非聴いてみてください！</p>
-
-<h3>@debility / クイズを支える技術</h3>
-
-<p>YAPCのTalkにも応募されていて、デモが面白いという噂を聞きお願いしました。</p>
-
-<p>ネタ満載でトリに相応しい盛り上がりで楽しませてもらいました！</p>
-
-<p>(楽しみ過ぎてて最後の締めの挨拶何も考えてなかったのは失敗でしたが&hellip;)</p>
-
-<h2>まとめ</h2>
-
-<p>自分がTalkを聞きたい人に集まってもらったので本当に楽しかったです！</p>
-
-<p>発表者の方、そしてスタッフの方本当にありがとうございました！！</p>
-
-<p>すこしでもWebアプリ作ろうと思った人がいれば嬉しいです！</p>
-
-<p>※参加してくださった方は感想を書いて頂けると嬉しいです。</p>
 ]]></content>
   </entry>
   
