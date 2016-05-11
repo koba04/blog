@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "React.js Links vol.4"
-date: 2016-05-02 09:41:13 +0900
+date: 2016-05-11 18:41:13 +0900
 comments: true
 categories: react.js react-links
 ---
@@ -33,7 +33,7 @@ v15になったこともあり、リリースサイクルについての議論�
 * https://github.com/reactjs/core-notes/pull/13
 
 React Coreチームのmeeting noteです。
-Dan Abramovが作業していたReact Perfのrewriteがmasterにmergeされました。気になる人はmasterを試してみるといいと思います。
+
 
 また、`airbnb/enzyme`をofficialのTestUtilsに？みたいな話もあってこちらも注目です。
 
@@ -43,17 +43,17 @@ Dan Abramovが作業していたReact Perfのrewriteがmasterにmergeされま�
 
 * https://github.com/facebook/react/pull/6046
 
-## Refactor composite component update flow #1965 (React PR)
-
-* https://github.com/facebook/react/pull/1965
-
-## Only fire input value change events when the value changes #5746 (React PR)
-
-* https://github.com/facebook/react/pull/5746
+Dan Abramovが作業していたReactPerfのrewriteされたものがmergeされました。
+`react@15.1.0-alpha.1`で試すことができます。
 
 ## RFC: New Reconciler Infra (React PR)
 
 * https://github.com/facebook/react/pull/6690
+
+Reactのコア部分であるReconcilerと呼ばれているComponentの更新処理を管理する部分の新しいアウトラインとなる実装がmergeされました。まだ初期という感じですが。。
+通常、Reactを使う場合にこのReconcilerは使われないので、コンセプトを共有するための実装という感じです。
+
+後、コードベースがFlowになっていますね。ReactNativeのコードはFlowが使われていたりするので、今後Reactの本体のコードにもFlowが使われていくようになるかもしれません。
 
 ## React Native 0.25.1 (React Native Release)
 
@@ -84,9 +84,13 @@ import { View } from 'react-native';
 
 * http://www.reactnativeexpress.com/
 
+ReactNativeのためのチュートリアル的なサイトです。サンプルが`react-native-web`を使って確認できるのは面白いですね。
+
 ## Proof of Concept: Enhancer Overhaul #1702 (Redux PR)
 
 * https://github.com/reactjs/redux/pull/1702
+
+Storeを拡張する辺りについての新しいコンセプトについて議論されています。
 
 ## Mobile Twitter Web(React Users)
 
