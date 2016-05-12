@@ -9,3 +9,9 @@ categories: react.js react-links
 これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。
 
 <!-- more -->
+
+## Tiny React Renderer (GitHub Repository)
+
+* https://github.com/iamdustan/tiny-react-renderer
+
+ReactのRendererの仕組みを知るための小さな実装です。
