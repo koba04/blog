@@ -10,6 +10,10 @@ categories: react.js react-links
 
 <!-- more -->
 
+## Docs need one or more diagrams #653 (Redux Issue)
+
+* https://github.com/reactjs/redux/issues/653
+
 ## Tiny React Renderer (GitHub Repository)
 
 * https://github.com/iamdustan/tiny-react-renderer
