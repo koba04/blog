@@ -41,3 +41,7 @@ ReactのRendererの仕組みを知るための小さな実装です。
 * https://medium.com/@fay_jai/react-elements-vs-react-components-vs-component-backing-instances-14d42729f62
 
 ReactElementとReact ComponentとComponentのinstanceの違いについて
+
+## Getting Started with React Native Development on Windows
+
+* https://shift.infinite.red/getting-started-with-react-native-development-on-windows-90d85a72ae65#.z7zy617cm
