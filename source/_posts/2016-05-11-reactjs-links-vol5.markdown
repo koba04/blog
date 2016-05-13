@@ -31,3 +31,13 @@ ReactのRendererの仕組みを知るための小さな実装です。
 ## Higher Order Components: Theory and Practice
 
 * http://engineering.blogfoster.com/higher-order-components-theory-and-practice/
+
+## redux-observable (Redux Middleware)
+
+* https://medium.com/@benlesh/redux-observable-ec0b00d2eb52
+
+## React Elements vs React Components vs Component Backing Instances (React)
+
+* https://medium.com/@fay_jai/react-elements-vs-react-components-vs-component-backing-instances-14d42729f62
+
+ReactElementとReact ComponentとComponentのinstanceの違いについて
