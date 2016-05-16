@@ -10,6 +10,10 @@ categories: react.js react-links
 
 <!-- more -->
 
+## React Core Meeting Note May 12 (React Meeting Note)
+
+* https://github.com/reactjs/core-notes/blob/master/2016-05/may-12.md
+
 ## Docs need one or more diagrams #653 (Redux Issue)
 
 * https://github.com/reactjs/redux/issues/653
