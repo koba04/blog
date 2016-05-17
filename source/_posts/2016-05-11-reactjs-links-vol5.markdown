@@ -71,3 +71,10 @@ ReactElementとReact ComponentとComponentのinstanceの違いについてのエ
 * https://shift.infinite.red/getting-started-with-react-native-development-on-windows-90d85a72ae65
 
 ReactNativeの開発をWindows上で行う方法について解説したエントリーです。
+
+## UI Testing in React
+
+* https://voice.kadira.io/ui-testing-in-react-74fd90a5d58b#.tr0046jgs
+
+ReactでのUIテストについてのエントリーです。
+テストをFunctional TestingとVisual Testingに分類して、Functional Testingはenzymeを、Visual TestingはReact Storybookをそれぞれ使う方法が紹介されています。
