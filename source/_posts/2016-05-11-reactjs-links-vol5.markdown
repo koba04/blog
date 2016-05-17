@@ -86,6 +86,7 @@ Storybookをそれぞれ使う方法が紹介されています。
 * https://www.youtube.com/channel/UCsFrt8oKNYXGspSlX9u6uXw
 
 React Amsterdamのスライドと動画が公開されています。
-ReactNativeのinternalの話もあったりして色々面白そうです。
+ReactNativeのinternalやJSSの話もあったりして色々面白そうです。
 
 * https://speakerdeck.com/reactamsterdam/tadeu-zagallo-facebook-london-react-native-architecture-overview
+* https://speakerdeck.com/reactamsterdam/oleg-slobodskoi-chatgrape-berlin-javascript-style-sheets
