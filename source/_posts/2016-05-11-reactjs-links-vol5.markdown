@@ -77,4 +77,15 @@ ReactNativeの開発をWindows上で行う方法について解説したエン�
 * https://voice.kadira.io/ui-testing-in-react-74fd90a5d58b#.tr0046jgs
 
 ReactでのUIテストについてのエントリーです。
-テストをFunctional TestingとVisual Testingに分類して、Functional Testingはenzymeを、Visual TestingはReact Storybookをそれぞれ使う方法が紹介されています。
+テストをFunctional TestingとVisual Testingに分類して、Functional Testingはenzymeを、Visual TestingはReact 
+Storybookをそれぞれ使う方法が紹介されています。
+
+## React Amsterdam
+
+* https://speakerdeck.com/reactamsterdam
+* https://www.youtube.com/channel/UCsFrt8oKNYXGspSlX9u6uXw
+
+React Amsterdamのスライドと動画が公開されています。
+ReactNativeのinternalの話もあったりして色々面白そうです。
+
+* https://speakerdeck.com/reactamsterdam/tadeu-zagallo-facebook-london-react-native-architecture-overview
