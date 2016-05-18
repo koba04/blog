@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-04-28T19:12:10+09:00</updated>
+  <updated>2016-05-11T23:16:19+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,146 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js Links vol.4 4/29〜5/11]]></title>
+    <link href="http://blog.koba04.com/post/2016/05/11/reactjs-links-vol4/"/>
+    <updated>2016-05-11T18:41:13+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/05/11/reactjs-links-vol4</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
+
+<!-- more -->
+
+
+<h2>React v15.0.2 (React Release)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/releases/tag/v15.0.2">https://github.com/facebook/react/releases/tag/v15.0.2</a></li>
+</ul>
+
+
+<p>Reactのv15.0.2がリリースされています。Bug fixが中心です。</p>
+
+<h2>React Core Meeting Note April 28 (React Meeting Note)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-04/april-28.md">https://github.com/reactjs/core-notes/blob/master/2016-04/april-28.md</a></li>
+<li><a href="https://github.com/reactjs/core-notes/pull/10">https://github.com/reactjs/core-notes/pull/10</a></li>
+</ul>
+
+
+<p>React Coreチームのmeeting noteです。
+v15になったこともあり、リリースサイクルについての議論が行われているようです。</p>
+
+<p>また、<code>Experimenting with StyleSheet.create() on the web</code>のようなトピックもあり、こちらも興味深いです。</p>
+
+<h2>React Core Meeting Note May 5 (React Meeting Note)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-05/may-05.md">https://github.com/reactjs/core-notes/blob/master/2016-05/may-05.md</a></li>
+<li><a href="https://github.com/reactjs/core-notes/pull/13">https://github.com/reactjs/core-notes/pull/13</a></li>
+</ul>
+
+
+<p>React Coreチームのmeeting noteです。</p>
+
+<p>また、<code>airbnb/enzyme</code>をofficialのTestUtilsに？みたいな話もあってこちらも注目です。</p>
+
+<p>あとは、Server Side RenderingやCSSのvendor prefixについての議論もされています。</p>
+
+<h2>Add new ReactPerf #6046 (React PR)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6046">https://github.com/facebook/react/pull/6046</a></li>
+</ul>
+
+
+<p>Dan Abramovが作業していたReactPerfのrewriteされたものがmergeされました。
+<code>react@15.1.0-alpha.1</code>で試すことができます。</p>
+
+<h2>RFC: New Reconciler Infra (React PR)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6690">https://github.com/facebook/react/pull/6690</a></li>
+</ul>
+
+
+<p>Reactのコア部分であるReconcilerと呼ばれているComponentの更新処理を管理する部分の新しいアウトラインとなる実装がmergeされました。まだ初期という感じですが。。
+通常、Reactを使う場合にこのReconcilerは使われないので、コンセプトを共有するための実装という感じです。</p>
+
+<p>後、コードベースがFlowになっていますね。ReactNativeのコードはFlowが使われていたりするので、今後Reactの本体のコードにもFlowが使われていくようになるかもしれません。</p>
+
+<h2>React Native 0.25.1 (React Native Release)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react-native/releases/tag/v0.25.1">https://github.com/facebook/react-native/releases/tag/v0.25.1</a></li>
+</ul>
+
+
+<p>これまでは、</p>
+
+<p><code>js
+import React, { Component, View } from 'react-native';
+</code></p>
+
+<p>と<code>react-native</code>からReactもComponentもimportする必要あったのが、</p>
+
+<p><code>js
+import React, { Component } from 'react';
+import { View } from 'react-native';
+</code></p>
+
+<p>のようにView部分だけを<code>react-native</code>からimportする形になり、rendererの1つとしてのReact Nativeという形に近づきました。</p>
+
+<h2>Flux 3.0 (Flux Release)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/flux/blob/master/CHANGELOG.md#300">https://github.com/facebook/flux/blob/master/CHANGELOG.md#300</a></li>
+</ul>
+
+
+<p>大きなところでは、Immutable.jsのMapをStateとして使うためのMapStoreが削除されました。</p>
+
+<h2>React Native Express (React Native Tutorial)</h2>
+
+<ul>
+<li><a href="http://www.reactnativeexpress.com/">http://www.reactnativeexpress.com/</a></li>
+</ul>
+
+
+<p>ReactNativeのためのチュートリアル的なサイトです。サンプルが<code>react-native-web</code>を使って確認できるのは面白いですね。</p>
+
+<h2>Proof of Concept: Enhancer Overhaul #1702 (Redux PR)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/pull/1702">https://github.com/reactjs/redux/pull/1702</a></li>
+</ul>
+
+
+<p>Storeを拡張する辺りについての新しいコンセプトについて議論されています。</p>
+
+<h2>Mobile Twitter Web(React Users)</h2>
+
+<ul>
+<li><a href="https://mobile.twitter.com/">https://mobile.twitter.com/</a></li>
+</ul>
+
+
+<p>TwitterのモバイルWeb版がいつの間にかリニューアルされていて、Reactが使われています。
+React Developer Toolsで見る限り、<code>react-router</code>と<code>redux</code>も使われているようです。</p>
+
+<h2>State management is easy &ndash; Introduction to MobX (Slide)</h2>
+
+<ul>
+<li><a href="https://speakerdeck.com/mweststrate/state-management-is-easy-introduction-to-mobx">https://speakerdeck.com/mweststrate/state-management-is-easy-introduction-to-mobx</a></li>
+</ul>
+
+
+<p>Mendixというところが作ったMobXの紹介スライドです。
+Storeとなるクラスの値をobservableにして、Compnentがobserveとなるような感じです。
+これだとデータの流れが不明確になって大規模だと辛そうですが&hellip;。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.3 4/20〜4/28]]></title>
@@ -759,97 +899,6 @@ const Component = () => (</p>
 </li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[React.js meetup #3を開催しました]]></title>
-    <link href="http://blog.koba04.com/post/2016/03/07/reactjs-meetup3/"/>
-    <updated>2016-03-07T17:08:38+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/03/07/reactjs-meetup3</id>
-    <content type="html"><![CDATA[<p>前回開催したのが9月だったみたいなので半年くらい経ちましたがReact.js meetup #3を開催しました。</p>
-
-<ul>
-<li><a href="http://reactjs-meetup.connpass.com/event/26229/">http://reactjs-meetup.connpass.com/event/26229/</a></li>
-</ul>
-
-
-<p>今回はサイボウズさんに会場を提供して頂き開催することができました。
-サイボウズの皆様、参加者の皆様、発表者の皆様ありがとうございました！！</p>
-
-<p>connpassの管理画面によると<strong>75/80人</strong>の方が参加してくださいました。感謝！</p>
-
-<p>{% img /images/reactjs-meetup3.jpg &lsquo;React.js meetup #3&rsquo; %}</p>
-
-<!-- more -->
-
-
-<h2>開催の経緯</h2>
-
-<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/koba04">@koba04</a> hey! I&#39;ll be in Tokyo in February. Are there any ReactJS or general JavaScript meetups happening during that time?</p>&mdash; Christoph Pojer (@cpojer) <a href="https://twitter.com/cpojer/status/691698537306796032">January 25, 2016</a></blockquote>
-
-
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>というmentionがきっかけで急遽の開催となりました。前回と全く同じような経緯です。</p>
-
-<p><a href="http://blog.koba04.com/post/2015/09/09/reactjs-meetup2/">http://blog.koba04.com/post/2015/09/09/reactjs-meetup2/</a></p>
-
-<h2>準備など</h2>
-
-<p><a href="https://twitter.com/yosuke_furukawa">@yusuke_furukawa</a>会長と相談しつつ、サイボウズさんに会場が決まってからは当日の準備や受付、懇親会の手配までサイボウズの方々にお任せしてしまって本当に助かりました！
-というわけで今回も自分はあまり何もしてないのですがイベントの構成を考えたりしていました。</p>
-
-<p>募集に関しては募集開始日に埋まることは予想していたのですが、2分持たずに埋まることまでは想定していなかったので次回の募集方法については考えようかなと思っています。
-（先着・抽選50%ずつなど）</p>
-
-<h2>Talk</h2>
-
-<p>Talkに関しては、<a href="https://twitter.com/cpojer">@cpojer</a>さんのTalkは事前に相談して得意分野であるというjscodeshitについてのTalkをお願いしてReactなどについてはQ&amp;Aでという形になりました。
-Q&amp;Aについては<a href="https://twitter.com/yando">@yando</a>さんが通訳してくださったので本当に助かりました。ありがとうございました！！</p>
-
-<p>今回のTalkはJSConf EU 2015でのTalkがベースになっているので興味のある方はそちらも参照してください。</p>
-
-<p><a href="https://www.youtube.com/watch?v=d0pOgY8__JM">https://www.youtube.com/watch?v=d0pOgY8__JM</a></p>
-
-<p>その他のTalkについても自分が聞きたいなぁと思った内容について個別にTalkをお願いしました。
-どのTalkも15分では短いくらいで面白かったです。</p>
-
-<p>LTもどれも面白かったですね。</p>
-
-<p>全部のTalkの資料が公開されているわけではないですが、下記のブログやtogetterによるまとめを見てください！</p>
-
-<ul>
-<li><a href="http://blog.cybozu.io/entry/2016/03/04/080000">http://blog.cybozu.io/entry/2016/03/04/080000</a></li>
-<li><a href="http://togetter.com/li/942145">http://togetter.com/li/942145</a></li>
-</ul>
-
-
-<h2>参加者</h2>
-
-<p>挙手でアンケートを取ったのですが、</p>
-
-<ul>
-<li>Reactを使っている人 &hellip; ほとんど全員</li>
-<li>仕事でReact使っているという人 &hellip; 半分くらい</li>
-<li>Redux使っている人 &hellip; 半分くらい</li>
-<li>Facebook Flux使っている人 &hellip; 1割くらい</li>
-<li>GraphQL、Relay使っている人 &hellip; 1人？</li>
-<li>ReactNative使っている人 &hellip; 1人？</li>
-</ul>
-
-
-<p>みたいな感じでした。
-GraphQL、Relay、ReactNativeなんかは英語の記事ではそこそこ見るのですがやはり導入のハードルが高いので実際に踏み込んでいる人はそんなに多くなさそうです。</p>
-
-<p>ReactNativeはGitHubを見てる限り今も活発にメンテナンスされていて、React.js Conf 2016でもTalkが多かったので今後どうなるのかは注目しています。</p>
-
-<h2>次回&hellip;?</h2>
-
-<p>次回はなんとなく6月の頭にあるReact Europe後くらいがいいかなと思っていますが、何か話したいネタがあったり聞きたいテーマなどあれば教えてもらえるとそれまでに開催するかもしれないのでよろしくお願いします！</p>
-
-<p>Reactの勉強会が少ない気がするという声も聞いたのでやりたい人がいたら是非やるといいんじゃないかなと思います！</p>
 ]]></content>
   </entry>
   

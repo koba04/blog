@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react-links | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-links/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-04-28T19:12:10+09:00</updated>
+  <updated>2016-05-11T23:16:19+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,146 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js Links vol.4 4/29〜5/11]]></title>
+    <link href="http://blog.koba04.com/post/2016/05/11/reactjs-links-vol4/"/>
+    <updated>2016-05-11T18:41:13+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/05/11/reactjs-links-vol4</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
+
+<!-- more -->
+
+
+<h2>React v15.0.2 (React Release)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/releases/tag/v15.0.2">https://github.com/facebook/react/releases/tag/v15.0.2</a></li>
+</ul>
+
+
+<p>Reactのv15.0.2がリリースされています。Bug fixが中心です。</p>
+
+<h2>React Core Meeting Note April 28 (React Meeting Note)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-04/april-28.md">https://github.com/reactjs/core-notes/blob/master/2016-04/april-28.md</a></li>
+<li><a href="https://github.com/reactjs/core-notes/pull/10">https://github.com/reactjs/core-notes/pull/10</a></li>
+</ul>
+
+
+<p>React Coreチームのmeeting noteです。
+v15になったこともあり、リリースサイクルについての議論が行われているようです。</p>
+
+<p>また、<code>Experimenting with StyleSheet.create() on the web</code>のようなトピックもあり、こちらも興味深いです。</p>
+
+<h2>React Core Meeting Note May 5 (React Meeting Note)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-05/may-05.md">https://github.com/reactjs/core-notes/blob/master/2016-05/may-05.md</a></li>
+<li><a href="https://github.com/reactjs/core-notes/pull/13">https://github.com/reactjs/core-notes/pull/13</a></li>
+</ul>
+
+
+<p>React Coreチームのmeeting noteです。</p>
+
+<p>また、<code>airbnb/enzyme</code>をofficialのTestUtilsに？みたいな話もあってこちらも注目です。</p>
+
+<p>あとは、Server Side RenderingやCSSのvendor prefixについての議論もされています。</p>
+
+<h2>Add new ReactPerf #6046 (React PR)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6046">https://github.com/facebook/react/pull/6046</a></li>
+</ul>
+
+
+<p>Dan Abramovが作業していたReactPerfのrewriteされたものがmergeされました。
+<code>react@15.1.0-alpha.1</code>で試すことができます。</p>
+
+<h2>RFC: New Reconciler Infra (React PR)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6690">https://github.com/facebook/react/pull/6690</a></li>
+</ul>
+
+
+<p>Reactのコア部分であるReconcilerと呼ばれているComponentの更新処理を管理する部分の新しいアウトラインとなる実装がmergeされました。まだ初期という感じですが。。
+通常、Reactを使う場合にこのReconcilerは使われないので、コンセプトを共有するための実装という感じです。</p>
+
+<p>後、コードベースがFlowになっていますね。ReactNativeのコードはFlowが使われていたりするので、今後Reactの本体のコードにもFlowが使われていくようになるかもしれません。</p>
+
+<h2>React Native 0.25.1 (React Native Release)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react-native/releases/tag/v0.25.1">https://github.com/facebook/react-native/releases/tag/v0.25.1</a></li>
+</ul>
+
+
+<p>これまでは、</p>
+
+<p><code>js
+import React, { Component, View } from 'react-native';
+</code></p>
+
+<p>と<code>react-native</code>からReactもComponentもimportする必要あったのが、</p>
+
+<p><code>js
+import React, { Component } from 'react';
+import { View } from 'react-native';
+</code></p>
+
+<p>のようにView部分だけを<code>react-native</code>からimportする形になり、rendererの1つとしてのReact Nativeという形に近づきました。</p>
+
+<h2>Flux 3.0 (Flux Release)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/flux/blob/master/CHANGELOG.md#300">https://github.com/facebook/flux/blob/master/CHANGELOG.md#300</a></li>
+</ul>
+
+
+<p>大きなところでは、Immutable.jsのMapをStateとして使うためのMapStoreが削除されました。</p>
+
+<h2>React Native Express (React Native Tutorial)</h2>
+
+<ul>
+<li><a href="http://www.reactnativeexpress.com/">http://www.reactnativeexpress.com/</a></li>
+</ul>
+
+
+<p>ReactNativeのためのチュートリアル的なサイトです。サンプルが<code>react-native-web</code>を使って確認できるのは面白いですね。</p>
+
+<h2>Proof of Concept: Enhancer Overhaul #1702 (Redux PR)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/pull/1702">https://github.com/reactjs/redux/pull/1702</a></li>
+</ul>
+
+
+<p>Storeを拡張する辺りについての新しいコンセプトについて議論されています。</p>
+
+<h2>Mobile Twitter Web(React Users)</h2>
+
+<ul>
+<li><a href="https://mobile.twitter.com/">https://mobile.twitter.com/</a></li>
+</ul>
+
+
+<p>TwitterのモバイルWeb版がいつの間にかリニューアルされていて、Reactが使われています。
+React Developer Toolsで見る限り、<code>react-router</code>と<code>redux</code>も使われているようです。</p>
+
+<h2>State management is easy &ndash; Introduction to MobX (Slide)</h2>
+
+<ul>
+<li><a href="https://speakerdeck.com/mweststrate/state-management-is-easy-introduction-to-mobx">https://speakerdeck.com/mweststrate/state-management-is-easy-introduction-to-mobx</a></li>
+</ul>
+
+
+<p>Mendixというところが作ったMobXの紹介スライドです。
+Storeとなるクラスの値をobservableにして、Compnentがobserveとなるような感じです。
+これだとデータの流れが不明確になって大規模だと辛そうですが&hellip;。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.3 4/20〜4/28]]></title>
