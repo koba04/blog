@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-05-11T23:16:19+09:00</updated>
+  <updated>2016-05-18T18:59:06+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,145 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js Links vol.5 5/12〜5/18]]></title>
+    <link href="http://blog.koba04.com/post/2016/05/18/reactjs-links-vol5/"/>
+    <updated>2016-05-18T23:27:34+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/05/18/reactjs-links-vol5</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
+
+<!-- more -->
+
+
+<h2>React Core Meeting Note May 12 (React Meeting Note)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-05/may-12.md">https://github.com/reactjs/core-notes/blob/master/2016-05/may-12.md</a></li>
+</ul>
+
+
+<p>恒例のCore TeamのMeeting Noteです。
+現在だと、production build時のエラーがわかりにくいものであったりとエラー周りの仕組みに不便なところがあるのでそれを改善することをReact Teamに来たインターンの人がやるそうです。すごい環境のインターンだ&hellip;。</p>
+
+<p>RustやEmber参考にしたRFCのプロセスを構築することが検討されているようです。
+また、ShallowRenderingとは別のテスト用にrendererのプロトタイプが作られていたりとこちらも興味深いです。</p>
+
+<h2>Docs need one or more diagrams #653 (Redux Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/issues/653#issuecomment-216844781">https://github.com/reactjs/redux/issues/653#issuecomment-216844781</a></li>
+</ul>
+
+
+<p>Reduxでのデータの流れがダイアグラムで示されていてわかりやすいので、はじめて触る人は見ておくといいかもしれません。</p>
+
+<h2>Tiny React Renderer (GitHub Repository)</h2>
+
+<ul>
+<li><a href="https://github.com/iamdustan/tiny-react-renderer">https://github.com/iamdustan/tiny-react-renderer</a></li>
+</ul>
+
+
+<p>ReactのRendererを理解するための小さな実装です。カスタムRendererを作りたかったり、Reactの内部を知りたい人はソースをみるといいんじゃないかと思います。</p>
+
+<h2>react-router-scroll (GitHub Repository)</h2>
+
+<ul>
+<li><a href="https://github.com/taion/react-router-scroll">https://github.com/taion/react-router-scroll</a></li>
+</ul>
+
+
+<p>ReactRouterでスクロールマネージメントを行うためのライブラリーです。
+scroll-behaviorをラップする感じになっているようです。</p>
+
+<h2>flow-typed (GitHub Repository)</h2>
+
+<ul>
+<li><a href="https://github.com/flowtype/flow-typed">https://github.com/flowtype/flow-typed</a></li>
+</ul>
+
+
+<p>Flowの型定義を管理するリポジトリーです。前に公開されたリポジトリーですが、最近型定義が集まり出しています。</p>
+
+<h2>Why did you update (GitHub Repository)</h2>
+
+<ul>
+<li><a href="https://github.com/garbles/why-did-you-update">https://github.com/garbles/why-did-you-update</a></li>
+</ul>
+
+
+<p>Reactにモンキーパッチを当てて、PropやStateが変わってないのにrerenderが行われたことを教えてくれるライブラリーです。
+パフォーマンスチューニングしたい場合に便利かもしれません。</p>
+
+<h2>Higher Order Components: Theory and Practice</h2>
+
+<ul>
+<li><a href="http://engineering.blogfoster.com/higher-order-components-theory-and-practice/">http://engineering.blogfoster.com/higher-order-components-theory-and-practice/</a></li>
+</ul>
+
+
+<p>ReactでMixinの代わりとしてよく使われるHigh Order Componentsのパターンについてのエントリーです。</p>
+
+<h2>redux-observable (Redux Middleware)</h2>
+
+<ul>
+<li><a href="https://medium.com/@benlesh/redux-observable-ec0b00d2eb52">https://medium.com/@benlesh/redux-observable-ec0b00d2eb52</a></li>
+</ul>
+
+
+<p>ReduxとRxJS v5を組み合わせるためのライブラリーについてのエントリーです。
+Ben LeshさんはRxJS v5のメインの開発者であり、以前に紹介した通りReduxに<code>es-observable</code>のspecに対応させるPRを送っていましたがここで結びつきました。このライブラリーはNetflixでも使っているようです。</p>
+
+<p><a href="http://blog.koba04.com/post/2016/04/19/reactjs-links-vol2/">http://blog.koba04.com/post/2016/04/19/reactjs-links-vol2/</a></p>
+
+<h2>React Elements vs React Components vs Component Backing Instances (React)</h2>
+
+<ul>
+<li><a href="https://medium.com/@fay_jai/react-elements-vs-react-components-vs-component-backing-instances-14d42729f62">https://medium.com/@fay_jai/react-elements-vs-react-components-vs-component-backing-instances-14d42729f62</a></li>
+</ul>
+
+
+<p>ReactElementとReact ComponentとComponentのinstanceの違いについてのエントリーです。</p>
+
+<h2>Getting Started with React Native Development on Windows</h2>
+
+<ul>
+<li><a href="https://shift.infinite.red/getting-started-with-react-native-development-on-windows-90d85a72ae65">https://shift.infinite.red/getting-started-with-react-native-development-on-windows-90d85a72ae65</a></li>
+</ul>
+
+
+<p>ReactNativeの開発をWindows上で行う方法について解説したエントリーです。</p>
+
+<h2>UI Testing in React</h2>
+
+<ul>
+<li><a href="https://voice.kadira.io/ui-testing-in-react-74fd90a5d58b#.tr0046jgs">https://voice.kadira.io/ui-testing-in-react-74fd90a5d58b#.tr0046jgs</a></li>
+</ul>
+
+
+<p>ReactでのUIテストについてのエントリーです。
+テストをFunctional TestingとVisual Testingに分類して、Functional Testingはenzymeを、Visual TestingはReact
+Storybookをそれぞれ使う方法が紹介されています。</p>
+
+<h2>React Amsterdam</h2>
+
+<ul>
+<li><a href="https://speakerdeck.com/reactamsterdam">https://speakerdeck.com/reactamsterdam</a></li>
+<li><a href="https://www.youtube.com/channel/UCsFrt8oKNYXGspSlX9u6uXw">https://www.youtube.com/channel/UCsFrt8oKNYXGspSlX9u6uXw</a></li>
+</ul>
+
+
+<p>React Amsterdamのスライドと動画が公開されています。
+ReactNativeのinternalやJSSの話もあったりして色々面白そうです。</p>
+
+<ul>
+<li><a href="https://speakerdeck.com/reactamsterdam/tadeu-zagallo-facebook-london-react-native-architecture-overview">https://speakerdeck.com/reactamsterdam/tadeu-zagallo-facebook-london-react-native-architecture-overview</a></li>
+<li><a href="https://speakerdeck.com/reactamsterdam/oleg-slobodskoi-chatgrape-berlin-javascript-style-sheets">https://speakerdeck.com/reactamsterdam/oleg-slobodskoi-chatgrape-berlin-javascript-style-sheets</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.4 4/29〜5/11]]></title>
@@ -647,258 +786,6 @@ Babelを使った最適化の場合でも数%の向上が見られますが、�
 
 <p>Perfによる計測をChrome Developer Toolsで行うことができるライブラリーです。
 カジュアルに計測が出来そうなのでよさそうです。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[React.js v15.0 changes]]></title>
-    <link href="http://blog.koba04.com/post/2016/03/09/react-js-v15-changes/"/>
-    <updated>2016-03-09T13:07:52+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/03/09/react-js-v15-changes</id>
-    <content type="html"><![CDATA[<p><strong>v15.0.0がリリースされました(2016/04/08)</strong></p>
-
-<hr />
-
-<p><strong>RC2が出たので追記</strong></p>
-
-<p><strong>RC2</strong> ではIE、Edgeでマークアップの構造によって一部のテキストが表示されないバグ(<a href="https://github.com/facebook/react/issues/6246">#6246</a>)とSVGに関する変更がrevertされました。</p>
-
-<hr />
-
-<p>React.js v15.0がリリースされたので変更内容などを整理したいと思います。</p>
-
-<ul>
-<li><a href="https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html">https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html</a></li>
-<li><a href="http://facebook.github.io/react/blog/2016/03/16/react-v15-rc2.html">http://facebook.github.io/react/blog/2016/03/16/react-v15-rc2.html</a></li>
-<li><a href="http://facebook.github.io/react/blog/2016/04/07/react-v15.html">http://facebook.github.io/react/blog/2016/04/07/react-v15.html</a></li>
-</ul>
-
-
-<p><code>
-% npm install --save react@15.0.0 react-dom@15.0.0
-</code></p>
-
-<p>今回の一番大きな変更はバージョン番号かなと思います。</p>
-
-<p>0.14から15.0に。</p>
-
-<p>0.x系だとproduction readyではないと思われることから一気に15.0になりましたが0.がなくなっただけで大きな変化があるわけでもないです。
-なぜ1.0ではないのかというと1.0というバージョン番号は特別意味のあるものとして扱われるので、そうではなくてすでにproduction readyでありsemverに従っているということを明確にするために0.を取って15.0になりました。</p>
-
-<p><a href="https://facebook.github.io/react/blog/2016/02/19/new-versioning-scheme.html">https://facebook.github.io/react/blog/2016/02/19/new-versioning-scheme.html</a></p>
-
-<p>ちなみにこれまでもminor version(0.13 &ndash;> 0.14)などでは破壊的な変更がありましたがpatch version(0.14.1 &ndash;> 0.14.2)などは基本的には破壊的な変更はなかったのでバージョンアップのサイクルなどが変わることはないと思います。
-（patch versionの更新でUndocumentedなfeatureで破壊的な変更が入ることはありましたが&hellip;）</p>
-
-<p>これまでも破壊的な変更をする際は基本的には前のバージョンでwarningを入れてから更新するので、今回もすでに0.14.7を使っていて特にwarningなどが出力されていないのであれば問題なく15.0にアップデートできると思います。</p>
-
-<!-- more -->
-
-
-<p>ちなみにIE8のサポートについてはまだIE8対応のコードは削除されていないので動作するはずですが、今後はIE8のためだけのバグFixなどは行わないというステータスです。</p>
-
-<p><a href="https://facebook.github.io/react/blog/2016/01/12/discontinuing-ie8-support.html">https://facebook.github.io/react/blog/2016/01/12/discontinuing-ie8-support.html</a></p>
-
-<h2>Major changes</h2>
-
-<h3>document.createElement is in and data-reactid is out</h3>
-
-<p>これまではReactで構築した全てのDOMに対して<code>data-reactid</code>という属性が付与されていましたがそれが付与されなくなりました。すっきりしていいですね。
-ReactDOM.renderを行ったルートの要素には<code>data-reactroot</code>という属性が付与されます。</p>
-
-<p>またこれまでは多くの場合で<code>document.createElement</code>を使うよりも高速であるという理由から初期マウント時にはHTML文字列を生成してinnerHTMLで流し込んでいましたが、ブラウザーの改善などにより必ずしもそうとも言えなくなってきたので<code>document.createElement</code>を使って作成するように変更されました。</p>
-
-<p><code>data-reactid</code>がなぜ必要だったのかはReactのイベントの仕組みに関係しています。
-ReactではイベントハンドリングはそれぞれのReactElementと対応付けられたDOM要素にイベントリスナーを登録してハンドリングするのではなく、<code>ReactDOM.render</code>で指定したルートのDOM要素だけにイベントリスナーを登録してそこで全てのイベントをハンドリングしています。
-ルートで受け取ったイベントがどのReactElementと対応付けられたDOMで発生したのかを判定するために<code>data-reactid</code>が使用されていました。</p>
-
-<p>イベントは頻繁に発生するため内部ではキャッシュなどを駆使して高速化が図られていたのですがそれによるバグも多く、今回HTML文字列ではなくDOM要素を作成するようになり、DOM要素を保持しておけばいいので<code>data-reactid</code>を使ったマッピング情報を保持しておく必要がなくなりました。</p>
-
-<p>ちなみに<code>ReactDOM.renderToString</code>を使って生成したHTML文字列には変わらず<code>data-reactid</code>が付与されています。</p>
-
-<h3>No more extra <code>&lt;span&gt;</code>s</h3>
-
-<p><code>{name}</code>などのように変数を文字列として埋め込んだ際にこれまでは差分更新のために<code>span</code>タグで囲まれていたのがcomment nodeに変更されました。</p>
-
-<ul>
-<li>v0.14</li>
-</ul>
-
-
-<p>```html</p>
-
-<div id="app">
-<div data-reactid=".0">
-<span data-reactid=".0.0">Hello </span>
-<span data-reactid=".0.1">React</span>
-</div>
-</div>
-
-
-<p>```</p>
-
-<ul>
-<li>v15</li>
-</ul>
-
-
-<p>```html</p>
-
-<div id="app">
-<div data-reactroot="">
-<!-- react-text: 2 -->Hello <!-- /react-text -->
-<!-- react-text: 3 -->React<!-- /react-text -->
-</div>
-</div>
-
-
-<p>```</p>
-
-<p>この変更はマークアップ構造の変更を生むので更新する際には注意が必要です。
-特にCSS周りやテストでspanが挿入されることに依存したコードを書いていると壊れます。</p>
-
-<p>元々が意図しないマークアップが挿入されていたのでそれがなくなってよかったんじゃないでしょうか。</p>
-
-<h3>Rendering null now uses comment nodes</h3>
-
-<p>renderメソッドでnullを返した場合に、これまでは<code>&lt;noscript&gt;</code>タグがrenderされていましたがcomment nodeに変更されました。
-この変更もマークアップ構造の変更を生むので特に<code>:nth-child</code>などのセレクターを使っている場合には注意が必要です。</p>
-
-<p>また下記のエントリーにもあるように無駄に<code>&lt;noscript&gt;</code>タグが更新されていたような場合に対するパフォーマンスの改善となります。</p>
-
-<p><a href="http://benchling.engineering/deep-dive-react-perf-debugging/">http://benchling.engineering/deep-dive-react-perf-debugging/</a></p>
-
-<h3>Improved SVG support</h3>
-
-<p><strong>[更新]RC2でrevertされました</strong></p>
-
-<p><del>全てのSVGタグがサポートされるようになりました。一般的ではないタグは<code>React.DOM</code>のヘルパーとしては提供されていませんが、<code>React.createElement</code>で全てのSVGタグを作成できます。</del>
-<del>全てのSVGタグはキャメルケースやハイフンなどそのままの指定で作成できます。</del>
-<del><code>gradientTransform</code>は<code>gradientTransform</code>のままで<code>clip-path</code>は<code>clip-path</code>のまま指定します。</del></p>
-
-<p><del>ちなみにクラスを指定する場合は<code>className</code>ではなくて、<code>class</code>で指定します。custom elementsと同じです。</del>
-<del>それに関するissueはこちら。</del></p>
-
-<p><del> <a href="https://github.com/facebook/react/issues/6211">https://github.com/facebook/react/issues/6211</a> </del></p>
-
-<p>このSVGに対する挙動の変更はcustom elementsの挙動と同様であったのですが、HTMLElementとの整合性(<code>class</code> &ndash;> <code>className</code>など)がなくなってしまうことが問題だということでrevertされました。
-なのでサポートされていないsvgの要素や属性があれば引き続きPRして反映する必要があります。こんな感じで。(<a href="https://github.com/facebook/react/pull/6267">#6267</a>)</p>
-
-<p>将来的にはSVGもHTMLも普段SVGやHTMLと同じようにclassはclassのままで指定できるようになるのではないかなと思います。具体的な予定は示されていませんが&hellip;。</p>
-
-<h2>Breaking changes</h2>
-
-<p>v15で最も大きなBreaking changeは上に書いたspanタグを使わなくなったことによるマークアップ構造の変化です。</p>
-
-<p>その他では、v0.14でwaringsを出力していたDeprecatedなAPIが完全に削除されました。</p>
-
-<ul>
-<li><p>Reactのパッケージから<code>findDOMNode</code>, <code>render</code>, <code>renderToString</code>, <code>renderToStaticMarkup</code>, <code>unmountComponentAtNode</code>が削除されました。代わりにReactDOMのパッケージにある同名のAPIを使います。</p></li>
-<li><p>Addonとして提供されていた<code>batchedUpdates</code>と<code>cloneWithProps</code>が削除されました。</p></li>
-<li><p><code>setProps</code>, <code>replaceProps</code>, <code>getDOMNode</code>のAPIが削除されました。</p></li>
-</ul>
-
-
-<h2>New deprecations, introduced with a warning</h2>
-
-<p><code>LinkedStateMixin</code>と<code>valueLink</code>はほとんど使われておらず、v16で廃止するためのwarningを追加されます。</p>
-
-<p><a href="https://facebook.github.io/react/docs/two-way-binding-helpers.html">https://facebook.github.io/react/docs/two-way-binding-helpers.html</a></p>
-
-<p>必要な場合は下記のパッケージを利用してください。</p>
-
-<p><a href="https://www.npmjs.com/package/react-linked-input">https://www.npmjs.com/package/react-linked-input</a></p>
-
-<h2>New helpful warnings</h2>
-
-<ul>
-<li>developmentビルド(<code>NODE_ENV</code>が<code>production</code>でない)にも関わらずminifiedされている場合はproductionビルドを使うようにwarningが出ます。
-
-<ul>
-<li>Reactの中のコードを見たことがある人であればproductionビルドにする必要性がわかるはず&hellip;。developmentビルドには大量のデバッグやwarning用のコードが含まれています。</li>
-</ul>
-</li>
-<li>styleのwidthやmarginに数値を渡すと自動で単位(px)を付与してくれますが、その際に数値を文字列として渡しているとwarningが出ます。将来のバージョンでは文字列の場合は単位が自動で付与されなくなります。
-
-<ul>
-<li><code>&lt;div style={ {width: 10} }&gt;</code>はOK、<code>&lt;div style={ {width: "10"} }&gt;</code>はwarningが出ます。</li>
-</ul>
-</li>
-<li>SyntheticEventに追加でpropertyをセットしようとしたり、すでに解放されているのにアクセスしようとするとwarningが出力されます。
-
-<ul>
-<li>追加でpropertyをセットした場合にwarningが出るのはES2015のProxiesがサポートされている環境のみです。ちなみに自分が実装しました。</li>
-</ul>
-</li>
-<li>ReactElementの<code>ref</code>と<code>key</code>のPropにアクセスしようとするとwarningが出力されます。これらはReact自体が使うためのPropでkeyで使った値が必要な場合は別途Propとして設定する必要があります。</li>
-<li>DOM ElementのPropに対して、<code>onClick</code>を<code>onclick</code>のように大文字・小文字の指定が間違っている場合にはwarningが出力されるようになりました。</li>
-</ul>
-
-
-<h2>Notable bug fixes</h2>
-
-<ul>
-<li>幾つかのメモリリークが修正されています。</li>
-</ul>
-
-
-<hr />
-
-<p>SyntheticEventでのメモリリークについては自分が修正したので紹介しておくとSyntheticEventの<code>target</code>属性が正しく解放されるようになりました。</p>
-
-<p>SyntheticEventはPoolingされており、イベントハンドラーの処理が終了すると初期化されPoolに戻るのですが一番よく使う<code>target</code>属性だけ解放されていませんでした。
-したがって、下記のようなコードはv0.14では動作していましたがv15では動作しません。</p>
-
-<p>```js
-const Component = () => (</p>
-
-<pre><code>&lt;div onClick={e =&gt; {
-  setTimeout(() =&gt; console.log(e.target)); // &lt;div&gt;click&lt;/div&gt;
-}}&gt;
-  click
-&lt;/div&gt;
-</code></pre>
-
-<p>);
-```</p>
-
-<p>これは<code>onClick</code>が実行された時点でSyntheticEvent(<code>e</code>)が初期化されており、setTimeoutのコールバック実行時にはすでにtargetの値が初期化(null)されているためです。
-上記の場合、<code>target</code>をローカル変数として保持するか<code>e.persist()</code>を使って保持する必要があります。</p>
-
-<p>SyntheticEventがPoolingされているのは大量のイベントオブジェクトを作成することで発生するGCを避けるなどパフォーマンス上の理由からなのですが、モダンなブラウザーではもう必要ないのではないかということでPoolingをやめることが検討されています。</p>
-
-<p>SyntheticEvent周りは自分が追加したProxyを使ったコードなどかなり混沌としてきているのでPoolingやめてリファクタリングするのはとてもいいと思います。やりたい&hellip;。</p>
-
-<p><a href="https://github.com/facebook/react/issues/6190">https://github.com/facebook/react/issues/6190</a></p>
-
-<hr />
-
-<ul>
-<li>IE10, 11などでのイベントの扱いが改善されています。</li>
-<li><code>cite</code>と<code>profile</code>の属性がサポートされました。</li>
-<li><code>onAnimationStart</code>, <code>onAnimationEnd</code>, <code>onAnimationIteration</code>, <code>onTransitionEnd</code>, <code>onInvalid</code>のイベントがサポートされました。また<code>object</code>要素に<code>onLoad</code>イベントが追加されました。</li>
-<li>shallowCompareなどのいくつかの場所で<code>Object.is</code>による比較が行われるようになりました(実際にはpolyfill)。これにより、<code>+0 !== -0</code>となったり<code>NaN === NaN</code>となります。
-
-<ul>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is</a></li>
-</ul>
-</li>
-<li><p>ReactDOMがデフォルトではpropertyとしてではなくattributeとして扱うようになります。これによるEdge caseなバグが修正されました。また属性値が<code>null</code>の場合に属性が完全に削除されるようになりました。これによりブラウザーがデフォルト値を設定しないようになります。</p></li>
-<li><p>あとblogにはありませんでしたが、Stateless Componentsが<code>null</code>を返せるようになったのは地味に嬉しいですね！</p></li>
-</ul>
-
-
-<h2>Regression?</h2>
-
-<ul>
-<li>15.0.0-rc.1では<code>onTouchTap</code>が動作していないようなので使っている人は注意した方がよさそうです。
-
-<ul>
-<li><a href="https://github.com/facebook/react/issues/6221">https://github.com/facebook/react/issues/6221</a></li>
-</ul>
-</li>
-</ul>
-
 ]]></content>
   </entry>
   

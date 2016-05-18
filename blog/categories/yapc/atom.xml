@@ -4,7 +4,7 @@
   <title><![CDATA[Category: yapc | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/yapc/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-05-11T23:16:19+09:00</updated>
+  <updated>2016-05-18T18:59:06+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -87,7 +87,7 @@ jQueryからReactまでそのライブラリをどのように使うのかでは
 
 <p>フロントエンドを普段からバリバリ書いている人ではなく、たまにフロントエンドを触ろうと思っても次から次へと色々なライブラリや技術が登場してきてよくわからないという人に対して、今何が起きているのかを伝えることが出来ればと思っています。</p>
 
-<p>{% img /images/yapc2015-slide.png &lsquo;YAPC Asia 2015 slide&rsquo; %}</p>
+<p><img src="/images/yapc2015-slide.png" title="&lsquo;YAPC Asia 2015 slide&rsquo;" ></p>
 
 <p>是非来てください！</p>
 ]]></content>
