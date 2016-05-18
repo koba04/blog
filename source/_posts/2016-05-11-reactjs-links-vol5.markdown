@@ -45,6 +45,13 @@ scroll-behaviorをラップする感じになっているようです。
 
 Flowの型定義を管理するリポジトリーです。前に公開されたリポジトリーですが、最近型定義が集まり出しています。
 
+## Why did you update (GitHub Repository)
+
+* https://github.com/garbles/why-did-you-update
+
+Reactにモンキーパッチを当てて、PropやStateが変わってないのにrerenderが行われたことを教えてくれるライブラリーです。
+パフォーマンスチューニングしたい場合に便利かもしれません。
+
 ## Higher Order Components: Theory and Practice
 
 * http://engineering.blogfoster.com/higher-order-components-theory-and-practice/
