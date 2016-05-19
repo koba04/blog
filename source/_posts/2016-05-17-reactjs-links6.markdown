@@ -22,3 +22,9 @@ Reduxで4.0に向けた議論が始まっています。
 
 * https://github.com/reactjs/redux/pull/1702
 
+## Spectacle 
+
+* http://formidable.com/open-source/spectacle/
+
+Reactを使い、JSXでスライドを作成するライブラリーです。
+Markdownなんかも使えるようです。
