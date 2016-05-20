@@ -10,6 +10,10 @@ categories: react.js react-links
 
 <!-- more -->
 
+## RFC: Should createClass be considered legacy? (React PR)
+
+* https://github.com/facebook/react/pull/6811
+
 ## Redux 4.0 ?
 
 Reduxで4.0に向けた議論が始まっています。
