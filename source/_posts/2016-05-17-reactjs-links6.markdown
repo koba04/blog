@@ -14,6 +14,10 @@ categories: react.js react-links
 
 * https://github.com/facebook/react/pull/6811
 
+## Support Server Rendering of `amp` Attribute #6798
+
+* https://github.com/facebook/react/issues/6798
+
 ## Redux 4.0 ?
 
 Reduxで4.0に向けた議論が始まっています。
