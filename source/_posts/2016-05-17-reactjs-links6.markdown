@@ -10,6 +10,14 @@ categories: react.js react-links
 
 <!-- more -->
 
+## React v15.1.0
+
+* https://github.com/facebook/react/releases/tag/v15.1.0
+
+## React Core Team meeting notes
+
+* https://github.com/reactjs/core-notes/blob/master/2016-05/may-19.md
+
 ## RFC: Should createClass be considered legacy? (React PR)
 
 * https://github.com/facebook/react/pull/6811
