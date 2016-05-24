@@ -57,7 +57,7 @@ Reduxで4.0に向けた議論が始まっています。
 
 * https://github.com/reactjs/redux/pull/1702
 
-こちらのStore enhancerのAPI変更については議論中です。
+`store base`と呼ばれているこちらのStore enhancerのAPI変更については議論中です。
 
 ## Spectacle 
 
