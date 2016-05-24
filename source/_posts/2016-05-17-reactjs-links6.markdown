@@ -58,6 +58,7 @@ Reduxで4.0に向けた議論が始まっています。
 * https://github.com/reactjs/redux/pull/1702
 
 `store base`と呼ばれているこちらのStore enhancerのAPI変更については議論中です。
+Storeを直接拡張するのではなく、今MiddlewareのAPIとして渡している`{getState, dispatch}`の形式を`store base`として抽象化して、それを拡張できるようにする感じなのかな？
 
 ## Spectacle 
 
