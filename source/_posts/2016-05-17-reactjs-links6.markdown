@@ -37,11 +37,17 @@ Stateless Functional ComponentsとES2015 ClassesによるComponent定義が中�
 上記のmeeting notesにも関わる内容で、`React.createClass`をlegacyとして扱うためのブログポストのPRです。
 結局、まだその時ではないということでmergeされませんでしたが、meeting note以上に詳しく書かれているので興味のある人はみるといいと思います。
 
-## Support Server Rendering of `amp` Attribute #6798
+## Support Server Rendering of `amp` Attribute #6798 (React Issue)
 
 * https://github.com/facebook/react/issues/6798
 
 `amp`のタグをSSRでサポートするかどうかについてのIssueです。
+
+## Copy React ART tests and add hacks to fix them #6775 (React PR)
+
+* https://github.com/facebook/react/pull/6775
+
+ReactARTのrendererがReactNativeと同様に、メンテナンス上の理由から`facebook/react`のリポジトリに入りました。
 
 ## Redux 4.0 ?
 
@@ -59,6 +65,12 @@ Reduxで4.0に向けた議論が始まっています。
 
 `store base`と呼ばれているこちらのStore enhancerのAPI変更については議論中です。
 Storeを直接拡張するのではなく、今MiddlewareのAPIとして渡している`{getState, dispatch}`の形式を`store base`として抽象化して、それを拡張できるようにする感じなのかな？
+
+## Understanding MobX and when to use it. #199 (MobX Issue)
+
+* https://github.com/mobxjs/mobx/issues/199
+
+MobXとReduxでのアプローチの違いについての議論です。
 
 ## Spectacle 
 
