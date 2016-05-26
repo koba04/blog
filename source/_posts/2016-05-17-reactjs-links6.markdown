@@ -49,6 +49,12 @@ Stateless Functional ComponentsとES2015 ClassesによるComponent定義が中�
 
 ReactARTのrendererがReactNativeと同様に、メンテナンス上の理由から`facebook/react`のリポジトリに入りました。
 
+## RFC: Error code system #6874
+
+* https://github.com/facebook/react/pull/6874
+
+Core Meeting Notesにあったエラーシステム周りの作業が始まっています。
+
 ## Redux 4.0 ?
 
 Reduxで4.0に向けた議論が始まっています。
