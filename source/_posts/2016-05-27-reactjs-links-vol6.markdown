@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "React.js Links vol.6 5/19〜5/27"
-date: 2016-05-18 19:04:55 +0900
+date: 2016-05-27 19:04:55 +0900
 comments: true
 categories: react.js react-links
 ---
@@ -78,7 +78,7 @@ Storeを直接拡張するのではなく、今MiddlewareのAPIとして渡し�
 
 MobXとReduxでのアプローチの違いについての議論です。
 
-## Spectacle 
+## Spectacle
 
 * http://formidable.com/open-source/spectacle/
 
