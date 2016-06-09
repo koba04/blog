@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react-links | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-links/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-05-18T18:59:06+09:00</updated>
+  <updated>2016-06-09T13:32:13+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,122 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js Links vol.6 5/19〜5/27]]></title>
+    <link href="http://blog.koba04.com/post/2016/05/27/reactjs-links-vol6/"/>
+    <updated>2016-05-27T19:04:55+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/05/27/reactjs-links-vol6</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
+
+<!-- more -->
+
+
+<h2>React v15.1.0</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/releases/tag/v15.1.0">https://github.com/facebook/react/releases/tag/v15.1.0</a></li>
+</ul>
+
+
+<p>React v15.1.0がリリースされています。
+基本的にはbug fixなどですが、Perfが書き直されています。その際、<code>printDOM</code>はdeprecatedになり、代わりに<code>printOperations</code>を使うようになりました。</p>
+
+<h2>React Core Team meeting notes</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-05/may-19.md">https://github.com/reactjs/core-notes/blob/master/2016-05/may-19.md</a></li>
+</ul>
+
+
+<p>恒例のmeeting noteです。
+今回のものは、<code>React.createClass</code>のAPIについてや、<code>PropTypes</code>の扱いなどについて触れられており、今後どうなっていくかに関わる重要なポイントに触れられています。</p>
+
+<p>Stateless Functional ComponentsとES2015 ClassesによるComponent定義が中心であり、PropTypesについてはFlowやTypeScriptなどで置き換えていきたいという流れです。
+まだ先の話になると思いますが。</p>
+
+<p>その他にも、パッチ、マイナーリリースを2週間ごとに行う計画や、複数パッケージの管理に<a href="https://lernajs.io/">Lerna</a>を使う計画などについても言及されています。</p>
+
+<h2>RFC: Should createClass be considered legacy? (React PR)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6811">https://github.com/facebook/react/pull/6811</a></li>
+</ul>
+
+
+<p>上記のmeeting notesにも関わる内容で、<code>React.createClass</code>をlegacyとして扱うためのブログポストのPRです。
+結局、まだその時ではないということでmergeされませんでしたが、meeting note以上に詳しく書かれているので興味のある人はみるといいと思います。</p>
+
+<h2>Support Server Rendering of <code>amp</code> Attribute #6798 (React Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/6798">https://github.com/facebook/react/issues/6798</a></li>
+</ul>
+
+
+<p><code>amp</code>のタグをSSRでサポートするかどうかについてのIssueです。</p>
+
+<h2>Copy React ART tests and add hacks to fix them #6775 (React PR)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6775">https://github.com/facebook/react/pull/6775</a></li>
+</ul>
+
+
+<p>ReactARTのrendererがReactNativeと同様に、メンテナンス上の理由から<code>facebook/react</code>のリポジトリに入りました。</p>
+
+<h2>RFC: Error code system #6874</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6874">https://github.com/facebook/react/pull/6874</a></li>
+</ul>
+
+
+<p>Core Meeting Notesにあったエラーシステム周りの作業が始まっています。</p>
+
+<h2>Redux 4.0 ?</h2>
+
+<p>Reduxで4.0に向けた議論が始まっています。</p>
+
+<h3>RFC: Simplify middleware signature</h3>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/issues/1744">https://github.com/reactjs/redux/issues/1744</a></li>
+</ul>
+
+
+<p>これは結局入らないみたいですね。</p>
+
+<h3>Proof of Concept: Enhancer Overhaul</h3>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/pull/1702">https://github.com/reactjs/redux/pull/1702</a></li>
+</ul>
+
+
+<p><code>store base</code>と呼ばれているこちらのStore enhancerのAPI変更については議論中です。
+Storeを直接拡張するのではなく、今MiddlewareのAPIとして渡している<code>{getState, dispatch}</code>の形式を<code>store base</code>として抽象化して、それを拡張できるようにする感じなのかな？</p>
+
+<h2>Understanding MobX and when to use it. #199 (MobX Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/mobxjs/mobx/issues/199">https://github.com/mobxjs/mobx/issues/199</a></li>
+</ul>
+
+
+<p>MobXとReduxでのアプローチの違いについての議論です。</p>
+
+<h2>Spectacle</h2>
+
+<ul>
+<li><a href="http://formidable.com/open-source/spectacle/">http://formidable.com/open-source/spectacle/</a></li>
+</ul>
+
+
+<p>Reactを使い、JSXでスライドを作成するライブラリーです。
+Markdownなんかも使えるようです。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.5 5/12〜5/18]]></title>
@@ -611,181 +727,6 @@ React Componentのaccessibilityを検査する<code>eslint-plugin-a11y</code>が
 
 
 <p>個人的には使っていないので詳細はわからないですが、Stateless ComponentsやHOC辺りのサポートや設定周りが改善されたようです。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[React Links vol.1 4/6〜4/14]]></title>
-    <link href="http://blog.koba04.com/post/2016/04/14/reactjs-links-vol1/"/>
-    <updated>2016-04-14T13:17:31+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/04/14/reactjs-links-vol1</id>
-    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
-
-<p>今週はF8があったのでReact Native関連の記事が多くありました。</p>
-
-<!-- more -->
-
-
-<h2>React v15</h2>
-
-<ul>
-<li><a href="http://facebook.github.io/react/blog/2016/04/07/react-v15.html">http://facebook.github.io/react/blog/2016/04/07/react-v15.html</a></li>
-<li><a href="https://facebook.github.io/react/blog/2016/04/08/react-v15.0.1.html">https://facebook.github.io/react/blog/2016/04/08/react-v15.0.1.html</a></li>
-</ul>
-
-
-<p>React v15がリリースされました。バグがあったのですぐに15.0.1がリリースされています。インストールする際には15.0.1を使用してください。</p>
-
-<p>細かいfeatureについてはブログ書いたのでそちらをみてください</p>
-
-<ul>
-<li><a href="http://blog.koba04.com/post/2016/03/09/react-js-v15-changes/">http://blog.koba04.com/post/2016/03/09/react-js-v15-changes/</a></li>
-</ul>
-
-
-<h2>React Native: A year in review</h2>
-
-<ul>
-<li><a href="https://code.facebook.com/posts/597378980427792/react-native-a-year-in-review/">https://code.facebook.com/posts/597378980427792/react-native-a-year-in-review/</a></li>
-</ul>
-
-
-<p>React Nativeが2013年の夏に社内の(?)hackathonで誕生してから、30,000以上のstarをgithubで得るようになるまでのStoryが書かれています。
-&ldquo;The React Native team has grown from around 10 to around 20 engineers in the past year"や"we are 1 percent finished. "とあるように、今後も力を入れていくことがわかります。
-Facebookのエンジニア以外からのcommitも30%くらいあって、Facebook以外でも使われていることがわかります。</p>
-
-<p>また、facebookがreact-nativeのリポジトリをどのように管理しているのかや、たくさんのissueやPRを処理するために作ったmention-botなどについても書かれていて、巨大なOSSをgithubでどう管理するかという点でも面白いです。</p>
-
-<p><a href="https://github.com/facebook/mention-bot">https://github.com/facebook/mention-bot</a></p>
-
-<h2>Building the F8 2016 App</h2>
-
-<ul>
-<li><a href="http://makeitopen.com/">http://makeitopen.com/</a></li>
-</ul>
-
-
-<p>ReactNativeを使ってF8のiOSとAndroidのアプリを作った際のことを、チュートリアルとして紹介しています。
-どのような構成にするのかを検討して、マルチプラットフォーム対応をどうするか、データ管理をどうするか、テストをどうするかなどが書かれていてとても参考になります。</p>
-
-<p>React使っている人は一度見てみるといいんじゃないかと思います。</p>
-
-<p>ReactNative + Flow + Redux + Jestな構成でサーバーサイドにはOSSのParse Serverを使っているようです。
-エディターはNuclideだそうです。</p>
-
-<p>アプリのソースコードもgithubで公開されています。</p>
-
-<ul>
-<li><a href="https://github.com/fbsamples/f8app">https://github.com/fbsamples/f8app</a></li>
-</ul>
-
-
-<h2>React Native on the Universal Windows Platform</h2>
-
-<ul>
-<li><a href="https://blogs.windows.com/buildingapps/2016/04/13/react-native-on-the-universal-windows-platform/">https://blogs.windows.com/buildingapps/2016/04/13/react-native-on-the-universal-windows-platform/</a></li>
-</ul>
-
-
-<p>MicroSoftがUniversal Windows Platform (UWP)対応をReactNativeに追加することが書かれています。
-これにより、WindowsのPCがモバイルだけでなく、Xbox OneやHoloLensのためのアプリをReactNativeで作れるようになります。
-記事では、F8のアプリをWindows 10 mobileとDesktop向けに作ったことが紹介されています。</p>
-
-<p>JavaScriptのランタイムにはChakraが使われているみたいです。</p>
-
-<p>また、VSCodeのReactNative拡張やReactNativeを使ったWindowsアプリに対するCodePush対応などを行っているようです。</p>
-
-<ul>
-<li><a href="http://microsoft.github.io/code-push/articles/ReactNativeWindows.html">http://microsoft.github.io/code-push/articles/ReactNativeWindows.html</a></li>
-</ul>
-
-
-<p>現在はforkしたrepositoryになっていますが、将来的にはReactNative本体と同期が取れるようにうまくやっていくようです。</p>
-
-<p><a href="https://github.com/ReactWindows/react-native">https://github.com/ReactWindows/react-native</a></p>
-
-<h2>core note 4/7</h2>
-
-<ul>
-<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-04/april-7.md">https://github.com/reactjs/core-notes/blob/master/2016-04/april-7.md</a></li>
-</ul>
-
-
-<p>Reactのcoreチームのmeeting noteが公開されています。
-以前はあったものの途中で削除されたBrowser Testingについて言及されているのは注目です。</p>
-
-<p>その他では、<em>ReactDOM.render() return value being <del>deprecated</del> legacy</em> (<a href="https://github.com/facebook/react/pull/6400">#6400</a>) も注目です。
-内部的なアルゴリズムの見直しをするために、ReactDOM.renderが将来的に戻り値を返さなくなります。
-戻り値を使いたい場合は、Refsを指定して取得することになりそうです。</p>
-
-<p>また、<em>Sebastian is moving some files from React Native to React</em> (<a href="https://github.com/facebook/react/pull/6338">#6338</a>)としてReactNativeのrenderer周りをreactのrepositoryに持ってきて、<code>react-native-renderer</code>として別パッケージにすることも予定されています。
-さらに<code>react-dom</code>から<code>react-dom-renderer</code>も切り離すことを検討されています。</p>
-
-<p>これによってカスタムrendererを作る時のI/Fが整備されて、わかりやすくなるといいなと思います。
-Windows対応もあったりでこの辺りを整理する優先度は高そうです。</p>
-
-<h2>Improve React performance with Babel</h2>
-
-<ul>
-<li><a href="https://medium.com/doctolib-engineering/improve-react-performance-with-babel-16f1becfaa25">https://medium.com/doctolib-engineering/improve-react-performance-with-babel-16f1becfaa25</a></li>
-</ul>
-
-
-<p>productionビルドやBabelの最適化を使った場合のパフォーマンスについてのエントリーです。当たり前ですが、developmentビルドとproductionビルドのパフォーマンスの違いが目立っています。
-Babelを使った最適化の場合でも数%の向上が見られますが、アプリケーションによるので利用する際は計測してみて導入することをおすすめします。</p>
-
-<h2>unofficial React Router docs</h2>
-
-<ul>
-<li><a href="http://knowbody.github.io/react-router-docs/">http://knowbody.github.io/react-router-docs/</a></li>
-</ul>
-
-
-<p><a href="https://github.com/knowbody">knowbody</a>さんによる非公式なReact Routerのドキュメントです。WIPですが、公式を読んでよくわからなかった人は確認してみるといいかもしれません。</p>
-
-<h2>React Router is dead. Long live rrtr.</h2>
-
-<p><strong>下のエントリーは現在は削除されています。</strong></p>
-
-<ul>
-<li><del><a href="https://medium.com/@taion/react-router-is-dead-long-live-rrtr-d229ca30e318#.vd0qjkccc">https://medium.com/@taion/react-router-is-dead-long-live-rrtr-d229ca30e318#.vd0qjkccc</a></del></li>
-</ul>
-
-
-<p>React Routerでここ数ヶ月中心的にcontributeしていた<a href="https://github.com/taion">taion</a>さんがリリースのサイクルの遅さやプロセスに不満を抱いてforkして<a href="https://github.com/taion/rrtr">rrtr</a>を作ったことを表明したエントリーです。</p>
-
-<p>それに対して、React Routerのオーナーである<a href="https://github.com/ryanflorence">ryanflorence</a>さんもgistでリアクションしています。</p>
-
-<ul>
-<li><del><a href="https://gist.github.com/ryanflorence/08a056374e24a7cda3c459e3d7d63e6e">https://gist.github.com/ryanflorence/08a056374e24a7cda3c459e3d7d63e6e</a></del> (<strong>これも削除済み</strong>)</li>
-</ul>
-
-
-<p>で下の通り、結局丸く収まりました。</p>
-
-<ul>
-<li><a href="https://medium.com/rackt-and-roll/rrtr-is-dead-long-live-react-router-ce982f6f1c10">https://medium.com/rackt-and-roll/rrtr-is-dead-long-live-react-router-ce982f6f1c10</a></li>
-</ul>
-
-
-<p>結果的に、PRをmergeするプロセスや定期的なリリースなど、プロジェクトの運営方針が行われました。</p>
-
-<p>ちなみにtaionさんはhistoryと組み合わせてscroll位置の復元などをサポートするscroll-behaviorというライブラリーも公開しています。</p>
-
-<ul>
-<li><a href="https://github.com/taion/scroll-behavior">https://github.com/taion/scroll-behavior</a></li>
-</ul>
-
-
-<h2>crysislinux/chrome-react-perf</h2>
-
-<ul>
-<li><a href="https://github.com/crysislinux/chrome-react-perf">https://github.com/crysislinux/chrome-react-perf</a></li>
-</ul>
-
-
-<p>Perfによる計測をChrome Developer Toolsで行うことができるライブラリーです。
-カジュアルに計測が出来そうなのでよさそうです。</p>
 ]]></content>
   </entry>
   
