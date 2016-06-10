@@ -51,3 +51,10 @@ ReactEuropeの動画が公開されています。
 * https://docs.google.com/document/d/1PU51njrUweehKFgSu69C7OAEdyp6rHmsvQ7KIcLaHqw/edit#
 
 Khan AcademyでのReactNativeについてのレポートです。実際に取り入れようとした時に何が問題になったかなど触れられていて参考になります。
+
+## Q&A with Ben Alpert
+
+* https://github.com/reactiflux/q-and-a/blob/master/ben-alpert_react-core.md
+
+Reactのcore memberであるBen Alpertに対するQ&Aです。
+New renconcilerについてのトピックが多くて興味深いです。
