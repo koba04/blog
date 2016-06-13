@@ -54,6 +54,14 @@ Refsをopt-inの機能にするという提案(discussion)です。
 
 PropTypesのFlowやTypeScriptで置き換えた場合でもContextTypesを使う必要があることについてのIssue(?)です。
 
+## New marketing copy on homepage #7012
+
+* https://github.com/facebook/react/pull/7012
+
+Reactのトップページに、特徴として書かれていた「JUST THE UI」、「VIRTUAL DOM」、「DATA FLOW」が「Declarative」、「Component-Based」、「Learn Once, Write Anywhere」に更新されました。
+
+この変更は、Reactは「JUST THE UI」でありMVCのVだという記述が、Reactを使う時にReduxなどのFlux系のライブラリーが必ず必要であるかのように捉えられてしまっている現状なんかも踏まえたもののようです。
+
 ## ReactEurope
 
 ReactEuropeの動画が公開されています。
