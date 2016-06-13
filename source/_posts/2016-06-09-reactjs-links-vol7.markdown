@@ -32,6 +32,16 @@ PureComponentによるStateless Functional Componentsの最適化について多
 
 * https://github.com/facebook/react/pull/6914
 
+### June 9
+
+* https://github.com/reactjs/core-notes/blob/master/2016-06/june-09.md
+
+主に新しいReconcilerの状況についてや、問題となる点について話されています。
+
+あとは、Facebook内の`React.createClass`からES classesに移行する方法についてが引き続き触れられています。
+
+新しいトピックでいうと、大きなfeatureについてはTC39のようにchampionを立てて進めていくプロセスを採用するかどうかが検討されているようです。
+
 ## RFC: Make Refs Opt-in #6974
 
 * https://github.com/facebook/react/issues/6974
