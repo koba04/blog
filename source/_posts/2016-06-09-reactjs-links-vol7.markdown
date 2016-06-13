@@ -38,6 +38,12 @@ PureComponentによるStateless Functional Componentsの最適化について多
 
 Refsをopt-inの機能にするという提案(discussion)です。
 
+## React ContextTypes, PropTypes when using an already static typed language like TypeScript #6525
+
+* https://github.com/facebook/react/issues/6525
+
+PropTypesのFlowやTypeScriptで置き換えた場合でもContextTypesを使う必要があることについてのIssue(?)です。
+
 ## ReactEurope
 
 ReactEuropeの動画が公開されています。
