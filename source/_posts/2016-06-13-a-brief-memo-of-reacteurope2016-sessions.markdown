@@ -44,6 +44,12 @@ DeeplinkやAndroidのバックボタンなど様々なActionを、Reduxのよう
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/-t8eOoRsJ7M" frameborder="0" allowfullscreen></iframe>
 
+Code CartoonsでおなじみのLin ClarkによるReactアプリケーションのパフォーマンスについてのTalkです。
+
+https://code-cartoons.com/
+
+Reactをガッツリ使っている人は知っていることが多いと思いますが、Reactでのパフォーマンスのポイントをブラウザーのレンダリングの仕組みからReactでのレンダリングの流れまで通してわかりやすく説明しています。
+
 ## Krzysztof Magiera - React Native ❤ 60FPS -- Improving React Native
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/qgSMjYWqBk4" frameborder="0" allowfullscreen></iframe>
