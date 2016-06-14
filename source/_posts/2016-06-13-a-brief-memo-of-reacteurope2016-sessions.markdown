@@ -33,6 +33,13 @@ Reduxの考え方や現状がわかりやすく説明されています。
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dOSwHABLvdM" frameborder="0" allowfullscreen></iframe>
 
+ReactNativeでiOS、Android、Webの各Platform共通で使えるNavigationExperimentalについてのTalkです。
+
+* https://github.com/ericvicenti/navigation-rfc
+
+DeeplinkやAndroidのバックボタンなど様々なActionを、ReduxのようにStateをReducerを使って宣言的に処理するアプローチです。
+また、アプリの中の1機能としてNavigationを持った機能を埋め込む方法についても解説されています。
+
 ## Lin Clark - A cartoon guide to performance in React
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/-t8eOoRsJ7M" frameborder="0" allowfullscreen></iframe>
