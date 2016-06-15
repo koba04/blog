@@ -54,6 +54,12 @@ Reactをガッツリ使っている人は知っていることが多いと思い
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/qgSMjYWqBk4" frameborder="0" allowfullscreen></iframe>
 
+ReactNativeでのアニメーションについてのTalkです。
+Platform固有のNativeComponentを使ったAnimationと、LayoutAnimationとAnimated.jsを使った場合のそれぞれCons,Prosについて、パフォーマンスチューニングついてのポイントについて解説しています。
+
+* https://facebook.github.io/react-native/docs/animations.html
+* http://facebook.github.io/react-native/docs/interactionmanager.html
+
 ## Christopher Chedeau - Being Successful at Open Source
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nRF0OVQL9Nw" frameborder="0" allowfullscreen></iframe>
