@@ -82,3 +82,12 @@ Khan AcademyでのReactNativeについてのレポートです。実際に取り
 
 Reactのcore memberであるBen Alpertに対するQ&Aです。
 New renconcilerについてのトピックが多くて興味深いです。
+
+## State Streams and React
+
+* https://medium.com/@markusctz/state-streams-and-react-7921e3c376a4#.39bp3z2fa
+
+RxJSでRedux風なアーキテクチャを構築し、Reactと組み合わせて作るというエントリーです。わかりやすいです。
+後半は作者が実際に作った`udeo`というライブラリーについての説明です。
+
+* https://github.com/mcoetzee/udeo
