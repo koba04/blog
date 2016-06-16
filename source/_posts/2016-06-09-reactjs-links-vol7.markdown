@@ -70,6 +70,8 @@ ReactEuropeの動画が公開されています。
 * https://www.youtube.com/playlist?list=PLCC436JpVnK09bZeayg-KeLuHfHgc-tDa (Day1)
 * https://www.youtube.com/playlist?list=PLCC436JpVnK0LTDKW3O_BGTZnrZ8dBAof (Day2)
 
+別途、まとめを書ければ書くかも。
+
 ## Experimenting with React Native at Khan Academy
 
 * https://docs.google.com/document/d/1PU51njrUweehKFgSu69C7OAEdyp6rHmsvQ7KIcLaHqw/edit#
