@@ -91,3 +91,26 @@ RxJSでRedux風なアーキテクチャを構築し、Reactと組み合わせて
 後半は作者が実際に作った`udeo`というライブラリーについての説明です。
 
 * https://github.com/mcoetzee/udeo
+
+## react-enroute
+
+* https://github.com/tj/react-enroute
+
+TJが開発しているreact-router風なlightweightなルーティングライブラリーです。
+ルーティングにはenrouteというライブラリーを使っていて、react-enrouteはReactとの繋ぎこみだけをやっているような感じです。
+
+* https://github.com/lapwinglabs/enroute
+
+## 3 Reasons why I stopped using React.setState
+
+* https://medium.com/@mweststrate/3-reasons-why-i-stopped-using-react-setstate-ab73fc67a42e#.umnvins0y
+
+ReactのsetStateのハマリどころなどについて解説したエントリーです。
+MobXの作者なので、後半はMobX最高という感じになっています。
+
+## Feature Request: Allow reducers to consult global state #1768
+
+* https://github.com/reactjs/redux/pull/1768
+
+Reduxのreducerで各ReducerでグローバルなStateも受け取れるようにしようというfeature requestです。
+mergeされそうな雰囲気?
