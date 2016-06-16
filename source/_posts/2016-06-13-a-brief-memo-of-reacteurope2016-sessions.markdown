@@ -8,6 +8,8 @@ categories:
 
 https://www.react-europe.org/
 
+メインのTalkの動画を一通り見たので、一言解説を。
+
 <!-- more -->
 
 ## Day 1
@@ -63,6 +65,13 @@ Platform固有のNativeComponentを使ったAnimationと、LayoutAnimationとAni
 ## Christopher Chedeau - Being Successful at Open Source
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nRF0OVQL9Nw" frameborder="0" allowfullscreen></iframe>
+
+CSS in JSのプレゼンでもおなじみで、ReactやReactNative、css-layoutをやっているvjeuxによる、OSSを成功に導くために必要なことについてのTalkです。
+テクニカルな内容ではなく、ReactをどのようにOSSとして成功させたのかということについて解説しています。
+OSSのプロジェクトをやっていたり、参加したいと思っている人にとっては面白いTalkだと思います。
+GitHubのIssueスタイルなプレゼンも面白いです。
+
+* Demo Driven Development
 
 ## Dan Schafer - GraphQL at Facebook
 
