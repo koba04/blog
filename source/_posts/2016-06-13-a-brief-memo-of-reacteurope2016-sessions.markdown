@@ -77,6 +77,16 @@ GitHubのIssueスタイルなプレゼンも面白いです。
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/etax3aEe2dA" frameborder="0" allowfullscreen></iframe>
 
+GraphQLの基本的な概念の説明と、認証はどのように実装するのか、効果的なデータの取得方法などを実際のコードを出しながら解説したTalkです。
+
+GraphQLの3つの概念。
+
+* Think Graphs, not Endpoints
+* Single Source of Truth
+* Thin API layer
+
+Talkの後の休憩でQ&Aが盛り上がってたことが印象的でした。
+
 ## Jeff Morrison - A Deepdive Into Flow
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/VEaDsKyDxkY" frameborder="0" allowfullscreen></iframe>
