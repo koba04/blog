@@ -36,7 +36,7 @@ Architectureの話が中心で各ライブラリーの説明ではありませ�
 
 特にFacebookは、ネットワーク環境が整備されていない国も含めた全世界にサービスを提供しているので、**Data Synchronization** におけるネットワークのレイテンシーの解決については力を注いでいるように感じます。
 
-具体的には、Webの場合は **What Changed** の部分にはReactを使ったComponentによるViewの抽象化とImmutable.jsによるデータ管理の単純化、 **Data Synchronization** の部分はGraphQLを使って必要最低限のデータのやりとりのみ行う方法を解説しています。
+Webの場合、 **What Changed** の部分にはReactを使ったComponentによるViewの抽象化とImmutable.jsによるデータ管理の単純化、 **Data Synchronization** の部分はGraphQLを使って必要最低限のデータのやりとりのみ行う方法を解説しています。
 
 これらを踏まえて、Immutable App Architectureとして、下記の図のような構成を紹介しています。
 
