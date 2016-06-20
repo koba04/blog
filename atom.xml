@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-05-18T18:59:06+09:00</updated>
+  <updated>2016-06-16T19:05:58+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,289 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js Links vol.7]]></title>
+    <link href="http://blog.koba04.com/post/2016/06/16/reactjs-links-vol7/"/>
+    <updated>2016-06-16T13:33:36+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/06/16/reactjs-links-vol7</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
+
+<!-- more -->
+
+
+<h2>React Core Team meeting notes</h2>
+
+<p>恒例のCore Teamのmeeting noteです。</p>
+
+<h3>May 26</h3>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-05/may-26.md">https://github.com/reactjs/core-notes/blob/master/2016-05/may-26.md</a></li>
+</ul>
+
+
+<p>主にES classesによるComponent定義で<code>React.createClass</code>による定義を置き換えることについて書かれています。
+ドキュメントやMixinをどうするか、Class Property Initializerについてのスタンスなど。</p>
+
+<p>その他では、Incremental Reconcilerが入った時にTestUtilsのrenderIntoDocumentが同期的なことについてどうするかについても触れられています。</p>
+
+<h3>June 2</h3>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-06/june-02.md">https://github.com/reactjs/core-notes/blob/master/2016-06/june-02.md</a></li>
+</ul>
+
+
+<p>PureComponentによるStateless Functional Componentsの最適化について多く触れられています。
+また、Facebookのコードベースを<code>React.createClass</code>からES classesに移行する計画があるようです。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6914">https://github.com/facebook/react/pull/6914</a></li>
+</ul>
+
+
+<h3>June 9</h3>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-06/june-09.md">https://github.com/reactjs/core-notes/blob/master/2016-06/june-09.md</a></li>
+</ul>
+
+
+<p>主に新しいReconcilerの状況についてや、問題となる点について話されています。</p>
+
+<p>あとは、Facebook内の<code>React.createClass</code>からES classesに移行する方法についてが引き続き触れられています。</p>
+
+<p>新しいトピックでいうと、大きなfeatureについてはTC39のようにchampionを立てて進めていくプロセスを採用するかどうかが検討されているようです。</p>
+
+<h2>RFC: Make Refs Opt-in #6974</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/6974">https://github.com/facebook/react/issues/6974</a></li>
+</ul>
+
+
+<p>Refsをopt-inの機能にするという提案(discussion)です。</p>
+
+<h2>React ContextTypes, PropTypes when using an already static typed language like TypeScript #6525</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/6525">https://github.com/facebook/react/issues/6525</a></li>
+</ul>
+
+
+<p>PropTypesのFlowやTypeScriptで置き換えた場合でもContextTypesを使う必要があることについてのIssue(?)です。</p>
+
+<h2>New marketing copy on homepage #7012</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/7012">https://github.com/facebook/react/pull/7012</a></li>
+</ul>
+
+
+<p>Reactのトップページに、特徴として書かれていた「JUST THE UI」、「VIRTUAL DOM」、「DATA FLOW」が「Declarative」、「Component-Based」、「Learn Once, Write Anywhere」に更新されました。</p>
+
+<p>この変更は、Reactは「JUST THE UI」でありMVCのVだという記述が、Reactを使う時にReduxなどのFlux系のライブラリーが必ず必要であるかのように捉えられてしまっている現状なんかも踏まえたもののようです。</p>
+
+<h2>ReactEurope</h2>
+
+<p>ReactEuropeの動画が公開されています。</p>
+
+<ul>
+<li><a href="https://www.react-europe.org/">https://www.react-europe.org/</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PLCC436JpVnK09bZeayg-KeLuHfHgc-tDa">https://www.youtube.com/playlist?list=PLCC436JpVnK09bZeayg-KeLuHfHgc-tDa</a> (Day1)</li>
+<li><a href="https://www.youtube.com/playlist?list=PLCC436JpVnK0LTDKW3O_BGTZnrZ8dBAof">https://www.youtube.com/playlist?list=PLCC436JpVnK0LTDKW3O_BGTZnrZ8dBAof</a> (Day2)</li>
+</ul>
+
+
+<p>別途、まとめを書ければ書くかも。</p>
+
+<h2>Experimenting with React Native at Khan Academy</h2>
+
+<ul>
+<li><a href="https://docs.google.com/document/d/1PU51njrUweehKFgSu69C7OAEdyp6rHmsvQ7KIcLaHqw/edit#">https://docs.google.com/document/d/1PU51njrUweehKFgSu69C7OAEdyp6rHmsvQ7KIcLaHqw/edit#</a></li>
+</ul>
+
+
+<p>Khan AcademyでのReactNativeについてのレポートです。実際に取り入れようとした時に何が問題になったかなど触れられていて参考になります。</p>
+
+<h2>Q&amp;A with Ben Alpert</h2>
+
+<ul>
+<li><a href="https://github.com/reactiflux/q-and-a/blob/master/ben-alpert_react-core.md">https://github.com/reactiflux/q-and-a/blob/master/ben-alpert_react-core.md</a></li>
+</ul>
+
+
+<p>Reactのcore memberであるBen Alpertに対するQ&amp;Aです。
+New renconcilerについてのトピックが多くて興味深いです。</p>
+
+<h2>State Streams and React</h2>
+
+<ul>
+<li><a href="https://medium.com/@markusctz/state-streams-and-react-7921e3c376a4#.39bp3z2fa">https://medium.com/@markusctz/state-streams-and-react-7921e3c376a4#.39bp3z2fa</a></li>
+</ul>
+
+
+<p>RxJSでRedux風なアーキテクチャを構築し、Reactと組み合わせて作るというエントリーです。わかりやすいです。
+後半は作者が実際に作った<code>udeo</code>というライブラリーについての説明です。</p>
+
+<ul>
+<li><a href="https://github.com/mcoetzee/udeo">https://github.com/mcoetzee/udeo</a></li>
+</ul>
+
+
+<h2>react-enroute</h2>
+
+<ul>
+<li><a href="https://github.com/tj/react-enroute">https://github.com/tj/react-enroute</a></li>
+</ul>
+
+
+<p>TJが開発しているreact-router風なlightweightなルーティングライブラリーです。
+ルーティングにはenrouteというライブラリーを使っていて、react-enrouteはReactとの繋ぎこみだけをやっているような感じです。</p>
+
+<ul>
+<li><a href="https://github.com/lapwinglabs/enroute">https://github.com/lapwinglabs/enroute</a></li>
+</ul>
+
+
+<h2>3 Reasons why I stopped using React.setState</h2>
+
+<ul>
+<li><a href="https://medium.com/@mweststrate/3-reasons-why-i-stopped-using-react-setstate-ab73fc67a42e#.umnvins0y">https://medium.com/@mweststrate/3-reasons-why-i-stopped-using-react-setstate-ab73fc67a42e#.umnvins0y</a></li>
+</ul>
+
+
+<p>ReactのsetStateのハマリどころなどについて解説したエントリーです。
+MobXの作者なので、後半はMobX最高という感じになっています。</p>
+
+<h2>Feature Request: Allow reducers to consult global state #1768</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/pull/1768">https://github.com/reactjs/redux/pull/1768</a></li>
+</ul>
+
+
+<p>Reduxのreducerで各ReducerでグローバルなStateも受け取れるようにしようというfeature requestです。
+mergeされそうな雰囲気?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[React.js Links vol.6 5/19〜5/27]]></title>
+    <link href="http://blog.koba04.com/post/2016/05/27/reactjs-links-vol6/"/>
+    <updated>2016-05-27T19:04:55+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/05/27/reactjs-links-vol6</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
+
+<!-- more -->
+
+
+<h2>React v15.1.0</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/releases/tag/v15.1.0">https://github.com/facebook/react/releases/tag/v15.1.0</a></li>
+</ul>
+
+
+<p>React v15.1.0がリリースされています。
+基本的にはbug fixなどですが、Perfが書き直されています。その際、<code>printDOM</code>はdeprecatedになり、代わりに<code>printOperations</code>を使うようになりました。</p>
+
+<h2>React Core Team meeting notes</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-05/may-19.md">https://github.com/reactjs/core-notes/blob/master/2016-05/may-19.md</a></li>
+</ul>
+
+
+<p>恒例のmeeting noteです。
+今回のものは、<code>React.createClass</code>のAPIについてや、<code>PropTypes</code>の扱いなどについて触れられており、今後どうなっていくかに関わる重要なポイントに触れられています。</p>
+
+<p>Stateless Functional ComponentsとES2015 ClassesによるComponent定義が中心であり、PropTypesについてはFlowやTypeScriptなどで置き換えていきたいという流れです。
+まだ先の話になると思いますが。</p>
+
+<p>その他にも、パッチ、マイナーリリースを2週間ごとに行う計画や、複数パッケージの管理に<a href="https://lernajs.io/">Lerna</a>を使う計画などについても言及されています。</p>
+
+<h2>RFC: Should createClass be considered legacy? (React PR)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6811">https://github.com/facebook/react/pull/6811</a></li>
+</ul>
+
+
+<p>上記のmeeting notesにも関わる内容で、<code>React.createClass</code>をlegacyとして扱うためのブログポストのPRです。
+結局、まだその時ではないということでmergeされませんでしたが、meeting note以上に詳しく書かれているので興味のある人はみるといいと思います。</p>
+
+<h2>Support Server Rendering of <code>amp</code> Attribute #6798 (React Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/6798">https://github.com/facebook/react/issues/6798</a></li>
+</ul>
+
+
+<p><code>amp</code>のタグをSSRでサポートするかどうかについてのIssueです。</p>
+
+<h2>Copy React ART tests and add hacks to fix them #6775 (React PR)</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6775">https://github.com/facebook/react/pull/6775</a></li>
+</ul>
+
+
+<p>ReactARTのrendererがReactNativeと同様に、メンテナンス上の理由から<code>facebook/react</code>のリポジトリに入りました。</p>
+
+<h2>RFC: Error code system #6874</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6874">https://github.com/facebook/react/pull/6874</a></li>
+</ul>
+
+
+<p>Core Meeting Notesにあったエラーシステム周りの作業が始まっています。</p>
+
+<h2>Redux 4.0 ?</h2>
+
+<p>Reduxで4.0に向けた議論が始まっています。</p>
+
+<h3>RFC: Simplify middleware signature</h3>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/issues/1744">https://github.com/reactjs/redux/issues/1744</a></li>
+</ul>
+
+
+<p>これは結局入らないみたいですね。</p>
+
+<h3>Proof of Concept: Enhancer Overhaul</h3>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/pull/1702">https://github.com/reactjs/redux/pull/1702</a></li>
+</ul>
+
+
+<p><code>store base</code>と呼ばれているこちらのStore enhancerのAPI変更については議論中です。
+Storeを直接拡張するのではなく、今MiddlewareのAPIとして渡している<code>{getState, dispatch}</code>の形式を<code>store base</code>として抽象化して、それを拡張できるようにする感じなのかな？</p>
+
+<h2>Understanding MobX and when to use it. #199 (MobX Issue)</h2>
+
+<ul>
+<li><a href="https://github.com/mobxjs/mobx/issues/199">https://github.com/mobxjs/mobx/issues/199</a></li>
+</ul>
+
+
+<p>MobXとReduxでのアプローチの違いについての議論です。</p>
+
+<h2>Spectacle</h2>
+
+<ul>
+<li><a href="http://formidable.com/open-source/spectacle/">http://formidable.com/open-source/spectacle/</a></li>
+</ul>
+
+
+<p>Reactを使い、JSXでスライドを作成するライブラリーです。
+Markdownなんかも使えるようです。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.5 5/12〜5/18]]></title>
@@ -4631,196 +4914,6 @@ watchifyはキャッシュするので二回目以降のビルドが高速化さ
 <hr />
 
 <p>良いお年を。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Joining TOLOT]]></title>
-    <link href="http://blog.koba04.com/post/2014/11/08/joining-tolot/"/>
-    <updated>2014-11-08T23:19:00+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/11/08/joining-tolot</id>
-    <content type="html"><![CDATA[<p>11月から<a href="http://tolot.com/">TOLOT</a>で働いています。</p>
-
-<p><a href="http://tolot.com/">http://tolot.com/</a></p>
-
-<!-- more -->
-
-
-<p>TOLOTは500円でフォトブックやカレンダーが作れるサービスで、1ユーザーとして好きなサービスだし中の人に話を聞いたりしてこれから面白くなっていきそうだなと思ったので決めた感じです。</p>
-
-<p>振り返ってみると高校の時にUS/UK RockのMix-CDを作ってあげたりするのが好きで、モノを作って自分を含む誰かにプレゼントすることが簡単に出来るサービスに対する思い入れが強いというのも背景にあったりします。</p>
-
-<p>今のところしばらくはサーバーサイドを中心にやる感じかなと思っていますが、そのうちフロントエンドとかAPI設計とか<a href="http://www.oreilly.co.jp/books/9784873116761/">ハイパフォーマンスブラウザネットワーキング</a>に書いてあるようなこととかを駆使してWebで面白いことやりたいなと思っています。</p>
-
-<p>まだ1週間ですが、技術的にも面白い人たちと一緒働けて楽しいです。</p>
-
-<p>色んな言語の色んなシステムがあって、やりたいこともいっぱいあるので興味ある人は是非声掛けてください！</p>
-
-<p>さて、来年のカレンダーもそろそろ作らないと。</p>
-
-<hr />
-
-<p><a href="http://www.amazon.co.jp/registry/wishlist/3RM30V69LJHUY">例のやつ</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[vueifyでcomponent化]]></title>
-    <link href="http://blog.koba04.com/post/2014/10/07/component-by-vueify/"/>
-    <updated>2014-10-07T15:29:06+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/10/07/component-by-vueify</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/vuejs/vueify">https://github.com/vuejs/vueify</a></p>
-
-<p>vueifyというVue.js用のbrowserifyのtransformが出てたので紹介。</p>
-
-<!-- more -->
-
-
-<p>以前にpartialifyやstylify、coffeeify、insert-cssなどを組み合わせてHTML、JavaScript、CSSをComponent化する方法を紹介しましたがそれをさらに進めて1つのファイルで完結することが出来るようになっています。</p>
-
-<p><a href="http://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browserify/">http://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browserify/</a></p>
-
-<h2>使い方</h2>
-
-<p>vueifyを使うと1つのファイルにHTMLとJavaScriptとCSSを全部まとめて書くようになり、1ファイルが1Componentという形になります。</p>
-
-<ul>
-<li>src/app.vue</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;script lang="coffee"&gt;
-</span><span class='line'>  module.exports =
-</span><span class='line'>    data: -&gt;
-</span><span class='line'>      view: "top"
-</span><span class='line'>&lt;/script&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;template&gt;
-</span><span class='line'>  &lt;div v-component="" v-transition&gt;&lt;/div&gt;
-</span><span class='line'>&lt;/template&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;style lang="stylus"&gt;
-</span><span class='line'>  #app
-</span><span class='line'>    .v-enter
-</span><span class='line'>      -webkit-animation: fadein 0.5s
-</span><span class='line'>      -webkit-animation-delay: 0.2s
-</span><span class='line'>      animation: fadein 0.5s
-</span><span class='line'>      animation-delay: 0.2s
-</span><span class='line'>      opacity: 0
-</span><span class='line'>    .v-leave
-</span><span class='line'>      -webkit-animation: fadeout 0.2s
-</span><span class='line'>      animation: fadeout 0.2s
-</span><span class='line'>
-</span><span class='line'>  @keyframes fadein
-</span><span class='line'>    0%
-</span><span class='line'>      transform: scale(0.5)
-</span><span class='line'>      -webkit-transform: scale(0.5)
-</span><span class='line'>      opacity: 0
-</span><span class='line'>    50%
-</span><span class='line'>      transform: scale(1.2)
-</span><span class='line'>      -webkit-transform: scale(1.2)
-</span><span class='line'>      opacity: 0.7
-</span><span class='line'>    100%
-</span><span class='line'>      transform: scale(1)
-</span><span class='line'>      -webkit-transform: scale(1)
-</span><span class='line'>      opacity: 1
-</span><span class='line'>
-</span><span class='line'>  @keyframes fadeout
-</span><span class='line'>    0%
-</span><span class='line'>      transform: scale(1)
-</span><span class='line'>      -webkit-transform: scale(1)
-</span><span class='line'>    100%
-</span><span class='line'>      transform: scale(0)
-</span><span class='line'>      -webkit-transform: scale(0)
-</span><span class='line'>&lt;/style&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>➜  tree src
-</span><span class='line'>src
-</span><span class='line'>├── app.vue
-</span><span class='line'>├── artist.vue
-</span><span class='line'>├── country.vue
-</span><span class='line'>├── footer.vue
-</span><span class='line'>├── index.js
-</span><span class='line'>├── input-artist.vue
-</span><span class='line'>├── nav.vue
-</span><span class='line'>├── select-country.vue
-</span><span class='line'>├── top.vue
-</span><span class='line'>└── tracks.vue</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="https://github.com/koba04/vue-boilerplate/tree/master/src">https://github.com/koba04/vue-boilerplate/tree/master/src</a></p>
-
-<p>coffeescriptとstylus以外にも、less、scss(node-sass)、jadeなどを指定することが出来ます。</p>
-
-<h2>syntax highlight</h2>
-
-<p>1つにまとめて、vueっていう拡張子付けたりするとシンタックスハイライトどうするのかという問題になりますが、SublimeTextだとこれで大丈夫なようです
-(使ってないのでわからないですが)</p>
-
-<p><a href="https://gist.github.com/yyx990803/9194f92d96546cebd033">https://gist.github.com/yyx990803/9194f92d96546cebd033</a></p>
-
-<p>vimとかの場合は&hellip;</p>
-
-<p>まぁ、ちょっとしたものを作るときにvueify使ってみるのもいいのではないでしょうか。</p>
 ]]></content>
   </entry>
   
