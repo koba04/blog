@@ -27,14 +27,14 @@ Architectureの話が中心で各ライブラリーの説明ではありませ�
 
 ## Immutable App Architecture
 
-Architectureの選択は、アプリケーションの品質、開発の簡単さや難しさ、リリース後の改善のサイクルにも大きく影響を及ぼすものであるとしています。
+まず最初に、Architectureの選択は、アプリケーションの品質、開発の簡単さや難しさ、リリース後の改善のサイクルにも大きく影響を及ぼすものであるとしています。
 
 > Architecture is about Choosing Elements of Abstraction
 
 例として、MVC & RESTなArchitectureをInformation Richなアプリケーションで採用した場合、**What Changed** と **Data Synchronization** の部分が問題になるとしています。
 変更管理とデータ同期の部分ですね。
 
-特にFacebookは全世界にサービスを提供しているので、**Data Synchronization** におけるネットワークのレイテンシーの解決については力を注いでいるように感じます。
+特にFacebookは、ネットワーク環境が整備されていないところも含めた全世界にサービスを提供しているので、**Data Synchronization** におけるネットワークのレイテンシーの解決については力を注いでいるように感じます。
 
 具体的には、Webの場合は **What Changed** の部分にはReactを使ったComponentによるViewの抽象化とImmutable.jsによるデータ管理の単純化、 **Data Synchronization** の部分はGraphQLを使って必要最低限のデータのやりとりのみ行う方法を解説しています。
 
