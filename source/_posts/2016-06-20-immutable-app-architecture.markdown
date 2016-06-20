@@ -114,7 +114,7 @@ TODOアイテムの作成を例にすると、下記のような流れになる�
 〜サーバーからレスポンスが返ってくる〜
 
 * サーバーから受け取ったidなどを持った完全な形のTODOをTrue Stateに反映する
-* QueueにあるActionをTrue Stateに適用する
+* 再度QueueにあるActionをTrue Stateに適用する
 
 -----------------------
 
