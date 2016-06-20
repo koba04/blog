@@ -1,17 +1,18 @@
 ---
 layout: post
-title: "Immutable App Architecture - Lee Byron (Render 2016)を観た"
+title: "Immutable User Interfaces - Lee Byron (Render 2016)を観た"
 date: 2016-06-20 09:28:35 +0900
 comments: true
 categories: architecture
 ---
-Dan AbramovもReact EuropeのQ&Aでおすすめしていましたが、面白い内容だったので紹介します。
 
 <iframe src="https://player.vimeo.com/video/166790294" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 <p><a href="https://vimeo.com/166790294">Render 2016 - Lee Byron</a> from <a href="https://vimeo.com/whiteoctober">White October</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
 * https://vimeo.com/166790294
 * http://2016.render-conf.com/talks#immutable-user-interfaces
+
+Dan AbramovもReact EuropeのQ&AでおすすめしていたTalkで、改めて見て面白い内容だったので紹介します。
 
 FacebookがReactやGraphQL、Immutable.jsを使ってどのようなアーキテクチャでアプリケーションを作成しているのかということを解説したTalkです。
 特にFluxのような新しい概念が提唱されているわけではありませんが、最近のフロントエンドの流れやFacebookが目指しているものがわかりやすく解説されています。
@@ -24,16 +25,18 @@ Architectureの話が中心で各ライブラリーの説明ではありませ�
 
 <!-- more -->
 
-------------------------
+## Immutable App Architecture
 
-Architectureの選択は、アプリケーションの品質、開発の簡単さや難しさ、リリース後の改善のサイクルにも大きく影響を及ぼします。
+Architectureの選択は、アプリケーションの品質、開発の簡単さや難しさ、リリース後の改善のサイクルにも大きく影響を及ぼすものであるとしています。
+
+> Architecture is about Choosing Elements of Abstraction
 
 例として、MVC & RESTなArchitectureをInformation Richなアプリケーションで採用した場合、**What Changed** と **Data Synchronization** の部分が問題になるとしています。
 変更管理とデータ同期の部分ですね。
 
 特にFacebookは全世界にサービスを提供しているので、**Data Synchronization** におけるネットワークのレイテンシーの解決については力を注いでいるように感じます。
 
-具体的には、**What Changed** の部分にはReactを使ったComponentによるViewの抽象化とImmutable.jsによるデータ管理の単純化、 **Data Synchronization** の部分はGraphQLを使って必要最低限のデータのやりとりのみ行う方法を解説しています。
+具体的には、Webの場合は **What Changed** の部分にはReactを使ったComponentによるViewの抽象化とImmutable.jsによるデータ管理の単純化、 **Data Synchronization** の部分はGraphQLを使って必要最低限のデータのやりとりのみ行う方法を解説しています。
 
 これらを踏まえて、Immutable App Architectureとして、下記の図のような構成を紹介しています。
 
@@ -90,25 +93,48 @@ Immutableにすることにより、Memoizationなどの最適化のテクニッ
 
 同時に発生する複数のActionをシリアライズして処理するためのQueueです。
 
-`(State) => State, Promise<State>`のActionの場合、Promiseでない方のStateは本当のState(**True State**)とは別に **Optimistic State** として扱われます。
-`(State) => State, Promise<State>`の場合、まずはOptimistic Stateの方をStateとして扱いViewが更新されます。その後Promiseがresolveされた時に、**True State** が更新されてQueueにあるActionが適用されます。
+`(State) => State, Promise<State>`のActionの場合、Promiseで解決されるStateを本当のState(**True State**)として、Promiseでない方のStateを **Optimistic State** として扱います。
 
-これにより、ネットワークリクエストが失敗した場合は、Optimistic StateからTrue Stateに戻せばいいだけなのでロールバックも簡単だとしています。
+```
+(State) => State, Promise<State>
+   |         |              |--------> True State
+   |         |----> Optimistic State
+   |--> Current State
+```
+
+`(State) => State, Promise<State>`の場合、まずは **Optimistic State** の方をStateとして扱いViewが更新されます。その後、Promiseがresolveされた時に、**True State** が更新されてQueueにあるActionが再度適用されます。
+
+TODOアイテムの作成を例にすると、下記のような流れになると解説されています。
+
+-----------------------
+
+* 入力したTODOのテキストをOptimistic Stateとして即時にStateに反映する
+* QueueにあるActionをOptimistic Stateに適用する
+
+〜サーバーからレスポンスが返ってくる〜
+
+* サーバーから受け取ったidなどを持った完全な形のTODOをTrue Stateに反映する
+* QueueにあるActionをTrue Stateに適用する
+
+-----------------------
+
+これにより、ネットワークリクエストが失敗した場合は、 **Optimistic State** から **True State** に戻せばいいだけなのでロールバックも簡単だとしています。
 
 {% img /images/posts/immutable-app-architecture/action-queue.png 'Action Queue' %}
 
-`(State) => State, Promise<State>`のActionが複数Queueに積まれた時にどうやって処理するのかとか明確でない点はありますが（Promiseがresolveするまで待ち受ける？）、こんな感じだと思います。
+それぞれ依存する`(State) => State, Promise<State>`のActionが複数Queueに積まれた時にどう処理するのかなど細かい不明な点はありますが、こんな感じだと思います。
 
 ### State
 
-ImmutableなStateはアプリケーションの状態です。
+Stateはアプリケーションの状態でImmutableです。
+Action毎に作成されます。
+
 Initial Stateはサーバーから作成されます。
 
 ### Models
 
-ModelはStateを元に作成されるただのデータの単位です。
-Plainなオブジェクト（JavaでいうPOJO）であることを推奨しています。
-JSの場合はImmutableなデータ構造はないのでImmutable.jsのデータ構造？
+ModelはStateを元に作成されるデータの形です。
+Plainなオブジェクト（JavaでいうPOJO）であることを推奨しています（JSの場合はImmutable.jsのデータ構造？）。
 
 ModelにはGraphQLのTypeが定義されています。または、ModelからGraphQLのTypeを自動作成します。
 
@@ -124,10 +150,9 @@ Immutable App ArchitectureはFacebookのアプリでも使われていてフィ�
 と、しながらもArchitectureの選択はトレードオフだとしています。
 なのでアプリケーションを完成させた後も、すぐにゼロから再構築することを考えて、よりよいArchitectureを常に探求する必要があるとしています。
 
-```
-There is no Architecture Nirvana.
-Exploration and Improvement.
-```
+> There is no Architecture Nirvana.
+
+> Exploration and Improvement.
 
 Please watch the video!
 
