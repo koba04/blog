@@ -136,7 +136,7 @@ Initial Stateはサーバーから作成されます。
 ModelはStateを元に作成されるデータの形です。
 Plainなオブジェクト（JavaでいうPOJO）であることを推奨しています（JSの場合はImmutable.jsのデータ構造？）。
 
-ModelにはGraphQLのTypeが定義されています。または、ModelからGraphQLのTypeを自動作成します。
+ModelはGraphQLのTypeで定義されています。
 
 {% img /images/posts/immutable-app-architecture/immutable-app-model.png 'Model' %}
 
