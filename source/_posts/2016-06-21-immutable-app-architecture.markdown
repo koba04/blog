@@ -158,3 +158,5 @@ Immutable App ArchitectureはFacebookのアプリでも使われていてフィ�
 Please watch the video!
 
 * https://vimeo.com/166790294
+
+(詳細が聞き取れなかった部分もあるので、間違ってるところがあったら指摘してもらえるとありがたいです)
