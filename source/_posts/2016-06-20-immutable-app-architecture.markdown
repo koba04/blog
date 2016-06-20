@@ -20,7 +20,7 @@ Architectureの話が中心で各ライブラリーの説明ではありませ�
 各ライブラリーの使い方が〜という話ではなく、どういったArchitectureでWebやiOSやAndroidなどのクライアントサイドを作っていくのかを考えたい人にとっては、参考になるTalkだと思います。
 
 というわけで、軽く内容を。
-いろいろ省略しているので、気になった人はぜひTalkを観てください！
+いろいろ省略しているので、気になった人はぜひTalkを観てください。
 
 <!-- more -->
 
@@ -90,12 +90,14 @@ Immutableにすることにより、Memoizationなどの最適化のテクニッ
 
 同時に発生する複数のActionをシリアライズして処理するためのQueueです。
 
-`(State) => State, Promise<State>`のActionの場合、Promiseでない方の新しいStateを適用したものを本当のState(**True State**)とは別に **Optimistic State** として管理しています。**True State** は`Promise<State>`が解決した時に更新されます。その後新しい **True State** に対してQueueにあったActionが再度適用されます。
+`(State) => State, Promise<State>`のActionの場合、Promiseでない方のStateは本当のState(**True State**)とは別に **Optimistic State** として扱われます。
+`(State) => State, Promise<State>`の場合、まずはOptimistic Stateの方をStateとして扱いViewが更新されます。その後Promiseがresolveされた時に、**True State** が更新されてQueueにあるActionが適用されます。
 
 これにより、ネットワークリクエストが失敗した場合は、Optimistic StateからTrue Stateに戻せばいいだけなのでロールバックも簡単だとしています。
 
 {% img /images/posts/immutable-app-architecture/action-queue.png 'Action Queue' %}
 
+`(State) => State, Promise<State>`のActionが複数Queueに積まれた時にどうやって処理するのかとか明確でない点はありますが（Promiseがresolveするまで待ち受ける？）、こんな感じだと思います。
 
 ### State
 
