@@ -91,6 +91,15 @@ Talkの後の休憩でQ&Aが盛り上がってたことが印象的でした。
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/VEaDsKyDxkY" frameborder="0" allowfullscreen></iframe>
 
+Flowの内部についてのTalkです。
+FlowがどのようにJavaScriptのコードを解析しているのか、Parse(AST) 後の InferのフェーズでTypeHeapやOpenTを使ってどのように型情報を保持しているのかなど、かなりテクニカルな情報です。
+
+ただ、内容自体は難しいというわけでもなく丁寧に説明されているので、面白いと思います。
+
+Flowの使い方を知るのではなく、Flowがどのように型チェックを行っているのかを知りたい人にとっては面白いTalkだと思います。
+個人的には、OpenTを利用して複数ファイルを並列にチェックしてる話とか面白いなぁと思いました。
+また、FlowGraphはDead Code Eliminationなど様々なことにも利用できるとしています。
+
 ## Mihail Diordiev - Debugging flux applications in production
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/cbXLohVbzNI" frameborder="0" allowfullscreen></iframe>
