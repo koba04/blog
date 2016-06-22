@@ -104,6 +104,14 @@ Flowの使い方を知るのではなく、Flowがどのように型チェック
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/cbXLohVbzNI" frameborder="0" allowfullscreen></iframe>
 
+昨年のDan AbramovのReact Europeでのタイムトラベルのデモをさらに発展させたようなデモ中心のTalkです。
+
+Redux DevTool Extensionを使ったActionとStateのexport、importやテストケースの作成の他、Remote Redux DevToolsを使い、本番でエラーや特定のActionが発生した時にActionとStateのhistoryを送信して手元で再現できるようにしています。
+
+バグが起きるActionとStateをファイルに記録しておいて、記録したActionとStateを再生しながら修正するのはよさそうです。
+
+また、ReduxだけでなくRxJSなどとも組み合わせて使ったり、ReactNativeやElectron環境でも使えるようです。
+
 ## Cheng Lou - On the Spectrum of Abstraction
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mVVNJKv9esE" frameborder="0" allowfullscreen></iframe>
