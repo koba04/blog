@@ -116,6 +116,17 @@ Redux DevTool Extensionを使ったActionとStateのexport、importやテスト�
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mVVNJKv9esE" frameborder="0" allowfullscreen></iframe>
 
+ReactMotionやAnimationの話をするのかと思っていたら、ライブラリーやフレームワークなどの抽象化についてのTalkでした。
+
+抽象化によるコスト、ライブラリーとフレームワークの違い、抽象化のレイヤーの違いによってどんな影響があるのか、Reactはなぜ今のようなアーキテクチャになっているのかといったことについて熱く話されています。
+
+Grunt vs Gulp、React vs Templates、Immutability vs Mutability、CSS in JS vs Traditional CSSなどのわかりやすい例を用いた説明もあって面白いです。
+
+* Don't Cover Every Use-case
+* Not DRY is Fine
+* Don't Be Swayed by Elegance
+* When in Doubt, Use Examples
+
 ## Bertrand Karerangabo & Evan Schultz - React Redux Analytics
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/MBTgiMLujek" frameborder="0" allowfullscreen></iframe>
