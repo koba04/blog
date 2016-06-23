@@ -131,6 +131,9 @@ Grunt vs Gulp、React vs Templates、Immutability vs Mutability、CSS in JS vs T
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/MBTgiMLujek" frameborder="0" allowfullscreen></iframe>
 
+Lean Analyticsを回すにあたり、Reduxでどのように計測するのかというTalkです。
+後半はSegment.ioと組み合わせて使うためのredux-segmentというライブラリーの紹介やデモです。
+
 ----------------------------
 
 ## Day 2
