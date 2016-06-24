@@ -144,6 +144,11 @@ https://www.youtube.com/playlist?list=PLCC436JpVnK0LTDKW3O_BGTZnrZ8dBAof
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WjJdaDXN5Vs" frameborder="0" allowfullscreen></iframe>
 
+ブラウザー上でのビジュアルプログラミングについてのデモと解説によるTalkです。
+React、Flow、Redux、Immutable.js、RxJSなどを使い、データの流れをコードとビジュアルプログラミングをうまく連携させていて、とても面白いです。Flowの型情報を使って接続できる要素を可視化しているところとか。
+
+ビジュアルプログラミングもただのデータの入力と出力であることがよくわかります。
+
 ## Bonnie Eisenman - React Native Retrospective
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/-vl57brMWNg" frameborder="0" allowfullscreen></iframe>
