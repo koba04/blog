@@ -153,6 +153,15 @@ React、Flow、Redux、Immutable.js、RxJSなどを使い、データの流れ�
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/-vl57brMWNg" frameborder="0" allowfullscreen></iframe>
 
+オライリーから出ている「Learning ReactNative」の作者の人のTalkです。
+
+* http://shop.oreilly.com/product/0636920041511.do
+
+ReactNativeが発表されてから、今までの流れを時系列にわかりやすく説明しています。
+具体的な使い方などではなくて、モバイルアプリ開発の状況やReactNativeの状況など、どのようにReactNativeが捉えられているのかがよくわかります。
+
+ReactNativeに手を出してみようかと思っている人にとっては参考になると思います。
+
 ## Max Stoiber & Nik Graf - The Evolution of React UI Development
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/0IkWuXeKPV0" frameborder="0" allowfullscreen></iframe>
