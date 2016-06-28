@@ -166,6 +166,19 @@ ReactNativeに手を出してみようかと思っている人にとっては参
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/0IkWuXeKPV0" frameborder="0" allowfullscreen></iframe>
 
+Hot Reloadingを使って、Componentをインタラクティブに開発していくことについてのTalkです。
+紹介していたCarte Blancheというライブラリーでは、PropTypes or FlowtypeからPropデータをランダムに生成してComponentの表示を確認できるようになっています。
+
+* https://github.com/carteb/carte-blanche
+
+また、データはファイルとして書き出されて、それを編集することでHot Reloadingで反映されるようになっています。
+今は、React用でwebpackに依存していますが、様々な環境やライブラリーに対応する予定があるそうです。
+
+react-storybookと似ていますが、こちらはデータをランダムに生成してくれる点などが違う点なのかなと思います。
+どちらも使っていないので間違っているかもですが...。
+
+* https://github.com/kadirahq/react-storybook
+
 ## Andrew Clark - Recomposing your React application
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zD_judE-bXk" frameborder="0" allowfullscreen></iframe>
