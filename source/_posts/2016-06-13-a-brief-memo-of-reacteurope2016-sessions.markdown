@@ -183,9 +183,35 @@ react-storybookと似ていますが、こちらはデータをランダムに�
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zD_judE-bXk" frameborder="0" allowfullscreen></iframe>
 
+ReactEuropeの中で数少ない、Reactに関するTalkです。
+High Order Componentsとは何か、どんなユースケースがあるのか、パフォーマンスについてはどうなのかについて話されています。
+
+```
+// High Order Components
+(...args) => Component => EnhancedComponent
+```
+
+Reduxなどを使う中で、HOCを使っている人も多いと思いますが、実際どうなっているのかやどんなことができるのかを知りたい人にとっては面白いTalkです。
+また、HOCを多用した場合にComponentが深くネストした構造になり、パフォーマンスに影響を与えることについても、`compose`を使った方法やStateless Functional Componentsの場合にはその場でReactElementに展開するようにするといった方法を紹介しています。
+
+実際のHigh Order Componentsの例については、本人が作っている`recompose`をみるといいと思います。
+
+いかにPresentational Componentにロジックを入れないようにするかのヒントとなるTalkだと思います。
+
+* https://github.com/acdlite/recompose
+
 ## Tadeu Zagallo - JavaScript, React Native and Performance
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/1oL_OJ3UePU" frameborder="0" allowfullscreen></iframe>
+
+ReactNativeが起動時にJavaScriptの部分で内部でどのように高速化しているのかという話です。
+
+初期化をマルチスレッド化やモジュール初期化の遅延の他、プラットフォーム固有のコードのDead Code Eliminationなど。
+
+またiOSではJITが使えず、AndroidではJITが使えたけど結果的に遅いという中で、ProfileをとってParse結果をバイトコードでキャッシュして改善していく流れが解説されています。
+この最適化は今のところAndroidだけでまた有効化されているわけではないようです。
+
+ReactNativeの内部的な話とか、JavaScriptの最適化に興味がある人にとっては面白いTalkだと思います。
 
 ## Jafar Husain - Falcor: One Model Everywhere
 
