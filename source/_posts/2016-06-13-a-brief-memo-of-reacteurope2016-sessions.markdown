@@ -232,3 +232,16 @@ ReactNativeの内部的な話とか、JavaScriptの最適化に興味がある�
 ## Question and Answers with core team members
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/5pMDd1t2thc" frameborder="0" allowfullscreen></iframe>
+
+Sessionに登壇していたFacebookのエンジニアによるQ&Aです。
+ざっくりまとめると前半がGraphQLについて、後半がアーキテクチャについての話が多い印象です。
+
+GraphQLについては、本編のTalkにあったsubscriptionについてやGraphQL Fragmentをどうやってテストするのかといった質問がありました。
+
+後半はImmutable.jsについての質問や、1からFacebookを作り直すならどういうアーキテクチャで作るかという質問から、アーキテクチャの話になっています。
+
+途中で紹介されるImmutable App Architectureについては別でブログ書いたのでそちらを。
+
+* http://blog.koba04.com/post/2016/06/21/immutable-app-architecture/
+
+その他には、TypeScriptとFlowについての質問や、
