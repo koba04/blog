@@ -10,6 +10,17 @@ categories: react.js react-links
 
 <!-- more -->
 
+## React v15.2.0
+
+* https://github.com/facebook/react/releases/tag/v15.2.0
+
+15.2.0がリリースされました。
+
+プロダクションビルドでエラーコードが付加されるようになりエラーの調査がしやすくなったことや、PropTypesやkeyのwarning時のスタックトレースがComponentのツリーで表示されるようになりました。
+開発をサポートするための機能です。
+
+その他はちょっとしたバグ修正などが中心です。
+
 ## Resolve refs in the order of the children #7101
 
 * https://github.com/facebook/react/pull/7101
