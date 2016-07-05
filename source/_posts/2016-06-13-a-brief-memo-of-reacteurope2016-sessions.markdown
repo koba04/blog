@@ -78,8 +78,12 @@ GitHubのIssueスタイルなプレゼンも面白いです。
 <iframe width="560" height="315" src="https://www.youtube.com/embed/etax3aEe2dA" frameborder="0" allowfullscreen></iframe>
 
 GraphQLの基本的な概念の説明と、認証はどのように実装するのか、効果的なデータの取得方法などを実際のコードを出しながら解説したTalkです。
+GraphQLには含まれていない部分で、データソースから効率的にデータを取得する方法については、Dataloaderを紹介しています。
+Dataloaderを使うことで、N+1問題やオーバーフェッチングを回避しています。
 
-GraphQLの3つの概念。
+* https://github.com/facebook/dataloader
+
+最後に、GraphQL概念として下の3つを紹介していました。
 
 * Think Graphs, not Endpoints
 * Single Source of Truth
@@ -216,6 +220,20 @@ ReactNativeの内部的な話とか、JavaScriptの最適化に興味がある�
 ## Jafar Husain - Falcor: One Model Everywhere
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nxQweyTUj5s" frameborder="0" allowfullscreen></iframe>
+
+NetflixのTechnical LeadであるJafar HusainさんによるFalcorについてのTalkです。
+話すペースは速いですが、さすが話し慣れているだけあってわかりやすいです。
+
+https://twitter.com/jhusain
+
+なぜNetflixがFalcorを作ったのか、Falcorの基本的な説明から、
+ReactEuropeなのでGraphQLと比較しつつ、Falcorの方がシンプルで小さく簡単に始められることを強調しています。
+GraphQLのように型が必要な場合は、JSONSchemaやTypeScriptと組み合わせることも可能だと説明しています。
+また、GraphQLのQueriesのアプローチとFalcorのPathsの違いについても解説しています。
+
+ベタに書いたJSONデータからFalcorを使うように変えていく説明もわかりやすいです。
+
+Falcorの基本を知るにはとてもいいTalkです。JSON Graphをどのように実現しているのかなど。
 
 ## Brent Vatne - Building li.st for Android with Exponent and React Native
 
