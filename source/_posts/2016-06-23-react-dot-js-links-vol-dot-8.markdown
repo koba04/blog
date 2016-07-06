@@ -72,6 +72,15 @@ developmentの時だけ有効にすることが推奨されています。
 JSXでのchildrenの仕様に対するProposalです。
 JSXChildを拡張して`{...children}`を許容するようにするものです。
 
+## RFC: Flat bundle using Rollup
+
+* https://github.com/facebook/react/pull/7178
+
+現在CommonJSベースで書かれているReactのコードをRollupでバンドルしてTree ShakingやDead Code Eliminationによりファイルサイズを削減するPRです。React Teamのインターンの人ですね。
+
+まずはトップレベルでない`require`を全てトップレベルにしてES Modulesに変換できるようにして、BabelでCommonJSをES Modulesに変換してRollupでバンドルするという方法を採っているようです。
+(RollupのCommonJSプラグインを使う方法よりサイズが小さくなるらしいです)
+
 ## Flow v0.28.0
 
 * https://github.com/facebook/flow/releases/tag/v0.28.0
