@@ -44,7 +44,7 @@ React Teamとしては、Class + property initializer + Flowの組み合わせ�
 
 また、Facebook内部ではPureRenderMixinがたくさん使われていて、それを置き換えるためのものとして`React.PureComponent`が考えられているようです。
 
-`React.PureComponent`に関しては、最初のProposalでは内部のStateless Functional Componentsにも最適化が適用される予定でしたが、混乱や問題点があることから、新しく出されたPRではただのClass版のPureRenderMixinとなっています。
+`React.PureComponent`に関しては、最初のProposalでは内部のStateless Functional Componentsにも最適化が適用される予定でしたが、混乱や問題点があることから、新しく出されたPRではただのClass版のPureRenderMixinとなっています。そしてmergeされました。
 
 * https://github.com/facebook/react/pull/7195
 * https://github.com/facebook/react/issues/6914
@@ -95,3 +95,12 @@ Flowの0.28.0がリリースされています。
 * https://github.com/facebook/react-native/releases/tag/v0.29.0
 
 ReactNativeの0.29.0がリリースされています。
+
+## Don't Use Bind When Passing Props
+
+* https://daveceddia.com/avoid-bind-when-passing-props/
+
+PureComponentなんかとも関連しますが、なぜrenderメソッドの中でFunction.prototype.bindしたりArrow Function使うのがダメなのかについて書いたエントリーです。
+過去にもあったような気もしますが。
+上記を使って書かれているサンプルも多いので、使うときは何が起きているのか意識して使った方がいいと思います。
+（Function.prototype.bindやArrow Functionsを使うと当たり前ですが新しい関数が都度生成されるので）
