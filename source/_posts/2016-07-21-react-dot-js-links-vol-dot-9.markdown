@@ -10,4 +10,9 @@ categories: react.js react-links
 
 <!-- more -->
 
+## [META] v3.0.0 (ReactRouter)
 
+* https://github.com/reactjs/react-router/issues/3611
+
+ReactRouter v3.0.0についてのIssueです。
+alpha.1から結構経ってますがそろそろ出そうですね。
