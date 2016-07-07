@@ -1,0 +1,422 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Immutable App ArchitectureについてのTalkを観た - blog.koba04.com</title>
+  <meta name="author" content="koba04">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="blog.koba04.com" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <meta property="og:title" content="Immutable App ArchitectureについてのTalkを観た - blog.koba04.com" />
+<meta property="og:description" content="" />
+<meta property="og:url" content="http://blog.koba04.com/post/2016/06/21/immutable-app-architecture/" />
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/250407" />
+<meta property="og:author" content="koba04" />
+<meta property="og:site_name" content="blog.koba04.com" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="fb:app_id" content="346463362115366" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-8875970-5']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <div class="nav-title"><a href="/">blog.koba04.com</a></div>
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/koba04" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://twitter.com/koba04" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    
+    <li><a href="http://d.hatena.ne.jp/koba04/">OldBlog</a></li>
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    Immutable App ArchitectureについてのTalkを観た
+	<h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2016-06-21T01:30:35+09:00" pubdate data-updated="true">Jun 21<span>st</span>, 2016</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <iframe src="https://player.vimeo.com/video/166790294" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+
+<p><a href="https://vimeo.com/166790294">Render 2016 - Lee Byron</a> from <a href="https://vimeo.com/whiteoctober">White October</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
+
+<ul>
+<li><a href="https://vimeo.com/166790294">https://vimeo.com/166790294</a></li>
+<li><a href="http://2016.render-conf.com/talks#immutable-user-interfaces">http://2016.render-conf.com/talks#immutable-user-interfaces</a></li>
+</ul>
+
+
+<p>Dan AbramovもReact EuropeのQ&amp;AでおすすめしていたTalkで、改めて見て面白い内容だったので紹介します。</p>
+
+<p>FacebookがReactやGraphQL、Immutable.jsを使ってどのようなアーキテクチャでアプリケーションを作成しているのかということを解説したTalkです。
+特にFluxのような新しい概念が提唱されているわけではありませんが、最近のフロントエンドの流れやFacebookが目指しているものがわかりやすく解説されています。</p>
+
+<p>Architectureの話が中心で各ライブラリーの説明や、細かい実装についてのTalkではありません。
+各ライブラリーの使い方が〜という話ではなく、どういったArchitectureでWebやiOSやAndroidなどのクライアントサイドを作っていくのかを考えたい人にとっては、参考になるTalkだと思います。</p>
+
+<p>というわけで、軽く内容を。
+いろいろ省略しているので、気になった人はぜひTalkを観てください。</p>
+
+<!-- more -->
+
+
+<h2>Immutable App Architecture</h2>
+
+<p>まず最初に、Architectureの選択は、アプリケーションの品質、開発の簡単さや難しさ、リリース後の改善のサイクルにも大きく影響を及ぼすものであるとしています。</p>
+
+<blockquote><p>Architecture is about Choosing Elements of Abstraction</p></blockquote>
+
+<p>例として、MVC &amp; RESTなArchitectureをInformation Richなアプリケーションで採用した場合、<strong>What Changed</strong> と <strong>Data Synchronization</strong> の部分が問題になるとしています。
+変更管理とデータ同期の部分ですね。</p>
+
+<p>特にFacebookは、ネットワーク環境が整備されていない国も含めた全世界にサービスを提供しているので、<strong>Data Synchronization</strong> におけるネットワークのレイテンシーの解決については力を注いでいるように感じます。</p>
+
+<p>Webの場合、 <strong>What Changed</strong> の部分にはReactを使ったComponentによるViewの抽象化とImmutable.jsによるデータ管理の単純化、 <strong>Data Synchronization</strong> の部分にはGraphQLを使って必要最低限のデータのやりとりのみ行う方法を解説しています。</p>
+
+<p>これらを踏まえて、Immutable App Architectureとして、下記の図のような構成を紹介しています。</p>
+
+<p><img src="/images/posts/immutable-app-architecture/immutable-app-architecture.png" title="'Immutable App Architecture'" ></p>
+
+<p>詳細については動画を見てほしいのですが下のような要素があります。
+Fluxについて聞いたことがあるとだいたいイメージできると思います。</p>
+
+<h3>Component</h3>
+
+<p>Componentは下のようなStateを受け取りViewを返すピュアな関数です。
+Viewへの反映を最適化します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(State) =&gt; View</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ReactやReactNative、ComponentKitが担っている部分です。</p>
+
+<h3>View</h3>
+
+<p>DOMやUIViewやAndroidのViewなど各Platformが提供しているViewです。
+Mutationが前提になっていて、管理や最適化が難しいとしています。</p>
+
+<h3>Actions</h3>
+
+<p>新しいStateを作成する部分です。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(State) =&gt; State</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ActionごとにStateを再作成するのはパフォーマンス的にツラいのでは？ということに対しては、<strong>Structural Sharing</strong> のアプローチを紹介しています。</p>
+
+<p>Structural Sharingは、Immurable.jsなどで使われていて、変更があった箇所とその上位の要素だけを再作成して、その他は参照を付け替えるだけなので全体を毎回再生成しているわけではないということです。
+もちろん、Immutable.jsを使わなくても実装することは可能で、Reduxを使っている人にはおなじみだと思います。</p>
+
+<p><img src="/images/posts/immutable-app-architecture/structual-sharing.png" title="'Structural Sharing'" ></p>
+
+<p>Immutableにすることにより、Memoizationなどの最適化のテクニックも適用しやすいとしています。</p>
+
+<p>また、サーバーからデータを取得するActionのI/Fは下記のように定義しています。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(State) =&gt; State, Promise&lt;State&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>(State) =&gt; Promise&lt;State&gt;</code>の場合、ネットワークが貧弱な環境ではユーザーにすぐにレスポンスを返せないので、「すぐに反映させるためにクライアント側で作成したState」と「サーバーからのレスポンスを反映したStateを返すPromise」の2つを返しています。
+このアプローチは次のQueueの部分でも重要になってきます。</p>
+
+<p>もっと複雑な非同期処理をやっている人にとっては、Observableなどで処理した方がいいのかもしれませんが、これで十分なことも多いのかなと思います。</p>
+
+<h3>Queue</h3>
+
+<p>同時に発生する複数のActionをシリアライズして処理するためのQueueです。</p>
+
+<p><code>(State) =&gt; State, Promise&lt;State&gt;</code>のActionの場合、Promiseで解決されるStateを本当のState(<strong>True State</strong>)として、Promiseでない方のStateを <strong>Optimistic State</strong> として扱います。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(State) =&gt; State, Promise&lt;State&gt;
+</span><span class='line'>   |         |              |--------&gt; True State
+</span><span class='line'>   |         |----&gt; Optimistic State
+</span><span class='line'>   |--&gt; Current State</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>(State) =&gt; State, Promise&lt;State&gt;</code>の場合、まずは <strong>Optimistic State</strong> の方をStateとして扱いViewが更新されます。その後、Promiseがresolveされた時に、<strong>True State</strong> が更新されてQueueにあるActionが再度適用されます。</p>
+
+<p>TODOアイテムの作成を例にすると、下記のような流れになると解説されています。</p>
+
+<hr />
+
+<ul>
+<li>入力したTODOのテキストをOptimistic Stateとして即時にStateに反映する</li>
+<li>QueueにあるActionをOptimistic Stateに適用する</li>
+</ul>
+
+
+<p>〜サーバーからレスポンスが返ってくる〜</p>
+
+<ul>
+<li>サーバーから受け取ったidなどを持った完全な形のTODOをTrue Stateに反映する</li>
+<li>QueueにあるActionを再度True Stateに適用する</li>
+</ul>
+
+
+<hr />
+
+<p>これにより、ネットワークリクエストが失敗した場合は、 <strong>Optimistic State</strong> から <strong>True State</strong> に戻せばいいだけなのでロールバックも簡単だとしています。</p>
+
+<p><img src="/images/posts/immutable-app-architecture/action-queue.png" title="'Action Queue'" ></p>
+
+<p>それぞれ依存する<code>(State) =&gt; State, Promise&lt;State&gt;</code>のActionが複数Queueに積まれた時にどう処理するのかなど細かい不明な点はありますが、こんな感じだと思います。</p>
+
+<h3>State</h3>
+
+<p>Stateはアプリケーションの状態でImmutableです。
+Action毎に作成されます。</p>
+
+<p>Initial Stateはサーバーから作成されます。</p>
+
+<h3>Models</h3>
+
+<p>ModelはStateを構成するComponentが必要とするGraphQLのTypeで定義されたデータの形です。</p>
+
+<blockquote><p>Colocated Data Dependencies</p></blockquote>
+
+<p>Plainなオブジェクト（JavaでいうPOJO）であることを推奨しています（JSの場合はImmutable.jsのデータ構造の場合も）。</p>
+
+<p><img src="/images/posts/immutable-app-architecture/immutable-app-model.png" title="'Model'" ></p>
+
+<h2>まとめ</h2>
+
+<p><img src="/images/posts/immutable-app-architecture/immutable-app-architecture.png" title="'Immutable App Architecture'" ></p>
+
+<p>上記のように構成されるImmutable App Architectureは <strong>Pure Function</strong>、<strong>Immutability</strong>、<strong>Composition</strong> を組み合わせた <strong>Composition of Simple Elements</strong> だとしています。
+Immutable App ArchitectureはFacebookのアプリでも使われていてフィットしているとのことです。</p>
+
+<p>と、しながらもArchitectureの選択はトレードオフだとしています。
+なのでアプリケーションを完成させた後も、すぐにゼロから再構築することを考えて、よりよいArchitectureを常に探求する必要があるとしています。</p>
+
+<blockquote><p>There is no Architecture Nirvana.</p>
+
+<p>Exploration and Improvement.</p></blockquote>
+
+<p>Please watch the video!</p>
+
+<ul>
+<li><a href="https://vimeo.com/166790294">https://vimeo.com/166790294</a></li>
+</ul>
+
+
+<p>(詳細が聞き取れなかった部分もあるので、間違ってるところがあったら指摘してもらえるとありがたいです)</p>
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <hr>
+    
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
+
+
+
+  <a href="/blog/categories/architecture/"><span class="badge">architecture</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://blog.koba04.com/post/2016/06/21/immutable-app-architecture/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.koba04.com/post/2016/06/21/immutable-app-architecture/" data-via="koba04" data-counturl="http://blog.koba04.com/post/2016/06/21/immutable-app-architecture/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-href="http://blog.koba04.com/post/2016/06/21/immutable-app-architecture/" data-send="true" data-width="100" data-show-faces="false"></div>
+  
+</div>
+
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/post/2016/06/16/reactjs-links-vol7/" title="Previous Post: React.js Links vol.7">&laquo; React.js Links vol.7</a>
+          
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2016 - koba04 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'koba04log';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.koba04.com/post/2016/06/21/immutable-app-architecture/';
+        var disqus_url = 'http://blog.koba04.com/post/2016/06/21/immutable-app-architecture/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=346463362115366&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
