@@ -239,6 +239,19 @@ Falcorの基本を知るにはとてもいいTalkです。JSON Graphをどのよ
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/cI9bDvDEsYE" frameborder="0" allowfullscreen></iframe>
 
+ExponentでReactNativeを使ってAndroidのアプリを作った時の話です。
+Nativeのカスタムビューを作成することなくできる、かなり実践的な快適なUIを実現する方法が解説されています。
+
+* UIをブロックしないスムーズなListViewを、IncrementalなRenderingにより実現した話
+* アニメーションを処理の前後で行うのではなく、同時にバックグラウンドの処理を実行することにより快適なアニメーションの実現する方法
+* `ex-navigation`を使ったNavigationについて
+* ユーザーインプットについて。キーボードイベントをどのようにハンドリングするか
+* タッチやジェスチャーをどのようにハンドリングするのか
+
+ReactNativeのAndroidでの事例として貴重なTalkだと感じました。
+
+* https://github.com/exponentjs/
+
 ## Laney Kuenzel & Lee Byron - GraphQL Future
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ViXL0YQnioU" frameborder="0" allowfullscreen></iframe>
