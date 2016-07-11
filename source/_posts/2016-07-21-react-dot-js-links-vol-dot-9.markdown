@@ -10,6 +10,10 @@ categories: react.js react-links
 
 <!-- more -->
 
+## React v15.2.1
+
+* https://github.com/facebook/react/releases/tag/v15.2.1
+
 ## [META] v3.0.0 (ReactRouter)
 
 * https://github.com/reactjs/react-router/issues/3611
