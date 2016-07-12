@@ -256,6 +256,23 @@ ReactNativeのAndroidでの事例として貴重なTalkだと感じました。
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ViXL0YQnioU" frameborder="0" allowfullscreen></iframe>
 
+GraphQL TeamのメンバーによるGraphQLがオープンソースになってから起きたことと、GraphQLのこれからについてのTalkです。Keynoteっ
+ぽい感じもあり、GraphQL使ってない人でも面白いTalkです。
+
+> We only open source what we use
+
+> We release what is generally useful
+
+というFacebookの考えの中で、Facebook内で試していることをあくまでExperimentalとして紹介されています。
+
+* 少しでも早く最初のコンテンツを返すための工夫としての`@defer`や`@stream`ディレクティブ
+* リアルタイムアップデートを行うための`@live`ディレクティブ（プロダクションではまだ使われていない）
+* 現時点ではReactiveなバックエンドを持っていないFacebookでは`@live`ディレクティブの導入も難しく、さらに複雑な依存関係の中で全ての変更を追従することが難しく、そのような状況の中でイベントベースのSubscriptionをGraphQLで実現するGraphQL Subscriptionsについて
+    * Facebookでは、GraphQL SubscriptionsをMQTTを使って実現しているようです。
+    * `subscription`のキーワード自体はgraphql-jsでもサポートされているようです。pubsubの処理は自身で実装する必要がありますが。このあたりはもっと一般化された際にはオープンソースになるかも？
+    * Facebooで実際に使われている規模としては、`150B daily subscribes`、`35B daily payload deliveries`、`〜30 subscriptions in schema`だそうです。
+    * GraphQL Subscriptionsによって、「xxx is writing a comment...」の表示や、live video上でのlive reactionの機能など多くのことが可能になったそうです。
+
 ## Martijn Walraven - Building native mobile apps with GraphQL
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/z5rz3saDPJ8" frameborder="0" allowfullscreen></iframe>
