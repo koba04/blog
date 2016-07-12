@@ -16,6 +16,13 @@ categories: react.js react-links
 
 Bug Fixやwarningの追加などが中心です。
 
+## Introducing React's Error Code System
+
+* https://facebook.github.io/react/blog/2016/07/11/introducing-reacts-error-code-system.html
+
+React v15.2.0で導入されたエラーコードシステムの解説です。
+これにより、プロダクションビルドでもエラーの詳細を確認することができるようになります。
+
 ## [META] v3.0.0 (ReactRouter)
 
 * https://github.com/reactjs/react-router/issues/3611
