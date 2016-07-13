@@ -23,6 +23,18 @@ Bug Fixやwarningの追加などが中心です。
 React v15.2.0で導入されたエラーコードシステムの解説です。
 これにより、プロダクションビルドでもエラーの詳細を確認することができるようになります。
 
+## Core Team meeting note
+
+* https://github.com/reactjs/core-notes/blob/master/2016-07/july-07.md
+
+ReactComponentは複数のReactElementを返すことができないので、`<div>`などで囲む必要があるのですが、これをFragmentsのようなものを導入してどうにかするという話が出ています。
+2016年中には入れたいという感じのようです。
+
+Rollupを使ったUMD Bundleのサイズ削減も取り上げられています。
+ReactはCommonJSで書かれているのでCommonJSからES Moudlesに変換してRollupに渡す形になっていて、将来的にはES Modulesに移行したいけど、Facebook内部のビルドシステムでES Modulesを使えないのでそうせざるを得ないということのようです。
+
+ファイルサイズについて考えた時に、Reactのイベントシステムの部分が大きな割合を占めていて、これはブラウザー間のAPIや挙動の違いを吸収するレイヤーになっているけど、必要なのかということも取り上げられています。
+
 ## [META] v3.0.0 (ReactRouter)
 
 * https://github.com/reactjs/react-router/issues/3611
