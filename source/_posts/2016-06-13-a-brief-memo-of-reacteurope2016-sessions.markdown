@@ -277,6 +277,12 @@ GraphQL TeamのメンバーによるGraphQLがオープンソースになって�
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/z5rz3saDPJ8" frameborder="0" allowfullscreen></iframe>
 
+Facebookの外ではまだまだGraphQL導入の敷居が高く、その中でiOSやAndroidアプリからどのようにGraphQLを使えばいいのかというTalkです。
+GraphQL Schemaを使ってクライアントでどのように型付けをするのか、RelayのようにGraphQLから取得したデータをどのように一元管理するかという内容です。
+ちょっと消化不良感がありました。
+
+* https://medium.com/apollo-stack
+
 ## Question and Answers with core team members
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/5pMDd1t2thc" frameborder="0" allowfullscreen></iframe>
