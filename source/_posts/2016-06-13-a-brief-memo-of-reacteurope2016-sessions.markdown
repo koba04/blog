@@ -290,12 +290,22 @@ GraphQL Schemaを使ってクライアントでどのように型付けをする
 Sessionに登壇していたFacebookのエンジニアによるQ&Aです。
 ざっくりまとめると前半がGraphQLについて、後半がアーキテクチャについての話が多い印象です。
 
-GraphQLについては、本編のTalkにあったsubscriptionについてやGraphQL Fragmentをどうやってテストするのかといった質問がありました。
+GraphQLについては、どのようにSQLに変換すればいいか、本編のTalkにあったGraphQL Subscriptionsについて、GraphQL Fragmentをどうやってテストするのか、バージョニングについてなどの質問がありました。
+
+Reactについては、DevTool APIがそのうち公開されるという話がありました。内部的にはReactPerfで使われているものです。
+あとはHigh Order Componentsについての質問もありました。
+このあたりは「Andrew Clark - Recomposing your React application」や下記のブログで詳しく解説されています。
+
+＊ https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html
 
 後半はImmutable.jsについての質問や、1からFacebookを作り直すならどういうアーキテクチャで作るかという質問から、アーキテクチャの話になっています。
+JavaScriptにImmutableなデータ型があれば何が変わるのかと言ったことや、Immutabilityとパフォーマンスについてなど。
+JavaScriptではMutablityがデフォルトなので、Immutablityが複雑なものとして捉えられますがそれはコンテキストによるもので、デフォルトがImmutableでで例外としてMutableを扱う言語もあり、Immutabilityの方がローレベルでシンプルなだという話など。
 
 途中で紹介されるImmutable App Architectureについては別でブログ書いたのでそちらを。
 
 * http://blog.koba04.com/post/2016/06/21/immutable-app-architecture/
 
-その他には、TypeScriptとFlowについての質問や、
+その他には、TypeScriptではなくFlowを採用するメリットについての質問やTypeScriptとFlowを組み合わせることについてなど、Flowについての質問もありました。
+
+全体的には、Lee Byron劇場な感じですが、とても面白いQ&Aになっています。
