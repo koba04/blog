@@ -23,6 +23,15 @@ Bug Fixやwarningの追加などが中心です。
 React v15.2.0で導入されたエラーコードシステムの解説です。
 これにより、プロダクションビルドでもエラーの詳細を確認することができるようになります。
 
+## Mixins Considered Harmful
+
+* https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html
+
+Facebook内のコードからMixinを削除しているという話をCore Noteで何度か紹介していましたが、その際の知見も含めた形で、Mixinからの移行を促すエントリーです。
+（Mixin自体は、`React.createClass`に残されます）
+
+Facebook内でMixinが利用されていたケースを取り上げ、High Order Componentsなどのパターンで置き換える方法が丁寧に説明されています。
+
 ## Core Team meeting note
 
 * https://github.com/reactjs/core-notes/blob/master/2016-07/july-07.md
