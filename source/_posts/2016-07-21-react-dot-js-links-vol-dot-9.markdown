@@ -23,6 +23,17 @@ Bug Fixやwarningの追加などが中心です。
 React v15.2.0で導入されたエラーコードシステムの解説です。
 これにより、プロダクションビルドでもエラーの詳細を確認することができるようになります。
 
+## Design Principles
+
+* https://facebook.github.io/react/contributing/design-principles.html
+
+Reactのドキュメントに新しく「Contributing」というセクションが追加されて、Design Principlesというドキュメントが追加されました。
+今後、実装のOverviewなどが追加される予定で楽しみです。
+
+Design Principlesでは、Reactが何を重要に考えていてどのように開発をされているかということを「Composition」「Common Abstraction」「Escape Hatches」「Stability」「Interoperability」「Scheduling」「Developer Experience」「Debugging」「Configuration」「Beyond the DOM」「Implementation」「Optimized for Tooling」「Driven by Facebook」という分類で解説されています。
+
+Reactを始める時に最初に読む必要はないですが、Reactについてもっと知りたい人や、Reactを使うかどうか判断する場合に、とてもドキュメントになっています。
+
 ## Mixins Considered Harmful
 
 * https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html
@@ -31,6 +42,8 @@ Facebook内のコードからMixinを削除しているという話をCore Note�
 （Mixin自体は、`React.createClass`に残されます）
 
 Facebook内でMixinが利用されていたケースを取り上げ、High Order Componentsなどのパターンで置き換える方法が丁寧に説明されています。
+
+Design Principlesのドキュメントもそうですが、Dan AbramovがReact Teamに加わってから色々整備されて、よくなってきてるのを感じます。
 
 ## Core Team meeting note
 
