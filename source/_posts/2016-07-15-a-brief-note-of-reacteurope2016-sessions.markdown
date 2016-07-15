@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "A brief memo of ReactEurope2016 sessions"
+title: "A brief note of ReactEurope2016 sessions"
 date: 2016-07-15 14:56:46 +0900
 comments: true
 categories: react.js conference
