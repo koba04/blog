@@ -6,9 +6,9 @@ comments: true
 categories:
 ---
 
-https://www.react-europe.org/
+ReactEurope 2016に行ってきて、改めてメインのTalkの動画を一通り見たので、一言解説を。
 
-メインのTalkの動画を一通り見たので、一言解説を。
+https://www.react-europe.org/
 
 <!-- more -->
 
@@ -23,8 +23,8 @@ https://www.youtube.com/playlist?list=PLCC436JpVnK09bZeayg-KeLuHfHgc-tDa
 去年のReactEuropeでのTalkで一躍有名になり、Reactの中の人になったDan AbramovによるKeynoteです。
 Reduxを発表してから何が起きたのか、何を大事にしているのかについて話しています。
 
-改めてReduxのパターンを説明しつつ、ConstraintsとしてReduxが大事に考えていることについて話されています。
-Reduxの考え方や現状がわかりやすく説明されています。
+改めてReduxのパターンを説明しつつ、ConstraintsとしてReduxが大事に考えていることについて話しています。
+全体を通して、Reduxの考え方や現状がわかりやすく説明されています。
 
 また、Talkの最後には新しいReduxのegghead.ioのビデオが公開されました。
 これは、前回のものに比べて、より実践的な内容になっています(まだ見てないけど...)。
@@ -41,6 +41,13 @@ ReactNativeでiOS、Android、Webの各Platform共通で使えるNavigationExper
 
 DeeplinkやAndroidのバックボタンなど様々なActionを、ReduxのようにStateをReducerを使って宣言的に処理するアプローチです。
 また、アプリの中の1機能としてNavigationを持った機能を埋め込む方法についても解説されています。
+
+Navigator、NavigatorIOSと比べて、NavigationのComponentの外に状態が持てるのはよさそうです。
+Reduxを使ったアプリケーションとも親和性が高そうです。
+
+ReactNativeのNavigationについては下にまとまっています。
+
+* http://facebook.github.io/react-native/docs/navigator-comparison.html
 
 ## Lin Clark - A cartoon guide to performance in React
 
@@ -71,7 +78,7 @@ CSS in JSのプレゼンでもおなじみで、ReactやReactNative、css-layout
 OSSのプロジェクトをやっていたり、参加したいと思っている人にとっては面白いTalkだと思います。
 GitHubのIssueスタイルなプレゼンも面白いです。
 
-* Demo Driven Development
+Demo Driven Developmentという言葉も飛び出していました。
 
 ## Dan Schafer - GraphQL at Facebook
 
@@ -101,8 +108,10 @@ FlowがどのようにJavaScriptのコードを解析しているのか、Parse(
 ただ、内容自体は難しいというわけでもなく丁寧に説明されているので、面白いと思います。
 
 Flowの使い方を知るのではなく、Flowがどのように型チェックを行っているのかを知りたい人にとっては面白いTalkだと思います。
-個人的には、OpenTを利用して複数ファイルを並列にチェックしてる話とか面白いなぁと思いました。
+OpenTを利用して複数ファイルを並列にチェックしてる話とか面白いなぁと思いました。
 また、FlowGraphはDead Code Eliminationなど様々なことにも利用できるとしています。
+
+個人的にはベストトークかなーという思うくらい面白かったです。Flowの内部に興味が湧きました。
 
 ## Mihail Diordiev - Debugging flux applications in production
 
@@ -296,11 +305,11 @@ Reactについては、DevTool APIがそのうち公開されるという話が�
 あとはHigh Order Componentsについての質問もありました。
 このあたりは「Andrew Clark - Recomposing your React application」や下記のブログで詳しく解説されています。
 
-＊ https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html
+* https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html
 
 後半はImmutable.jsについての質問や、1からFacebookを作り直すならどういうアーキテクチャで作るかという質問から、アーキテクチャの話になっています。
 JavaScriptにImmutableなデータ型があれば何が変わるのかと言ったことや、Immutabilityとパフォーマンスについてなど。
-JavaScriptではMutablityがデフォルトなので、Immutablityが複雑なものとして捉えられますがそれはコンテキストによるもので、デフォルトがImmutableでで例外としてMutableを扱う言語もあり、Immutabilityの方がローレベルでシンプルなだという話など。
+JavaScriptではMutablityがデフォルトなので、Immutablityが複雑なものとして捉えられますがそれはコンテキストによるもので、デフォルトがImmutableで例外としてMutableを扱う言語もあり、Immutabilityの方がローレベルでシンプルなだという話など。
 
 途中で紹介されるImmutable App Architectureについては別でブログ書いたのでそちらを。
 
@@ -309,3 +318,7 @@ JavaScriptではMutablityがデフォルトなので、Immutablityが複雑な�
 その他には、TypeScriptではなくFlowを採用するメリットについての質問やTypeScriptとFlowを組み合わせることについてなど、Flowについての質問もありました。
 
 全体的には、Lee Byron劇場な感じですが、とても面白いQ&Aになっています。
+
+----------------------
+
+そういえば、ReactEurope行ったことについてのエントリー書いてなかったので別途書こう...。
