@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "A brief memo of ReactEurope2016 sessions"
-date: 2016-06-13 18:33:46 +0900
+date: 2016-07-15 14:56:46 +0900
 comments: true
-categories:
+categories: react.js conference
 ---
 
 ReactEurope 2016に行ってきて、改めてメインのTalkの動画を一通り見たので、一言解説を。
