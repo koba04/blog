@@ -61,6 +61,10 @@ ReactはCommonJSで書かれているのでCommonJSからES Moudlesに変換し�
 
 * https://github.com/facebook/react/issues/7323
 
+## Codemod tests from createClass to ES2015 classes #7321
+
+* https://github.com/facebook/react/pull/7321
+
 ## [META] v3.0.0 (ReactRouter)
 
 * https://github.com/reactjs/react-router/issues/3611
