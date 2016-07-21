@@ -61,9 +61,18 @@ ReactはCommonJSで書かれているのでCommonJSからES Moudlesに変換し�
 
 * https://github.com/facebook/react/issues/7323
 
+Reactでの新たな最適化についてのIssueです。
+[Constant folding](https://en.wikipedia.org/wiki/Constant_folding)や[Inline expansion](https://en.wikipedia.org/wiki/Inline_expansion)や[Dead code elimination](https://en.wikipedia.org/wiki/Dead_code_elimination)を使って最適化を行いたいようです。
+一部はRollupがやっていることですね。
+
+ただ、JSはデフォルトがMutableであったり、依存関係をどのように解決するのかなど検討すべき点は多そうです。
+
 ## Codemod tests from createClass to ES2015 classes #7321
 
 * https://github.com/facebook/react/pull/7321
+
+Codemodを使って、`React.createClass`で書かれたComponentをES2015 classesに変換するPRです。
+Codemodのテストのようですが。
 
 ## Has Redux's Time Come and Gone #775
 
