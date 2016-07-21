@@ -57,6 +57,10 @@ ReactはCommonJSで書かれているのでCommonJSからES Moudlesに変換し�
 
 ファイルサイズについて考えた時に、Reactのイベントシステムの部分が大きな割合を占めていて、これはブラウザー間のAPIや挙動の違いを吸収するレイヤーになっているけど、必要なのかということも取り上げられています。
 
+## Optimizing Compiler: Component Folding #7323
+
+* https://github.com/facebook/react/issues/7323
+
 ## [META] v3.0.0 (ReactRouter)
 
 * https://github.com/reactjs/react-router/issues/3611
