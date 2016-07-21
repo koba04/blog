@@ -65,6 +65,13 @@ ReactはCommonJSで書かれているのでCommonJSからES Moudlesに変換し�
 
 * https://github.com/facebook/react/pull/7321
 
+## Has Redux's Time Come and Gone #775
+
+* https://github.com/reactjs/redux/issues/775
+
+ReduxとRelayやGraphQLを組み合わせることについての議論です。
+この辺りの組み合わせについて興味がある人は読んでみるといいと思います。
+
 ## [META] v3.0.0 (ReactRouter)
 
 * https://github.com/reactjs/react-router/issues/3611
