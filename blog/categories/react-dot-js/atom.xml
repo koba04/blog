@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-07-15T15:01:28+09:00</updated>
+  <updated>2016-07-21T18:49:07+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,132 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js Links vol.9]]></title>
+    <link href="http://blog.koba04.com/post/2016/07/21/react-dot-js-links-vol-dot-9/"/>
+    <updated>2016-07-21T19:38:19+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/07/21/react-dot-js-links-vol-dot-9</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
+
+<!-- more -->
+
+
+<h2>React v15.2.1</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/releases/tag/v15.2.1">https://github.com/facebook/react/releases/tag/v15.2.1</a></li>
+</ul>
+
+
+<p>Bug Fixやwarningの追加などが中心です。</p>
+
+<h2>Introducing React&rsquo;s Error Code System</h2>
+
+<ul>
+<li><a href="https://facebook.github.io/react/blog/2016/07/11/introducing-reacts-error-code-system.html">https://facebook.github.io/react/blog/2016/07/11/introducing-reacts-error-code-system.html</a></li>
+</ul>
+
+
+<p>React v15.2.0で導入されたエラーコードシステムの解説です。
+これにより、プロダクションビルドでもエラーの詳細を確認することができるようになります。</p>
+
+<h2>Design Principles</h2>
+
+<ul>
+<li><a href="https://facebook.github.io/react/contributing/design-principles.html">https://facebook.github.io/react/contributing/design-principles.html</a></li>
+</ul>
+
+
+<p>Reactのドキュメントに新しく「Contributing」というセクションが追加されて、Design Principlesというドキュメントが追加されました。
+今後、実装のOverviewなどが追加される予定で楽しみです。</p>
+
+<p>Design Principlesでは、Reactが何を重要に考えていてどのように開発をされているかということを「Composition」「Common Abstraction」「Escape Hatches」「Stability」「Interoperability」「Scheduling」「Developer Experience」「Debugging」「Configuration」「Beyond the DOM」「Implementation」「Optimized for Tooling」「Driven by Facebook」という分類で解説されています。</p>
+
+<p>Reactを始める時に最初に読む必要はないですが、Reactについてもっと知りたい人や、Reactを使うかどうか判断する場合に、とてもドキュメントになっています。</p>
+
+<h2>Mixins Considered Harmful</h2>
+
+<ul>
+<li><a href="https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html">https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html</a></li>
+</ul>
+
+
+<p>Facebook内のコードからMixinを削除しているという話をCore Noteで何度か紹介していましたが、その際の知見も含めた形で、Mixinからの移行を促すエントリーです。
+（Mixin自体は、<code>React.createClass</code>に残されます）</p>
+
+<p>Facebook内でMixinが利用されていたケースを取り上げ、High Order Componentsなどのパターンで置き換える方法が丁寧に説明されています。</p>
+
+<p>Design Principlesのドキュメントもそうですが、Dan AbramovがReact Teamに加わってから色々整備されて、よくなってきてるのを感じます。</p>
+
+<h2>Core Team meeting note</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-07/july-07.md">https://github.com/reactjs/core-notes/blob/master/2016-07/july-07.md</a></li>
+</ul>
+
+
+<p>ReactComponentは複数のReactElementを返すことができないので、<code>&lt;div&gt;</code>などで囲む必要があるのですが、これをFragmentsのようなものを導入してどうにかするという話が出ています。
+2016年中には入れたいという感じのようです。</p>
+
+<p>Rollupを使ったUMD Bundleのサイズ削減も取り上げられています。
+ReactはCommonJSで書かれているのでCommonJSからES Moudlesに変換してRollupに渡す形になっていて、将来的にはES Modulesに移行したいけど、Facebook内部のビルドシステムでES Modulesを使えないのでそうせざるを得ないということのようです。</p>
+
+<p>ファイルサイズについて考えた時に、Reactのイベントシステムの部分が大きな割合を占めていて、これはブラウザー間のAPIや挙動の違いを吸収するレイヤーになっているけど、必要なのかということも取り上げられています。</p>
+
+<h2>Optimizing Compiler: Component Folding #7323</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/7323">https://github.com/facebook/react/issues/7323</a></li>
+</ul>
+
+
+<p>Reactでの新たな最適化についてのIssueです。
+<a href="https://en.wikipedia.org/wiki/Constant_folding">Constant folding</a>や<a href="https://en.wikipedia.org/wiki/Inline_expansion">Inline expansion</a>や<a href="https://en.wikipedia.org/wiki/Dead_code_elimination">Dead code elimination</a>を使って最適化を行いたいようです。
+一部はRollupがやっていることですね。</p>
+
+<p>ただ、JSはデフォルトがMutableであったり、依存関係をどのように解決するのかなど検討すべき点は多そうです。</p>
+
+<h2>Codemod tests from createClass to ES2015 classes #7321</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/7321">https://github.com/facebook/react/pull/7321</a></li>
+</ul>
+
+
+<p>Codemodを使って、<code>React.createClass</code>で書かれたComponentをES2015 classesに変換するPRです。
+Codemodのテストのようですが。</p>
+
+<h2>Has Redux&rsquo;s Time Come and Gone #775</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/redux/issues/775">https://github.com/reactjs/redux/issues/775</a></li>
+</ul>
+
+
+<p>ReduxとRelayやGraphQLを組み合わせることについての議論です。
+この辺りの組み合わせについて興味がある人は読んでみるといいと思います。</p>
+
+<h2>[META] v3.0.0 (ReactRouter)</h2>
+
+<ul>
+<li><a href="https://github.com/reactjs/react-router/issues/3611">https://github.com/reactjs/react-router/issues/3611</a></li>
+</ul>
+
+
+<p>ReactRouter v3.0.0についてのIssueです。
+alpha.1から結構経ってますがそろそろ出そうですね。</p>
+
+<h2>You might not need React Router</h2>
+
+<ul>
+<li><a href="https://medium.com/@tarkus/you-might-not-need-react-router-38673620f3d#.3ech54krr">https://medium.com/@tarkus/you-might-not-need-react-router-38673620f3d#.3ech54krr</a></li>
+</ul>
+
+
+<p>ReactRouterを使わずに、ReactRouterが内部で使っている<code>history</code>を直接使えばいいのではというエントリーです。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A brief note of ReactEurope2016 sessions]]></title>
@@ -839,145 +965,6 @@ Storeを直接拡張するのではなく、今MiddlewareのAPIとして渡し�
 
 <p>Reactを使い、JSXでスライドを作成するライブラリーです。
 Markdownなんかも使えるようです。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[React.js Links vol.5 5/12〜5/18]]></title>
-    <link href="http://blog.koba04.com/post/2016/05/18/reactjs-links-vol5/"/>
-    <updated>2016-05-18T23:27:34+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/05/18/reactjs-links-vol5</id>
-    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
-
-<!-- more -->
-
-
-<h2>React Core Meeting Note May 12 (React Meeting Note)</h2>
-
-<ul>
-<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-05/may-12.md">https://github.com/reactjs/core-notes/blob/master/2016-05/may-12.md</a></li>
-</ul>
-
-
-<p>恒例のCore TeamのMeeting Noteです。
-現在だと、production build時のエラーがわかりにくいものであったりとエラー周りの仕組みに不便なところがあるのでそれを改善することをReact Teamに来たインターンの人がやるそうです。すごい環境のインターンだ&hellip;。</p>
-
-<p>RustやEmber参考にしたRFCのプロセスを構築することが検討されているようです。
-また、ShallowRenderingとは別のテスト用にrendererのプロトタイプが作られていたりとこちらも興味深いです。</p>
-
-<h2>Docs need one or more diagrams #653 (Redux Issue)</h2>
-
-<ul>
-<li><a href="https://github.com/reactjs/redux/issues/653#issuecomment-216844781">https://github.com/reactjs/redux/issues/653#issuecomment-216844781</a></li>
-</ul>
-
-
-<p>Reduxでのデータの流れがダイアグラムで示されていてわかりやすいので、はじめて触る人は見ておくといいかもしれません。</p>
-
-<h2>Tiny React Renderer (GitHub Repository)</h2>
-
-<ul>
-<li><a href="https://github.com/iamdustan/tiny-react-renderer">https://github.com/iamdustan/tiny-react-renderer</a></li>
-</ul>
-
-
-<p>ReactのRendererを理解するための小さな実装です。カスタムRendererを作りたかったり、Reactの内部を知りたい人はソースをみるといいんじゃないかと思います。</p>
-
-<h2>react-router-scroll (GitHub Repository)</h2>
-
-<ul>
-<li><a href="https://github.com/taion/react-router-scroll">https://github.com/taion/react-router-scroll</a></li>
-</ul>
-
-
-<p>ReactRouterでスクロールマネージメントを行うためのライブラリーです。
-scroll-behaviorをラップする感じになっているようです。</p>
-
-<h2>flow-typed (GitHub Repository)</h2>
-
-<ul>
-<li><a href="https://github.com/flowtype/flow-typed">https://github.com/flowtype/flow-typed</a></li>
-</ul>
-
-
-<p>Flowの型定義を管理するリポジトリーです。前に公開されたリポジトリーですが、最近型定義が集まり出しています。</p>
-
-<h2>Why did you update (GitHub Repository)</h2>
-
-<ul>
-<li><a href="https://github.com/garbles/why-did-you-update">https://github.com/garbles/why-did-you-update</a></li>
-</ul>
-
-
-<p>Reactにモンキーパッチを当てて、PropやStateが変わってないのにrerenderが行われたことを教えてくれるライブラリーです。
-パフォーマンスチューニングしたい場合に便利かもしれません。</p>
-
-<h2>Higher Order Components: Theory and Practice</h2>
-
-<ul>
-<li><a href="http://engineering.blogfoster.com/higher-order-components-theory-and-practice/">http://engineering.blogfoster.com/higher-order-components-theory-and-practice/</a></li>
-</ul>
-
-
-<p>ReactでMixinの代わりとしてよく使われるHigh Order Componentsのパターンについてのエントリーです。</p>
-
-<h2>redux-observable (Redux Middleware)</h2>
-
-<ul>
-<li><a href="https://medium.com/@benlesh/redux-observable-ec0b00d2eb52">https://medium.com/@benlesh/redux-observable-ec0b00d2eb52</a></li>
-</ul>
-
-
-<p>ReduxとRxJS v5を組み合わせるためのライブラリーについてのエントリーです。
-Ben LeshさんはRxJS v5のメインの開発者であり、以前に紹介した通りReduxに<code>es-observable</code>のspecに対応させるPRを送っていましたがここで結びつきました。このライブラリーはNetflixでも使っているようです。</p>
-
-<p><a href="http://blog.koba04.com/post/2016/04/19/reactjs-links-vol2/">http://blog.koba04.com/post/2016/04/19/reactjs-links-vol2/</a></p>
-
-<h2>React Elements vs React Components vs Component Backing Instances (React)</h2>
-
-<ul>
-<li><a href="https://medium.com/@fay_jai/react-elements-vs-react-components-vs-component-backing-instances-14d42729f62">https://medium.com/@fay_jai/react-elements-vs-react-components-vs-component-backing-instances-14d42729f62</a></li>
-</ul>
-
-
-<p>ReactElementとReact ComponentとComponentのinstanceの違いについてのエントリーです。</p>
-
-<h2>Getting Started with React Native Development on Windows</h2>
-
-<ul>
-<li><a href="https://shift.infinite.red/getting-started-with-react-native-development-on-windows-90d85a72ae65">https://shift.infinite.red/getting-started-with-react-native-development-on-windows-90d85a72ae65</a></li>
-</ul>
-
-
-<p>ReactNativeの開発をWindows上で行う方法について解説したエントリーです。</p>
-
-<h2>UI Testing in React</h2>
-
-<ul>
-<li><a href="https://voice.kadira.io/ui-testing-in-react-74fd90a5d58b#.tr0046jgs">https://voice.kadira.io/ui-testing-in-react-74fd90a5d58b#.tr0046jgs</a></li>
-</ul>
-
-
-<p>ReactでのUIテストについてのエントリーです。
-テストをFunctional TestingとVisual Testingに分類して、Functional Testingはenzymeを、Visual TestingはReact
-Storybookをそれぞれ使う方法が紹介されています。</p>
-
-<h2>React Amsterdam</h2>
-
-<ul>
-<li><a href="https://speakerdeck.com/reactamsterdam">https://speakerdeck.com/reactamsterdam</a></li>
-<li><a href="https://www.youtube.com/channel/UCsFrt8oKNYXGspSlX9u6uXw">https://www.youtube.com/channel/UCsFrt8oKNYXGspSlX9u6uXw</a></li>
-</ul>
-
-
-<p>React Amsterdamのスライドと動画が公開されています。
-ReactNativeのinternalやJSSの話もあったりして色々面白そうです。</p>
-
-<ul>
-<li><a href="https://speakerdeck.com/reactamsterdam/tadeu-zagallo-facebook-london-react-native-architecture-overview">https://speakerdeck.com/reactamsterdam/tadeu-zagallo-facebook-london-react-native-architecture-overview</a></li>
-<li><a href="https://speakerdeck.com/reactamsterdam/oleg-slobodskoi-chatgrape-berlin-javascript-style-sheets">https://speakerdeck.com/reactamsterdam/oleg-slobodskoi-chatgrape-berlin-javascript-style-sheets</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
