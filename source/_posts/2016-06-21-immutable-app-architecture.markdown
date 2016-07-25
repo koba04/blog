@@ -10,7 +10,7 @@ categories: architecture
 <p><a href="https://vimeo.com/166790294">Render 2016 - Lee Byron</a> from <a href="https://vimeo.com/whiteoctober">White October</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
 * https://vimeo.com/166790294
-* http://2016.render-conf.com/talks#immutable-user-interfaces
+* http://2016.render-conf.com/talks.php#immutable-user-interfaces
 
 Dan AbramovもReact EuropeのQ&AでおすすめしていたTalkで、改めて見て面白い内容だったので紹介します。
 
