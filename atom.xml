@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-07-21T18:51:28+09:00</updated>
+  <updated>2016-07-25T09:55:50+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -699,7 +699,7 @@ JSXChildを拡張して<code>{...children}</code>を許容するようにする�
 
 <ul>
 <li><a href="https://vimeo.com/166790294">https://vimeo.com/166790294</a></li>
-<li><a href="http://2016.render-conf.com/talks#immutable-user-interfaces">http://2016.render-conf.com/talks#immutable-user-interfaces</a></li>
+<li><a href="http://2016.render-conf.com/talks.php#immutable-user-interfaces">http://2016.render-conf.com/talks.php#immutable-user-interfaces</a></li>
 </ul>
 
 
