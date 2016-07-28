@@ -16,6 +16,15 @@ categories: react.js react-links
 * https://facebook.github.io/react/blog/2016/07/22/create-apps-with-no-configuration.html
 * https://github.com/facebookincubator/create-react-app
 
+## Jest 14.0: React Tree Snapshot Testing
+
+* http://facebook.github.io/jest/blog/2016/07/27/jest-14.html
+
+Jestが密かに追加されている新しいテスト用のrendererを使って、snapshot testをサポートしたという話です。
+snapshot testなので、一度テストを実行するとスナップショットのファイルが作成されて、次回からはそのスナップショットとテストが一致するかどうかを判定する感じです。
+
+その他にもReactNativeのサポートや、今後の予定(Jasmine捨てる)などが書かれています。
+
 ## React.js in patterns
 
 * http://krasimirtsonev.com/blog/article/react-js-in-design-patterns
