@@ -36,3 +36,7 @@ snapshot testなので、一度テストを実行するとスナップショッ�
 ## How to handle state in React. The missing FAQ.
 
 * https://medium.com/react-ecosystem/how-to-handle-state-in-react-6f2d3cd73a0c
+
+## Redux vs MobX vs Flux vs... Do you even need that?
+
+* http://goshakkk.name/redux-vs-mobx-vs-flux-etoomanychoices/
