@@ -37,6 +37,8 @@ snapshot testなので、一度テストを実行するとスナップショッ�
 
 * http://krasimirtsonev.com/blog/article/react-js-in-design-patterns
 
+High Order ComponentsやContextをDIなど、Reactのパターン集です。
+
 ## Use RxJS with React
 
 * http://michalzalecki.com/use-rxjs-with-react/
