@@ -90,3 +90,10 @@ Reactを学ぶ時に最初からReduxなどを使うのではなくて、React�
 
 上記のエントリーと同じように、まずはReactだけで始めて必要になったらReduxやMobXについて検討しましょうというエントリーです。
 Reactだけだと何が辛くて、何を解決するためにReduxなどのライブラリーを使うのかを理解してないと、ただ覚えることが増えたみたいに感じるということはありそうです。
+
+## A STEP-BY-STEP TDD APPROACH ON TESTING REACT COMPONENTS USING ENZYME
+
+* http://thereignn.ghost.io/a-step-by-step-tdd-approach-on-testing-react-components-using-enzyme/
+
+Enzymeを使って、React ComponentをTDDでテストを書いていく方法についてのエントリーです。
+TDDの流れに沿って順番にテストを書いていく方法が丁寧に解説されています。
