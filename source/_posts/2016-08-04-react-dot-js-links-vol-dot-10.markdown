@@ -39,6 +39,14 @@ snapshot testなので、一度テストを実行するとスナップショッ�
 
 High Order ComponentsやContextをDIなど、Reactのパターン集です。
 
+## Function as Child Components
+
+* https://medium.com/@iammerrick/function-as-child-components-5f3920a9ace9#.bnfwsk5un
+
+公式のブログでも言及されて、広く使われるようになったHigh Order Components(HOC)ですが、HOCではなくてchildrenに関数を渡すFunction as Child Componentsのパターンの方が有効ではないかとエントリーです。
+
+Function as Child Componentsにすることで、不要なComponentのラッピングをなくすことが出来たり、Propsの衝突を避けることも容易だとしています。
+
 ## Use RxJS with React
 
 * http://michalzalecki.com/use-rxjs-with-react/
