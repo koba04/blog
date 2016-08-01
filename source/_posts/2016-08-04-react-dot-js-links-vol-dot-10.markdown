@@ -11,6 +11,31 @@ categories: react.js react-links
 
 <!-- more -->
 
+## React v15.3.0
+
+* https://github.com/facebook/react/releases/tag/v15.3.0
+
+Reactのv15.3.0がリリースされました。
+
+今回の大きな変更点は、`React.PureComponent`の追加です。
+これは、PureRenderMixinのES Classes版というような実装で、自動的に`shouldComponentUpdate`にshallowEqualが適用されるというものです。
+最初このPRが出された時には、内部のStateless Functional Componentにも最適化が適用されるという実装も含まれていましたが、PR内での議論で問題点などが見えたため、今回はただのPureRenderMixin for ES Claseesとして入りました。
+
+今後、v16のタイミングなどでさらなる最適化が追加される可能性はあります。
+
+もう一つ、大きな点は`react-test-render`というパッケージのリリースです。
+これは、TestUtilsのShallowRenderと似ていますが、Shallowではなく子孫までrenderして結果をReactElementのJSONとして返します。
+refやライフサイクルメソッドなどが呼ばれる点もShallowRenderとは異なります。
+
+```js
+import renderer from 'react-test-renderer';
+
+const json = renderer.create(<App />).toJSON();
+```
+
+Jestにはこれを使ったsnapshottestが追加されました。
+
+
 ## Create Apps with No Configuration
 
 * https://facebook.github.io/react/blog/2016/07/22/create-apps-with-no-configuration.html
