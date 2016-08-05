@@ -97,3 +97,10 @@ Reactだけだと何が辛くて、何を解決するためにReduxなどのラ�
 
 Enzymeを使って、React ComponentをTDDでテストを書いていく方法についてのエントリーです。
 TDDの流れに沿って順番にテストを書いていく方法が丁寧に解説されています。
+
+## The Problem with CSS-In-JS, circa Mid-2016
+
+* https://medium.com/@taion/the-problem-with-css-in-js-circa-mid-2016-14060e69bf68#.ndfajua3p
+
+CSS in JSやCSS ModulesのようなComponentに閉じたCSSを使う場合の問題点についてのエントリーです。
+コンテキストによるスタイルの違いを、CSSがそれぞれ独立している中でどのようにComponentとして表現するかという内容です。
