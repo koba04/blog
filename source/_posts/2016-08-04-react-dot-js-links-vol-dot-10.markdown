@@ -104,3 +104,10 @@ TDDの流れに沿って順番にテストを書いていく方法が丁寧に�
 
 CSS in JSやCSS ModulesのようなComponentに閉じたCSSを使う場合の問題点についてのエントリーです。
 コンテキストによるスタイルの違いを、CSSがそれぞれ独立している中でどのようにComponentとして表現するかという内容です。
+
+## React Native at SoundCloud
+
+* https://developers.soundcloud.com/blog/react-native-at-soundcloud
+
+SoundCloudがReactNativeでSoundCloud Purseのアプリを作った時の話です。
+なぜReactNativeを使ったのか、実際使ってみてどうだったのかが書かれています。
