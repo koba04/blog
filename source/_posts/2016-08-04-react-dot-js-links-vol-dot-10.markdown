@@ -111,3 +111,34 @@ CSS in JSやCSS ModulesのようなComponentに閉じたCSSを使う場合の問
 
 SoundCloudがReactNativeでSoundCloud Purseのアプリを作った時の話です。
 なぜReactNativeを使ったのか、実際使ってみてどうだったのかが書かれています。
+
+## A Glimpse Into The Future With React Native For Web
+
+* https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
+
+`react-native-web`の現状についてのエントリーです。
+基本的には、まだプロダクションで使うレベルにはなっていないけど今後に期待という感じです。
+
+## React Fiber Architecture
+
+* https://github.com/acdlite/react-fiber-architecture
+
+現在実装が進められているReact内部のアルゴリズムであるReact Fiberについてのエントリーです。
+詳細については書かれていませんが、導入としては良さそうです。
+
+ちなみにacdliteさんは、今setStateのReact Fiber対応をやっています。
+
+* https://github.com/facebook/react/pull/7344
+
+## Internationalization in React
+
+* https://medium.freecodecamp.com/internationalization-in-react-7264738274a0#.33osi3w58
+
+`react-intl`を使ったReactを使ったアプリケーションでのi18n対応についてのエントリーです。
+
+## Flow: Mapping an object
+
+* https://medium.com/@thejameskyle/flow-mapping-an-object-373d64c44592#.xm62m8pic
+
+Flowでどのように型付けをしていけばいいのかということを、`map-obj`に型付けしていきながら解説しているエントリーです。
+わかりやすいです。
