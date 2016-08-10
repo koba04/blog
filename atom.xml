@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-07-25T09:55:50+09:00</updated>
+  <updated>2016-08-10T14:09:30+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,201 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js Links vol.10]]></title>
+    <link href="http://blog.koba04.com/post/2016/08/10/react-dot-js-links-vol-dot-10/"/>
+    <updated>2016-08-10T14:09:19+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/08/10/react-dot-js-links-vol-dot-10</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。
+10回目!!!</p>
+
+<!-- more -->
+
+
+<h2>React v15.3.0</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/releases/tag/v15.3.0">https://github.com/facebook/react/releases/tag/v15.3.0</a></li>
+</ul>
+
+
+<p>Reactのv15.3.0がリリースされました。</p>
+
+<p>今回の大きな変更点は、<code>React.PureComponent</code>の追加です。
+これは、PureRenderMixinのES Classes版というような実装で、自動的に<code>shouldComponentUpdate</code>にshallowEqualが適用されるというものです。
+最初このPRが出された時には、内部のStateless Functional Componentにも最適化が適用されるという実装も含まれていましたが、PR内での議論で問題点などが見えたため、今回はただのPureRenderMixin for ES Claseesとして入りました。</p>
+
+<p>今後、v16のタイミングなどでさらなる最適化が追加される可能性はあります。</p>
+
+<p>もう一つ、大きな点は<code>react-test-render</code>というパッケージのリリースです。
+これは、TestUtilsのShallowRenderと似ていますが、Shallowではなく子孫までrenderして結果をReactElementのJSONとして返します。
+refやライフサイクルメソッドなどが呼ばれる点もShallowRenderとは異なります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">renderer</span> <span class="nx">from</span> <span class="s1">&#39;react-test-renderer&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">json</span> <span class="o">=</span> <span class="nx">renderer</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">App</span> <span class="o">/&gt;</span><span class="p">).</span><span class="nx">toJSON</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Jestにはこれを使ったsnapshottestが追加されました。</p>
+
+<h2>Create Apps with No Configuration</h2>
+
+<ul>
+<li><a href="https://facebook.github.io/react/blog/2016/07/22/create-apps-with-no-configuration.html">https://facebook.github.io/react/blog/2016/07/22/create-apps-with-no-configuration.html</a></li>
+<li><a href="https://github.com/facebookincubator/create-react-app">https://github.com/facebookincubator/create-react-app</a></li>
+</ul>
+
+
+<p>Reactを使ったSingle Page Applicationのひな形を作成している公式のcliがリリースされました。
+これまでFacebookは自分たちが実際にプロダクトで使っているものだけをOSSにする方針でしたが、今回はコミュニティーの声に応えて作成したものです。</p>
+
+<p>インストールして、<code>create-react-app hello-world</code>として、<code>npm start</code>すればもう開発できるのは手軽でいいですね。
+また、<code>npm run eject</code>すると<code>react-scripts</code>というパッケージの内部に隠れていたwebpackの設定などが全部展開されてカスタマイズ出来るようになるのも面白いですね。</p>
+
+<p>まだ公開されてすぐなので、<code>facebookincubator/create-react-app</code>のリポジトリが、Reactを使ったプロジェクトの構成について多くの人が意見を交わしていてなかなか混沌としています。</p>
+
+<h2>Jest 14.0: React Tree Snapshot Testing</h2>
+
+<ul>
+<li><a href="http://facebook.github.io/jest/blog/2016/07/27/jest-14.html">http://facebook.github.io/jest/blog/2016/07/27/jest-14.html</a></li>
+</ul>
+
+
+<p>Jestが密かに追加されている新しいテスト用のrendererを使って、snapshot testをサポートしたという話です。
+snapshot testなので、一度テストを実行するとスナップショットのファイルが作成されて、次回からはそのスナップショットとテストが一致するかどうかを判定する感じです。</p>
+
+<p>その他にもReactNativeのサポートや、今後の予定(Jasmine捨てる)などが書かれています。</p>
+
+<h2>React.js in patterns</h2>
+
+<ul>
+<li><a href="http://krasimirtsonev.com/blog/article/react-js-in-design-patterns">http://krasimirtsonev.com/blog/article/react-js-in-design-patterns</a></li>
+</ul>
+
+
+<p>High Order ComponentsやContextをDIなど、Reactのパターン集です。</p>
+
+<h2>Function as Child Components</h2>
+
+<ul>
+<li><a href="https://medium.com/@iammerrick/function-as-child-components-5f3920a9ace9#.bnfwsk5un">https://medium.com/@iammerrick/function-as-child-components-5f3920a9ace9#.bnfwsk5un</a></li>
+</ul>
+
+
+<p>公式のブログでも言及されて、広く使われるようになったHigh Order Components(HOC)ですが、HOCではなくてchildrenに関数を渡すFunction as Child Componentsのパターンの方が有効ではないかとエントリーです。</p>
+
+<p>Function as Child Componentsにすることで、不要なComponentのラッピングをなくすことが出来たり、Propsの衝突を避けることも容易だとしています。</p>
+
+<h2>Use RxJS with React</h2>
+
+<ul>
+<li><a href="http://michalzalecki.com/use-rxjs-with-react/">http://michalzalecki.com/use-rxjs-with-react/</a></li>
+</ul>
+
+
+<p>RxJSを使ってReduxライクな状態管理を行う方法についてのエントリーです。</p>
+
+<h2>How to handle state in React. The missing FAQ.</h2>
+
+<ul>
+<li><a href="https://medium.com/react-ecosystem/how-to-handle-state-in-react-6f2d3cd73a0c">https://medium.com/react-ecosystem/how-to-handle-state-in-react-6f2d3cd73a0c</a></li>
+</ul>
+
+
+<p>Reactを学ぶ時に最初からReduxなどを使うのではなくて、ReactのStateから始めようってことで、Stateを扱う方法についてエントリーです。</p>
+
+<h2>Redux vs MobX vs Flux vs&hellip; Do you even need that?</h2>
+
+<ul>
+<li><a href="http://goshakkk.name/redux-vs-mobx-vs-flux-etoomanychoices/">http://goshakkk.name/redux-vs-mobx-vs-flux-etoomanychoices/</a></li>
+</ul>
+
+
+<p>上記のエントリーと同じように、まずはReactだけで始めて必要になったらReduxやMobXについて検討しましょうというエントリーです。
+Reactだけだと何が辛くて、何を解決するためにReduxなどのライブラリーを使うのかを理解してないと、ただ覚えることが増えたみたいに感じるということはありそうです。</p>
+
+<h2>A STEP-BY-STEP TDD APPROACH ON TESTING REACT COMPONENTS USING ENZYME</h2>
+
+<ul>
+<li><a href="http://thereignn.ghost.io/a-step-by-step-tdd-approach-on-testing-react-components-using-enzyme/">http://thereignn.ghost.io/a-step-by-step-tdd-approach-on-testing-react-components-using-enzyme/</a></li>
+</ul>
+
+
+<p>Enzymeを使って、React ComponentをTDDでテストを書いていく方法についてのエントリーです。
+TDDの流れに沿って順番にテストを書いていく方法が丁寧に解説されています。</p>
+
+<h2>The Problem with CSS-In-JS, circa Mid-2016</h2>
+
+<ul>
+<li><a href="https://medium.com/@taion/the-problem-with-css-in-js-circa-mid-2016-14060e69bf68#.ndfajua3p">https://medium.com/@taion/the-problem-with-css-in-js-circa-mid-2016-14060e69bf68#.ndfajua3p</a></li>
+</ul>
+
+
+<p>CSS in JSやCSS ModulesのようなComponentに閉じたCSSを使う場合の問題点についてのエントリーです。
+コンテキストによるスタイルの違いを、CSSがそれぞれ独立している中でどのようにComponentとして表現するかという内容です。</p>
+
+<h2>React Native at SoundCloud</h2>
+
+<ul>
+<li><a href="https://developers.soundcloud.com/blog/react-native-at-soundcloud">https://developers.soundcloud.com/blog/react-native-at-soundcloud</a></li>
+</ul>
+
+
+<p>SoundCloudがReactNativeでSoundCloud Purseのアプリを作った時の話です。
+なぜReactNativeを使ったのか、実際使ってみてどうだったのかが書かれています。</p>
+
+<h2>A Glimpse Into The Future With React Native For Web</h2>
+
+<ul>
+<li><a href="https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/">https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/</a></li>
+</ul>
+
+
+<p><code>react-native-web</code>の現状についてのエントリーです。
+基本的には、まだプロダクションで使うレベルにはなっていないけど今後に期待という感じです。</p>
+
+<h2>React Fiber Architecture</h2>
+
+<ul>
+<li><a href="https://github.com/acdlite/react-fiber-architecture">https://github.com/acdlite/react-fiber-architecture</a></li>
+</ul>
+
+
+<p>現在実装が進められているReact内部のアルゴリズムであるReact Fiberについてのエントリーです。
+詳細については書かれていませんが、導入としては良さそうです。</p>
+
+<p>ちなみにacdliteさんは、今setStateのReact Fiber対応をやっています。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/7344">https://github.com/facebook/react/pull/7344</a></li>
+</ul>
+
+
+<h2>Internationalization in React</h2>
+
+<ul>
+<li><a href="https://medium.freecodecamp.com/internationalization-in-react-7264738274a0#.33osi3w58">https://medium.freecodecamp.com/internationalization-in-react-7264738274a0#.33osi3w58</a></li>
+</ul>
+
+
+<p><code>react-intl</code>を使ったReactを使ったアプリケーションでのi18n対応についてのエントリーです。</p>
+
+<h2>Flow: Mapping an object</h2>
+
+<ul>
+<li><a href="https://medium.com/@thejameskyle/flow-mapping-an-object-373d64c44592#.xm62m8pic">https://medium.com/@thejameskyle/flow-mapping-an-object-373d64c44592#.xm62m8pic</a></li>
+</ul>
+
+
+<p>Flowでどのように型付けをしていけばいいのかということを、<code>map-obj</code>に型付けしていきながら解説しているエントリーです。
+わかりやすいです。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.9]]></title>
@@ -699,7 +894,7 @@ JSXChildを拡張して<code>{...children}</code>を許容するようにする�
 
 <ul>
 <li><a href="https://vimeo.com/166790294">https://vimeo.com/166790294</a></li>
-<li><a href="http://2016.render-conf.com/talks.php#immutable-user-interfaces">http://2016.render-conf.com/talks.php#immutable-user-interfaces</a></li>
+<li><a href="http://2016.render-conf.com/talks#immutable-user-interfaces">http://2016.render-conf.com/talks#immutable-user-interfaces</a></li>
 </ul>
 
 
@@ -3466,337 +3661,6 @@ jQueryからReactまでそのライブラリをどのように使うのかでは
 <p>イベントの管理者側でやるのは初めてだったので色々至らない点があったかもしれませんが、準備してくださったDeNAの方々、発表者の方々、参加者の皆様、本当にありがとうございました！！</p>
 
 <p>感想とかブログに書いてもらえると嬉しいです！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Setting up minimum single page application]]></title>
-    <link href="http://blog.koba04.com/post/2015/03/19/setting-up-minimum-single-page-application/"/>
-    <updated>2015-03-19T18:54:49+09:00</updated>
-    <id>http://blog.koba04.com/post/2015/03/19/setting-up-minimum-single-page-application</id>
-    <content type="html"><![CDATA[<p>React.jsなどを試そうとするときに、browserify? gulp? grunt? webpack? どれ使えばいいのとか、テストは何を使えばいいのかとかよくわからないというのをたまに聞くので、最低限の設定だけどES6で書けたりautobuildやlivereloadが出来る構成のサンプルを作ってみました。</p>
-
-<p>あと、テストはkarma + mocha + power-assertでchromeでテスト出来るようにしています。</p>
-
-<!-- more -->
-
-
-<p>本当はpackage.jsonだけにしたかったのですがkarmaの設定だけは別ファイルになってます&hellip;。
-テストが必要ない場合は、package.jsonの指定だけで大丈夫です。</p>
-
-<ul>
-<li><a href="https://github.com/koba04/minimum-spa-boilerplate">https://github.com/koba04/minimum-spa-boilerplate</a></li>
-</ul>
-
-
-<p>git cloneして<code>npm install</code>して<code>npm start</code>すればいいだけの設定になっています。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git@github.com:koba04/minimum-spa-boilerplate.git
-</span><span class='line'>npm install
-</span><span class='line'>npm start</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://i.gyazo.com/f906464bfb325437c5c905f80a5b976d.gif" alt="gif" /></p>
-
-<h2>概要</h2>
-
-<h3>tree</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>➜  tree -L 1
-</span><span class='line'>.
-</span><span class='line'>├── README.md
-</span><span class='line'>├── index.js         // エントリーポイント
-</span><span class='line'>├── karma.conf.js    // karmaの設定
-</span><span class='line'>├── lib              // ソース
-</span><span class='line'>├── node_modules
-</span><span class='line'>├── package.json     // 設定はこの中
-</span><span class='line'>├── public           // document root
-</span><span class='line'>└── test             // テスト</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>package.json</h3>
-
-<p>基本的には<code>npm init</code>で作ったものに色々インストールしてnpm scriptの設定をしているだけです。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'>  <span class="s2">&quot;scripts&quot;</span><span class="err">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;build&quot;</span><span class="p">:</span> <span class="s2">&quot;NODE_ENV=production browserify index.js -t babelify | uglifyjs &gt; public/bundle.js&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;watch&quot;</span><span class="p">:</span> <span class="s2">&quot;watchify -d index.js -t babelify -o public/bundle.js -v&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;server&quot;</span><span class="p">:</span> <span class="s2">&quot;browser-sync start --server public --files public/**/*&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;test&quot;</span><span class="p">:</span> <span class="s2">&quot;karma start&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;npm run watch &amp; npm run server &amp; npm test&quot;</span>
-</span><span class='line'>  <span class="p">}</span><span class="err">,</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="s2">&quot;dependencies&quot;</span><span class="err">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;react&quot;</span><span class="p">:</span> <span class="s2">&quot;^0.13.1&quot;</span>
-</span><span class='line'>  <span class="p">}</span><span class="err">,</span>
-</span><span class='line'>  <span class="s2">&quot;devDependencies&quot;</span><span class="err">:</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nt">&quot;babelify&quot;</span><span class="p">:</span> <span class="s2">&quot;^5.0.4&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;browser-sync&quot;</span><span class="p">:</span> <span class="s2">&quot;^2.3.1&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;browserify&quot;</span><span class="p">:</span> <span class="s2">&quot;^9.0.3&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;espowerify&quot;</span><span class="p">:</span> <span class="s2">&quot;^0.10.0&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;karma&quot;</span><span class="p">:</span> <span class="s2">&quot;^0.12.31&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;karma-browserify&quot;</span><span class="p">:</span> <span class="s2">&quot;^4.0.0&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;karma-chrome-launcher&quot;</span><span class="p">:</span> <span class="s2">&quot;^0.1.7&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;karma-cli&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.4&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;karma-mocha&quot;</span><span class="p">:</span> <span class="s2">&quot;^0.1.10&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;mocha&quot;</span><span class="p">:</span> <span class="s2">&quot;^2.2.1&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;power-assert&quot;</span><span class="p">:</span> <span class="s2">&quot;^0.10.2&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;uglify-js&quot;</span><span class="p">:</span> <span class="s2">&quot;^2.4.17&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nt">&quot;watchify&quot;</span><span class="p">:</span> <span class="s2">&quot;^2.4.0&quot;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="https://github.com/koba04/minimum-spa-boilerplate/blob/master/package.json">https://github.com/koba04/minimum-spa-boilerplate/blob/master/package.json</a></p>
-
-<ul>
-<li><code>npm run build</code></li>
-</ul>
-
-
-<p>これはReactに依存したビルドになっているのですが、production用にビルドされたファイルを生成することを想定しています。</p>
-
-<ul>
-<li><code>npm run watch</code></li>
-</ul>
-
-
-<p>watchifyによってファイルが変更されたら自動的にbrowserifyのビルドが走るようになっています。
-watchifyはキャッシュするので二回目以降のビルドが高速化されるのもポイントです。</p>
-
-<ul>
-<li><code>npm run server</code></li>
-</ul>
-
-
-<p>BrowserSyncによって<code>public</code>をrootにしたserverを立ちあげつつ、<code>public</code>以下のファイルを監視してlivereloadするようになっています。</p>
-
-<ul>
-<li><code>npm test</code></li>
-</ul>
-
-
-<p>テストはkarmaを使うので<code>karma start</code>しているだけです。<code>karma</code>の設定は<code>karma.conf.js</code>にあります。</p>
-
-<ul>
-<li><code>npm start</code></li>
-</ul>
-
-
-<p>上記のweatchとbrowserとtestをまとめて実行するコマンドで、これだけ実行すれば開発を始められるようになっています。</p>
-
-<h3>karma</h3>
-
-<p>karmaは<code>karma init</code>で対話的に作成出来る<code>karma.conf.js</code>にbrowserifyの設定を追加したくらいです。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// frameworks to use</span>
-</span><span class='line'><span class="c1">// available frameworks: https://npmjs.org/browse/keyword/karma-adapter</span>
-</span><span class='line'><span class="nx">frameworks</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mocha&#39;</span><span class="p">,</span> <span class="s1">&#39;browserify&#39;</span><span class="p">],</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// list of files / patterns to load in the browser</span>
-</span><span class='line'><span class="nx">files</span><span class="o">:</span> <span class="p">[</span>
-</span><span class='line'>  <span class="s1">&#39;test/**/*.js&#39;</span>
-</span><span class='line'><span class="p">],</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// list of files to exclude</span>
-</span><span class='line'><span class="nx">exclude</span><span class="o">:</span> <span class="p">[</span>
-</span><span class='line'><span class="p">],</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// preprocess matching files before serving them to the browser</span>
-</span><span class='line'><span class="c1">// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor</span>
-</span><span class='line'><span class="nx">preprocessors</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>  <span class="s1">&#39;test/**/*.js&#39;</span><span class="o">:</span> <span class="s1">&#39;browserify&#39;</span>
-</span><span class='line'><span class="p">},</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">browserify</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">debug</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span><span class='line'>  <span class="nx">transform</span><span class="o">:</span> <span class="p">[</span>
-</span><span class='line'>    <span class="s2">&quot;babelify&quot;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s2">&quot;espowerify&quot;</span>
-</span><span class='line'>  <span class="p">]</span>
-</span><span class='line'><span class="p">},</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>karmaについては以前にも書いたのでそちらも。</p>
-
-<ul>
-<li><a href="http://blog.koba04.com/post/2014/06/23/karma-for-javascript-test-runner/">http://blog.koba04.com/post/2014/06/23/karma-for-javascript-test-runner/</a></li>
-</ul>
-
-
-<p>今回はカジュアルさを優先したので設定していませんが、travis-ciを使いたい場合は、<code>karma-phantomjs-launcher</code>を入れて<code>npm test</code>でPhantomJSで実行出来るようにすればOKだと思います。</p>
-
-<h3>Code</h3>
-
-<p>コードはこんな感じで書けます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Hello</span> <span class="nx">World</span><span class="o">&lt;</span><span class="err">/div&gt;;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="https://github.com/koba04/minimum-spa-boilerplate/blob/master/lib/components/app.js">https://github.com/koba04/minimum-spa-boilerplate/blob/master/lib/components/app.js</a></p>
-
-<h3>Test</h3>
-
-<p>テストはこんな感じ</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">assert</span> <span class="nx">from</span> <span class="s1">&#39;power-assert&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react/addons&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="kr">import</span> <span class="nx">App</span> <span class="nx">from</span> <span class="s1">&#39;../../lib/components/app&#39;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kr">const</span> <span class="p">{</span><span class="nx">TestUtils</span><span class="p">}</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">addons</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">describe</span><span class="p">(</span><span class="s2">&quot;App&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>  <span class="kd">let</span> <span class="nx">component</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">beforeEach</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">component</span> <span class="o">=</span> <span class="nx">TestUtils</span><span class="p">.</span><span class="nx">renderIntoDocument</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">App</span> <span class="o">/&gt;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">it</span><span class="p">(</span><span class="s2">&quot;returns Hello World in div&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kr">const</span> <span class="nx">div</span> <span class="o">=</span> <span class="nx">TestUtils</span><span class="p">.</span><span class="nx">findRenderedDOMComponentWithTag</span><span class="p">(</span><span class="nx">component</span><span class="p">,</span> <span class="s1">&#39;div&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="nx">assert</span><span class="p">(</span>
-</span><span class='line'>      <span class="nx">React</span><span class="p">.</span><span class="nx">findDOMNode</span><span class="p">(</span><span class="nx">div</span><span class="p">).</span><span class="nx">textContent</span>
-</span><span class='line'>      <span class="o">===</span>
-</span><span class='line'>      <span class="s1">&#39;Hello World&#39;</span>
-</span><span class='line'>    <span class="p">);</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>おまけ</h2>
-
-<h3>karma-browserify + power-assert + babel</h3>
-
-<p>npm scriptでbrowserifyとwatchifyの引数に<code>babelify</code>を指定していますが、本当は↓のようにbrowserifyのtransformフィールドにだけ指定してkarmaには<code>espowerify</code>だけを指定したいところなのですが、<code>karma-browserify</code>に指定するtransformはbrowserifyにoptionとしてそのまま渡されるのではなくて事前にtransformするので、<code>espowerify</code>が<code>babelify</code>される前のコードを対象としてしまいエラーになります&hellip;。</p>
-
-<p>なのでここでは、それぞれに個別に設定する形になっています&hellip;。
-レアケースですがなんとかしたいなぁと思いつつ&hellip;。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="s2">&quot;browserify&quot;</span><span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>  <span class="s2">&quot;transform&quot;</span><span class="o">:</span> <span class="p">[</span>
-</span><span class='line'>    <span class="p">[</span><span class="s2">&quot;babelify&quot;</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">]</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<hr />
-
-<p>そこそこカジュアルな感じになっているかなぁと思います。</p>
 ]]></content>
   </entry>
   

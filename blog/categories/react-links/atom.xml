@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react-links | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-links/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-07-25T09:55:50+09:00</updated>
+  <updated>2016-08-10T14:09:30+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,198 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js Links vol.10]]></title>
+    <link href="http://blog.koba04.com/post/2016/08/10/react-dot-js-links-vol-dot-10/"/>
+    <updated>2016-08-10T14:09:19+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/08/10/react-dot-js-links-vol-dot-10</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。
+10回目!!!</p>
+
+<!-- more -->
+
+
+<h2>React v15.3.0</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/releases/tag/v15.3.0">https://github.com/facebook/react/releases/tag/v15.3.0</a></li>
+</ul>
+
+
+<p>Reactのv15.3.0がリリースされました。</p>
+
+<p>今回の大きな変更点は、<code>React.PureComponent</code>の追加です。
+これは、PureRenderMixinのES Classes版というような実装で、自動的に<code>shouldComponentUpdate</code>にshallowEqualが適用されるというものです。
+最初このPRが出された時には、内部のStateless Functional Componentにも最適化が適用されるという実装も含まれていましたが、PR内での議論で問題点などが見えたため、今回はただのPureRenderMixin for ES Claseesとして入りました。</p>
+
+<p>今後、v16のタイミングなどでさらなる最適化が追加される可能性はあります。</p>
+
+<p>もう一つ、大きな点は<code>react-test-render</code>というパッケージのリリースです。
+これは、TestUtilsのShallowRenderと似ていますが、Shallowではなく子孫までrenderして結果をReactElementのJSONとして返します。
+refやライフサイクルメソッドなどが呼ばれる点もShallowRenderとは異なります。</p>
+
+<p>```js
+import renderer from &lsquo;react-test-renderer&rsquo;;</p>
+
+<p>const json = renderer.create(<App />).toJSON();
+```</p>
+
+<p>Jestにはこれを使ったsnapshottestが追加されました。</p>
+
+<h2>Create Apps with No Configuration</h2>
+
+<ul>
+<li><a href="https://facebook.github.io/react/blog/2016/07/22/create-apps-with-no-configuration.html">https://facebook.github.io/react/blog/2016/07/22/create-apps-with-no-configuration.html</a></li>
+<li><a href="https://github.com/facebookincubator/create-react-app">https://github.com/facebookincubator/create-react-app</a></li>
+</ul>
+
+
+<p>Reactを使ったSingle Page Applicationのひな形を作成している公式のcliがリリースされました。
+これまでFacebookは自分たちが実際にプロダクトで使っているものだけをOSSにする方針でしたが、今回はコミュニティーの声に応えて作成したものです。</p>
+
+<p>インストールして、<code>create-react-app hello-world</code>として、<code>npm start</code>すればもう開発できるのは手軽でいいですね。
+また、<code>npm run eject</code>すると<code>react-scripts</code>というパッケージの内部に隠れていたwebpackの設定などが全部展開されてカスタマイズ出来るようになるのも面白いですね。</p>
+
+<p>まだ公開されてすぐなので、<code>facebookincubator/create-react-app</code>のリポジトリが、Reactを使ったプロジェクトの構成について多くの人が意見を交わしていてなかなか混沌としています。</p>
+
+<h2>Jest 14.0: React Tree Snapshot Testing</h2>
+
+<ul>
+<li><a href="http://facebook.github.io/jest/blog/2016/07/27/jest-14.html">http://facebook.github.io/jest/blog/2016/07/27/jest-14.html</a></li>
+</ul>
+
+
+<p>Jestが密かに追加されている新しいテスト用のrendererを使って、snapshot testをサポートしたという話です。
+snapshot testなので、一度テストを実行するとスナップショットのファイルが作成されて、次回からはそのスナップショットとテストが一致するかどうかを判定する感じです。</p>
+
+<p>その他にもReactNativeのサポートや、今後の予定(Jasmine捨てる)などが書かれています。</p>
+
+<h2>React.js in patterns</h2>
+
+<ul>
+<li><a href="http://krasimirtsonev.com/blog/article/react-js-in-design-patterns">http://krasimirtsonev.com/blog/article/react-js-in-design-patterns</a></li>
+</ul>
+
+
+<p>High Order ComponentsやContextをDIなど、Reactのパターン集です。</p>
+
+<h2>Function as Child Components</h2>
+
+<ul>
+<li><a href="https://medium.com/@iammerrick/function-as-child-components-5f3920a9ace9#.bnfwsk5un">https://medium.com/@iammerrick/function-as-child-components-5f3920a9ace9#.bnfwsk5un</a></li>
+</ul>
+
+
+<p>公式のブログでも言及されて、広く使われるようになったHigh Order Components(HOC)ですが、HOCではなくてchildrenに関数を渡すFunction as Child Componentsのパターンの方が有効ではないかとエントリーです。</p>
+
+<p>Function as Child Componentsにすることで、不要なComponentのラッピングをなくすことが出来たり、Propsの衝突を避けることも容易だとしています。</p>
+
+<h2>Use RxJS with React</h2>
+
+<ul>
+<li><a href="http://michalzalecki.com/use-rxjs-with-react/">http://michalzalecki.com/use-rxjs-with-react/</a></li>
+</ul>
+
+
+<p>RxJSを使ってReduxライクな状態管理を行う方法についてのエントリーです。</p>
+
+<h2>How to handle state in React. The missing FAQ.</h2>
+
+<ul>
+<li><a href="https://medium.com/react-ecosystem/how-to-handle-state-in-react-6f2d3cd73a0c">https://medium.com/react-ecosystem/how-to-handle-state-in-react-6f2d3cd73a0c</a></li>
+</ul>
+
+
+<p>Reactを学ぶ時に最初からReduxなどを使うのではなくて、ReactのStateから始めようってことで、Stateを扱う方法についてエントリーです。</p>
+
+<h2>Redux vs MobX vs Flux vs&hellip; Do you even need that?</h2>
+
+<ul>
+<li><a href="http://goshakkk.name/redux-vs-mobx-vs-flux-etoomanychoices/">http://goshakkk.name/redux-vs-mobx-vs-flux-etoomanychoices/</a></li>
+</ul>
+
+
+<p>上記のエントリーと同じように、まずはReactだけで始めて必要になったらReduxやMobXについて検討しましょうというエントリーです。
+Reactだけだと何が辛くて、何を解決するためにReduxなどのライブラリーを使うのかを理解してないと、ただ覚えることが増えたみたいに感じるということはありそうです。</p>
+
+<h2>A STEP-BY-STEP TDD APPROACH ON TESTING REACT COMPONENTS USING ENZYME</h2>
+
+<ul>
+<li><a href="http://thereignn.ghost.io/a-step-by-step-tdd-approach-on-testing-react-components-using-enzyme/">http://thereignn.ghost.io/a-step-by-step-tdd-approach-on-testing-react-components-using-enzyme/</a></li>
+</ul>
+
+
+<p>Enzymeを使って、React ComponentをTDDでテストを書いていく方法についてのエントリーです。
+TDDの流れに沿って順番にテストを書いていく方法が丁寧に解説されています。</p>
+
+<h2>The Problem with CSS-In-JS, circa Mid-2016</h2>
+
+<ul>
+<li><a href="https://medium.com/@taion/the-problem-with-css-in-js-circa-mid-2016-14060e69bf68#.ndfajua3p">https://medium.com/@taion/the-problem-with-css-in-js-circa-mid-2016-14060e69bf68#.ndfajua3p</a></li>
+</ul>
+
+
+<p>CSS in JSやCSS ModulesのようなComponentに閉じたCSSを使う場合の問題点についてのエントリーです。
+コンテキストによるスタイルの違いを、CSSがそれぞれ独立している中でどのようにComponentとして表現するかという内容です。</p>
+
+<h2>React Native at SoundCloud</h2>
+
+<ul>
+<li><a href="https://developers.soundcloud.com/blog/react-native-at-soundcloud">https://developers.soundcloud.com/blog/react-native-at-soundcloud</a></li>
+</ul>
+
+
+<p>SoundCloudがReactNativeでSoundCloud Purseのアプリを作った時の話です。
+なぜReactNativeを使ったのか、実際使ってみてどうだったのかが書かれています。</p>
+
+<h2>A Glimpse Into The Future With React Native For Web</h2>
+
+<ul>
+<li><a href="https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/">https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/</a></li>
+</ul>
+
+
+<p><code>react-native-web</code>の現状についてのエントリーです。
+基本的には、まだプロダクションで使うレベルにはなっていないけど今後に期待という感じです。</p>
+
+<h2>React Fiber Architecture</h2>
+
+<ul>
+<li><a href="https://github.com/acdlite/react-fiber-architecture">https://github.com/acdlite/react-fiber-architecture</a></li>
+</ul>
+
+
+<p>現在実装が進められているReact内部のアルゴリズムであるReact Fiberについてのエントリーです。
+詳細については書かれていませんが、導入としては良さそうです。</p>
+
+<p>ちなみにacdliteさんは、今setStateのReact Fiber対応をやっています。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/7344">https://github.com/facebook/react/pull/7344</a></li>
+</ul>
+
+
+<h2>Internationalization in React</h2>
+
+<ul>
+<li><a href="https://medium.freecodecamp.com/internationalization-in-react-7264738274a0#.33osi3w58">https://medium.freecodecamp.com/internationalization-in-react-7264738274a0#.33osi3w58</a></li>
+</ul>
+
+
+<p><code>react-intl</code>を使ったReactを使ったアプリケーションでのi18n対応についてのエントリーです。</p>
+
+<h2>Flow: Mapping an object</h2>
+
+<ul>
+<li><a href="https://medium.com/@thejameskyle/flow-mapping-an-object-373d64c44592#.xm62m8pic">https://medium.com/@thejameskyle/flow-mapping-an-object-373d64c44592#.xm62m8pic</a></li>
+</ul>
+
+
+<p>Flowでどのように型付けをしていけばいいのかということを、<code>map-obj</code>に型付けしていきながら解説しているエントリーです。
+わかりやすいです。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.9]]></title>
@@ -565,145 +757,6 @@ Storeを直接拡張するのではなく、今MiddlewareのAPIとして渡し�
 
 <p>Reactを使い、JSXでスライドを作成するライブラリーです。
 Markdownなんかも使えるようです。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[React.js Links vol.5 5/12〜5/18]]></title>
-    <link href="http://blog.koba04.com/post/2016/05/18/reactjs-links-vol5/"/>
-    <updated>2016-05-18T23:27:34+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/05/18/reactjs-links-vol5</id>
-    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
-
-<!-- more -->
-
-
-<h2>React Core Meeting Note May 12 (React Meeting Note)</h2>
-
-<ul>
-<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-05/may-12.md">https://github.com/reactjs/core-notes/blob/master/2016-05/may-12.md</a></li>
-</ul>
-
-
-<p>恒例のCore TeamのMeeting Noteです。
-現在だと、production build時のエラーがわかりにくいものであったりとエラー周りの仕組みに不便なところがあるのでそれを改善することをReact Teamに来たインターンの人がやるそうです。すごい環境のインターンだ&hellip;。</p>
-
-<p>RustやEmber参考にしたRFCのプロセスを構築することが検討されているようです。
-また、ShallowRenderingとは別のテスト用にrendererのプロトタイプが作られていたりとこちらも興味深いです。</p>
-
-<h2>Docs need one or more diagrams #653 (Redux Issue)</h2>
-
-<ul>
-<li><a href="https://github.com/reactjs/redux/issues/653#issuecomment-216844781">https://github.com/reactjs/redux/issues/653#issuecomment-216844781</a></li>
-</ul>
-
-
-<p>Reduxでのデータの流れがダイアグラムで示されていてわかりやすいので、はじめて触る人は見ておくといいかもしれません。</p>
-
-<h2>Tiny React Renderer (GitHub Repository)</h2>
-
-<ul>
-<li><a href="https://github.com/iamdustan/tiny-react-renderer">https://github.com/iamdustan/tiny-react-renderer</a></li>
-</ul>
-
-
-<p>ReactのRendererを理解するための小さな実装です。カスタムRendererを作りたかったり、Reactの内部を知りたい人はソースをみるといいんじゃないかと思います。</p>
-
-<h2>react-router-scroll (GitHub Repository)</h2>
-
-<ul>
-<li><a href="https://github.com/taion/react-router-scroll">https://github.com/taion/react-router-scroll</a></li>
-</ul>
-
-
-<p>ReactRouterでスクロールマネージメントを行うためのライブラリーです。
-scroll-behaviorをラップする感じになっているようです。</p>
-
-<h2>flow-typed (GitHub Repository)</h2>
-
-<ul>
-<li><a href="https://github.com/flowtype/flow-typed">https://github.com/flowtype/flow-typed</a></li>
-</ul>
-
-
-<p>Flowの型定義を管理するリポジトリーです。前に公開されたリポジトリーですが、最近型定義が集まり出しています。</p>
-
-<h2>Why did you update (GitHub Repository)</h2>
-
-<ul>
-<li><a href="https://github.com/garbles/why-did-you-update">https://github.com/garbles/why-did-you-update</a></li>
-</ul>
-
-
-<p>Reactにモンキーパッチを当てて、PropやStateが変わってないのにrerenderが行われたことを教えてくれるライブラリーです。
-パフォーマンスチューニングしたい場合に便利かもしれません。</p>
-
-<h2>Higher Order Components: Theory and Practice</h2>
-
-<ul>
-<li><a href="http://engineering.blogfoster.com/higher-order-components-theory-and-practice/">http://engineering.blogfoster.com/higher-order-components-theory-and-practice/</a></li>
-</ul>
-
-
-<p>ReactでMixinの代わりとしてよく使われるHigh Order Componentsのパターンについてのエントリーです。</p>
-
-<h2>redux-observable (Redux Middleware)</h2>
-
-<ul>
-<li><a href="https://medium.com/@benlesh/redux-observable-ec0b00d2eb52">https://medium.com/@benlesh/redux-observable-ec0b00d2eb52</a></li>
-</ul>
-
-
-<p>ReduxとRxJS v5を組み合わせるためのライブラリーについてのエントリーです。
-Ben LeshさんはRxJS v5のメインの開発者であり、以前に紹介した通りReduxに<code>es-observable</code>のspecに対応させるPRを送っていましたがここで結びつきました。このライブラリーはNetflixでも使っているようです。</p>
-
-<p><a href="http://blog.koba04.com/post/2016/04/19/reactjs-links-vol2/">http://blog.koba04.com/post/2016/04/19/reactjs-links-vol2/</a></p>
-
-<h2>React Elements vs React Components vs Component Backing Instances (React)</h2>
-
-<ul>
-<li><a href="https://medium.com/@fay_jai/react-elements-vs-react-components-vs-component-backing-instances-14d42729f62">https://medium.com/@fay_jai/react-elements-vs-react-components-vs-component-backing-instances-14d42729f62</a></li>
-</ul>
-
-
-<p>ReactElementとReact ComponentとComponentのinstanceの違いについてのエントリーです。</p>
-
-<h2>Getting Started with React Native Development on Windows</h2>
-
-<ul>
-<li><a href="https://shift.infinite.red/getting-started-with-react-native-development-on-windows-90d85a72ae65">https://shift.infinite.red/getting-started-with-react-native-development-on-windows-90d85a72ae65</a></li>
-</ul>
-
-
-<p>ReactNativeの開発をWindows上で行う方法について解説したエントリーです。</p>
-
-<h2>UI Testing in React</h2>
-
-<ul>
-<li><a href="https://voice.kadira.io/ui-testing-in-react-74fd90a5d58b#.tr0046jgs">https://voice.kadira.io/ui-testing-in-react-74fd90a5d58b#.tr0046jgs</a></li>
-</ul>
-
-
-<p>ReactでのUIテストについてのエントリーです。
-テストをFunctional TestingとVisual Testingに分類して、Functional Testingはenzymeを、Visual TestingはReact
-Storybookをそれぞれ使う方法が紹介されています。</p>
-
-<h2>React Amsterdam</h2>
-
-<ul>
-<li><a href="https://speakerdeck.com/reactamsterdam">https://speakerdeck.com/reactamsterdam</a></li>
-<li><a href="https://www.youtube.com/channel/UCsFrt8oKNYXGspSlX9u6uXw">https://www.youtube.com/channel/UCsFrt8oKNYXGspSlX9u6uXw</a></li>
-</ul>
-
-
-<p>React Amsterdamのスライドと動画が公開されています。
-ReactNativeのinternalやJSSの話もあったりして色々面白そうです。</p>
-
-<ul>
-<li><a href="https://speakerdeck.com/reactamsterdam/tadeu-zagallo-facebook-london-react-native-architecture-overview">https://speakerdeck.com/reactamsterdam/tadeu-zagallo-facebook-london-react-native-architecture-overview</a></li>
-<li><a href="https://speakerdeck.com/reactamsterdam/oleg-slobodskoi-chatgrape-berlin-javascript-style-sheets">https://speakerdeck.com/reactamsterdam/oleg-slobodskoi-chatgrape-berlin-javascript-style-sheets</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
