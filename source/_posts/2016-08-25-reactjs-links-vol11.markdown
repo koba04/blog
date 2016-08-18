@@ -22,3 +22,9 @@ CSS in JSでのパターン集です。
 これがmergeされると、Flowのtype annotationのためだけに`babel-plugin-transform-class-properties`を追加する必要はなくなります。
 
 * https://github.com/babel/babel/pull/3655
+
+## exponentjs/exponent
+
+ReactEurope 2016でAndroid版の事例を紹介していたReactNativeで作られたExponentのiOS/Android版が公開されています。
+
+* https://github.com/exponentjs/exponent
