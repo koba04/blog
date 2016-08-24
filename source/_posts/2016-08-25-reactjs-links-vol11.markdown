@@ -10,6 +10,23 @@ categories: react.js react-links
 
 <!-- more -->
 
+## React Core Meeting Notes
+
+7/21, 28, 8/4のMeeting Noteがまとめて公開されました。
+
+`React.createClass`のES classes化については、引き続き進められているようで、すでに80%がES classesになったそうです。
+Public Class Fieldsがstage2になったことも紹介されています。
+
+その他には、`create-react-app`をリリースしたことや、そこでのJestサポートについても紹介されています。
+また7/28のMeeting Noteでは、Reconcilerの位置付けについて解説されています。Reconcilerはrendererに属するものであり、react本体にはComponentやReactElementを作成する部分のみが含まれているという形です。
+それにより、新しいReactFiberのReconcilerの導入もすでにあるReact Componentに手を入れることなくできるとしています。
+
+（Reactの中では、完全にrenderer毎にコードが分かれているわけではなくて、共通化されている部分もありますが）
+
+* https://github.com/reactjs/core-notes/blob/master/2016-07/july-21.md
+* https://github.com/reactjs/core-notes/blob/master/2016-07/july-28.md
+* https://github.com/reactjs/core-notes/blob/master/2016-08/august-04.md
+
 ## PATTERNS FOR STYLE COMPOSITION IN REACT
 
 CSS in JSでのパターン集です。
