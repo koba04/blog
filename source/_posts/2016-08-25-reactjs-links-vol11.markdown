@@ -45,3 +45,11 @@ CSS in JSでのパターン集です。
 ReactEurope 2016でAndroid版の事例を紹介していたReactNativeで作られたExponentのiOS/Android版が公開されています。
 
 * https://github.com/exponentjs/exponent
+
+## react-history
+
+* https://github.com/ReactTraining/react-history
+
+## Animating in React
+
+* http://slides.com/sdrasner/react-rally#/
