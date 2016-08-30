@@ -53,3 +53,7 @@ ReactEurope 2016でAndroid版の事例を紹介していたReactNativeで作ら�
 ## Animating in React
 
 * http://slides.com/sdrasner/react-rally#/
+
+## Async Redux Actions With RxJS
+
+* http://www.slideshare.net/benlesh1/async-redux-actions-with-rxjs-react-rally-2016
