@@ -12,7 +12,7 @@ categories: react.js react-links
 
 ## React Core Meeting Notes
 
-7/21, 28, 8/4のMeeting Noteがまとめて公開されました。
+7/21, 28, 8/4, 25のMeeting Noteがまとめて公開されました。
 
 `React.createClass`のES classes化については、引き続き進められているようで、すでに80%がES classesになったそうです。
 Public Class Fieldsがstage2になったことも紹介されています。
@@ -26,6 +26,7 @@ Public Class Fieldsがstage2になったことも紹介されています。
 * https://github.com/reactjs/core-notes/blob/master/2016-07/july-21.md
 * https://github.com/reactjs/core-notes/blob/master/2016-07/july-28.md
 * https://github.com/reactjs/core-notes/blob/master/2016-08/august-04.md
+* https://github.com/reactjs/core-notes/blob/master/2016-08/august-25.md
 
 ## PATTERNS FOR STYLE COMPOSITION IN REACT
 
