@@ -49,13 +49,24 @@ ReactEurope 2016でAndroid版の事例を紹介していたReactNativeで作ら�
 
 ## react-history
 
+`history`をラップしたようなReactComponentです。
+`react-router`のv4はこれを使うというような話もあり、あいかわらず落ち着かない感じです...。
+
 * https://github.com/ReactTraining/react-history
 
 ## Animating in React
 
+ReactでのAnimationの方法についてのスライドです。
+codepenによるサンプルも多く埋め込まれており、とてもわかりやすいです。
+
+CSS、DOM、SVG、Canvasなどによるアプローチの比較や、react-motionなどライブラリーに関する解説もあり、アニメーションで悩んでいる人にはおすすめのスライドです。
+
 * http://slides.com/sdrasner/react-rally#/
 
 ## Async Redux Actions With RxJS
+
+NetflixのエンジニアでRxJSの開発者であるBen Leshによる、redux-observableを使ってReduxとRxJSを組み合わせる話です。
+なぜReduxにRxJSを組み合わせる必要があるのか、redux-observableにあるEpicとは何なのかということがわかりやすく解説されています。
 
 * http://www.slideshare.net/benlesh1/async-redux-actions-with-rxjs-react-rally-2016
 
