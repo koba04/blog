@@ -58,3 +58,10 @@ ReactEurope 2016でAndroid版の事例を紹介していたReactNativeで作ら�
 ## Async Redux Actions With RxJS
 
 * http://www.slideshare.net/benlesh1/async-redux-actions-with-rxjs-react-rally-2016
+
+## React: Facebook's Functional Turn on Writing JavaScript
+
+Reactの初期の開発者であるPete Huntと、現在の開発者であるPaul O'Shannessyに対するReactに関するインタビューです。
+Reactの思想などについて語られていて、面白いです。
+
+* http://queue.acm.org/detail.cfm?id=2994373
