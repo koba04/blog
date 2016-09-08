@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-08-10T14:11:07+09:00</updated>
+  <updated>2016-09-08T19:28:08+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,109 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js Links vol.11]]></title>
+    <link href="http://blog.koba04.com/post/2016/09/07/reactjs-links-vol11d/"/>
+    <updated>2016-09-07T19:26:04+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/09/07/reactjs-links-vol11d</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
+
+<!-- more -->
+
+
+<h2>React Core Meeting Notes</h2>
+
+<p>7/21, 28, 8/4, 25のMeeting Noteがまとめて公開されました。</p>
+
+<p><code>React.createClass</code>のES classes化については、引き続き進められているようで、すでに80%がES classesになったそうです。
+Public Class Fieldsがstage2になったことも紹介されています。</p>
+
+<p>その他には、<code>create-react-app</code>をリリースしたことや、そこでのJestサポートについても紹介されています。
+また7/28のMeeting Noteでは、Reconcilerの位置付けについて解説されています。Reconcilerはrendererに属するものであり、react本体にはComponentやReactElementを作成する部分のみが含まれているという形です。
+それにより、新しいReactFiberのReconcilerの導入もすでにあるReact Componentに手を入れることなくできるとしています。</p>
+
+<p>（Reactの中では、完全にrenderer毎にコードが分かれているわけではなくて、共通化されている部分もありますが）</p>
+
+<ul>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-07/july-21.md">https://github.com/reactjs/core-notes/blob/master/2016-07/july-21.md</a></li>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-07/july-28.md">https://github.com/reactjs/core-notes/blob/master/2016-07/july-28.md</a></li>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-08/august-04.md">https://github.com/reactjs/core-notes/blob/master/2016-08/august-04.md</a></li>
+<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-08/august-25.md">https://github.com/reactjs/core-notes/blob/master/2016-08/august-25.md</a></li>
+</ul>
+
+
+<h2>PATTERNS FOR STYLE COMPOSITION IN REACT</h2>
+
+<p>CSS in JSでのパターン集です。</p>
+
+<ul>
+<li><a href="http://jxnblk.com/writing/posts/patterns-for-style-composition-in-react/">http://jxnblk.com/writing/posts/patterns-for-style-composition-in-react/</a></li>
+</ul>
+
+
+<h2>Strip flow-only class props without needing transform-class-properties. #3655 (Babel)</h2>
+
+<p><code>babel-plugin-transform-flow-strip-types</code>でtype annotationのためだけに使われているclass propertiesを削除するというPRです。
+これがmergeされると、Flowのtype annotationのためだけに<code>babel-plugin-transform-class-properties</code>を追加する必要はなくなります。</p>
+
+<ul>
+<li><a href="https://github.com/babel/babel/pull/3655">https://github.com/babel/babel/pull/3655</a></li>
+</ul>
+
+
+<h2>exponentjs/exponent</h2>
+
+<p>ReactEurope 2016でAndroid版の事例を紹介していたReactNativeで作られたExponentのiOS/Android版が公開されています。</p>
+
+<ul>
+<li><a href="https://github.com/exponentjs/exponent">https://github.com/exponentjs/exponent</a></li>
+</ul>
+
+
+<h2>react-history</h2>
+
+<p><code>history</code>をラップしたようなReactComponentです。
+<code>react-router</code>のv4はこれを使うというような話もあり、あいかわらず落ち着かない感じです&hellip;。</p>
+
+<ul>
+<li><a href="https://github.com/ReactTraining/react-history">https://github.com/ReactTraining/react-history</a></li>
+</ul>
+
+
+<h2>Animating in React</h2>
+
+<p>ReactでのAnimationの方法についてのスライドです。
+codepenによるサンプルも多く埋め込まれており、とてもわかりやすいです。</p>
+
+<p>CSS、DOM、SVG、Canvasなどによるアプローチの比較や、react-motionなどライブラリーに関する解説もあり、アニメーションで悩んでいる人にはおすすめのスライドです。</p>
+
+<ul>
+<li><a href="http://slides.com/sdrasner/react-rally#/">http://slides.com/sdrasner/react-rally#/</a></li>
+</ul>
+
+
+<h2>Async Redux Actions With RxJS</h2>
+
+<p>NetflixのエンジニアでRxJSの開発者であるBen Leshによる、redux-observableを使ってReduxとRxJSを組み合わせる話です。
+なぜReduxにRxJSを組み合わせる必要があるのか、redux-observableにあるEpicとは何なのかということがわかりやすく解説されています。</p>
+
+<ul>
+<li><a href="http://www.slideshare.net/benlesh1/async-redux-actions-with-rxjs-react-rally-2016">http://www.slideshare.net/benlesh1/async-redux-actions-with-rxjs-react-rally-2016</a></li>
+</ul>
+
+
+<h2>React: Facebook&rsquo;s Functional Turn on Writing JavaScript</h2>
+
+<p>Reactの初期の開発者であるPete Huntと、現在の開発者であるPaul O&#8217;Shannessyに対するReactに関するインタビューです。
+Reactの思想などについて語られていて、面白いです。</p>
+
+<ul>
+<li><a href="http://queue.acm.org/detail.cfm?id=2994373">http://queue.acm.org/detail.cfm?id=2994373</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.10]]></title>
@@ -3552,115 +3655,6 @@ jQueryからReactまでそのライブラリをどのように使うのかでは
 <p><img src="http://blog.koba04.com/images/yapc2015-slide.png" title="'YAPC Asia 2015 slide'" ></p>
 
 <p>是非来てください！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[React.js meetup #1 を開催しました]]></title>
-    <link href="http://blog.koba04.com/post/2015/04/25/reactjs-meetup1/"/>
-    <updated>2015-04-25T17:11:35+09:00</updated>
-    <id>http://blog.koba04.com/post/2015/04/25/reactjs-meetup1</id>
-    <content type="html"><![CDATA[<p><a href="http://reactjs-meetup.connpass.com/event/11232/">http://reactjs-meetup.connpass.com/event/11232/</a></p>
-
-<p>一人Advent Calendar書いた時にやりたいと言っていたのでReact.js meetup #1 を<a href="http://twitter.com/yosuke_furukawa">@yosuke_furukawa</a>さんと開催しました。</p>
-
-<p> DeNAさんが会場から懇親会のお酒や寿司、当日の運営まで全てやってくださったので自分はほとんど何もしてないですが..。
- 本当にありがとうございました！！</p>
-
-<p>やりたいって言ってこの規模の勉強会を開催させてもらえるの本当にスゴいなぁと思います&hellip;。</p>
-
-<p> <blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/hashtag/reactjs_meetup?src=hash">#reactjs_meetup</a> <a href="https://twitter.com/hashtag/react_sushi?src=hash">#react_sushi</a> です <a href="http://t.co/GdpyF7Paqk">pic.twitter.com/GdpyF7Paqk</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/591580062702383107">April 24, 2015</a></blockquote></p>
-
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-
-
-<!-- more -->
-
-
-<p>ある程度予想はしていたのですが、Talkが10分と短かったりで押して慌ただしい感じになってしまったのは申し訳なかったなぁと思ってます。
-ただ、色んなテーマのTalkを一度に聞くことが出来たのはよかったかなと思っています。</p>
-
-<h2>Talks</h2>
-
-<p>各Talkの資料についてはconpassのページに追加しておいたのでそちらを見て頂くとして簡単な一言感想です。</p>
-
-<p><a href="http://reactjs-meetup.connpass.com/event/11232/presentation/">http://reactjs-meetup.connpass.com/event/11232/presentation/</a></p>
-
-<h3><a href="https://twitter.com/naoya_ito">@naoya_ito</a> &ndash; React概論</h3>
-
-<p>Reactの特徴をわかりやすく説明していてReact.js触ってない人にとってもわかりやすい説明だったんじゃないかなと思います。</p>
-
-<h3><a href="https://twitter.com/hokaccha">@hokaccha</a> &ndash; react-rails</h3>
-
-<p>Railsと一緒に使いたい人にとってはかなり有益な情報だったんじゃないかなと思います。Turbolinksどうするのとか。</p>
-
-<h3><a href="https://twitter.com/azu_re">@azu_re</a> &ndash; 10分で実装するFlux</h3>
-
-<p>Fluxを最小限の構成にしてデータの流れを一方向にするということがどういうことなのか説明していてわかりやすかったです。console.traceを使っての説明もなるほどなぁと思いました。</p>
-
-<h3><a href="http://twitter.com/yosuke_furukawa">@yosuke_furukawa</a> &ndash; mercury/mithril.js</h3>
-
-<p>React.jsのVIRTUAL DOMのdiffアルゴリズムの説明からmercuryやmithril.jsといった他のライブラリがどうやってReact.jsより高速化しているのかという説明で面白かったです。</p>
-
-<h3><a href="https://twitter.com/mizchi">@mizchi</a> &ndash; React/FluxでSPAを開発してぶちあたった問題</h3>
-
-<p>KobitoをReact.js + Fluxで作った時の問題になった点と解決方法について説明していて、ないものは作る姿勢がスゴイなぁ思いました。</p>
-
-<h3><a href="https://twitter.com/sugyan">@sugyan</a> &ndash; React.jsと、 Railsとかアイドルとか (LT)</h3>
-
-<p>React.jsとRailsでReactRouter使ったり色々組み合わてみた話でツラいと言いながらちゃんと作ってしまうところがスゴイなぁと思いました。</p>
-
-<h3><a href="https://twitter.com/making">@making</a> &ndash; Java + React.jsでSever Side Rendering (LT)</h3>
-
-<p>SPAで作ったブログが検索に引っかからないからReact.js + Javaでserver-side renderingするようにしたという話で、最後のオチも含めて面白かったです。</p>
-
-<h3><a href="https://twitter.com/tyshgc">@tyshgc</a> &ndash; Rapid React Prototyping : React.jsでUIデザインプロトタイプを作る (LT)</h3>
-
-<p>React.jsでプロトタイプを作る話で、Photoshopのレイヤー情報からReact.jsのComponentを生成するようにしていてスゴかったです。</p>
-
-<h3><a href="https://twitter.com/teppeis">@teppeis</a> &ndash; Flowtype (LT)</h3>
-
-<p>懇親会の時にFlowtypeについてのLTをしてくれて、デモもあったりFacebookが開発中のElectron(旧:AtomShell)ベースのNuclideの話まであって面白かったです。</p>
-
-<h2>LiveCodingやった</h2>
-
-<p>ぼっちでも懇親会に参加して欲しかったので、ぼーっと見ていたり会話のネタになるかなと思ってLiveCodeingをやってみました。</p>
-
-<p>最近だとJSの環境を作るにも何を使えばいいのかわからないという声も聞くので、0から簡単なアプリを作るところまでの流れを伝えられればと思い、HackerNewsのAPIを使ってTopStoryの一覧を表示するものを作ってみました。</p>
-
-<p>あと、3分間クッキングみたいに事前に色々用意しておくのもライブ感がないなぁと思ったので<code>mkdir</code>から全部その場で作ることにしました。</p>
-
-<p><a href="https://github.com/koba04/react-hacker-news-stories/tree/meetup">https://github.com/koba04/react-hacker-news-stories/tree/meetup</a></p>
-
-<p>環境構築は、browserifyとwatchifyとbabelifyで変換を行ってlivereloadするためのbrowser-syncを使いました。</p>
-
-<p>LiveCodingの流れとしては</p>
-
-<ul>
-<li>ディレクトリ作ったり<code>npm init</code>したり<code>npm install</code>したりして環境を作る</li>
-<li>Hello Worldしてみる(Hellって書いたけど&hellip;)</li>
-<li>各Componentを作成する</li>
-<li>HackerNewsのAPI叩いて一覧が出るようにする</li>
-<li><code>React.addons.Perf</code>を使ってDOMが無駄に更新されていることとkeyが指定されていないwarningが出ていることを確認</li>
-<li>keyを指定することで無駄のDOM操作がなくなることを確認</li>
-<li>diffの時間を減らすために<code>Immutable.js</code>を使いつつ<code>shouldComponentUpdate</code>を実装</li>
-</ul>
-
-
-<p>という感じで行いました。</p>
-
-<p>ライブコーディングが初めてで緊張していたのとお酒が入っていたのもあって(言い訳)、いつもと同じ感覚でコーディング出来なくてtypoしまくってしまい、「これ終わらないかも&hellip;」とかなり駆け足になってしまったのは反省です&hellip;。
-(事前に練習はしたんですが&hellip;)</p>
-
-<p>でも、とりあえず最後まで出来てよかった&hellip;。</p>
-
-<h2>まとめ</h2>
-
-<p>イベントの管理者側でやるのは初めてだったので色々至らない点があったかもしれませんが、準備してくださったDeNAの方々、発表者の方々、参加者の皆様、本当にありがとうございました！！</p>
-
-<p>感想とかブログに書いてもらえると嬉しいです！</p>
 ]]></content>
   </entry>
   
