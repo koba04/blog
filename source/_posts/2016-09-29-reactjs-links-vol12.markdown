@@ -25,3 +25,7 @@ categories: react.js react-links
 ## Declarative Routing for React
 
 * https://react-router-website-uxmsaeusnn.now.sh/
+
+## AMA with Redux
+
+* https://hashnode.com/ama/with-redux-cisteui6p005gzx53fstg8t6l
