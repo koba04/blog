@@ -24,6 +24,15 @@ React v15.3.2がリリースされています。
 ReactのGitHubでのstarが50,000を超えたことを記念するエントリーです。
 Reactの前にはFaxJSというのがあって〜など、Reactが誕生するまでの流れの話などとても面白いです。
 
+## Codebase Overview
+
+* https://facebook.github.io/react/contributing/codebase-overview.html
+
+React本体のコードについての解説です。
+Reactを使う人にとってはほとんど知る必要のないことですが、contributeしたい場合にはとても役に立つドキュメントです。
+特に`Haste`とというCommonJSではないFacebook独自のモジュールシステムを使っていたりするので...。
+最初からこれがあれば...。
+
 ## If TypeScript is so great, how come all notable ReactJS projects use Babel?
 
 * https://discuss.reactjs.org/t/if-typescript-is-so-great-how-come-all-notable-reactjs-projects-use-babel/4887
