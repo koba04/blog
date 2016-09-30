@@ -56,6 +56,8 @@ React.js meetupは、メインのTalkは全てこちらからお願いして決�
 LTは、新しい発見の場として募集で受付けています。5minだと短いので10minで。
 (これはNode学園を参考にしました)
 
+毎回面白いTalkが多いのでいつも楽しみにしています。
+
 それを[@yosuke_furukawa](https://twitter.com/yosuke_furukawa)や[@teppeis](https://twitter.com/teppeis)や[@yoshiko_pg](https://twitter.com/yoshiko_pg)や、[@ama_ch](https://twitter.com/ama_ch)に相談したり、会場を探したり、色々と準備を手伝ってもらいながら運営しています。
 
 （[#2](http://reactjs-meetup.connpass.com/event/19504/)に関しては、別のイベントとしてすでにあったものをReact.js meetupという名前を使う形にしたのでちょっと違いますが）
@@ -67,7 +69,7 @@ LTは、新しい発見の場として募集で受付けています。5minだ�
 聞きたいTalkを聞いて、参加者の人とディスカッションして。
 （参加したけど知っている人がいないという人は是非声かけてください！）
 
-実際当日は、事前に懇親会の食べ物・飲み物を頼んでいたりするので参加率を気にしたり、ピザの配達状況を確認したりしているので、正直ちゃんとTalk聞けていないのですが...。
+実際のところ、当日は事前に懇親会の食べ物・飲み物を頼んでいたりするので参加率を気にしたり、ピザの配達状況を確認したりしているので、正直ちゃんとTalk聞けていないのですが...。
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/reactjs_meetup?src=hash">#reactjs_meetup</a> <br>yield pizza;<br><br>とのこと <a href="https://t.co/RDGQgcMKsz">pic.twitter.com/RDGQgcMKsz</a></p>&mdash; Yosuke FURUKAWA (@yosuke_furukawa) <a href="https://twitter.com/yosuke_furukawa/status/780737219464007682">September 27, 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -76,3 +78,5 @@ LTは、新しい発見の場として募集で受付けています。5minだ�
 
 今のところ、特に考えていないので、何か話したいこととか、聞きたいテーマなどあれば教えてください！
 今回は詰め込みすぎたので、次回はメインのTalkは2本くらいにしようと思っています。
+
+来年かな。
