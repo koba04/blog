@@ -4,7 +4,7 @@
   <title><![CDATA[Category: architecture | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/architecture/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-09-30T13:56:28+09:00</updated>
+  <updated>2016-09-30T14:02:33+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -59,7 +59,7 @@
 
 <p>これらを踏まえて、Immutable App Architectureとして、下記の図のような構成を紹介しています。</p>
 
-<p><img src="/images/posts/immutable-app-architecture/immutable-app-architecture.png" title="&lsquo;Immutable App Architecture&rsquo;" ></p>
+<p>{% img /images/posts/immutable-app-architecture/immutable-app-architecture.png &lsquo;Immutable App Architecture&rsquo; %}</p>
 
 <p>詳細については動画を見てほしいのですが下のような要素があります。
 Fluxについて聞いたことがあるとだいたいイメージできると思います。</p>
@@ -93,7 +93,7 @@ Mutationが前提になっていて、管理や最適化が難しいとしてい
 <p>Structural Sharingは、Immurable.jsなどで使われていて、変更があった箇所とその上位の要素だけを再作成して、その他は参照を付け替えるだけなので全体を毎回再生成しているわけではないということです。
 もちろん、Immutable.jsを使わなくても実装することは可能で、Reduxを使っている人にはおなじみだと思います。</p>
 
-<p><img src="/images/posts/immutable-app-architecture/structual-sharing.png" title="&lsquo;Structural Sharing&rsquo;" ></p>
+<p>{% img /images/posts/immutable-app-architecture/structual-sharing.png &lsquo;Structural Sharing&rsquo; %}</p>
 
 <p>Immutableにすることにより、Memoizationなどの最適化のテクニックも適用しやすいとしています。</p>
 
@@ -145,7 +145,7 @@ Mutationが前提になっていて、管理や最適化が難しいとしてい
 
 <p>これにより、ネットワークリクエストが失敗した場合は、 <strong>Optimistic State</strong> から <strong>True State</strong> に戻せばいいだけなのでロールバックも簡単だとしています。</p>
 
-<p><img src="/images/posts/immutable-app-architecture/action-queue.png" title="&lsquo;Action Queue&rsquo;" ></p>
+<p>{% img /images/posts/immutable-app-architecture/action-queue.png &lsquo;Action Queue&rsquo; %}</p>
 
 <p>それぞれ依存する<code>(State) =&gt; State, Promise&lt;State&gt;</code>のActionが複数Queueに積まれた時にどう処理するのかなど細かい不明な点はありますが、こんな感じだと思います。</p>
 
@@ -164,11 +164,11 @@ Action毎に作成されます。</p>
 
 <p>Plainなオブジェクト（JavaでいうPOJO）であることを推奨しています（JSの場合はImmutable.jsのデータ構造の場合も）。</p>
 
-<p><img src="/images/posts/immutable-app-architecture/immutable-app-model.png" title="&lsquo;Model&rsquo;" ></p>
+<p>{% img /images/posts/immutable-app-architecture/immutable-app-model.png &lsquo;Model&rsquo; %}</p>
 
 <h2>まとめ</h2>
 
-<p><img src="/images/posts/immutable-app-architecture/immutable-app-architecture.png" title="&lsquo;Immutable App Architecture&rsquo;" ></p>
+<p>{% img /images/posts/immutable-app-architecture/immutable-app-architecture.png &lsquo;Immutable App Architecture&rsquo; %}</p>
 
 <p>上記のように構成されるImmutable App Architectureは <strong>Pure Function</strong>、<strong>Immutability</strong>、<strong>Composition</strong> を組み合わせた <strong>Composition of Simple Elements</strong> だとしています。
 Immutable App ArchitectureはFacebookのアプリでも使われていてフィットしているとのことです。</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2016-09-30T13:56:28+09:00</updated>
+  <updated>2016-09-30T14:01:03+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React.js Links vol.12]]></title>
+    <link href="http://blog.koba04.com/post/2016/09/30/reactjs-links-vol12/"/>
+    <updated>2016-09-30T14:00:10+09:00</updated>
+    <id>http://blog.koba04.com/post/2016/09/30/reactjs-links-vol12</id>
+    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
+
+<!-- more -->
+
+
+<h2>React v15.3.2</h2>
+
+<ul>
+<li><a href="https://github.com/facebook/react/releases/tag/v15.3.2">https://github.com/facebook/react/releases/tag/v15.3.2</a></li>
+</ul>
+
+
+<p>React v15.3.2がリリースされています。
+細かなバグフィックスなどが中心です。</p>
+
+<h2>Our First 50,000 Stars</h2>
+
+<ul>
+<li><a href="https://facebook.github.io/react/blog/2016/09/28/our-first-50000-stars.html">https://facebook.github.io/react/blog/2016/09/28/our-first-50000-stars.html</a></li>
+</ul>
+
+
+<p>ReactのGitHubでのstarが50,000を超えたことを記念するエントリーです。
+Reactの前にはFaxJSというのがあって〜など、Reactが誕生するまでの流れの話などとても面白いです。</p>
+
+<h2>Codebase Overview</h2>
+
+<ul>
+<li><a href="https://facebook.github.io/react/contributing/codebase-overview.html">https://facebook.github.io/react/contributing/codebase-overview.html</a></li>
+</ul>
+
+
+<p>React本体のコードについての解説です。
+Reactを使う人にとってはほとんど知る必要のないことですが、contributeしたい場合にはとても役に立つドキュメントです。
+特に<code>Haste</code>とというCommonJSではないFacebook独自のモジュールシステムを使っていたりするので&hellip;。
+最初からこれがあれば&hellip;。</p>
+
+<h2>If TypeScript is so great, how come all notable ReactJS projects use Babel?</h2>
+
+<ul>
+<li><a href="https://discuss.reactjs.org/t/if-typescript-is-so-great-how-come-all-notable-reactjs-projects-use-babel/4887">https://discuss.reactjs.org/t/if-typescript-is-so-great-how-come-all-notable-reactjs-projects-use-babel/4887</a></li>
+</ul>
+
+
+<p>TypeScriptが最高なら、どうしてReact周りのプロジェクトはみんなBabelを使っているの？という疑問に対するスレッドです。
+FlowTypeとTypeScriptの違いなどの話も登場して面白いです。</p>
+
+<h2>Redux Patterns and Anti-Patterns</h2>
+
+<ul>
+<li><a href="https://tech.affirm.com/redux-patterns-and-anti-patterns-7d80ef3d53bc">https://tech.affirm.com/redux-patterns-and-anti-patterns-7d80ef3d53bc</a></li>
+</ul>
+
+
+<p>Reduxでのアンチパターンについての記事です。
+Immutable.jsと組み合わせた場合や、redux-thunkでのAPIアクセスの書き方について解説されています。</p>
+
+<h2>You Might Not Need Redux</h2>
+
+<ul>
+<li><a href="https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367">https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367</a></li>
+</ul>
+
+
+<p>Dan Abramov自身によるエントリーで、何も考えずにとりあえずRedux使うのをやめようという記事です。</p>
+
+<h2>Declarative Routing for React</h2>
+
+<ul>
+<li><a href="https://react-router-website-uxmsaeusnn.now.sh/">https://react-router-website-uxmsaeusnn.now.sh/</a></li>
+</ul>
+
+
+<p>react-router v4についてのページです。
+react-routerでは、Reactのためのルーティングライブラリーではなく、Reactを使ったルーティングライブラリーになっています。
+そのため、<code>Match</code>や<code>Redirect</code>といったComponentが登場しており、議論を呼びそうな感じの変わり方をしています。
+（反応を見ていると、概ねポジティブに捉えられているのがビックリですが）</p>
+
+<h2>AMA with Redux</h2>
+
+<ul>
+<li><a href="https://hashnode.com/ama/with-redux-cisteui6p005gzx53fstg8t6l">https://hashnode.com/ama/with-redux-cisteui6p005gzx53fstg8t6l</a></li>
+</ul>
+
+
+<p>Reduxの作者であるDan Abramovと初期からの開発者であるAndrew ClarkによるAMAです。
+Reduxについての実際に作った人たちの考えが説明されているので、興味のある人は読むといいと思います。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React.js meetup #4]]></title>
@@ -3679,62 +3774,6 @@ Stateless Componentsが加わったりはしていますが、基本的には無
 <h2>次回？</h2>
 
 <p>まったく何も考えていないので、聞きたいテーマなどあれば教えてもらえると嬉しいです！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[YAPC::Asia Tokyo 2015で「今フロントエンドで何が起こっているのか」という話をしました]]></title>
-    <link href="http://blog.koba04.com/post/2015/08/22/yapc-asia-2015-whats-happening-in-frontend-now/"/>
-    <updated>2015-08-22T11:15:43+09:00</updated>
-    <id>http://blog.koba04.com/post/2015/08/22/yapc-asia-2015-whats-happening-in-frontend-now</id>
-    <content type="html"><![CDATA[<p>YAPC::Asia Tokyo 2015で「今フロントエンドで何が起こっているのか」という話をしました。</p>
-
-<p><a href="http://yapcasia.org/2015/talk/show/94051590-fb11-11e4-a39d-8ab37d574c3a">http://yapcasia.org/2015/talk/show/94051590-fb11-11e4-a39d-8ab37d574c3a</a></p>
-
-<!-- more -->
-
-
-<p>満員になるほどたくさんの方に来て頂いてありがとうございました！</p>
-
-<p>よくフロントエンドの話について聞かれると「Grunt or gulp」、「browserify or webpack」、「Angular or React」のような内容が多いので、新しいライブラリや仕様がそれぞれがどういった流れで登場し何を解決しようとしているのかを流れをもって紹介するような構成にしました。</p>
-
-<p>jQuery以降というかなり広い範囲を対象にしたので、それを50minに収めるのために削ったトピックもかなりありますが&hellip;。</p>
-
-<p>それでもASTなど普段ライブラリを使っているだけだとなかなか見えないけど重要な要素については残しました。</p>
-
-<p>とりあげたトピックはこんな感じです。</p>
-
-<ul>
-<li>ES5</li>
-<li>CoffeeScript</li>
-<li>jQuery</li>
-<li>Backbone</li>
-<li>Node.js</li>
-<li>Grunt</li>
-<li>SinglePageApplication</li>
-<li>TypeScript</li>
-<li>AST</li>
-<li>Isomorphic</li>
-<li>Angular</li>
-<li>gulp</li>
-<li>browserify</li>
-<li>ES2015</li>
-<li>Babel・TC39</li>
-<li>Service Workers</li>
-<li>Extensible Web</li>
-<li>React, Flux</li>
-<li>FRP</li>
-<li>Redux</li>
-<li>Unix philosophy</li>
-</ul>
-
-
-<p>駆け足になったのでわかりにくい部分もあったと思いますが、少しでもその辺りが伝われば嬉しいです。</p>
-
-<p><a href="https://speakerdeck.com/koba04/whats-happening-in-frontend-now">https://speakerdeck.com/koba04/whats-happening-in-frontend-now</a></p>
-
-<script async class="speakerdeck-embed" data-id="4d78b0afe4fa4e078544e80db2eb8bd1" data-ratio="1.33333333333333" src="http://blog.koba04.com//speakerdeck.com/assets/embed.js"></script>
-
 ]]></content>
   </entry>
   
