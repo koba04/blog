@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "React.js meetup #4"
-date: 2016-09-30 00:20:56 +0900
+date: 2016-09-30 13:56:56 +0900
 comments: true
 categories: react.js
 ---
