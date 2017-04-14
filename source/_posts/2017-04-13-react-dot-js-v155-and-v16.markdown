@@ -8,24 +8,25 @@ categories: react.js
 
 Reactのv15.5がリリースされたので、v15.5での変更点とv16についてのまとめです。
 
+* https://facebook.github.io/react/blog/2017/04/07/react-v15.5.0.html
+
 v15.5はバグフィックスとv16での変更点に対する準備なので、可能ならあげておいた方がスムーズにv16がリリースされた時に対応できると思います。
 
 また、当初の予定ではv15.5がv15系の最後のリリースになる予定でしたが、色々と混乱もあったためフォローアップとしてv15.6もリリースされることになりました。
 なので、v15.6がリリースされてから対応するのもアリだと思います。
 
-それでは、大きな変更点を見ていきたいと思います。
 基本的には、v16で色々と廃止するための警告が主になります。
 最近のバージョンと同様に、コアから必要なもの以外をどんどん削ぎ落としていく流れです。
 
 廃止されるものは色々ありますが、基本的に全てのものに対してマイグレーションのパスは提供されているので対応可能だと思います。
-ただ、対応版をリリースしていないライブラリーを使っていると色々警告が出ると思います。
+ただ、アクティブにメンテされていないくて15.5対応版をリリースしていないライブラリーを使っていると色々警告が出ると思います。
 場合によっては、その警告によってテストが壊れることがあるかもしれません。
 
 <!-- more -->
 
 ## Deprecated React.createClass
 
-廃止されること自体は前から言われていたので、使わないようにしていた人も多いと思いますが、`create-react-class`として別パッケージとなり、v16では`react`からは削除されます。
+廃止されること自体は前から言われていたので、使わないようにしていた人も多いと思いますが、`create-react-class`として別パッケージとなり、v16では`react`から削除されます。
 
 ```js
 import createReactClass from 'create-react-class';
@@ -41,11 +42,11 @@ mixinを使っているなど、どうしても`React.createClass`を使いた�
 
 * https://github.com/reactjs/react-codemod
 
-このcodemodでは、`React.createClass`が提供するautobindを実現するために、property initializerのシンタックスを利用するので、変換後は`babel-plugin-transform-class-properties`を使用する必要があります。(Stage 2)
+このcodemodでは、`React.createClass`が提供するautobindを実現するために、property initializerのシンタックスを利用します。そのため、変換後は`babel-plugin-transform-class-properties`を使用する必要があります。(Stage 2)
 
 * http://babeljs.io/docs/plugins/transform-class-properties/
 
-`React.createClass`を使っているライブラリーを利用している場合には、PR送って対応してもらうか、`React.createClass`に`create-react-class`を代入して対応するなどが必要になるかもしれません。
+v16になった時点で`React.createClass`を使っているライブラリーを利用している場合には、PR送って対応してもらうか、`React.createClass`に`create-react-class`を代入するなどの対応が必要になるかもしれません。
 (v15.5では、警告を出すために`React.createClass`には`Object.defineProperty`でgetterが設定されており、`configurable`でないので置き換えることはできません)
 
 ## Deprecated React.PropTypes
@@ -63,7 +64,7 @@ import PropTypes from 'prop-types';
 * https://github.com/reactjs/react-codemod#react-proptypes-to-prop-types
 
 PropTypesに関しては、FlowやTypeScriptへの移行が勧められているもののハードルもあるので、別パッケージ化された`prop-types`をしばらく使い続けるのは選択肢としてあるのかなと思います。
-今回別パッケージとなったので、組み込みのvalidationロジックであり、PropTypesのチェック機構自体がなくなることは、まだ予定されていないので。
+今回別パッケージとなったのは組み込みのPropTypesのvalidationロジックであり、PropTypesのチェック機構自体がなくなることは、まだ予定されていないので。
 
 ちなみに、将来的にAPIの変更が予定されているContextを使う場合にも、変わらず`prop-types`を使って指定します。
 （実際には`contextTypes`の定義でマスクしているだけなので、`prop-types`を使う必要はないのですが）
@@ -163,4 +164,6 @@ v16からは、それぞれのエントリーポイントがRollupを使って�
 ### リリース？
 
 ちなみにv16は、夏くらい(?)をターゲットに考えているようです。
+
+また何か動きがあれば追記するかも。
 
