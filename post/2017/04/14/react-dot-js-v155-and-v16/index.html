@@ -239,8 +239,10 @@ ShallowRenderは、これのトップレベルのComponentまでしかrenderし�
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>react-addons-perf</code>だけは、特に何もなくこのままですが、<code>react-addons-perf</code>は同期的なrenderが前提となっているため、将来的にFiberで非同期的なrenderをする場合には正しく計測できません。
-これに変わる何かが将来的に提供される可能性もありますが、とりあえずは<code>?react_perf</code>によるBroser Timelineを使った計測が推奨されています。</p>
+<p><del><code>react-addons-perf</code>だけは、特に何もなくこのままですが、<code>react-addons-perf</code>は同期的なrenderが前提となっているため、将来的にFiberで非同期的なrenderをする場合には正しく計測できません。</del></p>
+
+<p><strong>[修正]</strong> <code>react-addons-perf</code>は同期的なrenderが前提となっていてFiberへの対応が難しいため、v16(Fiber)への対応は行われません。
+Perfに変わる何かについては検討されるので、将来的に何か提供される可能性もありますが、とりあえずは<code>?react_perf</code>によるBrowser Timelineを使った計測が推奨されています。</p>
 
 <ul>
 <li><a href="https://facebook.github.io/react/docs/optimizing-performance.html#profiling-components-with-chrome-timeline">https://facebook.github.io/react/docs/optimizing-performance.html#profiling-components-with-chrome-timeline</a></li>
