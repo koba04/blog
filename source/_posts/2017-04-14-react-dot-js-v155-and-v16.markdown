@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "React v15.5(6) and v16"
-date: 2017-04-13 20:07:05 +0900
+date: 2017-04-14 14:00:05 +0900
 comments: true
 categories: react.js
 ---
