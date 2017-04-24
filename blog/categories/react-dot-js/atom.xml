@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2017-04-14T15:50:51+09:00</updated>
+  <updated>2017-04-25T01:56:35+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,584 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React Fiber現状確認]]></title>
+    <link href="http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber/"/>
+    <updated>2017-04-25T02:00:55+09:00</updated>
+    <id>http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber</id>
+    <content type="html"><![CDATA[<p><a href="https://developers.facebook.com/videos/?category=f8_2017">F8</a>でもReact Fiberについての発表もあったので、気になっている人も多いReact Fiberの現状について簡単に書きたいと思います。</p>
+
+<p>Reactの完全な書き換えということで、使い方も変わってしまうと思っている人もいると思いますが、内部実装の書き換えであり、利用者から見える部分ではほとんど変更はありません。</p>
+
+<p>もちろん、react-fiberというパッケージをインストールするというわけでもありません。</p>
+
+<p>むしろ、<code>v16</code>の時点では現在の実装と互換性を保たれているので、<code>v16</code>がリリースされた時に、<code>v15.5</code>を使っていればほとんどそのまま<code>v16</code>に更新できると思います。
+そして、言われなければ内部実装が変わっていることに気づかないのではないかと思います。</p>
+
+<h2>とりあえずどうなるのか知りたい人向けのまとめ</h2>
+
+<ul>
+<li>v16では、基本的にはv15の時と同じように動作します。逆に言うとパフォーマンスもそんなに変わらない（はず）です</li>
+<li>renderメソッドから<code>[&lt;Foo /&gt;, &lt;Bar /&gt;]</code> みたいに配列で返したり、文字列をReactElementでラップすることなく返せるようになります</li>
+<li>v17では、デフォルトで非同期のrendering（後述）になります。v16でも何らかのAPIでopt-inで試せるようにはなりそうです。現状は<code>ReactDOM.unstable_deferredUpdates</code>で一部試すことができます</li>
+<li>v17では、劇的に高速になるというよりは、ユーザーの入力をブロックしないようにしたり、柔軟に更新処理をスケジューリング出来るようになる予定です</li>
+</ul>
+
+
+<h2>注意点</h2>
+
+<p><strong>以下の情報は、Reactをただ使いたい人にとっては知る必要のない内部実装の話です。多くの人にとってはここまでの情報でReact FiberについてはOKだと思います。v17になるまでは。</strong></p>
+
+<!-- more -->
+
+
+<h2>Reactの構成</h2>
+
+<p>新しいFiberについて説明するために、まずは現状の実装について確認しましょう。
+Reactのソースコードは下記のような構成になっています。</p>
+
+<p>```</p>
+
+<pre><code>src
+├── fb
+├── isomorphic
+│   ├── children
+│   ├── classic
+│   │   ├── class
+│   │   ├── element
+│   │   └── types
+│   ├── hooks
+│   └── modern
+│       ├── class
+│       └── element
+├── renderers
+│   ├── art
+│   ├── dom
+│   │   ├── fiber
+│   │   ├── shared
+│   │   └── stack
+│   ├── native
+│   ├── noop
+│   ├── shared
+│   │   ├── fiber
+│   │   ├── hooks
+│   │   ├── shared
+│   │   ├── stack
+│   │   └── utils
+│   └── testing
+│       └── stack
+├── shared
+│   ├── types
+│   └── utils
+└── test
+(テストなどの一部ディレクトリは省略)
+</code></pre>
+
+<p>```</p>
+
+<p>上記の通り、Fiberは<code>renderers</code> の中にありrendererの1つであることがわかります。<code>fiber</code> と同列にある<code>stack</code> は現在の実装のrendererです。</p>
+
+<p><code>renderes/shared/</code> に<code>fiber</code> と<code>stack</code> のディレクトリがあって、<code>renderers/dom/</code> にも<code>stack</code> と<code>fiber</code> があります。rendererの中にはStackとFiberの2種類の実装があり、それぞれに対応するDOMやNativeなどの環境毎のrendererがさらにあるような構成になっています。</p>
+
+<p>FiberやStackは、reconciliationと呼ばれる部分の役割を担っています。
+reconciliationとは、ReactElementからComponentのインスタンスを生成したり差分を計算してHost(DOM)に反映したり、ライフサイクルメソッドの呼び出しといったことを行う部分です。
+Hostに反映させる部分はHostが何かによっても異なり、反映方法もreconciliationによって異なるため、<code>renderers/dom/</code> 以下にもStackとFiberが存在します。</p>
+
+<p>Hostとは各環境のことです。ブラウザー環境であればDOMであり、ReactNativeであればネイティブのビューとなります。</p>
+
+<h2>Stack</h2>
+
+<p>それでは、まずは現在使われているStackのrendererについて簡単に触れます。
+Stackは、ReactElementがツリー構造になるのと同様に、親から子、子から孫に処理を行っていきます。</p>
+
+<p><img src="/images/posts/a-state-of-react-fiber/ReactDOM.png" title="&lsquo;ReactDOM Stack&rsquo;" ></p>
+
+<p>上記では、<code>mountComponent</code> がどんどん入れ子になって呼ばれているのがわかります。
+加えてこれは同期的に行われます。</p>
+
+<p>つまり、トップレベルのComponentから再renderした場合、</p>
+
+<ul>
+<li>子孫の全てのComponentに対するrender処理を行いReactElementのツリーを構築する</li>
+<li>更新の場合は、前のReactElementツリーと比較を行う</li>
+<li>差分をHostに適用する</li>
+<li>ライフサイクルメソッドの呼び出しなどを行う</li>
+</ul>
+
+
+<p>という処理が同期的に処理されます。
+そのため、例えば複雑なツリー構造を持っていて上記の処理に時間がかかる場合、UIを完全にブロックしてしまいます。</p>
+
+<p>また、例えばアニメーションやユーザーのタイピングなど、即時に反映する必要のある処理を行っている時にサーバーから結果が返ってきた時を考えてみます。
+Stackは全てが同期的に処理されるため、サーバーからの結果の反映処理が、アニメーションやタイピングの反映に割り込んでブロックしてしまうことも起きます。</p>
+
+<p>これらは、単純なパフォーマンスのベンチマークでは現れない指標ですが、ユーザー体験という意味では重要です。</p>
+
+<p>これらの問題を解決するためのものとしてReact Fiberはあります。</p>
+
+<p>ちなみにStackに関連するソースは、v16のリリース時には削除されそうな感じではあります。</p>
+
+<h2>Fiber</h2>
+
+<p>Fiberは、wikipediaによると「軽量な実行スレッド」とされています。</p>
+
+<p><a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E3%83%BC_">https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E3%83%BC_</a>(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)</p>
+
+<p>React Fiberでは、Fiberの単位でreconciliationが行われます。
+Fiberは、基本的には1つのReactElementと対応すると考えることができます。</p>
+
+<p>厳密にはReactElementの単位とFiberが必ずしも一致するわけでありません。
+さらにFiberは、<code>fiber.alternate</code> として自身をcloneしたFiberを持っており再利用されています。
+ただ、考える上ではFiberをReactElementの単位でイメージするとわかりやすいと思います。</p>
+
+<p>FiberはFlowの型で下記のように指定されています。</p>
+
+<p>```js</p>
+
+<pre><code>// 一部省略
+type Fiber = {
+  tag: TypeOfWork,
+  key: null | string,
+  type: any,
+  stateNode: any,
+  return: Fiber | null,
+  child: Fiber | null,
+  sibling: Fiber | null,
+  index: number,
+  ref: null | (((handle: mixed) =&gt; void) &amp; {_stringRef: ?string}),
+  pendingProps: any, // This type will be more specific once we overload the tag.
+  memoizedProps: any, // The props used to create the output.
+  updateQueue: UpdateQueue | null,
+  memoizedState: any,
+  effectTag: TypeOfSideEffect,
+  nextEffect: Fiber | null,
+  firstEffect: Fiber | null,
+  lastEffect: Fiber | null,
+  pendingWorkPriority: PriorityLevel,
+  progressedPriority: PriorityLevel,
+  progressedChild: Fiber | null,
+  progressedFirstDeletion: Fiber | null,
+  progressedLastDeletion: Fiber | null,
+  alternate: Fiber | null,
+};
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiber.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiber.js</a></li>
+</ul>
+
+
+<p>各プロパティについては解説しませんが、<code>return</code> や<code>child</code> や<code>sibling</code> など、他のFiberへの参照を持っていることがわかります。
+FiberはLinked Listの構造になっています。Stackの場合はTree構造を掘り下げていくように処理をしていましたが、Fiberでは、<code>return</code> や<code>child</code> や<code>sibling</code> などをたどることで順番にReactElementを処理していきます。
+そのことは、下記のスタックツリーを見てもわかります。</p>
+
+<p><img src="/images/posts/a-state-of-react-fiber/ReactDOMFiber.png" title="&lsquo;ReactDOM Fiber&rsquo;" ></p>
+
+<p>上記の通り、Stackのようにスタックがたくさん積まれていないことがわかります。</p>
+
+<p>Stackでは処理が1つのツリーを単位として行われていましたが、FiberではFiberの単位で処理されます。Stackでは処理を同期的に行うしかできませんでしたが、FiberではこのFiberに対する処理をスケジューリングすることができます。</p>
+
+<p>つまり、A → B → C とLinkedListを構成しているFiberがあった時に、A → B まで処理して中断し、またB → Cから処理を再開できます。
+これはStackのような構造では難しいことです。
+Generatorsだとどうでしょうか？それに対しては、<a href="https://github.com/sebmarkbage">Sebastian Markbåge</a>が下記でGeneratorsを採用しなかった理由を書いているので興味のある人は見て見るといいと思います。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/7942">https://github.com/facebook/react/issues/7942</a></li>
+</ul>
+
+
+<h3>Fiberのスケジューリング</h3>
+
+<p>では、具体的にどのようにスケジューリングが行われるのかを見ていきます。</p>
+
+<p>Fiberは、<code>beginWork</code> と<code>completeWork</code> と<code>commitWork</code> という3つのフェーズがあります。
+beginWorkはcomponentのインスタンス化やrenderメソッドの呼び出し、shouldComponentUpdateなどによる比較を行います。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberBeginWork.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberBeginWork.js</a></li>
+</ul>
+
+
+<p>completeWorkは副作用を示すeffectTagを設定したり、Hostインスタンスを作成したりなどを行います。（末端のHostなどでのみ実行される）</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberCompleteWork.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberCompleteWork.js</a></li>
+</ul>
+
+
+<p>副作用は下記のように定義されています。</p>
+
+<p>```js</p>
+
+<pre><code>module.exports = {
+  NoEffect: 0, //           0b0000000
+  Placement: 1, //          0b0000001
+  Update: 2, //             0b0000010
+  PlacementAndUpdate: 3, // 0b0000011
+  Deletion: 4, //           0b0000100
+  ContentReset: 8, //       0b0001000
+  Callback: 16, //          0b0010000
+  Err: 32, //               0b0100000
+  Ref: 64, //               0b1000000
+};
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactTypeOfSideEffect.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactTypeOfSideEffect.js</a></li>
+</ul>
+
+
+<p>commitWorkでは、componentDid(Mount|Update)などのライフサイクルメソッドの呼び出しや、completeWorkで設定されたeffectTagに基づいてHostに結果を反映します。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberCommitWork.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberCommitWork.js</a></li>
+</ul>
+
+
+<p>この中で、beginWorkとcompleteWorkはFiber単位で実行されます。
+commitWorkは、全てのFiberに対する処理が終わった後にまとめて実行されます。</p>
+
+<p>例えば、下記のような構成のComponentがある場合、</p>
+
+<p>```js</p>
+
+<pre><code>Text = () =&gt; '...';
+List = () =&gt; [
+  &lt;div&gt;...&lt;/div&gt;,
+  &lt;div&gt;...&lt;/div&gt;,
+  &lt;div&gt;...&lt;/div&gt;,
+];
+
+class App extends React.Component {
+    render() {
+        return (
+            &lt;main&gt;
+            &lt;h2&gt;...&lt;/h2&gt;
+            &lt;p&gt;...&lt;/p&gt;
+            &lt;div&gt;
+                &lt;Text /&gt;
+                &lt;List /&gt;
+            &lt;/div&gt;
+            &lt;/main&gt;
+        );
+    }
+}
+</code></pre>
+
+<p>```</p>
+
+<p>下記のような流れで処理されます。</p>
+
+<ol>
+<li><strong>beginWork</strong> … (HostRoot)</li>
+<li><strong>beginWork …</strong>  <code>&lt;App&gt;</code> (ClassComponent)</li>
+<li><strong>beginWork</strong> …  <code>&lt;main&gt;</code> (HostComponent)</li>
+<li><strong>beginWork, completeWork …</strong>  <code>&lt;h2&gt;</code> (HostComponent)</li>
+<li><strong>beginWork, completeWork …</strong> <code>&lt;p&gt;</code> (HostComponent)</li>
+<li><strong>beginWork …</strong> <code>&lt;div&gt;</code> (HostComponent)</li>
+<li><strong>beginWork …</strong> <code>&lt;Text&gt;</code> (FunctionalComponent)</li>
+<li><strong>beginWork completeWork …</strong> &lsquo;&hellip;&rsquo; (HostText)</li>
+<li><strong>beginWork …</strong> <code>&lt;List&gt;</code> (Functional Component)</li>
+<li><strong>beginWork, completeWork …</strong> : <code>&lt;div&gt;</code> (HostComponent)</li>
+<li><strong>beginWork, completeWork …</strong> : <code>&lt;div&gt;</code> (HostComponent)</li>
+<li><strong>beginWork, completeWork …</strong> : <code>&lt;div&gt;</code> (HostComponent)</li>
+<li><strong>commitAllWork …</strong> (HostRoot)</li>
+</ol>
+
+
+<p>React Fiberは、非同期renderingの場合には、後述する優先度が高くないものについてはrequestIdleCallback（サポートしてなければpolyfill実装）を使い、これらをスケジューリングして非同期に処理していきます。
+requestIdleCallbackでは、アイドル時間を<code>timeRemaining</code>の関数から受け取ることができるため、この値を元に処理できる時間がなくなると再び<code>requestIdleCallback</code> に処理を登録して次のアイドル時間に処理するようになっています。
+これにより、優先度が高くない処理がUIや他の処理をブロックしないようになっています。</p>
+
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/API/Window/requestIdleCallback">https://developer.mozilla.org/ja/docs/Web/API/Window/requestIdleCallback</a></li>
+</ul>
+
+
+<p>下記はFiberを同期モードで実行した時のスタックです。
+全てが同期的に行われていることがわかります。この間はUIを完全にブロックしてしまいます。</p>
+
+<p><img src="/images/posts/a-state-of-react-fiber/ReactDOMFiber-sync.png" title="&lsquo;ReactDOM Fiber Sync&rsquo;" ></p>
+
+<p>下記は同じ処理を非同期で実行したスタックです。
+スタックが途切れ途切れになっていることがわかります。そのためUIをブロックしません。
+右端にある細いスタックはcommitWorkによるものです。
+Renderingの処理はcommitWorkの以降でだけ発生していることがわかります。</p>
+
+<p><img src="/images/posts/a-state-of-react-fiber/ReactDOMFiber-async.png" title="&lsquo;ReactDOM Fiber Async&rsquo;" ></p>
+
+<p>このとき、HostのViewに反映するといった副作用をこのbeginWork〜completeWorkの中で行わないというのは1つのポイントです。
+例えば、Viewへの反映をこの非同期処理の中で行ってしまうと、Viewが部分部分更新される形になり、UIがガタガタしてしまいます。
+React Fiberでは、commitWorkで全てのViewへの更新をまとめて行うため、このようなことは起こりません。
+逆にcommitWorkの部分は時間がかかりやすくframeを落としてしまうこともあるためパフォーマンスチューニングが注意深く行われています。
+componentDid(Mount|Update)もこの中で行われるため、この中で重い処理を行わないように注意が必要です。</p>
+
+<p>余談ですが、上記のようにライフサイクルメソッドがボトルネックになる場面が想定されるため、ライフサイクルメソッドをPromiseを返す非同期なAPIとする案もあります。
+あと、実はマウント時はcompleteWorkでもSideEffectが処理されています。これはマウント時にはまだHostContainerはDOMに追加されていないため追加しても表示されず問題ないためです。
+これもcommitWorkでframeを落とさないための工夫の1つです。</p>
+
+<p>また、上記のようなrequestIdleCallbackを使ったスケジュール以外にも、優先度に応じたスケジューリングも可能です。
+優先度は下記のように定義されています。</p>
+
+<p>```js</p>
+
+<pre><code>export type PriorityLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+
+module.exports = {
+  NoWork: 0, // No work is pending.
+  SynchronousPriority: 1, // For controlled text inputs. Synchronous side-effects.
+  TaskPriority: 2, // Completes at the end of the current tick.
+  AnimationPriority: 3, // Needs to complete before the next frame.
+  HighPriority: 4, // Interaction that needs to complete pretty soon to feel responsive.
+  LowPriority: 5, // Data fetching, or result from updating stores.
+  OffscreenPriority: 6, // Won't be visible but do the work in case it becomes visible.
+};
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactPriorityLevel.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactPriorityLevel.js</a></li>
+</ul>
+
+
+<p>更新処理に優先度を持たせることで、ユーザーインタラクションやアニメーションなどの更新処理を、APIレスポンスの反映など、優先度の低いタスクが邪魔しないようにすることができます。</p>
+
+<p>下記はそれを表したサンプルです。「Async mode」の場合、5000個のlist itemは100ms毎に<code>LowPriority</code>で更新されます。「Sync mode」の場合は<code>SynchronousPriority</code>として同期的にレンダリングされます。</p>
+
+<ul>
+<li><a href="https://koba04.github.io/react-fiber-resources/examples/">https://koba04.github.io/react-fiber-resources/examples/</a></li>
+</ul>
+
+
+<p>上にある入力フィールドに何か入力してください。「Async mode」の場合は入力中はlist itemが更新されず、入力も多少引っかかりますがスムーズに反映されます。「Sync mode」の場合は入力中もlist itemが更新されてユーザーの入力を邪魔してしまっています。</p>
+
+<p>優先度の低い処理はrequestIdleCallbackを使ってアイドル時間がある時に、優先度の高い処理はrequestAnimationFrameを使うか同期的にASAPで反映されます。</p>
+
+<p>優先度の低いタスクを実行中に、優先度の高いタスクが割り込んで来た場合、優先度の低いタスクは中断されて、優先度の高いタスクが先に行われます。
+優先度の高いタスクが終了後、再び優先度の低いタスクが実行されます。
+この際、割り込まれる前に優先度の低いタスクが実行していたFiberのうち、優先度の高いタスクが処理しなかったものは再利用されます。</p>
+
+<p>このように、タスクの割り込みによっては複数回Fiberが処理されることがあるため、非同期のレンダリングの場合には、componentWillMountなどのライフサイクルメソッドが複数回呼び出されることがあります。componentDidMountなどはcommitWorkで呼ばれるため複数回呼ばれることはありません。</p>
+
+<p>また、OffscreenPriorityというPriorityがあります。これを利用することで初回のレンダリングでは必要ない部分をプリレンダリングしたり、ダブルバッファリングが可能となります。ReactDOMでは、<code>hidden</code>属性のあるものはOffscreenPriorityとして扱われます。</p>
+
+<p>他にもAnimationPriorityなどのPriorityがありますが、現時点ではまだPriorityを制御するようなAPIはないため、どのように利用するのかは見えていません。（facebook.comでの非同期レンダリングの実験をやりながらAPIを決めていくらしい）</p>
+
+<p>その他の細かい挙動については、<code>ReactIncremental-test.js</code>のテストを見るとどんなことができるのかわかるかと思います。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/__tests__/ReactIncremental-test.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/__tests__/ReactIncremental-test.js</a></li>
+</ul>
+
+
+<p>ここで使われている<code>ReactNoop</code> というrendererはテスト用のrendererです。UIは全く持っておらずテスト用に<code>timeRemaining</code> などが柔軟に制御可能であり、React Fiberの開発は初期の頃はこのrendererに対して行われていました。custom rendererを作る際の参考にもいいかもしれません。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/noop/ReactNoop.js">https://github.com/facebook/react/blob/master/src/renderers/noop/ReactNoop.js</a></li>
+</ul>
+
+
+<h2>Error Boundary</h2>
+
+<p>あと、Fiber自体には直接関係ないですが、Error Boundaryの機能も公式にサポートされるようになりそうです。
+Error Boundaryとは、これまでは子孫Componentのrender時にエラーが発生した場合は、何も表示されなくなってしまいましたが、Error Boundaryの機能を使うことで握り潰したりエラーハンドリングができるようになるものです。</p>
+
+<p>```js</p>
+
+<pre><code>class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null
+        };
+    }
+    // エラーハンドリングを定義する
+    unstable_handleError(error) {
+        this.setState({error});
+    }
+    render() {
+        if (this.state.error) {
+            return &lt;div&gt;エラーが発生しました&lt;/div&gt;;
+        }
+        return this.props.children;
+    }
+}
+</code></pre>
+
+<p>```</p>
+
+<h2>CoroutineComponent</h2>
+
+<p>Fiberには<code>CoroutineComponent</code> や<code>CoroutineHandlerPhase</code> や<code>YieldComponent</code>といったComponentもあります。これはどうやら、親のComponentのレンダリングを途中で止めて、子のComponentからの結果を受けて親のComponentのレンダリングを再開するみたいなこともできるっぽいです（あんまりわかってない）。例えばレイアウトを行うComponentで子を実際にレンダリングしてみて、サイズなどの結果を持って親のComponentを再度レンダリングするみたいなことが、ユースケースとしてどこかで説明されていました。</p>
+
+<p>これの動作については、上記であげた<code>ReactCoroutin-test.js</code> の中にあるので見てみるといいかと思います。状態としてはとりあえず動いてるっぽいという感じだとは思います。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/__tests__/ReactCoroutine-test.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/__tests__/ReactCoroutine-test.js</a></li>
+</ul>
+
+
+<h2>Custom Renderer</h2>
+
+<p>Stackでは、Custom Rendererを作成するためにはハックが必要でしたが、React FiberではFlowによって型付けされているため、わかりやすくなりました。</p>
+
+<p>```js</p>
+
+<pre><code>export type HostConfig&lt;T, P, I, TI, PI, C, CX, PL&gt; = {
+  getRootHostContext(rootContainerInstance: C): CX,
+  getChildHostContext(parentHostContext: CX, type: T): CX,
+  getPublicInstance(instance: I | TI): PI,
+
+  createInstance(
+    type: T,
+    props: P,
+    rootContainerInstance: C,
+    hostContext: CX,
+    internalInstanceHandle: OpaqueHandle,
+  ): I,
+  appendInitialChild(parentInstance: I, child: I | TI): void,
+  finalizeInitialChildren(
+    parentInstance: I,
+    type: T,
+    props: P,
+    rootContainerInstance: C,
+  ): boolean,
+
+  prepareUpdate(
+    instance: I,
+    type: T,
+    oldProps: P,
+    newProps: P,
+    rootContainerInstance: C,
+    hostContext: CX,
+  ): null | PL,
+  commitUpdate(
+    instance: I,
+    updatePayload: PL,
+    type: T,
+    oldProps: P,
+    newProps: P,
+    internalInstanceHandle: OpaqueHandle,
+  ): void,
+  commitMount(
+    instance: I,
+    type: T,
+    newProps: P,
+    internalInstanceHandle: OpaqueHandle,
+  ): void,
+
+  shouldSetTextContent(props: P): boolean,
+  resetTextContent(instance: I): void,
+  shouldDeprioritizeSubtree(type: T, props: P): boolean,
+
+  createTextInstance(
+    text: string,
+    rootContainerInstance: C,
+    hostContext: CX,
+    internalInstanceHandle: OpaqueHandle,
+  ): TI,
+  commitTextUpdate(textInstance: TI, oldText: string, newText: string): void,
+
+  appendChild(parentInstance: I | C, child: I | TI): void,
+  insertBefore(parentInstance: I | C, child: I | TI, beforeChild: I | TI): void,
+  removeChild(parentInstance: I | C, child: I | TI): void,
+
+  scheduleAnimationCallback(callback: () =&gt; void): number | void,
+  scheduleDeferredCallback(
+    callback: (deadline: Deadline) =&gt; void,
+  ): number | void,
+
+  prepareForCommit(): void,
+  resetAfterCommit(): void,
+
+  useSyncScheduling?: boolean,
+};
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberReconciler.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberReconciler.js</a></li>
+</ul>
+
+
+<p>実際に実装する際には、先ほど紹介した<code>ReactNoop</code> や、Test用のrendererでありReactElementからJSONを返す<code>ReactTestRenderer</code> や<code>ReactART</code> などが参考になると思います。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/testing/ReactTestRendererFiber.js">https://github.com/facebook/react/blob/master/src/renderers/testing/ReactTestRendererFiber.js</a></li>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/art/ReactARTFiber.js">https://github.com/facebook/react/blob/master/src/renderers/art/ReactARTFiber.js</a></li>
+</ul>
+
+
+<p>ただ、Reactはv16からFlat bundleになり、内部ライブラリーを<code>react/lib/xxx</code>のように利用出来なくなったので、Custom Renderer作る人向けに何かが提供されるのかは不明なところです。</p>
+
+<h2>Server Side Rendering</h2>
+
+<p>サーバーサイドレンダリングについては、Facebookで使っていないということもあり後回しになっていて、まだ実装されていません。
+ただ、今までの<code>renderToString</code> は完全に同期でしたが、ReactFiberになることでイベントループをブロックしないようにHTML文字列を生成することは簡単になりそうです（v16には入るかどうかは不明）。<code>renderToStream</code> みたいなのは、副作用はcommitWorkでまとめてやるというところからは外れてしまうのでどうなんでしょうね。</p>
+
+<h2>v16でも非同期レンダリングを試したい</h2>
+
+<ul>
+<li>現時点では、<code>ReactDOMFeatureFlags</code> に<code>fiberAsyncScheduling</code> というフラグがあるので、それを無理やり<code>true</code> に書き換えることでデフォルトで非同期のレンダリングに出来ます。ただまだそんなにテストされていないと思うのでバグなどはありそうです</li>
+<li>または、<code>ReactDOM.unstable_deferredUpdates</code> を使うとその中の更新処理は<code>lowPriority</code> として処理されるため、非同期となります</li>
+</ul>
+
+
+<h2>その他リソース</h2>
+
+<p>Fiberで何が嬉しいのかを知りたい人は、F8のTom OcchinoのTalkがとてもわかりやすいと思います。</p>
+
+<ul>
+<li>The Evolution of React and GraphQL at Facebook and Beyond
+
+<ul>
+<li><a href="https://developers.facebook.com/videos/f8-2017/the-evolution-of-react-and-graphql-at-facebook-and-beyond/">https://developers.facebook.com/videos/f8-2017/the-evolution-of-react-and-graphql-at-facebook-and-beyond/</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>Lin ClarkがReact ConfでCode Cartoonを使ってReact Fiberについて説明していたのもわかりと思います。</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZCuYPiUIONs?ecver=1" frameborder="0" allowfullscreen></iframe>
+
+
+<p>あとはSebastian MarkbågeのReact ConfのキーノートでもReact Fiberについて触れられています。</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bvFpe5j9-zQ?ecver=1" frameborder="0" allowfullscreen></iframe>
+
+
+<p>あとは、個人的にReact Fiberについてまとめたリポジトリもあります。</p>
+
+<ul>
+<li><a href="https://github.com/koba04/react-fiber-resources">https://github.com/koba04/react-fiber-resources</a></li>
+</ul>
+
+
+<h2>で結局何が嬉しいの？</h2>
+
+<p>React Fiberに変わることで、よくフレームワークのパフォーマンス比較にあるようなベンチマークのスコアがよくなるといったことはおそらくないと思います。
+React Fiberになることで、これまで同期的にツリーを処理していくしかなかったものが非同期に、より柔軟に処理出来るようになるのがメリットです。
+これにより、アニメーションやユーザーのインタラクションに対して可能な限り早く反応出来るように出来ます。また、このような基盤としてReact Fiberがあるので、今後そういった機能追加が行われていくのではないかと思います。</p>
+
+<p>というで、v16ではそんなに変わりませんが、今後の機能追加を楽しみにしましょう。
+また、React Fiberの実装も勉強になるので興味のある人は是非読んでみてください。</p>
+
+<p>ちなみにReact Fiberの最初のPRはこれのようですね。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6690">https://github.com/facebook/react/pull/6690</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React v15.5(6) and v16]]></title>
@@ -523,198 +1101,6 @@ Reactの思想などについて語られていて、面白いです。</p>
 <li><a href="http://queue.acm.org/detail.cfm?id=2994373">http://queue.acm.org/detail.cfm?id=2994373</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[React.js Links vol.10]]></title>
-    <link href="http://blog.koba04.com/post/2016/08/10/react-dot-js-links-vol-dot-10/"/>
-    <updated>2016-08-10T14:09:19+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/08/10/react-dot-js-links-vol-dot-10</id>
-    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。
-10回目!!!</p>
-
-<!-- more -->
-
-
-<h2>React v15.3.0</h2>
-
-<ul>
-<li><a href="https://github.com/facebook/react/releases/tag/v15.3.0">https://github.com/facebook/react/releases/tag/v15.3.0</a></li>
-</ul>
-
-
-<p>Reactのv15.3.0がリリースされました。</p>
-
-<p>今回の大きな変更点は、<code>React.PureComponent</code>の追加です。
-これは、PureRenderMixinのES Classes版というような実装で、自動的に<code>shouldComponentUpdate</code>にshallowEqualが適用されるというものです。
-最初このPRが出された時には、内部のStateless Functional Componentにも最適化が適用されるという実装も含まれていましたが、PR内での議論で問題点などが見えたため、今回はただのPureRenderMixin for ES Claseesとして入りました。</p>
-
-<p>今後、v16のタイミングなどでさらなる最適化が追加される可能性はあります。</p>
-
-<p>もう一つ、大きな点は<code>react-test-render</code>というパッケージのリリースです。
-これは、TestUtilsのShallowRenderと似ていますが、Shallowではなく子孫までrenderして結果をReactElementのJSONとして返します。
-refやライフサイクルメソッドなどが呼ばれる点もShallowRenderとは異なります。</p>
-
-<p>```js
-import renderer from &lsquo;react-test-renderer&rsquo;;</p>
-
-<p>const json = renderer.create(<App />).toJSON();
-```</p>
-
-<p>Jestにはこれを使ったsnapshottestが追加されました。</p>
-
-<h2>Create Apps with No Configuration</h2>
-
-<ul>
-<li><a href="https://facebook.github.io/react/blog/2016/07/22/create-apps-with-no-configuration.html">https://facebook.github.io/react/blog/2016/07/22/create-apps-with-no-configuration.html</a></li>
-<li><a href="https://github.com/facebookincubator/create-react-app">https://github.com/facebookincubator/create-react-app</a></li>
-</ul>
-
-
-<p>Reactを使ったSingle Page Applicationのひな形を作成している公式のcliがリリースされました。
-これまでFacebookは自分たちが実際にプロダクトで使っているものだけをOSSにする方針でしたが、今回はコミュニティーの声に応えて作成したものです。</p>
-
-<p>インストールして、<code>create-react-app hello-world</code>として、<code>npm start</code>すればもう開発できるのは手軽でいいですね。
-また、<code>npm run eject</code>すると<code>react-scripts</code>というパッケージの内部に隠れていたwebpackの設定などが全部展開されてカスタマイズ出来るようになるのも面白いですね。</p>
-
-<p>まだ公開されてすぐなので、<code>facebookincubator/create-react-app</code>のリポジトリが、Reactを使ったプロジェクトの構成について多くの人が意見を交わしていてなかなか混沌としています。</p>
-
-<h2>Jest 14.0: React Tree Snapshot Testing</h2>
-
-<ul>
-<li><a href="http://facebook.github.io/jest/blog/2016/07/27/jest-14.html">http://facebook.github.io/jest/blog/2016/07/27/jest-14.html</a></li>
-</ul>
-
-
-<p>Jestが密かに追加されている新しいテスト用のrendererを使って、snapshot testをサポートしたという話です。
-snapshot testなので、一度テストを実行するとスナップショットのファイルが作成されて、次回からはそのスナップショットとテストが一致するかどうかを判定する感じです。</p>
-
-<p>その他にもReactNativeのサポートや、今後の予定(Jasmine捨てる)などが書かれています。</p>
-
-<h2>React.js in patterns</h2>
-
-<ul>
-<li><a href="http://krasimirtsonev.com/blog/article/react-js-in-design-patterns">http://krasimirtsonev.com/blog/article/react-js-in-design-patterns</a></li>
-</ul>
-
-
-<p>High Order ComponentsやContextをDIなど、Reactのパターン集です。</p>
-
-<h2>Function as Child Components</h2>
-
-<ul>
-<li><a href="https://medium.com/@iammerrick/function-as-child-components-5f3920a9ace9#.bnfwsk5un">https://medium.com/@iammerrick/function-as-child-components-5f3920a9ace9#.bnfwsk5un</a></li>
-</ul>
-
-
-<p>公式のブログでも言及されて、広く使われるようになったHigh Order Components(HOC)ですが、HOCではなくてchildrenに関数を渡すFunction as Child Componentsのパターンの方が有効ではないかとエントリーです。</p>
-
-<p>Function as Child Componentsにすることで、不要なComponentのラッピングをなくすことが出来たり、Propsの衝突を避けることも容易だとしています。</p>
-
-<h2>Use RxJS with React</h2>
-
-<ul>
-<li><a href="http://michalzalecki.com/use-rxjs-with-react/">http://michalzalecki.com/use-rxjs-with-react/</a></li>
-</ul>
-
-
-<p>RxJSを使ってReduxライクな状態管理を行う方法についてのエントリーです。</p>
-
-<h2>How to handle state in React. The missing FAQ.</h2>
-
-<ul>
-<li><a href="https://medium.com/react-ecosystem/how-to-handle-state-in-react-6f2d3cd73a0c">https://medium.com/react-ecosystem/how-to-handle-state-in-react-6f2d3cd73a0c</a></li>
-</ul>
-
-
-<p>Reactを学ぶ時に最初からReduxなどを使うのではなくて、ReactのStateから始めようってことで、Stateを扱う方法についてエントリーです。</p>
-
-<h2>Redux vs MobX vs Flux vs&hellip; Do you even need that?</h2>
-
-<ul>
-<li><a href="http://goshakkk.name/redux-vs-mobx-vs-flux-etoomanychoices/">http://goshakkk.name/redux-vs-mobx-vs-flux-etoomanychoices/</a></li>
-</ul>
-
-
-<p>上記のエントリーと同じように、まずはReactだけで始めて必要になったらReduxやMobXについて検討しましょうというエントリーです。
-Reactだけだと何が辛くて、何を解決するためにReduxなどのライブラリーを使うのかを理解してないと、ただ覚えることが増えたみたいに感じるということはありそうです。</p>
-
-<h2>A STEP-BY-STEP TDD APPROACH ON TESTING REACT COMPONENTS USING ENZYME</h2>
-
-<ul>
-<li><a href="http://thereignn.ghost.io/a-step-by-step-tdd-approach-on-testing-react-components-using-enzyme/">http://thereignn.ghost.io/a-step-by-step-tdd-approach-on-testing-react-components-using-enzyme/</a></li>
-</ul>
-
-
-<p>Enzymeを使って、React ComponentをTDDでテストを書いていく方法についてのエントリーです。
-TDDの流れに沿って順番にテストを書いていく方法が丁寧に解説されています。</p>
-
-<h2>The Problem with CSS-In-JS, circa Mid-2016</h2>
-
-<ul>
-<li><a href="https://medium.com/@taion/the-problem-with-css-in-js-circa-mid-2016-14060e69bf68#.ndfajua3p">https://medium.com/@taion/the-problem-with-css-in-js-circa-mid-2016-14060e69bf68#.ndfajua3p</a></li>
-</ul>
-
-
-<p>CSS in JSやCSS ModulesのようなComponentに閉じたCSSを使う場合の問題点についてのエントリーです。
-コンテキストによるスタイルの違いを、CSSがそれぞれ独立している中でどのようにComponentとして表現するかという内容です。</p>
-
-<h2>React Native at SoundCloud</h2>
-
-<ul>
-<li><a href="https://developers.soundcloud.com/blog/react-native-at-soundcloud">https://developers.soundcloud.com/blog/react-native-at-soundcloud</a></li>
-</ul>
-
-
-<p>SoundCloudがReactNativeでSoundCloud Purseのアプリを作った時の話です。
-なぜReactNativeを使ったのか、実際使ってみてどうだったのかが書かれています。</p>
-
-<h2>A Glimpse Into The Future With React Native For Web</h2>
-
-<ul>
-<li><a href="https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/">https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/</a></li>
-</ul>
-
-
-<p><code>react-native-web</code>の現状についてのエントリーです。
-基本的には、まだプロダクションで使うレベルにはなっていないけど今後に期待という感じです。</p>
-
-<h2>React Fiber Architecture</h2>
-
-<ul>
-<li><a href="https://github.com/acdlite/react-fiber-architecture">https://github.com/acdlite/react-fiber-architecture</a></li>
-</ul>
-
-
-<p>現在実装が進められているReact内部のアルゴリズムであるReact Fiberについてのエントリーです。
-詳細については書かれていませんが、導入としては良さそうです。</p>
-
-<p>ちなみにacdliteさんは、今setStateのReact Fiber対応をやっています。</p>
-
-<ul>
-<li><a href="https://github.com/facebook/react/pull/7344">https://github.com/facebook/react/pull/7344</a></li>
-</ul>
-
-
-<h2>Internationalization in React</h2>
-
-<ul>
-<li><a href="https://medium.freecodecamp.com/internationalization-in-react-7264738274a0#.33osi3w58">https://medium.freecodecamp.com/internationalization-in-react-7264738274a0#.33osi3w58</a></li>
-</ul>
-
-
-<p><code>react-intl</code>を使ったReactを使ったアプリケーションでのi18n対応についてのエントリーです。</p>
-
-<h2>Flow: Mapping an object</h2>
-
-<ul>
-<li><a href="https://medium.com/@thejameskyle/flow-mapping-an-object-373d64c44592#.xm62m8pic">https://medium.com/@thejameskyle/flow-mapping-an-object-373d64c44592#.xm62m8pic</a></li>
-</ul>
-
-
-<p>Flowでどのように型付けをしていけばいいのかということを、<code>map-obj</code>に型付けしていきながら解説しているエントリーです。
-わかりやすいです。</p>
 ]]></content>
   </entry>
   

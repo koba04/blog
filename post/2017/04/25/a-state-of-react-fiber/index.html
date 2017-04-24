@@ -1,0 +1,986 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>React Fiber現状確認 - blog.koba04.com</title>
+  <meta name="author" content="koba04">
+
+   
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="blog.koba04.com" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <script src="/js/application.js"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <meta property="og:title" content="React Fiber現状確認 - blog.koba04.com" />
+<meta property="og:description" content="" />
+<meta property="og:url" content="http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber/" />
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/250407" />
+<meta property="og:author" content="koba04" />
+<meta property="og:site_name" content="blog.koba04.com" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="fb:app_id" content="346463362115366" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-8875970-5']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <div class="nav-title"><a href="/">blog.koba04.com</a></div>
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    <li><a href="http://github.com/koba04" title="Github Profile"><i class="icon-github-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://twitter.com/koba04" title="Twitter Profile"><i class="icon-twitter-sign social-navbar"></i></a></li>
+    
+    
+    
+    
+    
+    <li><a href="http://d.hatena.ne.jp/koba04/">OldBlog</a></li>
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    React Fiber現状確認
+	<h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2017-04-25T02:00:55+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2017</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <p><a href="https://developers.facebook.com/videos/?category=f8_2017">F8</a>でもReact Fiberについての発表もあったので、気になっている人も多いReact Fiberの現状について簡単に書きたいと思います。</p>
+
+<p>Reactの完全な書き換えということで、使い方も変わってしまうと思っている人もいると思いますが、内部実装の書き換えであり、利用者から見える部分ではほとんど変更はありません。</p>
+
+<p>もちろん、react-fiberというパッケージをインストールするというわけでもありません。</p>
+
+<p>むしろ、<code>v16</code>の時点では現在の実装と互換性を保たれているので、<code>v16</code>がリリースされた時に、<code>v15.5</code>を使っていればほとんどそのまま<code>v16</code>に更新できると思います。
+そして、言われなければ内部実装が変わっていることに気づかないのではないかと思います。</p>
+
+<h2>とりあえずどうなるのか知りたい人向けのまとめ</h2>
+
+<ul>
+<li>v16では、基本的にはv15の時と同じように動作します。逆に言うとパフォーマンスもそんなに変わらない（はず）です</li>
+<li>renderメソッドから<code>[&lt;Foo /&gt;, &lt;Bar /&gt;]</code> みたいに配列で返したり、文字列をReactElementでラップすることなく返せるようになります</li>
+<li>v17では、デフォルトで非同期のrendering（後述）になります。v16でも何らかのAPIでopt-inで試せるようにはなりそうです。現状は<code>ReactDOM.unstable_deferredUpdates</code>で一部試すことができます</li>
+<li>v17では、劇的に高速になるというよりは、ユーザーの入力をブロックしないようにしたり、柔軟に更新処理をスケジューリング出来るようになる予定です</li>
+</ul>
+
+
+<h2>注意点</h2>
+
+<p><strong>以下の情報は、Reactをただ使いたい人にとっては知る必要のない内部実装の話です。多くの人にとってはここまでの情報でReact FiberについてはOKだと思います。v17になるまでは。</strong></p>
+
+<!-- more -->
+
+
+<h2>Reactの構成</h2>
+
+<p>新しいFiberについて説明するために、まずは現状の実装について確認しましょう。
+Reactのソースコードは下記のような構成になっています。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>src
+</span><span class='line'>├── fb
+</span><span class='line'>├── isomorphic
+</span><span class='line'>│   ├── children
+</span><span class='line'>│   ├── classic
+</span><span class='line'>│   │   ├── class
+</span><span class='line'>│   │   ├── element
+</span><span class='line'>│   │   └── types
+</span><span class='line'>│   ├── hooks
+</span><span class='line'>│   └── modern
+</span><span class='line'>│       ├── class
+</span><span class='line'>│       └── element
+</span><span class='line'>├── renderers
+</span><span class='line'>│   ├── art
+</span><span class='line'>│   ├── dom
+</span><span class='line'>│   │   ├── fiber
+</span><span class='line'>│   │   ├── shared
+</span><span class='line'>│   │   └── stack
+</span><span class='line'>│   ├── native
+</span><span class='line'>│   ├── noop
+</span><span class='line'>│   ├── shared
+</span><span class='line'>│   │   ├── fiber
+</span><span class='line'>│   │   ├── hooks
+</span><span class='line'>│   │   ├── shared
+</span><span class='line'>│   │   ├── stack
+</span><span class='line'>│   │   └── utils
+</span><span class='line'>│   └── testing
+</span><span class='line'>│       └── stack
+</span><span class='line'>├── shared
+</span><span class='line'>│   ├── types
+</span><span class='line'>│   └── utils
+</span><span class='line'>└── test
+</span><span class='line'>(テストなどの一部ディレクトリは省略)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記の通り、Fiberは<code>renderers</code> の中にありrendererの1つであることがわかります。<code>fiber</code> と同列にある<code>stack</code> は現在の実装のrendererです。</p>
+
+<p><code>renderes/shared/</code> に<code>fiber</code> と<code>stack</code> のディレクトリがあって、<code>renderers/dom/</code> にも<code>stack</code> と<code>fiber</code> があります。rendererの中にはStackとFiberの2種類の実装があり、それぞれに対応するDOMやNativeなどの環境毎のrendererがさらにあるような構成になっています。</p>
+
+<p>FiberやStackは、reconciliationと呼ばれる部分の役割を担っています。
+reconciliationとは、ReactElementからComponentのインスタンスを生成したり差分を計算してHost(DOM)に反映したり、ライフサイクルメソッドの呼び出しといったことを行う部分です。
+Hostに反映させる部分はHostが何かによっても異なり、反映方法もreconciliationによって異なるため、<code>renderers/dom/</code> 以下にもStackとFiberが存在します。</p>
+
+<p>Hostとは各環境のことです。ブラウザー環境であればDOMであり、ReactNativeであればネイティブのビューとなります。</p>
+
+<h2>Stack</h2>
+
+<p>それでは、まずは現在使われているStackのrendererについて簡単に触れます。
+Stackは、ReactElementがツリー構造になるのと同様に、親から子、子から孫に処理を行っていきます。</p>
+
+<p><img src="/images/posts/a-state-of-react-fiber/ReactDOM.png" title="'ReactDOM Stack'" ></p>
+
+<p>上記では、<code>mountComponent</code> がどんどん入れ子になって呼ばれているのがわかります。
+加えてこれは同期的に行われます。</p>
+
+<p>つまり、トップレベルのComponentから再renderした場合、</p>
+
+<ul>
+<li>子孫の全てのComponentに対するrender処理を行いReactElementのツリーを構築する</li>
+<li>更新の場合は、前のReactElementツリーと比較を行う</li>
+<li>差分をHostに適用する</li>
+<li>ライフサイクルメソッドの呼び出しなどを行う</li>
+</ul>
+
+
+<p>という処理が同期的に処理されます。
+そのため、例えば複雑なツリー構造を持っていて上記の処理に時間がかかる場合、UIを完全にブロックしてしまいます。</p>
+
+<p>また、例えばアニメーションやユーザーのタイピングなど、即時に反映する必要のある処理を行っている時にサーバーから結果が返ってきた時を考えてみます。
+Stackは全てが同期的に処理されるため、サーバーからの結果の反映処理が、アニメーションやタイピングの反映に割り込んでブロックしてしまうことも起きます。</p>
+
+<p>これらは、単純なパフォーマンスのベンチマークでは現れない指標ですが、ユーザー体験という意味では重要です。</p>
+
+<p>これらの問題を解決するためのものとしてReact Fiberはあります。</p>
+
+<p>ちなみにStackに関連するソースは、v16のリリース時には削除されそうな感じではあります。</p>
+
+<h2>Fiber</h2>
+
+<p>Fiberは、wikipediaによると「軽量な実行スレッド」とされています。</p>
+
+<p><a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E3%83%BC_">https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E3%83%BC_</a>(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)</p>
+
+<p>React Fiberでは、Fiberの単位でreconciliationが行われます。
+Fiberは、基本的には1つのReactElementと対応すると考えることができます。</p>
+
+<p>厳密にはReactElementの単位とFiberが必ずしも一致するわけでありません。
+さらにFiberは、<code>fiber.alternate</code> として自身をcloneしたFiberを持っており再利用されています。
+ただ、考える上ではFiberをReactElementの単位でイメージするとわかりやすいと思います。</p>
+
+<p>FiberはFlowの型で下記のように指定されています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// 一部省略</span>
+</span><span class='line'><span class="nx">type</span> <span class="nx">Fiber</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">tag</span><span class="o">:</span> <span class="nx">TypeOfWork</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">key</span><span class="o">:</span> <span class="kc">null</span> <span class="o">|</span> <span class="nx">string</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">type</span><span class="o">:</span> <span class="nx">any</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">stateNode</span><span class="o">:</span> <span class="nx">any</span><span class="p">,</span>
+</span><span class='line'>  <span class="k">return</span><span class="o">:</span> <span class="nx">Fiber</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">child</span><span class="o">:</span> <span class="nx">Fiber</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">sibling</span><span class="o">:</span> <span class="nx">Fiber</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">index</span><span class="o">:</span> <span class="nx">number</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">ref</span><span class="o">:</span> <span class="kc">null</span> <span class="o">|</span> <span class="p">(((</span><span class="nx">handle</span><span class="o">:</span> <span class="nx">mixed</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">{</span><span class="nx">_stringRef</span><span class="o">:</span> <span class="o">?</span><span class="nx">string</span><span class="p">}),</span>
+</span><span class='line'>  <span class="nx">pendingProps</span><span class="o">:</span> <span class="nx">any</span><span class="p">,</span> <span class="c1">// This type will be more specific once we overload the tag.</span>
+</span><span class='line'>  <span class="nx">memoizedProps</span><span class="o">:</span> <span class="nx">any</span><span class="p">,</span> <span class="c1">// The props used to create the output.</span>
+</span><span class='line'>  <span class="nx">updateQueue</span><span class="o">:</span> <span class="nx">UpdateQueue</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">memoizedState</span><span class="o">:</span> <span class="nx">any</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">effectTag</span><span class="o">:</span> <span class="nx">TypeOfSideEffect</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">nextEffect</span><span class="o">:</span> <span class="nx">Fiber</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">firstEffect</span><span class="o">:</span> <span class="nx">Fiber</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">lastEffect</span><span class="o">:</span> <span class="nx">Fiber</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">pendingWorkPriority</span><span class="o">:</span> <span class="nx">PriorityLevel</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">progressedPriority</span><span class="o">:</span> <span class="nx">PriorityLevel</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">progressedChild</span><span class="o">:</span> <span class="nx">Fiber</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">progressedFirstDeletion</span><span class="o">:</span> <span class="nx">Fiber</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">progressedLastDeletion</span><span class="o">:</span> <span class="nx">Fiber</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">alternate</span><span class="o">:</span> <span class="nx">Fiber</span> <span class="o">|</span> <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiber.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiber.js</a></li>
+</ul>
+
+
+<p>各プロパティについては解説しませんが、<code>return</code> や<code>child</code> や<code>sibling</code> など、他のFiberへの参照を持っていることがわかります。
+FiberはLinked Listの構造になっています。Stackの場合はTree構造を掘り下げていくように処理をしていましたが、Fiberでは、<code>return</code> や<code>child</code> や<code>sibling</code> などをたどることで順番にReactElementを処理していきます。
+そのことは、下記のスタックツリーを見てもわかります。</p>
+
+<p><img src="/images/posts/a-state-of-react-fiber/ReactDOMFiber.png" title="'ReactDOM Fiber'" ></p>
+
+<p>上記の通り、Stackのようにスタックがたくさん積まれていないことがわかります。</p>
+
+<p>Stackでは処理が1つのツリーを単位として行われていましたが、FiberではFiberの単位で処理されます。Stackでは処理を同期的に行うしかできませんでしたが、FiberではこのFiberに対する処理をスケジューリングすることができます。</p>
+
+<p>つまり、A → B → C とLinkedListを構成しているFiberがあった時に、A → B まで処理して中断し、またB → Cから処理を再開できます。
+これはStackのような構造では難しいことです。
+Generatorsだとどうでしょうか？それに対しては、<a href="https://github.com/sebmarkbage">Sebastian Markbåge</a>が下記でGeneratorsを採用しなかった理由を書いているので興味のある人は見て見るといいと思います。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/issues/7942">https://github.com/facebook/react/issues/7942</a></li>
+</ul>
+
+
+<h3>Fiberのスケジューリング</h3>
+
+<p>では、具体的にどのようにスケジューリングが行われるのかを見ていきます。</p>
+
+<p>Fiberは、<code>beginWork</code> と<code>completeWork</code> と<code>commitWork</code> という3つのフェーズがあります。
+beginWorkはcomponentのインスタンス化やrenderメソッドの呼び出し、shouldComponentUpdateなどによる比較を行います。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberBeginWork.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberBeginWork.js</a></li>
+</ul>
+
+
+<p>completeWorkは副作用を示すeffectTagを設定したり、Hostインスタンスを作成したりなどを行います。（末端のHostなどでのみ実行される）</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberCompleteWork.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberCompleteWork.js</a></li>
+</ul>
+
+
+<p>副作用は下記のように定義されています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">NoEffect</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">//           0b0000000</span>
+</span><span class='line'>  <span class="nx">Placement</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1">//          0b0000001</span>
+</span><span class='line'>  <span class="nx">Update</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="c1">//             0b0000010</span>
+</span><span class='line'>  <span class="nx">PlacementAndUpdate</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="c1">// 0b0000011</span>
+</span><span class='line'>  <span class="nx">Deletion</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span> <span class="c1">//           0b0000100</span>
+</span><span class='line'>  <span class="nx">ContentReset</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="c1">//       0b0001000</span>
+</span><span class='line'>  <span class="nx">Callback</span><span class="o">:</span> <span class="mi">16</span><span class="p">,</span> <span class="c1">//          0b0010000</span>
+</span><span class='line'>  <span class="nx">Err</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span> <span class="c1">//               0b0100000</span>
+</span><span class='line'>  <span class="nx">Ref</span><span class="o">:</span> <span class="mi">64</span><span class="p">,</span> <span class="c1">//               0b1000000</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactTypeOfSideEffect.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactTypeOfSideEffect.js</a></li>
+</ul>
+
+
+<p>commitWorkでは、componentDid(Mount|Update)などのライフサイクルメソッドの呼び出しや、completeWorkで設定されたeffectTagに基づいてHostに結果を反映します。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberCommitWork.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberCommitWork.js</a></li>
+</ul>
+
+
+<p>この中で、beginWorkとcompleteWorkはFiber単位で実行されます。
+commitWorkは、全てのFiberに対する処理が終わった後にまとめて実行されます。</p>
+
+<p>例えば、下記のような構成のComponentがある場合、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Text</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="s1">&#39;...&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nx">List</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="p">...</span><span class="o">&lt;</span><span class="err">/div&gt;,</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="p">...</span><span class="o">&lt;</span><span class="err">/div&gt;,</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="p">...</span><span class="o">&lt;</span><span class="err">/div&gt;,</span>
+</span><span class='line'><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">(</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">main</span><span class="o">&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="p">...</span><span class="o">&lt;</span><span class="err">/h2&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">...</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="nx">Text</span> <span class="o">/&gt;</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="nx">List</span> <span class="o">/&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="err">/main&gt;</span>
+</span><span class='line'>        <span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>下記のような流れで処理されます。</p>
+
+<ol>
+<li><strong>beginWork</strong> … (HostRoot)</li>
+<li><strong>beginWork …</strong>  <code>&lt;App&gt;</code> (ClassComponent)</li>
+<li><strong>beginWork</strong> …  <code>&lt;main&gt;</code> (HostComponent)</li>
+<li><strong>beginWork, completeWork …</strong>  <code>&lt;h2&gt;</code> (HostComponent)</li>
+<li><strong>beginWork, completeWork …</strong> <code>&lt;p&gt;</code> (HostComponent)</li>
+<li><strong>beginWork …</strong> <code>&lt;div&gt;</code> (HostComponent)</li>
+<li><strong>beginWork …</strong> <code>&lt;Text&gt;</code> (FunctionalComponent)</li>
+<li><strong>beginWork completeWork …</strong> &lsquo;&hellip;&rsquo; (HostText)</li>
+<li><strong>beginWork …</strong> <code>&lt;List&gt;</code> (Functional Component)</li>
+<li><strong>beginWork, completeWork …</strong> : <code>&lt;div&gt;</code> (HostComponent)</li>
+<li><strong>beginWork, completeWork …</strong> : <code>&lt;div&gt;</code> (HostComponent)</li>
+<li><strong>beginWork, completeWork …</strong> : <code>&lt;div&gt;</code> (HostComponent)</li>
+<li><strong>commitAllWork …</strong> (HostRoot)</li>
+</ol>
+
+
+<p>React Fiberは、非同期renderingの場合には、後述する優先度が高くないものについてはrequestIdleCallback（サポートしてなければpolyfill実装）を使い、これらをスケジューリングして非同期に処理していきます。
+requestIdleCallbackでは、アイドル時間を<code>timeRemaining</code>の関数から受け取ることができるため、この値を元に処理できる時間がなくなると再び<code>requestIdleCallback</code> に処理を登録して次のアイドル時間に処理するようになっています。
+これにより、優先度が高くない処理がUIや他の処理をブロックしないようになっています。</p>
+
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/API/Window/requestIdleCallback">https://developer.mozilla.org/ja/docs/Web/API/Window/requestIdleCallback</a></li>
+</ul>
+
+
+<p>下記はFiberを同期モードで実行した時のスタックです。
+全てが同期的に行われていることがわかります。この間はUIを完全にブロックしてしまいます。</p>
+
+<p><img src="/images/posts/a-state-of-react-fiber/ReactDOMFiber-sync.png" title="'ReactDOM Fiber Sync'" ></p>
+
+<p>下記は同じ処理を非同期で実行したスタックです。
+スタックが途切れ途切れになっていることがわかります。そのためUIをブロックしません。
+右端にある細いスタックはcommitWorkによるものです。
+Renderingの処理はcommitWorkの以降でだけ発生していることがわかります。</p>
+
+<p><img src="/images/posts/a-state-of-react-fiber/ReactDOMFiber-async.png" title="'ReactDOM Fiber Async'" ></p>
+
+<p>このとき、HostのViewに反映するといった副作用をこのbeginWork〜completeWorkの中で行わないというのは1つのポイントです。
+例えば、Viewへの反映をこの非同期処理の中で行ってしまうと、Viewが部分部分更新される形になり、UIがガタガタしてしまいます。
+React Fiberでは、commitWorkで全てのViewへの更新をまとめて行うため、このようなことは起こりません。
+逆にcommitWorkの部分は時間がかかりやすくframeを落としてしまうこともあるためパフォーマンスチューニングが注意深く行われています。
+componentDid(Mount|Update)もこの中で行われるため、この中で重い処理を行わないように注意が必要です。</p>
+
+<p>余談ですが、上記のようにライフサイクルメソッドがボトルネックになる場面が想定されるため、ライフサイクルメソッドをPromiseを返す非同期なAPIとする案もあります。
+あと、実はマウント時はcompleteWorkでもSideEffectが処理されています。これはマウント時にはまだHostContainerはDOMに追加されていないため追加しても表示されず問題ないためです。
+これもcommitWorkでframeを落とさないための工夫の1つです。</p>
+
+<p>また、上記のようなrequestIdleCallbackを使ったスケジュール以外にも、優先度に応じたスケジューリングも可能です。
+優先度は下記のように定義されています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">export</span> <span class="nx">type</span> <span class="nx">PriorityLevel</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="mi">3</span> <span class="o">|</span> <span class="mi">4</span> <span class="o">|</span> <span class="mi">5</span> <span class="o">|</span> <span class="mi">6</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">NoWork</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// No work is pending.</span>
+</span><span class='line'>  <span class="nx">SynchronousPriority</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1">// For controlled text inputs. Synchronous side-effects.</span>
+</span><span class='line'>  <span class="nx">TaskPriority</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="c1">// Completes at the end of the current tick.</span>
+</span><span class='line'>  <span class="nx">AnimationPriority</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="c1">// Needs to complete before the next frame.</span>
+</span><span class='line'>  <span class="nx">HighPriority</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span> <span class="c1">// Interaction that needs to complete pretty soon to feel responsive.</span>
+</span><span class='line'>  <span class="nx">LowPriority</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> <span class="c1">// Data fetching, or result from updating stores.</span>
+</span><span class='line'>  <span class="nx">OffscreenPriority</span><span class="o">:</span> <span class="mi">6</span><span class="p">,</span> <span class="c1">// Won&#39;t be visible but do the work in case it becomes visible.</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactPriorityLevel.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactPriorityLevel.js</a></li>
+</ul>
+
+
+<p>更新処理に優先度を持たせることで、ユーザーインタラクションやアニメーションなどの更新処理を、APIレスポンスの反映など、優先度の低いタスクが邪魔しないようにすることができます。</p>
+
+<p>下記はそれを表したサンプルです。「Async mode」の場合、5000個のlist itemは100ms毎に<code>LowPriority</code>で更新されます。「Sync mode」の場合は<code>SynchronousPriority</code>として同期的にレンダリングされます。</p>
+
+<ul>
+<li><a href="https://koba04.github.io/react-fiber-resources/examples/">https://koba04.github.io/react-fiber-resources/examples/</a></li>
+</ul>
+
+
+<p>上にある入力フィールドに何か入力してください。「Async mode」の場合は入力中はlist itemが更新されず、入力も多少引っかかりますがスムーズに反映されます。「Sync mode」の場合は入力中もlist itemが更新されてユーザーの入力を邪魔してしまっています。</p>
+
+<p>優先度の低い処理はrequestIdleCallbackを使ってアイドル時間がある時に、優先度の高い処理はrequestAnimationFrameを使うか同期的にASAPで反映されます。</p>
+
+<p>優先度の低いタスクを実行中に、優先度の高いタスクが割り込んで来た場合、優先度の低いタスクは中断されて、優先度の高いタスクが先に行われます。
+優先度の高いタスクが終了後、再び優先度の低いタスクが実行されます。
+この際、割り込まれる前に優先度の低いタスクが実行していたFiberのうち、優先度の高いタスクが処理しなかったものは再利用されます。</p>
+
+<p>このように、タスクの割り込みによっては複数回Fiberが処理されることがあるため、非同期のレンダリングの場合には、componentWillMountなどのライフサイクルメソッドが複数回呼び出されることがあります。componentDidMountなどはcommitWorkで呼ばれるため複数回呼ばれることはありません。</p>
+
+<p>また、OffscreenPriorityというPriorityがあります。これを利用することで初回のレンダリングでは必要ない部分をプリレンダリングしたり、ダブルバッファリングが可能となります。ReactDOMでは、<code>hidden</code>属性のあるものはOffscreenPriorityとして扱われます。</p>
+
+<p>他にもAnimationPriorityなどのPriorityがありますが、現時点ではまだPriorityを制御するようなAPIはないため、どのように利用するのかは見えていません。（facebook.comでの非同期レンダリングの実験をやりながらAPIを決めていくらしい）</p>
+
+<p>その他の細かい挙動については、<code>ReactIncremental-test.js</code>のテストを見るとどんなことができるのかわかるかと思います。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/__tests__/ReactIncremental-test.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/__tests__/ReactIncremental-test.js</a></li>
+</ul>
+
+
+<p>ここで使われている<code>ReactNoop</code> というrendererはテスト用のrendererです。UIは全く持っておらずテスト用に<code>timeRemaining</code> などが柔軟に制御可能であり、React Fiberの開発は初期の頃はこのrendererに対して行われていました。custom rendererを作る際の参考にもいいかもしれません。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/noop/ReactNoop.js">https://github.com/facebook/react/blob/master/src/renderers/noop/ReactNoop.js</a></li>
+</ul>
+
+
+<h2>Error Boundary</h2>
+
+<p>あと、Fiber自体には直接関係ないですが、Error Boundaryの機能も公式にサポートされるようになりそうです。
+Error Boundaryとは、これまでは子孫Componentのrender時にエラーが発生した場合は、何も表示されなくなってしまいましたが、Error Boundaryの機能を使うことで握り潰したりエラーハンドリングができるようになるものです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kr">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">error</span><span class="o">:</span> <span class="kc">null</span>
+</span><span class='line'>        <span class="p">};</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="c1">// エラーハンドリングを定義する</span>
+</span><span class='line'>    <span class="nx">unstable_handleError</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="nx">error</span><span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="err">エラーが発生しました</span><span class="o">&lt;</span><span class="err">/div&gt;;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>CoroutineComponent</h2>
+
+<p>Fiberには<code>CoroutineComponent</code> や<code>CoroutineHandlerPhase</code> や<code>YieldComponent</code>といったComponentもあります。これはどうやら、親のComponentのレンダリングを途中で止めて、子のComponentからの結果を受けて親のComponentのレンダリングを再開するみたいなこともできるっぽいです（あんまりわかってない）。例えばレイアウトを行うComponentで子を実際にレンダリングしてみて、サイズなどの結果を持って親のComponentを再度レンダリングするみたいなことが、ユースケースとしてどこかで説明されていました。</p>
+
+<p>これの動作については、上記であげた<code>ReactCoroutin-test.js</code> の中にあるので見てみるといいかと思います。状態としてはとりあえず動いてるっぽいという感じだとは思います。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/__tests__/ReactCoroutine-test.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/__tests__/ReactCoroutine-test.js</a></li>
+</ul>
+
+
+<h2>Custom Renderer</h2>
+
+<p>Stackでは、Custom Rendererを作成するためにはハックが必要でしたが、React FiberではFlowによって型付けされているため、わかりやすくなりました。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">export</span> <span class="nx">type</span> <span class="nx">HostConfig</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">P</span><span class="p">,</span> <span class="nx">I</span><span class="p">,</span> <span class="nx">TI</span><span class="p">,</span> <span class="nx">PI</span><span class="p">,</span> <span class="nx">C</span><span class="p">,</span> <span class="nx">CX</span><span class="p">,</span> <span class="nx">PL</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">getRootHostContext</span><span class="p">(</span><span class="nx">rootContainerInstance</span><span class="o">:</span> <span class="nx">C</span><span class="p">)</span><span class="o">:</span> <span class="nx">CX</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">getChildHostContext</span><span class="p">(</span><span class="nx">parentHostContext</span><span class="o">:</span> <span class="nx">CX</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">T</span><span class="p">)</span><span class="o">:</span> <span class="nx">CX</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">getPublicInstance</span><span class="p">(</span><span class="nx">instance</span><span class="o">:</span> <span class="nx">I</span> <span class="o">|</span> <span class="nx">TI</span><span class="p">)</span><span class="o">:</span> <span class="nx">PI</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">createInstance</span><span class="p">(</span>
+</span><span class='line'>    <span class="nx">type</span><span class="o">:</span> <span class="nx">T</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">props</span><span class="o">:</span> <span class="nx">P</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">rootContainerInstance</span><span class="o">:</span> <span class="nx">C</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">hostContext</span><span class="o">:</span> <span class="nx">CX</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">internalInstanceHandle</span><span class="o">:</span> <span class="nx">OpaqueHandle</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">)</span><span class="o">:</span> <span class="nx">I</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">appendInitialChild</span><span class="p">(</span><span class="nx">parentInstance</span><span class="o">:</span> <span class="nx">I</span><span class="p">,</span> <span class="nx">child</span><span class="o">:</span> <span class="nx">I</span> <span class="o">|</span> <span class="nx">TI</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">finalizeInitialChildren</span><span class="p">(</span>
+</span><span class='line'>    <span class="nx">parentInstance</span><span class="o">:</span> <span class="nx">I</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">type</span><span class="o">:</span> <span class="nx">T</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">props</span><span class="o">:</span> <span class="nx">P</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">rootContainerInstance</span><span class="o">:</span> <span class="nx">C</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">prepareUpdate</span><span class="p">(</span>
+</span><span class='line'>    <span class="nx">instance</span><span class="o">:</span> <span class="nx">I</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">type</span><span class="o">:</span> <span class="nx">T</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">oldProps</span><span class="o">:</span> <span class="nx">P</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">newProps</span><span class="o">:</span> <span class="nx">P</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">rootContainerInstance</span><span class="o">:</span> <span class="nx">C</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">hostContext</span><span class="o">:</span> <span class="nx">CX</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">)</span><span class="o">:</span> <span class="kc">null</span> <span class="o">|</span> <span class="nx">PL</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">commitUpdate</span><span class="p">(</span>
+</span><span class='line'>    <span class="nx">instance</span><span class="o">:</span> <span class="nx">I</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">updatePayload</span><span class="o">:</span> <span class="nx">PL</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">type</span><span class="o">:</span> <span class="nx">T</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">oldProps</span><span class="o">:</span> <span class="nx">P</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">newProps</span><span class="o">:</span> <span class="nx">P</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">internalInstanceHandle</span><span class="o">:</span> <span class="nx">OpaqueHandle</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">)</span><span class="o">:</span> <span class="k">void</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">commitMount</span><span class="p">(</span>
+</span><span class='line'>    <span class="nx">instance</span><span class="o">:</span> <span class="nx">I</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">type</span><span class="o">:</span> <span class="nx">T</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">newProps</span><span class="o">:</span> <span class="nx">P</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">internalInstanceHandle</span><span class="o">:</span> <span class="nx">OpaqueHandle</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">)</span><span class="o">:</span> <span class="k">void</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">shouldSetTextContent</span><span class="p">(</span><span class="nx">props</span><span class="o">:</span> <span class="nx">P</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">resetTextContent</span><span class="p">(</span><span class="nx">instance</span><span class="o">:</span> <span class="nx">I</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">shouldDeprioritizeSubtree</span><span class="p">(</span><span class="nx">type</span><span class="o">:</span> <span class="nx">T</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="nx">P</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">createTextInstance</span><span class="p">(</span>
+</span><span class='line'>    <span class="nx">text</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">rootContainerInstance</span><span class="o">:</span> <span class="nx">C</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">hostContext</span><span class="o">:</span> <span class="nx">CX</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">internalInstanceHandle</span><span class="o">:</span> <span class="nx">OpaqueHandle</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">)</span><span class="o">:</span> <span class="nx">TI</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">commitTextUpdate</span><span class="p">(</span><span class="nx">textInstance</span><span class="o">:</span> <span class="nx">TI</span><span class="p">,</span> <span class="nx">oldText</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">newText</span><span class="o">:</span> <span class="nx">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">appendChild</span><span class="p">(</span><span class="nx">parentInstance</span><span class="o">:</span> <span class="nx">I</span> <span class="o">|</span> <span class="nx">C</span><span class="p">,</span> <span class="nx">child</span><span class="o">:</span> <span class="nx">I</span> <span class="o">|</span> <span class="nx">TI</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">insertBefore</span><span class="p">(</span><span class="nx">parentInstance</span><span class="o">:</span> <span class="nx">I</span> <span class="o">|</span> <span class="nx">C</span><span class="p">,</span> <span class="nx">child</span><span class="o">:</span> <span class="nx">I</span> <span class="o">|</span> <span class="nx">TI</span><span class="p">,</span> <span class="nx">beforeChild</span><span class="o">:</span> <span class="nx">I</span> <span class="o">|</span> <span class="nx">TI</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">removeChild</span><span class="p">(</span><span class="nx">parentInstance</span><span class="o">:</span> <span class="nx">I</span> <span class="o">|</span> <span class="nx">C</span><span class="p">,</span> <span class="nx">child</span><span class="o">:</span> <span class="nx">I</span> <span class="o">|</span> <span class="nx">TI</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">scheduleAnimationCallback</span><span class="p">(</span><span class="nx">callback</span><span class="o">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">)</span><span class="o">:</span> <span class="nx">number</span> <span class="o">|</span> <span class="k">void</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">scheduleDeferredCallback</span><span class="p">(</span>
+</span><span class='line'>    <span class="nx">callback</span><span class="o">:</span> <span class="p">(</span><span class="nx">deadline</span><span class="o">:</span> <span class="nx">Deadline</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">)</span><span class="o">:</span> <span class="nx">number</span> <span class="o">|</span> <span class="k">void</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">prepareForCommit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">resetAfterCommit</span><span class="p">()</span><span class="o">:</span> <span class="k">void</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">useSyncScheduling</span><span class="o">?:</span> <span class="kr">boolean</span><span class="p">,</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberReconciler.js">https://github.com/facebook/react/blob/master/src/renderers/shared/fiber/ReactFiberReconciler.js</a></li>
+</ul>
+
+
+<p>実際に実装する際には、先ほど紹介した<code>ReactNoop</code> や、Test用のrendererでありReactElementからJSONを返す<code>ReactTestRenderer</code> や<code>ReactART</code> などが参考になると思います。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/testing/ReactTestRendererFiber.js">https://github.com/facebook/react/blob/master/src/renderers/testing/ReactTestRendererFiber.js</a></li>
+<li><a href="https://github.com/facebook/react/blob/master/src/renderers/art/ReactARTFiber.js">https://github.com/facebook/react/blob/master/src/renderers/art/ReactARTFiber.js</a></li>
+</ul>
+
+
+<p>ただ、Reactはv16からFlat bundleになり、内部ライブラリーを<code>react/lib/xxx</code>のように利用出来なくなったので、Custom Renderer作る人向けに何かが提供されるのかは不明なところです。</p>
+
+<h2>Server Side Rendering</h2>
+
+<p>サーバーサイドレンダリングについては、Facebookで使っていないということもあり後回しになっていて、まだ実装されていません。
+ただ、今までの<code>renderToString</code> は完全に同期でしたが、ReactFiberになることでイベントループをブロックしないようにHTML文字列を生成することは簡単になりそうです（v16には入るかどうかは不明）。<code>renderToStream</code> みたいなのは、副作用はcommitWorkでまとめてやるというところからは外れてしまうのでどうなんでしょうね。</p>
+
+<h2>v16でも非同期レンダリングを試したい</h2>
+
+<ul>
+<li>現時点では、<code>ReactDOMFeatureFlags</code> に<code>fiberAsyncScheduling</code> というフラグがあるので、それを無理やり<code>true</code> に書き換えることでデフォルトで非同期のレンダリングに出来ます。ただまだそんなにテストされていないと思うのでバグなどはありそうです</li>
+<li>または、<code>ReactDOM.unstable_deferredUpdates</code> を使うとその中の更新処理は<code>lowPriority</code> として処理されるため、非同期となります</li>
+</ul>
+
+
+<h2>その他リソース</h2>
+
+<p>Fiberで何が嬉しいのかを知りたい人は、F8のTom OcchinoのTalkがとてもわかりやすいと思います。</p>
+
+<ul>
+<li>The Evolution of React and GraphQL at Facebook and Beyond
+
+<ul>
+<li><a href="https://developers.facebook.com/videos/f8-2017/the-evolution-of-react-and-graphql-at-facebook-and-beyond/">https://developers.facebook.com/videos/f8-2017/the-evolution-of-react-and-graphql-at-facebook-and-beyond/</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>Lin ClarkがReact ConfでCode Cartoonを使ってReact Fiberについて説明していたのもわかりと思います。</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZCuYPiUIONs?ecver=1" frameborder="0" allowfullscreen></iframe>
+
+
+<p>あとはSebastian MarkbågeのReact ConfのキーノートでもReact Fiberについて触れられています。</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bvFpe5j9-zQ?ecver=1" frameborder="0" allowfullscreen></iframe>
+
+
+<p>あとは、個人的にReact Fiberについてまとめたリポジトリもあります。</p>
+
+<ul>
+<li><a href="https://github.com/koba04/react-fiber-resources">https://github.com/koba04/react-fiber-resources</a></li>
+</ul>
+
+
+<h2>で結局何が嬉しいの？</h2>
+
+<p>React Fiberに変わることで、よくフレームワークのパフォーマンス比較にあるようなベンチマークのスコアがよくなるといったことはおそらくないと思います。
+React Fiberになることで、これまで同期的にツリーを処理していくしかなかったものが非同期に、より柔軟に処理出来るようになるのがメリットです。
+これにより、アニメーションやユーザーのインタラクションに対して可能な限り早く反応出来るように出来ます。また、このような基盤としてReact Fiberがあるので、今後そういった機能追加が行われていくのではないかと思います。</p>
+
+<p>というで、v16ではそんなに変わりませんが、今後の機能追加を楽しみにしましょう。
+また、React Fiberの実装も勉強になるので興味のある人は是非読んでみてください。</p>
+
+<p>ちなみにReact Fiberの最初のPRはこれのようですね。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/pull/6690">https://github.com/facebook/react/pull/6690</a></li>
+</ul>
+
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <hr>
+    
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
+
+
+
+  <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
+
+
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber/" data-via="koba04" data-counturl="http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-href="http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber/" data-send="true" data-width="100" data-show-faces="false"></div>
+  
+</div>
+
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/post/2017/04/14/react-dot-js-v155-and-v16/" title="Previous Post: React v15.5(6) and v16">&laquo; React v15.5(6) and v16</a>
+          
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2017 - koba04 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
+</p>
+
+
+        </footer>
+      </div>
+  </div>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'koba04log';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber/';
+        var disqus_url = 'http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=346463362115366&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

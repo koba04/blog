@@ -117,6 +117,74 @@
   
 
 
+<i class="icon-calendar-empty"></i> <time datetime="2017-04-25T02:00:55+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2017</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
+          
+          </div>
+          
+    </div>
+    <div class="span10 post-container">
+      <h1 class="link"><a href="/post/2017/04/25/a-state-of-react-fiber/">React Fiber現状確認</a></h1>
+      <p><a href="https://developers.facebook.com/videos/?category=f8_2017">F8</a>でもReact Fiberについての発表もあったので、気になっている人も多いReact Fiberの現状について簡単に書きたいと思います。</p>
+
+<p>Reactの完全な書き換えということで、使い方も変わってしまうと思っている人もいると思いますが、内部実装の書き換えであり、利用者から見える部分ではほとんど変更はありません。</p>
+
+<p>もちろん、react-fiberというパッケージをインストールするというわけでもありません。</p>
+
+<p>むしろ、<code>v16</code>の時点では現在の実装と互換性を保たれているので、<code>v16</code>がリリースされた時に、<code>v15.5</code>を使っていればほとんどそのまま<code>v16</code>に更新できると思います。
+そして、言われなければ内部実装が変わっていることに気づかないのではないかと思います。</p>
+
+<h2>とりあえずどうなるのか知りたい人向けのまとめ</h2>
+
+<ul>
+<li>v16では、基本的にはv15の時と同じように動作します。逆に言うとパフォーマンスもそんなに変わらない（はず）です</li>
+<li>renderメソッドから<code>[&lt;Foo /&gt;, &lt;Bar /&gt;]</code> みたいに配列で返したり、文字列をReactElementでラップすることなく返せるようになります</li>
+<li>v17では、デフォルトで非同期のrendering（後述）になります。v16でも何らかのAPIでopt-inで試せるようにはなりそうです。現状は<code>ReactDOM.unstable_deferredUpdates</code>で一部試すことができます</li>
+<li>v17では、劇的に高速になるというよりは、ユーザーの入力をブロックしないようにしたり、柔軟に更新処理をスケジューリング出来るようになる予定です</li>
+</ul>
+
+
+<h2>注意点</h2>
+
+<p><strong>以下の情報は、Reactをただ使いたい人にとっては知る必要のない内部実装の話です。多くの人にとってはここまでの情報でReact FiberについてはOKだと思います。v17になるまでは。</strong></p>
+
+
+      
+       <a href="/post/2017/04/25/a-state-of-react-fiber/">Read on &rarr;</a> 
+    </div>
+  </div>
+
+
+
+    </article>
+    
+    <hr>
+    
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2 post-meta">
+	  <h5 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
 <i class="icon-calendar-empty"></i> <time datetime="2017-04-14T14:00:05+09:00" pubdate data-updated="true">Apr 14<span>th</span>, 2017</time></h5>
           <div class="row-fluid">
           
@@ -583,55 +651,6 @@
 
       
        <a href="/post/2016/06/21/immutable-app-architecture/">Read on &rarr;</a> 
-    </div>
-  </div>
-
-
-
-    </article>
-    
-    <hr>
-    
-  
-  
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
-
-
-
-
-
-
-
-
-  
-
-
-<i class="icon-calendar-empty"></i> <time datetime="2016-06-16T13:33:36+09:00" pubdate data-updated="true">Jun 16<span>th</span>, 2016</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/react-links/"><span class="badge">react-links</span></a>
-          
-          <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/post/2016/06/16/reactjs-links-vol7/">React.js Links vol.7</a></h1>
-      <p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
-
-
-      
-       <a href="/post/2016/06/16/reactjs-links-vol7/">Read on &rarr;</a> 
     </div>
   </div>
 
