@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>blog.koba04.com</title>
+  <title>React v16 changes - blog.koba04.com</title>
   <meta name="author" content="koba04">
 
    
@@ -32,9 +32,9 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
-  <meta property="og:title" content=" - blog.koba04.com" />
+  <meta property="og:title" content="React v16 changes - blog.koba04.com" />
 <meta property="og:description" content="" />
-<meta property="og:url" content="http://blog.koba04.com/index.html" />
+<meta property="og:url" content="http://blog.koba04.com/post/2017/09/27/react-v16-changes/" />
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/250407" />
 <meta property="og:author" content="koba04" />
 <meta property="og:site_name" content="blog.koba04.com" />
@@ -94,18 +94,14 @@
   <div class="container" id="main">
       <div class="row-fluid">
         <div id="content">
-          
+          <div>
+<article class="hentry" role="article">
+  
 
-<div class="blog-index">
-  
-  
-  
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
+  <header>
+  <div class="jumbotron">
+    React v16 changes
+	<h5>
 
 
 
@@ -118,19 +114,10 @@
 
 
 <i class="icon-calendar-empty"></i> <time datetime="2017-09-27T16:00:07+09:00" pubdate data-updated="true">Sep 27<span>th</span>, 2017</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/post/2017/09/27/react-v16-changes/">React v16 changes</a></h1>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
       <p>Reactのv16がリリースされたので、変更点などを整理したいと思います。</p>
 
 <ul>
@@ -1014,518 +1001,70 @@ v3からはAdapterのアーキテクチャになっており、対象とするRe
 </ul>
 
 
-      
-      
     </div>
   </div>
 
 
 
-    </article>
-    
+  <footer>
     <hr>
     
-  
-  
-    <article>
+    <div class="row-fluid">
       
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
-
-
+      <div class="span6">
+        <p class="meta">
+        
+        
 
 
 
+  <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
 
 
 
-  
 
-
-<i class="icon-calendar-empty"></i> <time datetime="2017-04-25T02:00:55+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2017</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/post/2017/04/25/a-state-of-react-fiber/">React Fiber現状確認</a></h1>
-      <p><a href="https://developers.facebook.com/videos/?category=f8_2017">F8</a>でもReact Fiberについての発表もあったので、気になっている人も多いReact Fiberの現状について簡単に書きたいと思います。</p>
-
-<p>Reactの完全な書き換えということで、使い方も変わってしまうと思っている人もいると思いますが、内部実装の書き換えであり、利用者から見える部分ではほとんど変更はありません。</p>
-
-<p>もちろん、react-fiberというパッケージをインストールするというわけでもありません。</p>
-
-<p>むしろ、<code>v16</code>の時点では現在の実装と互換性を保たれているので、<code>v16</code>がリリースされた時に、<code>v15.5</code>を使っていればほとんどそのまま<code>v16</code>に更新できると思います。
-そして、言われなければ内部実装が変わっていることに気づかないのではないかと思います。</p>
-
-<h2>とりあえずどうなるのか知りたい人向けのまとめ</h2>
-
-<ul>
-<li>v16では、基本的にはv15の時と同じように動作します。逆に言うとパフォーマンスもそんなに変わらない（はず）です</li>
-<li>renderメソッドから<code>[&lt;Foo /&gt;, &lt;Bar /&gt;]</code> みたいに配列で返したり、文字列をReactElementでラップすることなく返せるようになります</li>
-<li>v17では、デフォルトで非同期のrendering（後述）になります。v16でも何らかのAPIでopt-inで試せるようにはなりそうです。現状は<code>ReactDOM.unstable_deferredUpdates</code>で一部試すことができます</li>
-<li>v17では、劇的に高速になるというよりは、ユーザーの入力をブロックしないようにしたり、柔軟に更新処理をスケジューリング出来るようになる予定です</li>
-</ul>
-
-
-<h2>注意点</h2>
-
-<p><strong>以下の情報は、Reactをただ使いたい人にとっては知る必要のない内部実装の話です。多くの人にとってはここまでの情報でReact FiberについてはOKだと思います。v17になるまでは。</strong></p>
-
-
+        </p>
+      </div>
       
-       <a href="/post/2017/04/25/a-state-of-react-fiber/">Read on &rarr;</a> 
-    </div>
-  </div>
-
-
-
-    </article>
-    
-    <hr>
-    
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://blog.koba04.com/post/2017/09/27/react-v16-changes/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.koba04.com/post/2017/09/27/react-v16-changes/" data-via="koba04" data-counturl="http://blog.koba04.com/post/2017/09/27/react-v16-changes/" >Tweet</a>
   
   
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
-
-
-
-
-
-
-
-
   
-
-
-<i class="icon-calendar-empty"></i> <time datetime="2017-04-14T14:00:05+09:00" pubdate data-updated="true">Apr 14<span>th</span>, 2017</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/post/2017/04/14/react-dot-js-v155-and-v16/">React v15.5(6) and v16</a></h1>
-      <p>Reactのv15.5がリリースされたので、v15.5での変更点とv16についてのまとめです。</p>
-
-<ul>
-<li><a href="https://facebook.github.io/react/blog/2017/04/07/react-v15.5.0.html">https://facebook.github.io/react/blog/2017/04/07/react-v15.5.0.html</a></li>
-</ul>
-
-
-<p>v15.5はバグフィックスとv16での変更点に対する準備なので、可能ならあげておいた方がスムーズにv16がリリースされた時に対応できると思います。</p>
-
-<p>基本的には、v16で色々と廃止するための警告が主になります。
-最近のバージョンと同様に、コアから必要なもの以外をどんどん削ぎ落としていく流れです。</p>
-
-<p>この警告に対応するために、Enzymeなどでは利用するために必要なライブラリーが変更されているので更新する際には注意が必要です。</p>
-
-<p>また、当初の予定ではv15.5がv15系の最後のリリースになる予定でしたが、上記のような混乱もあったためフォローアップとしてv15.6もリリースされることになりました。
-なので、v15.6がリリースされてから対応するのもアリだと思います。</p>
-
-<p>廃止されるものは色々ありますが、基本的に全てのものに対してマイグレーションのパスは提供されているので対応可能だと思います。
-ただ、アクティブにメンテされていないくて15.5対応版をリリースしていないライブラリーを使っていると色々警告が出ると思います。
-場合によっては、その警告によってテストが壊れることがあるかもしれません。</p>
-
-
-      
-       <a href="/post/2017/04/14/react-dot-js-v155-and-v16/">Read on &rarr;</a> 
-    </div>
-  </div>
-
-
-
-    </article>
-    
-    <hr>
-    
+    <div class="fb-like" data-href="http://blog.koba04.com/post/2017/09/27/react-v16-changes/" data-send="true" data-width="100" data-show-faces="false"></div>
   
-  
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
-
-
-
-
-
-
-
-
-  
-
-
-<i class="icon-calendar-empty"></i> <time datetime="2016-09-30T14:00:10+09:00" pubdate data-updated="true">Sep 30<span>th</span>, 2016</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/react-links/"><span class="badge">react-links</span></a>
-          
-          <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/post/2016/09/30/reactjs-links-vol12/">React.js Links vol.12</a></h1>
-      <p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
-
-
-      
-       <a href="/post/2016/09/30/reactjs-links-vol12/">Read on &rarr;</a> 
-    </div>
-  </div>
-
-
-
-    </article>
-    
-    <hr>
-    
-  
-  
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
-
-
-
-
-
-
-
-
-  
-
-
-<i class="icon-calendar-empty"></i> <time datetime="2016-09-30T13:56:56+09:00" pubdate data-updated="true">Sep 30<span>th</span>, 2016</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/post/2016/09/30/reactjs-meetup-vol4/">React.js meetup #4</a></h1>
-      <p>前回が2月だったので約半年振りですが、React.js meetup #4を開催しました。</p>
-
-<ul>
-<li><a href="http://reactjs-meetup.connpass.com/event/39793/">http://reactjs-meetup.connpass.com/event/39793/</a></li>
-</ul>
-
-
-<p>今回は <strong>67/80人</strong> の方が参加してくださりました！感謝！</p>
-
-<blockquote class="twitter-tweet" data-lang="en"><p lang="ja" dir="ltr">たくさんの方に参加してもらって感謝！！ <a href="https://twitter.com/hashtag/reactjs_meetup?src=hash">#reactjs_meetup</a> <a href="https://t.co/1tTO5gKDxP">pic.twitter.com/1tTO5gKDxP</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/780747386251415552">September 27, 2016</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>今回も、前回同様にサイボウズさんに会場を提供して頂き開催することができました。
- サイボウズの皆様、参加者の皆様、発表者の皆様ありがとうございました！！</p>
-
-
-      
-       <a href="/post/2016/09/30/reactjs-meetup-vol4/">Read on &rarr;</a> 
-    </div>
-  </div>
-
-
-
-    </article>
-    
-    <hr>
-    
-  
-  
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
-
-
-
-
-
-
-
-
-  
-
-
-<i class="icon-calendar-empty"></i> <time datetime="2016-09-07T19:26:04+09:00" pubdate data-updated="true">Sep 7<span>th</span>, 2016</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/react-links/"><span class="badge">react-links</span></a>
-          
-          <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/post/2016/09/07/reactjs-links-vol11d/">React.js Links vol.11</a></h1>
-      <p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
-
-
-      
-       <a href="/post/2016/09/07/reactjs-links-vol11d/">Read on &rarr;</a> 
-    </div>
-  </div>
-
-
-
-    </article>
-    
-    <hr>
-    
-  
-  
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
-
-
-
-
-
-
-
-
-  
-
-
-<i class="icon-calendar-empty"></i> <time datetime="2016-08-10T14:09:19+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2016</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/react-links/"><span class="badge">react-links</span></a>
-          
-          <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/post/2016/08/10/react-dot-js-links-vol-dot-10/">React.js Links vol.10</a></h1>
-      <p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。
-10回目!!!</p>
-
-
-      
-       <a href="/post/2016/08/10/react-dot-js-links-vol-dot-10/">Read on &rarr;</a> 
-    </div>
-  </div>
-
-
-
-    </article>
-    
-    <hr>
-    
-  
-  
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
-
-
-
-
-
-
-
-
-  
-
-
-<i class="icon-calendar-empty"></i> <time datetime="2016-07-21T19:38:19+09:00" pubdate data-updated="true">Jul 21<span>st</span>, 2016</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/react-links/"><span class="badge">react-links</span></a>
-          
-          <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/post/2016/07/21/react-dot-js-links-vol-dot-9/">React.js Links vol.9</a></h1>
-      <p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
-
-
-      
-       <a href="/post/2016/07/21/react-dot-js-links-vol-dot-9/">Read on &rarr;</a> 
-    </div>
-  </div>
-
-
-
-    </article>
-    
-    <hr>
-    
-  
-  
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
-
-
-
-
-
-
-
-
-  
-
-
-<i class="icon-calendar-empty"></i> <time datetime="2016-07-15T14:56:46+09:00" pubdate data-updated="true">Jul 15<span>th</span>, 2016</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/conference/"><span class="badge">conference</span></a>
-          
-          <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/post/2016/07/15/a-brief-note-of-reacteurope2016-sessions/">A brief note of ReactEurope2016 sessions</a></h1>
-      <p>ReactEurope 2016に行ってきて、改めてメインのTalkの動画を一通り見たので、一言解説を。</p>
-
-<p><a href="https://www.react-europe.org/">https://www.react-europe.org/</a></p>
-
-
-      
-       <a href="/post/2016/07/15/a-brief-note-of-reacteurope2016-sessions/">Read on &rarr;</a> 
-    </div>
-  </div>
-
-
-
-    </article>
-    
-    <hr>
-    
-  
-  
-    <article>
-      
-
-  <div class="row-fluid">
-    <div class="span2 post-meta">
-	  <h5 class="date-time">
-
-
-
-
-
-
-
-
-  
-
-
-<i class="icon-calendar-empty"></i> <time datetime="2016-06-23T13:33:36+09:00" pubdate data-updated="true">Jun 23<span>rd</span>, 2016</time></h5>
-          <div class="row-fluid">
-          
-          </div>
-          
-          <div class="row-fluid">
-          
-          <a href="/blog/categories/react-links/"><span class="badge">react-links</span></a>
-          
-          <a href="/blog/categories/react-dot-js/"><span class="badge">react.js</span></a>
-          
-          </div>
-          
-    </div>
-    <div class="span10 post-container">
-      <h1 class="link"><a href="/post/2016/06/23/react-dot-js-links-vol-dot-8/">React.js Links vol.8</a></h1>
-      <p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
-
-
-      
-       <a href="/post/2016/06/23/react-dot-js-links-vol-dot-8/">Read on &rarr;</a> 
-    </div>
-  </div>
-
-
-
-    </article>
-    
-  
-  <div class="pagination">
-    
-    <a class="prev" href="/post/page/2/">&larr; Older</a>
-    
-
-    
-  </div>
 </div>
+
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/post/2017/04/25/a-state-of-react-fiber/" title="Previous Post: React Fiber現状確認">&laquo; React Fiber現状確認</a>
+          
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
 
 
         </div>
@@ -1547,7 +1086,10 @@ v3からはAdapterのアーキテクチャになっており、対象とするRe
       var disqus_shortname = 'koba04log';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.koba04.com/post/2017/09/27/react-v16-changes/';
+        var disqus_url = 'http://blog.koba04.com/post/2017/09/27/react-v16-changes/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
