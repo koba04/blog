@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2017-09-27T16:18:08+09:00</updated>
+  <updated>2017-09-27T16:41:37+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[React v16 changes]]></title>
     <link href="http://blog.koba04.com/post/2017/09/27/react-v16-changes/"/>
-    <updated>2017-09-27T16:00:07+09:00</updated>
+    <updated>2017-09-27T16:34:07+09:00</updated>
     <id>http://blog.koba04.com/post/2017/09/27/react-v16-changes</id>
     <content type="html"><![CDATA[<p>Reactのv16がリリースされたので、変更点などを整理したいと思います。</p>
 
@@ -34,6 +34,9 @@
 <li><a href="https://speakerdeck.com/koba04/react-v16-and-beyond-react-fiber">React v16 and beyond React Fiber</a></li>
 <li><a href="https://html5experts.jp/shumpei-shiraishi/23265/">ReactはなぜFiberで書き直されたのか？Reactの課題と将来像を探る</a></li>
 </ul>
+
+
+<!-- more -->
 
 
 <h2>新機能</h2>
@@ -140,7 +143,7 @@ console.log(error.message, info.componentStack);
 }
 ```</p>
 
-<p>上記のように、componentDidCatchの引数には、Errorオブジェクト以外に<code>info</code>というオブジェクトを受け取ります。<code>info</code>は今のところ<code>componentStack</code>のプロパティしか持っていません。<code>componentStack</code>には、Compnentのスタックトレースが文字列で入っています。したがって、これをエラーと一緒に送信すると、どこのComponentでどのエラーが発生したのかがわかります。</p>
+<p>上記のように、componentDidCatchの引数には、Errorオブジェクト以外に<code>info</code>というオブジェクトを受け取ります。infoは今のところ<code>componentStack</code>のプロパティしか持っていません。<code>componentStack</code>には、Compnentのスタックトレースが文字列で入っています。したがって、これをエラーと一緒に送信すると、どこのComponentでどのエラーが発生したのかがわかります。</p>
 
 <p><strong>Error Boundariesの対象になるのは、render関数とライフサイクルメソッドの中のエラーだけです。</strong>なので、イベントハンドラーの中で起きたエラーや、ライフサイクルメソッドの中での非同期処理（HTTP Requestなど)で起きたエラーは対象になりません。</p>
 
@@ -148,13 +151,13 @@ console.log(error.message, info.componentStack);
 
 <p>v15までは、エラーが発生したらそこで処理が中断されていました。したがって、途中のComponentのrenderで処理が止まるなど、不整合なViewをユーザーに見せてしまう可能性がありました。</p>
 
-<p>v16では、エラーが発生すると、<code>ReactDOM.render</code>で指定したRoot Containerから全てアンマウント（DOMから削除）されるようになります。
-それを避けたい場合には、上記の例のように<code>componentDidCatch</code>を定義して<code>setState</code>するなどしてエラー用の表示を行う必要があります。
-なので、親のComponentで<code>componentDidCatch</code>を定義したり、<code>componentDidCatch</code>を定義したComponentでアプリケーション全体のComponentをラップしておくと安心かと思います。</p>
+<p>v16では、エラーが発生すると、ReactDOM.renderで指定したRoot Containerから全てアンマウント（DOMから削除）されるようになります。
+それを避けたい場合には、上記の例のようにcomponentDidCatchを定義してsetStateするなどしてエラー用の表示を行う必要があります。
+なので、親のComponentでcomponentDidCatchを定義したり、componentDidCatchを定義したComponentでアプリケーション全体のComponentをラップしておくと安心かと思います。</p>
 
 <h3>Portals</h3>
 
-<p>ReactDOM.createPortalというAPIが追加されました。</p>
+<p><code>ReactDOM.createPortal</code>というAPIが追加されました。</p>
 
 <ul>
 <li><a href="https://facebook.github.io/react/docs/portals.html">https://facebook.github.io/react/docs/portals.html</a></li>
@@ -193,7 +196,7 @@ render() {
 <p>}
 ```</p>
 
-<p>と<code>componentDidUpdate</code>や<code>componentDidMount</code>のライフサイクルメソッドの中で扱う形になりますが、Portalを使うと、</p>
+<p>とcomponentDidUpdateやcomponentDidMountのライフサイクルメソッドの中で扱う形になりますが、Portalを使うと、</p>
 
 <p>```js
 class App extends React.Component {</p>
@@ -278,13 +281,13 @@ import ReactDOMServer from &lsquo;react-dom/server&rsquo;;</p>
 
 <p>ここでいうHydrationとは、サーバーサイドレンダリングで返したHTMLが生成したDOM要素を、クライアント側でのレンダリング時に再利用することを指します。</p>
 
-<p>クライアント側でのAPIの変更については、<code>ReactDOM.render</code>の代わりに<code>ReactDOM.hydrate</code>という専用のAPIを使うようになります。
-v16の段階では、<code>ReactDOM.render</code>によるHydrationもサポートされますが、将来的に廃止される予定です。</p>
+<p>クライアント側でのAPIの変更については、ReactDOM.renderの代わりに<code>ReactDOM.hydrate</code>という専用のAPIを使うようになります。
+v16の段階では、ReactDOM.renderによるHydrationもサポートされますが、将来的に廃止される予定です。</p>
 
-<p>ちなみに、<code>renderToNodeStream</code>と<code>renderToStaticNodeStream</code>による出力の違いは、Rootの要素に<code>data-reactroot</code>があるかないかの違いだけです。この<code>data-reactroot</code>は<code>ReactDOM.render</code>でHydrationするかどうかの判定に使われているだけです。
-なので、将来的にはどちらか1つのAPIだけになると思います。<code>ReactDOM.hydrate</code>を使う場合は、<code>renderToStaticNodeStream</code>で生成したHTMLに対してもHydration出来ます。</p>
+<p>ちなみに、renderToNodeStreamとrenderToStaticNodeStreamによる出力の違いは、Rootの要素に<code>data-reactroot</code>があるかないかの違いだけです。このdata-reactrootはReactDOM.renderでHydrationするかどうかの判定に使われているだけです。
+なので、将来的にはどちらか1つのAPIだけになると思います。ReactDOM.hydrateを使う場合は、renderToStaticNodeStreamで生成したHTMLに対してもHydration出来ます。</p>
 
-<p>Hydrationの方法については、v15までは<code>renderToString</code>で生成したHTMLの<code>data-react-check-sum</code>という属性につけられたチェックサムを使い、クライアント側で生成したReactElementの構造が一致するかどうか判定し、一致すればDOMを再利用して一致しなければDOMを再構築する方法を採用していました。</p>
+<p>Hydrationの方法については、v15まではrenderToStringで生成したHTMLの<code>data-react-check-sum</code>という属性につけられたチェックサムを使い、クライアント側で生成したReactElementの構造が一致するかどうか判定し、一致すればDOMを再利用して一致しなければDOMを再構築する方法を採用していました。</p>
 
 <p>v16では、サーバーサイドレンダリングで構築したDOMを、React.hydrateの際に可能な限り再利用しようとします。
 ReactElementの構造が一致するかどうかの確認が、ReactElementの単位で行われるようになります。
@@ -303,11 +306,11 @@ ReactElementの構造が一致するかどうかの確認が、ReactElementの�
 <h3>DOM Attributes</h3>
 
 <p>これまでは、ホワイトリストで管理された属性以外は、warningを出しつつDOMには反映されなかったのですが、v16からは反映されるようになります。
-これにより、<code>ng-xx</code>とか<code>v-xx</code>みたいな属性や、一部ブラウザーが実装しているけどまだ標準化されていないような属性値も使えるようになります。
-ただし、<code>on〜</code>といった属性値については、セキュリティ的なリスクから反映されません。</p>
+これにより、ng-xxとかv-xxみたいな属性や、一部ブラウザーが実装しているけどまだ標準化されていないような属性値も使えるようになります。
+ただし、on〜といった属性値については、セキュリティ的なリスクから反映されません。</p>
 
 <p>また、属性が期待している型とは異なる値を渡した場合に、値が反映されなくなります。
-例えば<code>className</code>に<code>false</code>を渡した場合は、v15までは"false"という文字列がクラス名と設定されていましたが、v16からはwarningが出て反映されなくなります。</p>
+例えばclassNameにfalseを渡した場合は、v15までは"false"という文字列がクラス名と設定されていましたが、v16からはwarningが出て反映されなくなります。</p>
 
 <p>詳細は、下のブログに。</p>
 
@@ -383,7 +386,7 @@ node_modules/react-dom/
 </code></p>
 
 <p>上記の<code>cjs</code>がcommonJSのビルドが入っているディレクトリです。<code>〜.development.js</code>と<code>〜.production.min.js</code>があるのは本番用のビルドと開発用のビルドを分けるためです。
-この分岐は<code>index.js</code>の中で<code>process.env.NODE_ENV</code>によって行われています。</p>
+この分岐はindex.jsの中で<code>process.env.NODE_ENV</code>によって行われています。</p>
 
 <ul>
 <li><code>node_modules/react/index.js</code></li>
@@ -456,29 +459,29 @@ bundle.js  117 kB // with `-p` option
 </ul>
 
 
-<p><code>react-addons-perf</code>に関しては、<code>?react_perf</code>をURLにつけてBrowserのPerformanceのTimelineで計測する方法になります。</p>
+<p>react-addons-perfに関しては、<code>?react_perf</code>をURLにつけてBrowserのPerformanceのTimelineで計測する方法になります。</p>
 
 <ul>
 <li><a href="https://facebook.github.io/react/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab">https://facebook.github.io/react/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab</a></li>
 </ul>
 
 
-<p><code>react-with-addons.js</code>のようなUMDビルドももう提供されません。</p>
+<p>react-with-addons.jsのようなUMDビルドももう提供されません。</p>
 
 <h2>Breaking Changes</h2>
 
 <p>React Fiberに実装が変わったことによる、処理順の変更などが多いです。</p>
 
 <ul>
-<li><code>ReactDOM.render</code>と<code>ReactDOM.unstable_renderIntoContainer</code>をライフサイクルメソッドの中で読んだ場合には<code>null</code>が返るようになります。</li>
-<li><code>setState</code>で<code>null</code>を渡した場合、更新処理が行われなくなります。</li>
-<li><code>render</code>の中での<code>setState</code>は常に更新処理が行われるようになります（以前はされない場合があったらしい）。そもそも<code>render</code>の中でsetStateを呼び出すべきではないですが。</li>
-<li><code>setState</code>の第2引数のコールバックは<code>componentDidMount</code>と<code>componentDidUpdate</code>の後すぐに呼び出されるようになります。以前は全てのComponentがrenderされた後に呼び出されていました。 <strong>???以前のバージョンの挙動が確認できなかった</strong></li>
-<li><code>&lt;A /&gt;</code>から<code>&lt;B /&gt;</code>に置き換えたとき、<code>B.componentWillMount</code>が常に<code>A.componentWillUnmount</code>の前に呼ばれるようになります。</li>
-<li>以前は、refを更新する際のデタッチ(<code>null</code>での呼び出し)はComponentのrender関数の前に呼ばれていましたが、render関数の後に変更になります。</li>
+<li>ReactDOM.renderとReactDOM.unstable_renderIntoContainerをライフサイクルメソッドの中で読んだ場合にはnullが返るようになります。</li>
+<li>setStateでnullを渡した場合、更新処理が行われなくなります。</li>
+<li>renderの中でのsetStateは常に更新処理が行われるようになります（以前はされない場合があったらしい）。そもそもrenderの中でsetStateを呼び出すべきではないですが。</li>
+<li>setStateの第2引数のコールバックはcomponentDidMountとcomponentDidUpdateの後すぐに呼び出されるようになります。以前は全てのComponentがrenderされた後に呼び出されていました。 <strong>???以前のバージョンの挙動が確認できなかった</strong></li>
+<li><code>&lt;A /&gt;</code>から<code>&lt;B /&gt;</code>に置き換えたとき、B.componentWillMountが常にA.componentWillUnmountの前に呼ばれるようになります。</li>
+<li>以前は、refを更新する際のデタッチ(nullでの呼び出し)はComponentのrender関数の前に呼ばれていましたが、render関数の後に変更になります。</li>
 <li>React以外によって、編集されたDOMに対して再度ReactDOM.renderを行った時にwarningが出るようになりました。この場合は一度ReactDOM.unmountComponentAtNodeでアンマウントしてから再度renderを行います。</li>
-<li><code>componentDidUpdate</code>のライフサイクルメソッドが第3引数としてprevContextを受け取らなくなりました。</li>
-<li>ShallowRendererに<code>unstable_batchedUpdates</code>はもう実装されません。</li>
+<li>componentDidUpdateのライフサイクルメソッドが第3引数としてprevContextを受け取らなくなりました。</li>
+<li>ShallowRendererにunstable_batchedUpdatesはもう実装されません。</li>
 </ul>
 
 
@@ -493,7 +496,8 @@ bundle.js  117 kB // with `-p` option
 
 <h2>JavaScript Environment Requirements</h2>
 
-<p>動作環境として、<code>Map</code>と<code>Set</code>と<code>requestAnimationFrame</code>が必要になりました。</p>
+<p>動作環境として、<code>Map</code>と<code>Set</code>と<code>requestAnimationFrame</code>が必要になりました。
+なので必要に応じてpolyfillを設定します。</p>
 
 <p>```js
 import &lsquo;core-js/es6/map&rsquo;;
@@ -521,7 +525,7 @@ window.requestAnimationFrame = cb =&gt; {
 
 <h3>ReactDOM.unstable_deferredUpdates</h3>
 
-<p><code>ReactDOM.unstable_deferredUpdates</code>で囲んだ中での<code>setState</code>などの更新処理は、Low Priorityとして扱われて、requestIdleCallbackを使って非同期に処理されます。</p>
+<p><code>ReactDOM.unstable_deferredUpdates</code>で囲んだ中でのsetStateなどの更新処理は、Low Priorityとして扱われて、requestIdleCallbackを使って非同期に処理されます。</p>
 
 <p>```js
 ReactDOM.unstable_deferredUpdates(() => {</p>
@@ -592,7 +596,7 @@ this.setState(prevState =&gt; newState);
 <p>主にsnapshot testingなどで使われていたTest Rendererに便利なAPIが追加されて使いやすくなりました。
 Shallow Rendereは指定したComponentだけがrenderされますが、Test Rendererはツリー全体をrenderします。</p>
 
-<p>下記のように<code>find〜</code>や<code>findAll〜</code>のAPIが追加されており、インスタンスにもアクセスできるため、<code>setState</code>を呼び出したりもできます。
+<p>下記のようにfind〜やfindAll〜のAPIが追加されており、インスタンスにもアクセスできるため、setStateを呼び出したりもできます。
 また、Test RendererはReact Fiberに対するRendererとして実装されているため、React Fiberが提供する機能を利用できます。</p>
 
 <p>```js
