@@ -18,6 +18,8 @@ React v16やReact Fiberについては、下記で書いたりもしているの
 * [React v16 and beyond React Fiber](https://speakerdeck.com/koba04/react-v16-and-beyond-react-fiber)
 * [ReactはなぜFiberで書き直されたのか？Reactの課題と将来像を探る](https://html5experts.jp/shumpei-shiraishi/23265/)
 
+<!-- more -->
+
 ## 新機能
 
 ### render関数から文字列や配列を直接返せるように
