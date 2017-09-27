@@ -229,9 +229,12 @@ v16の段階では、`ReactDOM.render`によるHydrationもサポートされま
 
 Hydrationの方法については、v15までは`renderToString`で生成したHTMLの`data-react-check-sum`という属性につけられたチェックサムを使い、クライアント側で生成したReactElementの構造が一致するかどうか判定し、一致すればDOMを再利用して一致しなければDOMを再構築する方法を採用していました。
 
-v16では、サーバーサイドレンダリングで構築したDOMとReactElementの構造が一致するかどうかの確認が、ReactElementの単位で行われるようになります。
-したがって、一致しない要素があった場合はそのReactElementに対するDOM要素だけが再構築されます。
+v16では、サーバーサイドレンダリングで構築したDOMを、React.hydrateの際に可能な限り再利用しようとします。
+ReactElementの構造が一致するかどうかの確認が、ReactElementの単位で行われるようになります。
 （一致しない場合は、引き続きwarningが出力されます）
+ただし、バリデーションするというよりも可能な限り再利用する方針であるため、サーバーサイドレンダリングした内容とのdiff次第では、意図しない結果となる場合があります。
+
+* https://github.com/facebook/react/issues/10591
 
 これにより、`data-react-check-sum`だけでなく、`react-text`のコメントや`data-react-id`もHTMLに付加されなりました。
 
