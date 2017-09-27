@@ -236,6 +236,8 @@ ReactElementの構造が一致するかどうかの確認が、ReactElementの�
 
 * https://github.com/facebook/react/issues/10591
 
+サーバーサイドレンダリングで意図的に異なるコンテンツを返している場合は、一度DOMをリセットする方がいいかもしれません。
+
 これにより、`data-react-check-sum`だけでなく、`react-text`のコメントや`data-react-id`もHTMLに付加されなりました。
 
 ### DOM Attributes
