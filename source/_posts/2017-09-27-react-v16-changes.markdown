@@ -121,7 +121,7 @@ v16では、エラーが発生すると、ReactDOM.renderで指定したRoot Con
 
 * https://facebook.github.io/react/docs/portals.html
 
-これは、Componentrツリーの外側に対するrenderをComponentツリーの一部として扱えるようにする機能です。
+これは、Componentツリーの外側に対するrenderをComponentツリーの一部として扱えるようにする機能です。
 文字だけで書くとわかりにくいので例として、どこかアプリケーションの外側にモーダル用のDOMがあって、アプリケーションのStateによってモーダルを表示したい場合を考えてみます。
 
 Portalを使わずに書くと、
