@@ -251,7 +251,7 @@ ReactElementの構造が一致するかどうかの確認が、ReactElementの�
 
 これにより、`data-react-check-sum`だけでなく、`react-text`のコメントや`data-react-id`もHTMLに付加されなりました。
 
-サーバーサイドレンダリングについては、捕捉記事書きました。
+サーバーサイドレンダリングについては、補足記事書きました。
 
 * http://http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/
 
