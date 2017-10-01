@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2017-10-01T21:07:23+09:00</updated>
+  <updated>2017-10-01T23:05:22+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,337 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React v16でのサーバーサイドレンダリング]]></title>
+    <link href="http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/"/>
+    <updated>2017-10-01T23:02:46+09:00</updated>
+    <id>http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16</id>
+    <content type="html"><![CDATA[<p>React v16について書いたブログの中の、サーバーサイドレンダリングについての部分に間違いがあったので修正しつつ、v16のサーバーサイドレンダリングについて補足します。</p>
+
+<p><a href="http://blog.koba04.com/post/2017/09/27/react-v16-changes/">http://blog.koba04.com/post/2017/09/27/react-v16-changes/</a></p>
+
+<p><strong>Hydrationしたい場合は、renderToStringまたはrenderToNodeStreamで行う必要があります。</strong></p>
+
+<p><code>data-reactroot</code>以外にも変数部分を識別するためのコメントノードなどが挿入されている必要があるためです。</p>
+
+<p>それでは、v15とv16でのサーバーサイドレンダリングの違いを見てみます。</p>
+
+<!-- more -->
+
+
+<p>以下、長いのでサーバーサイドレンダリングはSSRとします。</p>
+
+<h2>v15まで</h2>
+
+<p>ReactでSSRしたコンテンツをクライアントでも再利用したい場合、これまではSSRしたHTMLを元に生成されたchecksumとクライアントサイドで構築したReactElementから生成したchecksumが一致する必要がありました。</p>
+
+<p>これはつまり、ReactDOMServer.renderToStringのエントリーポイントと、ReactDOM.renderのエントリーポイントが一致する必要があることを示します。</p>
+
+<p>つまりHTML全体をReactで構築しようとするとこんな感じになります。</p>
+
+<ul>
+<li>App.js</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Hello</span> <span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/div&gt;;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="kr">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Html.js</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">Html</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">App</span><span class="o">&lt;</span><span class="err">/title&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="err">/head&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;app&quot;</span> <span class="nx">dangerouslySetInnerHTML</span><span class="o">=</span><span class="p">{</span> <span class="p">{</span><span class="nx">__html</span><span class="o">:</span> <span class="nx">props</span><span class="p">.</span><span class="nx">markup</span><span class="p">}</span> <span class="p">}</span><span class="o">&gt;&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;initial-data&quot;</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/plain&quot;</span> <span class="nx">data</span><span class="o">-</span><span class="nx">json</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">initialData</span><span class="p">}</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;/static/bundle.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="err">/body&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="err">/html&gt;</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">export</span> <span class="k">default</span> <span class="nx">Html</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>server.js</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">ReactDOMServer</span> <span class="nx">from</span> <span class="s1">&#39;react-dom/server&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">express</span> <span class="nx">from</span> <span class="s1">&#39;express&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">import</span> <span class="nx">Html</span> <span class="nx">from</span> <span class="s1">&#39;./Html&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">App</span> <span class="nx">from</span> <span class="s1">&#39;./App&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">initialData</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;World&#39;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span>
+</span><span class='line'>        <span class="nx">ReactDOMServer</span><span class="p">.</span><span class="nx">renderToStaticMarkup</span><span class="p">(</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">Html</span>
+</span><span class='line'>                <span class="nx">markup</span><span class="o">=</span><span class="p">{</span><span class="nx">ReactDOMServer</span><span class="p">.</span><span class="nx">renderToString</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">App</span> <span class="p">{...</span><span class="nx">initialData</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">)}</span>
+</span><span class='line'>                <span class="nx">initialData</span><span class="o">=</span><span class="p">{</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">initialData</span><span class="p">)}</span>
+</span><span class='line'>            <span class="o">/&gt;</span>
+</span><span class='line'>        <span class="p">)</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>browser.js</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">ReactDOM</span> <span class="nx">from</span> <span class="s1">&#39;react-dom&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">App</span> <span class="nx">from</span> <span class="s1">&#39;./App&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">initialData</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;initial-data&#39;</span><span class="p">).</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">&#39;data-json&#39;</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">App</span> <span class="p">{...</span><span class="nx">initialData</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記のように<code>Html.js</code>ではdangerouslySetInnerHTMLを使い、アプリケーションのComponentをrenderToStringによりchecksumなどが付与されたHTML文字列として埋め込む必要があります。</p>
+
+<p>また<code>server.js</code>では、HTML全体の部分はrenderToStaticMarkupで、アプリケーションの部分はrenderToStringでと、別々に生成する必要があります。</p>
+
+<p>これにより、renderToStringとReactDOM.renderで構築される内容が一致するため、SSRによって生成されたDOMが再利用されます。</p>
+
+<h2>v16</h2>
+
+<p>v16では、checksumによりチェックは行われず、可能な限りすでに構築されているDOMを再利用しようとします。
+また、ReactDOM.hydrateという明示的なAPIを使うことで、サーバー側とクライアント側でエントリーポイントを合わせる必要はありません。
+（ReactDOM.renderを使う場合は、<code>data-reactroot</code>の属性がDOMにあるかをチェックしているのでエントリーポイントを合わせる必要があります）</p>
+
+<p>そのためv15のように、エントリーポイントを一致させるために、アプリケーションのComponentを別途HTML文字列として生成する必要はありません。</p>
+
+<p>したがって、上記の例は、v16で追加されたrenderToNodeStreamを使うと</p>
+
+<ul>
+<li>App.js</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Hello</span> <span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/div&gt;;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="kr">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Html.js</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">Html</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">App</span><span class="o">&lt;</span><span class="err">/title&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="err">/head&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;app&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;initial-data&quot;</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/plain&quot;</span> <span class="nx">data</span><span class="o">-</span><span class="nx">json</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">initialData</span><span class="p">}</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;/static/bundle.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="err">/body&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="err">/html&gt;</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">export</span> <span class="k">default</span> <span class="nx">Html</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>server.js</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">ReactDOMServer</span> <span class="nx">from</span> <span class="s1">&#39;react-dom/server&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">express</span> <span class="nx">from</span> <span class="s1">&#39;express&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">import</span> <span class="nx">Html</span> <span class="nx">from</span> <span class="s1">&#39;./Html&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">App</span> <span class="nx">from</span> <span class="s1">&#39;./App&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">initialData</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;World&#39;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">ReactDOMServer</span><span class="p">.</span><span class="nx">renderToNodeStream</span><span class="p">(</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="nx">Html</span> <span class="nx">initialData</span><span class="o">=</span><span class="p">{</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">initialData</span><span class="p">)}</span><span class="o">&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">App</span> <span class="p">{...</span><span class="nx">initialData</span><span class="p">}</span> <span class="o">/&gt;</span>
+</span><span class='line'>        <span class="o">&lt;</span><span class="err">/Html&gt;</span>
+</span><span class='line'>    <span class="p">).</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>browser.js</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">ReactDOM</span> <span class="nx">from</span> <span class="s1">&#39;react-dom&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">App</span> <span class="nx">from</span> <span class="s1">&#39;./App&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">initialData</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;initial-data&#39;</span><span class="p">).</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">&#39;data-json&#39;</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">hydrate</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">App</span> <span class="p">{...</span><span class="nx">initialData</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記ではHtmlのComponent内で、アプリケーションのComponentを、ReactDOM.hydrateの対象となるDOMの子要素として渡しているだけです。
+HTML文字列として渡したりする必要はありません。</p>
+
+<p>また全体もrenderToNodeStreamでまとめて構築できるため、コードもシンプルになります。</p>
+
+<p>というわけで、v16ではSSRのコードもよりシンプルに書けるように効率的になっています。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React v16 changes]]></title>
@@ -397,6 +728,13 @@ ReactElementの構造が一致するかどうかの確認が、ReactElementの�
 <p>サーバーサイドレンダリングで意図的に異なるコンテンツを返している場合は、一度DOMをリセットする方がいいかもしれません。</p>
 
 <p>これにより、<code>data-react-check-sum</code>だけでなく、<code>react-text</code>のコメントや<code>data-react-id</code>もHTMLに付加されなりました。</p>
+
+<p>サーバーサイドレンダリングについては、捕捉記事書きました。</p>
+
+<ul>
+<li><a href="http://http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/">http://http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/</a></li>
+</ul>
+
 
 <h3>DOM Attributes</h3>
 
@@ -4438,268 +4776,6 @@ Babelを使った最適化の場合でも数%の向上が見られますが、�
 
 <p>Perfによる計測をChrome Developer Toolsで行うことができるライブラリーです。
 カジュアルに計測が出来そうなのでよさそうです。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[React.js v15.0 changes]]></title>
-    <link href="http://blog.koba04.com/post/2016/03/09/react-js-v15-changes/"/>
-    <updated>2016-03-09T13:07:52+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/03/09/react-js-v15-changes</id>
-    <content type="html"><![CDATA[<p><strong>v15.0.0がリリースされました(2016/04/08)</strong></p>
-
-<hr />
-
-<p><strong>RC2が出たので追記</strong></p>
-
-<p><strong>RC2</strong> ではIE、Edgeでマークアップの構造によって一部のテキストが表示されないバグ(<a href="https://github.com/facebook/react/issues/6246">#6246</a>)とSVGに関する変更がrevertされました。</p>
-
-<hr />
-
-<p>React.js v15.0がリリースされたので変更内容などを整理したいと思います。</p>
-
-<ul>
-<li><a href="https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html">https://facebook.github.io/react/blog/2016/03/07/react-v15-rc1.html</a></li>
-<li><a href="http://facebook.github.io/react/blog/2016/03/16/react-v15-rc2.html">http://facebook.github.io/react/blog/2016/03/16/react-v15-rc2.html</a></li>
-<li><a href="http://facebook.github.io/react/blog/2016/04/07/react-v15.html">http://facebook.github.io/react/blog/2016/04/07/react-v15.html</a></li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>% npm install --save react@15.0.0 react-dom@15.0.0</span></code></pre></td></tr></table></div></figure>
-
-
-<p>今回の一番大きな変更はバージョン番号かなと思います。</p>
-
-<p>0.14から15.0に。</p>
-
-<p>0.x系だとproduction readyではないと思われることから一気に15.0になりましたが0.がなくなっただけで大きな変化があるわけでもないです。
-なぜ1.0ではないのかというと1.0というバージョン番号は特別意味のあるものとして扱われるので、そうではなくてすでにproduction readyでありsemverに従っているということを明確にするために0.を取って15.0になりました。</p>
-
-<p><a href="https://facebook.github.io/react/blog/2016/02/19/new-versioning-scheme.html">https://facebook.github.io/react/blog/2016/02/19/new-versioning-scheme.html</a></p>
-
-<p>ちなみにこれまでもminor version(0.13 &ndash;> 0.14)などでは破壊的な変更がありましたがpatch version(0.14.1 &ndash;> 0.14.2)などは基本的には破壊的な変更はなかったのでバージョンアップのサイクルなどが変わることはないと思います。
-（patch versionの更新でUndocumentedなfeatureで破壊的な変更が入ることはありましたが&hellip;）</p>
-
-<p>これまでも破壊的な変更をする際は基本的には前のバージョンでwarningを入れてから更新するので、今回もすでに0.14.7を使っていて特にwarningなどが出力されていないのであれば問題なく15.0にアップデートできると思います。</p>
-
-<!-- more -->
-
-
-<p>ちなみにIE8のサポートについてはまだIE8対応のコードは削除されていないので動作するはずですが、今後はIE8のためだけのバグFixなどは行わないというステータスです。</p>
-
-<p><a href="https://facebook.github.io/react/blog/2016/01/12/discontinuing-ie8-support.html">https://facebook.github.io/react/blog/2016/01/12/discontinuing-ie8-support.html</a></p>
-
-<h2>Major changes</h2>
-
-<h3>document.createElement is in and data-reactid is out</h3>
-
-<p>これまではReactで構築した全てのDOMに対して<code>data-reactid</code>という属性が付与されていましたがそれが付与されなくなりました。すっきりしていいですね。
-ReactDOM.renderを行ったルートの要素には<code>data-reactroot</code>という属性が付与されます。</p>
-
-<p>またこれまでは多くの場合で<code>document.createElement</code>を使うよりも高速であるという理由から初期マウント時にはHTML文字列を生成してinnerHTMLで流し込んでいましたが、ブラウザーの改善などにより必ずしもそうとも言えなくなってきたので<code>document.createElement</code>を使って作成するように変更されました。</p>
-
-<p><code>data-reactid</code>がなぜ必要だったのかはReactのイベントの仕組みに関係しています。
-ReactではイベントハンドリングはそれぞれのReactElementと対応付けられたDOM要素にイベントリスナーを登録してハンドリングするのではなく、<code>ReactDOM.render</code>で指定したルートのDOM要素だけにイベントリスナーを登録してそこで全てのイベントをハンドリングしています。
-ルートで受け取ったイベントがどのReactElementと対応付けられたDOMで発生したのかを判定するために<code>data-reactid</code>が使用されていました。</p>
-
-<p>イベントは頻繁に発生するため内部ではキャッシュなどを駆使して高速化が図られていたのですがそれによるバグも多く、今回HTML文字列ではなくDOM要素を作成するようになり、DOM要素を保持しておけばいいので<code>data-reactid</code>を使ったマッピング情報を保持しておく必要がなくなりました。</p>
-
-<p>ちなみに<code>ReactDOM.renderToString</code>を使って生成したHTML文字列には変わらず<code>data-reactid</code>が付与されています。</p>
-
-<h3>No more extra <code>&lt;span&gt;</code>s</h3>
-
-<p><code>{name}</code>などのように変数を文字列として埋め込んだ際にこれまでは差分更新のために<code>span</code>タグで囲まれていたのがcomment nodeに変更されました。</p>
-
-<ul>
-<li>v0.14</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;app&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">data-reactid=</span><span class="s">&quot;.0&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;span</span> <span class="na">data-reactid=</span><span class="s">&quot;.0.0&quot;</span><span class="nt">&gt;</span>Hello <span class="nt">&lt;/span&gt;</span>
-</span><span class='line'><span class="nt">&lt;span</span> <span class="na">data-reactid=</span><span class="s">&quot;.0.1&quot;</span><span class="nt">&gt;</span>React<span class="nt">&lt;/span&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>v15</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;app&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;div</span> <span class="na">data-reactroot=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="c">&lt;!-- react-text: 2 --&gt;</span>Hello <span class="c">&lt;!-- /react-text --&gt;</span>
-</span><span class='line'><span class="c">&lt;!-- react-text: 3 --&gt;</span>React<span class="c">&lt;!-- /react-text --&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>この変更はマークアップ構造の変更を生むので更新する際には注意が必要です。
-特にCSS周りやテストでspanが挿入されることに依存したコードを書いていると壊れます。</p>
-
-<p>元々が意図しないマークアップが挿入されていたのでそれがなくなってよかったんじゃないでしょうか。</p>
-
-<h3>Rendering null now uses comment nodes</h3>
-
-<p>renderメソッドでnullを返した場合に、これまでは<code>&lt;noscript&gt;</code>タグがrenderされていましたがcomment nodeに変更されました。
-この変更もマークアップ構造の変更を生むので特に<code>:nth-child</code>などのセレクターを使っている場合には注意が必要です。</p>
-
-<p>また下記のエントリーにもあるように無駄に<code>&lt;noscript&gt;</code>タグが更新されていたような場合に対するパフォーマンスの改善となります。</p>
-
-<p><a href="http://benchling.engineering/deep-dive-react-perf-debugging/">http://benchling.engineering/deep-dive-react-perf-debugging/</a></p>
-
-<h3>Improved SVG support</h3>
-
-<p><strong>[更新]RC2でrevertされました</strong></p>
-
-<p><del>全てのSVGタグがサポートされるようになりました。一般的ではないタグは<code>React.DOM</code>のヘルパーとしては提供されていませんが、<code>React.createElement</code>で全てのSVGタグを作成できます。</del>
-<del>全てのSVGタグはキャメルケースやハイフンなどそのままの指定で作成できます。</del>
-<del><code>gradientTransform</code>は<code>gradientTransform</code>のままで<code>clip-path</code>は<code>clip-path</code>のまま指定します。</del></p>
-
-<p><del>ちなみにクラスを指定する場合は<code>className</code>ではなくて、<code>class</code>で指定します。custom elementsと同じです。</del>
-<del>それに関するissueはこちら。</del></p>
-
-<p><del> <a href="https://github.com/facebook/react/issues/6211">https://github.com/facebook/react/issues/6211</a> </del></p>
-
-<p>このSVGに対する挙動の変更はcustom elementsの挙動と同様であったのですが、HTMLElementとの整合性(<code>class</code> &ndash;> <code>className</code>など)がなくなってしまうことが問題だということでrevertされました。
-なのでサポートされていないsvgの要素や属性があれば引き続きPRして反映する必要があります。こんな感じで。(<a href="https://github.com/facebook/react/pull/6267">#6267</a>)</p>
-
-<p>将来的にはSVGもHTMLも普段SVGやHTMLと同じようにclassはclassのままで指定できるようになるのではないかなと思います。具体的な予定は示されていませんが&hellip;。</p>
-
-<h2>Breaking changes</h2>
-
-<p>v15で最も大きなBreaking changeは上に書いたspanタグを使わなくなったことによるマークアップ構造の変化です。</p>
-
-<p>その他では、v0.14でwaringsを出力していたDeprecatedなAPIが完全に削除されました。</p>
-
-<ul>
-<li><p>Reactのパッケージから<code>findDOMNode</code>, <code>render</code>, <code>renderToString</code>, <code>renderToStaticMarkup</code>, <code>unmountComponentAtNode</code>が削除されました。代わりにReactDOMのパッケージにある同名のAPIを使います。</p></li>
-<li><p>Addonとして提供されていた<code>batchedUpdates</code>と<code>cloneWithProps</code>が削除されました。</p></li>
-<li><p><code>setProps</code>, <code>replaceProps</code>, <code>getDOMNode</code>のAPIが削除されました。</p></li>
-</ul>
-
-
-<h2>New deprecations, introduced with a warning</h2>
-
-<p><code>LinkedStateMixin</code>と<code>valueLink</code>はほとんど使われておらず、v16で廃止するためのwarningを追加されます。</p>
-
-<p><a href="https://facebook.github.io/react/docs/two-way-binding-helpers.html">https://facebook.github.io/react/docs/two-way-binding-helpers.html</a></p>
-
-<p>必要な場合は下記のパッケージを利用してください。</p>
-
-<p><a href="https://www.npmjs.com/package/react-linked-input">https://www.npmjs.com/package/react-linked-input</a></p>
-
-<h2>New helpful warnings</h2>
-
-<ul>
-<li>developmentビルド(<code>NODE_ENV</code>が<code>production</code>でない)にも関わらずminifiedされている場合はproductionビルドを使うようにwarningが出ます。
-
-<ul>
-<li>Reactの中のコードを見たことがある人であればproductionビルドにする必要性がわかるはず&hellip;。developmentビルドには大量のデバッグやwarning用のコードが含まれています。</li>
-</ul>
-</li>
-<li>styleのwidthやmarginに数値を渡すと自動で単位(px)を付与してくれますが、その際に数値を文字列として渡しているとwarningが出ます。将来のバージョンでは文字列の場合は単位が自動で付与されなくなります。
-
-<ul>
-<li><code>&lt;div style={ {width: 10} }&gt;</code>はOK、<code>&lt;div style={ {width: "10"} }&gt;</code>はwarningが出ます。</li>
-</ul>
-</li>
-<li>SyntheticEventに追加でpropertyをセットしようとしたり、すでに解放されているのにアクセスしようとするとwarningが出力されます。
-
-<ul>
-<li>追加でpropertyをセットした場合にwarningが出るのはES2015のProxiesがサポートされている環境のみです。ちなみに自分が実装しました。</li>
-</ul>
-</li>
-<li>ReactElementの<code>ref</code>と<code>key</code>のPropにアクセスしようとするとwarningが出力されます。これらはReact自体が使うためのPropでkeyで使った値が必要な場合は別途Propとして設定する必要があります。</li>
-<li>DOM ElementのPropに対して、<code>onClick</code>を<code>onclick</code>のように大文字・小文字の指定が間違っている場合にはwarningが出力されるようになりました。</li>
-</ul>
-
-
-<h2>Notable bug fixes</h2>
-
-<ul>
-<li>幾つかのメモリリークが修正されています。</li>
-</ul>
-
-
-<hr />
-
-<p>SyntheticEventでのメモリリークについては自分が修正したので紹介しておくとSyntheticEventの<code>target</code>属性が正しく解放されるようになりました。</p>
-
-<p>SyntheticEventはPoolingされており、イベントハンドラーの処理が終了すると初期化されPoolに戻るのですが一番よく使う<code>target</code>属性だけ解放されていませんでした。
-したがって、下記のようなコードはv0.14では動作していましたがv15では動作しません。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">const</span> <span class="nx">Component</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">));</span> <span class="c1">// &lt;div&gt;click&lt;/div&gt;</span>
-</span><span class='line'>    <span class="p">}}</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="nx">click</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="err">/div&gt;</span>
-</span><span class='line'><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これは<code>onClick</code>が実行された時点でSyntheticEvent(<code>e</code>)が初期化されており、setTimeoutのコールバック実行時にはすでにtargetの値が初期化(null)されているためです。
-上記の場合、<code>target</code>をローカル変数として保持するか<code>e.persist()</code>を使って保持する必要があります。</p>
-
-<p>SyntheticEventがPoolingされているのは大量のイベントオブジェクトを作成することで発生するGCを避けるなどパフォーマンス上の理由からなのですが、モダンなブラウザーではもう必要ないのではないかということでPoolingをやめることが検討されています。</p>
-
-<p>SyntheticEvent周りは自分が追加したProxyを使ったコードなどかなり混沌としてきているのでPoolingやめてリファクタリングするのはとてもいいと思います。やりたい&hellip;。</p>
-
-<p><a href="https://github.com/facebook/react/issues/6190">https://github.com/facebook/react/issues/6190</a></p>
-
-<hr />
-
-<ul>
-<li>IE10, 11などでのイベントの扱いが改善されています。</li>
-<li><code>cite</code>と<code>profile</code>の属性がサポートされました。</li>
-<li><code>onAnimationStart</code>, <code>onAnimationEnd</code>, <code>onAnimationIteration</code>, <code>onTransitionEnd</code>, <code>onInvalid</code>のイベントがサポートされました。また<code>object</code>要素に<code>onLoad</code>イベントが追加されました。</li>
-<li>shallowCompareなどのいくつかの場所で<code>Object.is</code>による比較が行われるようになりました(実際にはpolyfill)。これにより、<code>+0 !== -0</code>となったり<code>NaN === NaN</code>となります。
-
-<ul>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is</a></li>
-</ul>
-</li>
-<li><p>ReactDOMがデフォルトではpropertyとしてではなくattributeとして扱うようになります。これによるEdge caseなバグが修正されました。また属性値が<code>null</code>の場合に属性が完全に削除されるようになりました。これによりブラウザーがデフォルト値を設定しないようになります。</p></li>
-<li><p>あとblogにはありませんでしたが、Stateless Componentsが<code>null</code>を返せるようになったのは地味に嬉しいですね！</p></li>
-</ul>
-
-
-<h2>Regression?</h2>
-
-<ul>
-<li>15.0.0-rc.1では<code>onTouchTap</code>が動作していないようなので使っている人は注意した方がよさそうです。
-
-<ul>
-<li><a href="https://github.com/facebook/react/issues/6221">https://github.com/facebook/react/issues/6221</a></li>
-</ul>
-</li>
-</ul>
-
 ]]></content>
   </entry>
   

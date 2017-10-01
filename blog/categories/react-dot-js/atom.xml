@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2017-10-01T21:07:23+09:00</updated>
+  <updated>2017-10-01T23:05:22+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,254 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React v16でのサーバーサイドレンダリング]]></title>
+    <link href="http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/"/>
+    <updated>2017-10-01T23:02:46+09:00</updated>
+    <id>http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16</id>
+    <content type="html"><![CDATA[<p>React v16について書いたブログの中の、サーバーサイドレンダリングについての部分に間違いがあったので修正しつつ、v16のサーバーサイドレンダリングについて補足します。</p>
+
+<p><a href="http://blog.koba04.com/post/2017/09/27/react-v16-changes/">http://blog.koba04.com/post/2017/09/27/react-v16-changes/</a></p>
+
+<p><strong>Hydrationしたい場合は、renderToStringまたはrenderToNodeStreamで行う必要があります。</strong></p>
+
+<p><code>data-reactroot</code>以外にも変数部分を識別するためのコメントノードなどが挿入されている必要があるためです。</p>
+
+<p>それでは、v15とv16でのサーバーサイドレンダリングの違いを見てみます。</p>
+
+<!-- more -->
+
+
+<p>以下、長いのでサーバーサイドレンダリングはSSRとします。</p>
+
+<h2>v15まで</h2>
+
+<p>ReactでSSRしたコンテンツをクライアントでも再利用したい場合、これまではSSRしたHTMLを元に生成されたchecksumとクライアントサイドで構築したReactElementから生成したchecksumが一致する必要がありました。</p>
+
+<p>これはつまり、ReactDOMServer.renderToStringのエントリーポイントと、ReactDOM.renderのエントリーポイントが一致する必要があることを示します。</p>
+
+<p>つまりHTML全体をReactで構築しようとするとこんな感じになります。</p>
+
+<ul>
+<li>App.js</li>
+</ul>
+
+
+<p>```js
+import React from &lsquo;react&rsquo;;
+const App = (props) => {</p>
+
+<pre><code>return &lt;div&gt;Hello {props.name}&lt;/div&gt;;
+</code></pre>
+
+<p>};
+export default App;
+```</p>
+
+<ul>
+<li>Html.js</li>
+</ul>
+
+
+<p>```js
+import React from &lsquo;react&rsquo;;</p>
+
+<p>const Html = (props) => {</p>
+
+<pre><code>return (
+    &lt;html&gt;
+        &lt;head&gt;
+            &lt;title&gt;App&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;div id="app" dangerouslySetInnerHTML={ {__html: props.markup} }&gt;&lt;/div&gt;
+            &lt;script id="initial-data" type="text/plain" data-json={props.initialData}&gt;&lt;/script&gt;
+            &lt;script src="http://blog.koba04.com/static/bundle.js"&gt;&lt;/script&gt;
+        &lt;/body&gt;
+    &lt;/html&gt;
+);
+</code></pre>
+
+<p>};</p>
+
+<p>export default Html;
+```</p>
+
+<ul>
+<li>server.js</li>
+</ul>
+
+
+<p>```js
+import React from &lsquo;react&rsquo;;
+import ReactDOMServer from &lsquo;react-dom/server&rsquo;;
+import express from &lsquo;express&rsquo;;</p>
+
+<p>import Html from &lsquo;./Html&rsquo;;
+import App from &lsquo;./App&rsquo;;</p>
+
+<p>const app = express();</p>
+
+<p>const initialData = {</p>
+
+<pre><code>name: 'World'
+</code></pre>
+
+<p>};</p>
+
+<p>app.get(&lsquo;/&rsquo;, (req, res) => {</p>
+
+<pre><code>res.send(
+    ReactDOMServer.renderToStaticMarkup(
+        &lt;Html
+            markup={ReactDOMServer.renderToString(&lt;App {...initialData} /&gt;)}
+            initialData={JSON.stringify(initialData)}
+        /&gt;
+    )
+);
+</code></pre>
+
+<p>});</p>
+
+<p>app.listen(3000);
+```</p>
+
+<ul>
+<li>browser.js</li>
+</ul>
+
+
+<p>```js
+import React from &lsquo;react&rsquo;;
+import ReactDOM from &lsquo;react-dom&rsquo;;
+import App from &lsquo;./App&rsquo;;</p>
+
+<p>const initialData = JSON.parse(document.getElementById(&lsquo;initial-data&rsquo;).getAttribute(&lsquo;data-json&rsquo;));</p>
+
+<p>ReactDOM.render(<App {...initialData} />, document.getElementById(&lsquo;app&rsquo;));
+```</p>
+
+<p>上記のように<code>Html.js</code>ではdangerouslySetInnerHTMLを使い、アプリケーションのComponentをrenderToStringによりchecksumなどが付与されたHTML文字列として埋め込む必要があります。</p>
+
+<p>また<code>server.js</code>では、HTML全体の部分はrenderToStaticMarkupで、アプリケーションの部分はrenderToStringでと、別々に生成する必要があります。</p>
+
+<p>これにより、renderToStringとReactDOM.renderで構築される内容が一致するため、SSRによって生成されたDOMが再利用されます。</p>
+
+<h2>v16</h2>
+
+<p>v16では、checksumによりチェックは行われず、可能な限りすでに構築されているDOMを再利用しようとします。
+また、ReactDOM.hydrateという明示的なAPIを使うことで、サーバー側とクライアント側でエントリーポイントを合わせる必要はありません。
+（ReactDOM.renderを使う場合は、<code>data-reactroot</code>の属性がDOMにあるかをチェックしているのでエントリーポイントを合わせる必要があります）</p>
+
+<p>そのためv15のように、エントリーポイントを一致させるために、アプリケーションのComponentを別途HTML文字列として生成する必要はありません。</p>
+
+<p>したがって、上記の例は、v16で追加されたrenderToNodeStreamを使うと</p>
+
+<ul>
+<li>App.js</li>
+</ul>
+
+
+<p>```js
+import React from &lsquo;react&rsquo;;
+const App = (props) => {</p>
+
+<pre><code>return &lt;div&gt;Hello {props.name}&lt;/div&gt;;
+</code></pre>
+
+<p>};
+export default App;
+```</p>
+
+<ul>
+<li>Html.js</li>
+</ul>
+
+
+<p>```js
+import React from &lsquo;react&rsquo;;</p>
+
+<p>const Html = (props) => {</p>
+
+<pre><code>return (
+    &lt;html&gt;
+        &lt;head&gt;
+            &lt;title&gt;App&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;div id="app"&gt;{props.children}&lt;/div&gt;
+            &lt;script id="initial-data" type="text/plain" data-json={props.initialData}&gt;&lt;/script&gt;
+            &lt;script src="http://blog.koba04.com/static/bundle.js"&gt;&lt;/script&gt;
+        &lt;/body&gt;
+    &lt;/html&gt;
+);
+</code></pre>
+
+<p>};</p>
+
+<p>export default Html;
+```</p>
+
+<ul>
+<li>server.js</li>
+</ul>
+
+
+<p>```js
+import React from &lsquo;react&rsquo;;
+import ReactDOMServer from &lsquo;react-dom/server&rsquo;;
+import express from &lsquo;express&rsquo;;</p>
+
+<p>import Html from &lsquo;./Html&rsquo;;
+import App from &lsquo;./App&rsquo;;</p>
+
+<p>const app = express();</p>
+
+<p>const initialData = {</p>
+
+<pre><code>name: 'World'
+</code></pre>
+
+<p>};</p>
+
+<p>app.get(&lsquo;/&rsquo;, (req, res) => {</p>
+
+<pre><code>ReactDOMServer.renderToNodeStream(
+    &lt;Html initialData={JSON.stringify(initialData)}&gt;
+        &lt;App {...initialData} /&gt;
+    &lt;/Html&gt;
+).pipe(res);
+</code></pre>
+
+<p>});</p>
+
+<p>app.listen(3000);
+```</p>
+
+<ul>
+<li>browser.js</li>
+</ul>
+
+
+<p>```js
+import React from &lsquo;react&rsquo;;
+import ReactDOM from &lsquo;react-dom&rsquo;;
+import App from &lsquo;./App&rsquo;;</p>
+
+<p>const initialData = JSON.parse(document.getElementById(&lsquo;initial-data&rsquo;).getAttribute(&lsquo;data-json&rsquo;));</p>
+
+<p>ReactDOM.hydrate(<App {...initialData} />, document.getElementById(&lsquo;app&rsquo;));
+```</p>
+
+<p>上記ではHtmlのComponent内で、アプリケーションのComponentを、ReactDOM.hydrateの対象となるDOMの子要素として渡しているだけです。
+HTML文字列として渡したりする必要はありません。</p>
+
+<p>また全体もrenderToNodeStreamでまとめて構築できるため、コードもシンプルになります。</p>
+
+<p>というわけで、v16ではSSRのコードもよりシンプルに書けるように効率的になっています。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React v16 changes]]></title>
@@ -311,6 +559,13 @@ ReactElementの構造が一致するかどうかの確認が、ReactElementの�
 <p>サーバーサイドレンダリングで意図的に異なるコンテンツを返している場合は、一度DOMをリセットする方がいいかもしれません。</p>
 
 <p>これにより、<code>data-react-check-sum</code>だけでなく、<code>react-text</code>のコメントや<code>data-react-id</code>もHTMLに付加されなりました。</p>
+
+<p>サーバーサイドレンダリングについては、捕捉記事書きました。</p>
+
+<ul>
+<li><a href="http://http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/">http://http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/</a></li>
+</ul>
+
 
 <h3>DOM Attributes</h3>
 
@@ -1589,110 +1844,6 @@ react-routerでは、Reactのためのルーティングライブラリーでは
 
 <p>Reduxの作者であるDan Abramovと初期からの開発者であるAndrew ClarkによるAMAです。
 Reduxについての実際に作った人たちの考えが説明されているので、興味のある人は読むといいと思います。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[React.js meetup #4]]></title>
-    <link href="http://blog.koba04.com/post/2016/09/30/reactjs-meetup-vol4/"/>
-    <updated>2016-09-30T13:56:56+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/09/30/reactjs-meetup-vol4</id>
-    <content type="html"><![CDATA[<p>前回が2月だったので約半年振りですが、React.js meetup #4を開催しました。</p>
-
-<ul>
-<li><a href="http://reactjs-meetup.connpass.com/event/39793/">http://reactjs-meetup.connpass.com/event/39793/</a></li>
-</ul>
-
-
-<p>今回は <strong>67/80人</strong> の方が参加してくださりました！感謝！</p>
-
-<blockquote class="twitter-tweet" data-lang="en"><p lang="ja" dir="ltr">たくさんの方に参加してもらって感謝！！ <a href="https://twitter.com/hashtag/reactjs_meetup?src=hash">#reactjs_meetup</a> <a href="https://t.co/1tTO5gKDxP">pic.twitter.com/1tTO5gKDxP</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/780747386251415552">September 27, 2016</a></blockquote>
-
-
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>今回も、前回同様にサイボウズさんに会場を提供して頂き開催することができました。
- サイボウズの皆様、参加者の皆様、発表者の皆様ありがとうございました！！</p>
-
-<!-- more -->
-
-
-<h2>本編</h2>
-
-<p>今回はメインのTalk(20min)が4本、LT(10min)が4本とかなり多く、さらにそれぞれのTalkもかなり濃かったので、その場では消化しきれなかった方も多かったのではないでしょうか。
-資料も公開されているので、是非見返してみてください。</p>
-
-<ul>
-<li><a href="http://reactjs-meetup.connpass.com/event/39793/presentation/">http://reactjs-meetup.connpass.com/event/39793/presentation/</a></li>
-</ul>
-
-
-<p>Tweetはここにまとめてあります。</p>
-
-<ul>
-<li><a href="http://togetter.com/li/1029915">http://togetter.com/li/1029915</a></li>
-</ul>
-
-
-<p>さらに今回は、直前に<a href="https://twitter.com/cpojer">@cpojer</a>さんから、ちょうど日本にいるタイミングなので参加したいという連絡があり、急遽JestについてのLTをしてもらいました。</p>
-
-<p>Jestは、最近になってものすごい勢いで開発されていて、全く別のライブラリーと言えるくらい進化しているので、それを紹介できる機会になってよかったなぁと思っています。</p>
-
-<ul>
-<li><a href="http://facebook.github.io/jest/">http://facebook.github.io/jest/</a></li>
-</ul>
-
-
-<p>後、これまでは先着での受付にしていたのですが、すぐに埋まってしまうので今回は抽選にしました。
-Twitterのpollを見る感じでも、抽選の方がよさそうですね。</p>
-
-<blockquote class="twitter-tweet" data-lang="en"><p lang="ja" dir="ltr">ちなみに次回 <a href="https://twitter.com/hashtag/reactjs_meetup?src=hash">#reactjs_meetup</a> やるとしたら、募集方法は抽選と先着のどちらがいいですか？</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/780705408335753222">September 27, 2016</a></blockquote>
-
-
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<h2>React.js meetupについて</h2>
-
-<p>そういえば、React.js meetupをどんな感じでやっているかを書いてなかったので、少しだけ書いてみます。</p>
-
-<p>React.js meetupは、メインのTalkは全てこちらからお願いして決めています。
-<a href="https://twitter.com/koba04">@koba04</a> が個人的に聞きたいものや多くの人が関心のありそうなテーマから選んでいます。
-それを普段からアウトプットしている方にお願いしています。</p>
-
-<p>その結果、React.js meetupはクオリティの高いTalkが聞ける場だと思ってもらえていたら嬉しいなと思っています。</p>
-
-<p>LTは、新しい発見の場として募集で受付けています。5minだと短いので10minで。
-(これはNode学園を参考にしました)</p>
-
-<p>毎回面白いTalkが多いのでいつも楽しみにしています。</p>
-
-<p>それを<a href="https://twitter.com/yosuke_furukawa">@yosuke_furukawa</a>や<a href="https://twitter.com/teppeis">@teppeis</a>や<a href="https://twitter.com/yoshiko_pg">@yoshiko_pg</a>や、<a href="https://twitter.com/ama_ch">@ama_ch</a>に相談したり、会場を探したり、色々と準備を手伝ってもらいながら運営しています。</p>
-
-<p>（<a href="http://reactjs-meetup.connpass.com/event/19504/">#2</a>に関しては、別のイベントとしてすでにあったものをReact.js meetupという名前を使う形にしたのでちょっと違いますが）</p>
-
-<p>そんな感じで小さくやっているので、あまり規模を拡大したり、頻繁に開催するといったことは考えていません。
-すでにReactに関するイベントはたくさん行なわれていると思うので。</p>
-
-<p>基本的には、自分たちが楽しむためにやっている感じです。
-聞きたいTalkを聞いて、参加者の人とディスカッションして。
-（参加したけど知っている人がいないという人は是非声かけてください！）</p>
-
-<p>実際のところ、当日は事前に懇親会の食べ物・飲み物を頼んでいたりするので参加率を気にしたり、ピザの配達状況を確認したりしているので、正直ちゃんとTalk聞けていないのですが&hellip;。</p>
-
-<blockquote class="twitter-tweet" data-lang="en"><p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/reactjs_meetup?src=hash">#reactjs_meetup</a> <br>yield pizza;<br><br>とのこと <a href="https://t.co/RDGQgcMKsz">pic.twitter.com/RDGQgcMKsz</a></p>&mdash; Yosuke FURUKAWA (@yosuke_furukawa) <a href="https://twitter.com/yosuke_furukawa/status/780737219464007682">September 27, 2016</a></blockquote>
-
-
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<h2>次回？</h2>
-
-<p>今のところ、特に考えていないので、何か話したいこととか、聞きたいテーマなどあれば教えてください！
-今回は詰め込みすぎたので、次回はメインのTalkは2本くらいにしようと思っています。</p>
-
-<p>来年かな。</p>
 ]]></content>
   </entry>
   
