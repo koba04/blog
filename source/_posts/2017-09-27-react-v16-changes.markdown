@@ -253,7 +253,7 @@ ReactElementの構造が一致するかどうかの確認が、ReactElementの�
 
 サーバーサイドレンダリングについては、補足記事書きました。
 
-* http://http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/
+* http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/
 
 ### DOM Attributes
 
