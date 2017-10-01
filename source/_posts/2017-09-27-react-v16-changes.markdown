@@ -226,8 +226,17 @@ Hydrationの方法の変更については、クライアント側の変更と�
 クライアント側でのAPIの変更については、ReactDOM.renderの代わりに`ReactDOM.hydrate`という専用のAPIを使うようになります。
 v16の段階では、ReactDOM.renderによるHydrationもサポートされますが、将来的に廃止される予定です。
 
-ちなみに、renderToNodeStreamとrenderToStaticNodeStreamによる出力の違いは、Rootの要素に`data-reactroot`があるかないかの違いだけです。このdata-reactrootはReactDOM.renderでHydrationするかどうかの判定に使われているだけです。
-なので、将来的にはどちらか1つのAPIだけになると思います。ReactDOM.hydrateを使う場合は、renderToStaticNodeStreamで生成したHTMLに対してもHydration出来ます。
+~~ちなみに、renderToNodeStreamとrenderToStaticNodeStreamによる出力の違いは、Rootの要素に`data-reactroot`があるかないかの違いだけです。このdata-reactrootはReactDOM.renderでHydrationするかどうかの判定に使われているだけです。
+なので、将来的にはどちらか1つのAPIだけになると思います。ReactDOM.hydrateを使う場合は、renderToStaticNodeStreamで生成したHTMLに対してもHydration出来ます。~~
+
+-------
+
+**[2017/10/01:訂正]**
+
+renderToNodeStreamとrenderToStaticNodeStreamによる出力の違いは、Rootの要素に`data-reactroot`以外にも、変数部分を識別するためのコメントノードの差し込みがあります。
+したがって、Hydrationする場合にはrenderToNodeStreamを、それ以外の場合はrenderToStaticNodeStreamという使い分けになります。
+
+-------
 
 Hydrationの方法については、v15まではrenderToStringで生成したHTMLの`data-react-check-sum`という属性につけられたチェックサムを使い、クライアント側で生成したReactElementの構造が一致するかどうか判定し、一致すればDOMを再利用して一致しなければDOMを再構築する方法を採用していました。
 
