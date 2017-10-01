@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2017-10-01T23:16:33+09:00</updated>
+  <updated>2017-10-01T23:18:47+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -729,10 +729,10 @@ ReactElementの構造が一致するかどうかの確認が、ReactElementの�
 
 <p>これにより、<code>data-react-check-sum</code>だけでなく、<code>react-text</code>のコメントや<code>data-react-id</code>もHTMLに付加されなりました。</p>
 
-<p>サーバーサイドレンダリングについては、捕捉記事書きました。</p>
+<p>サーバーサイドレンダリングについては、補足記事書きました。</p>
 
 <ul>
-<li><a href="http://http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/">http://http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/</a></li>
+<li><a href="http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/">http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/</a></li>
 </ul>
 
 
