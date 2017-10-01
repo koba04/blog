@@ -12,13 +12,13 @@ http://blog.koba04.com/post/2017/09/27/react-v16-changes/
 
 **Hydrationしたい場合は、renderToStringまたはrenderToNodeStreamで行う必要があります。**
 
-`data-reactroot`以外にも変数部分を識別するためのコメントノードなどが挿入されている必要があるためです。
+renderToStringまたはrenderToNodeStreamには、`data-reactroot`以外にも変数部分を識別するためのコメントノードなどが挿入されていて、それが必要であるためです。
 
 それでは、v15とv16でのサーバーサイドレンダリングの違いを見てみます。
 
 <!-- more -->
 
-以下、長いのでサーバーサイドレンダリングはSSRとします。
+以下、長いのでサーバーサイドレンダリングはSSRと略します。
 
 ## v15まで
 
