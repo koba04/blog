@@ -251,6 +251,10 @@ ReactElementの構造が一致するかどうかの確認が、ReactElementの�
 
 これにより、`data-react-check-sum`だけでなく、`react-text`のコメントや`data-react-id`もHTMLに付加されなりました。
 
+サーバーサイドレンダリングについては、捕捉記事書きました。
+
+* http://http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/
+
 ### DOM Attributes
 
 これまでは、ホワイトリストで管理された属性以外は、warningを出しつつDOMには反映されなかったのですが、v16からは反映されるようになります。
