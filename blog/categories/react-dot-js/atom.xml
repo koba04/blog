@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2017-10-01T23:05:22+09:00</updated>
+  <updated>2017-10-01T23:14:56+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -24,14 +24,14 @@
 
 <p><strong>Hydrationしたい場合は、renderToStringまたはrenderToNodeStreamで行う必要があります。</strong></p>
 
-<p><code>data-reactroot</code>以外にも変数部分を識別するためのコメントノードなどが挿入されている必要があるためです。</p>
+<p>renderToStringまたはrenderToNodeStreamには、<code>data-reactroot</code>以外にも変数部分を識別するためのコメントノードなどが挿入されていて、それが必要であるためです。</p>
 
 <p>それでは、v15とv16でのサーバーサイドレンダリングの違いを見てみます。</p>
 
 <!-- more -->
 
 
-<p>以下、長いのでサーバーサイドレンダリングはSSRとします。</p>
+<p>以下、長いのでサーバーサイドレンダリングはSSRと略します。</p>
 
 <h2>v15まで</h2>
 
@@ -1053,7 +1053,7 @@ Hostに反映させる部分はHostが何かによっても異なり、反映方
 <p>それでは、まずは現在使われているStackのrendererについて簡単に触れます。
 Stackは、ReactElementがツリー構造になるのと同様に、親から子、子から孫に処理を行っていきます。</p>
 
-<p><img src="/images/posts/a-state-of-react-fiber/ReactDOM.png" title="&lsquo;ReactDOM Stack&rsquo;" ></p>
+<p>{% img /images/posts/a-state-of-react-fiber/ReactDOM.png &lsquo;ReactDOM Stack&rsquo; %}</p>
 
 <p>上記では、<code>mountComponent</code> がどんどん入れ子になって呼ばれているのがわかります。
 加えてこれは同期的に行われます。</p>
@@ -1136,7 +1136,7 @@ type Fiber = {
 FiberはLinked Listの構造になっています。Stackの場合はTree構造を掘り下げていくように処理をしていましたが、Fiberでは、<code>return</code> や<code>child</code> や<code>sibling</code> などをたどることで順番にReactElementを処理していきます。
 そのことは、下記のスタックツリーを見てもわかります。</p>
 
-<p><img src="/images/posts/a-state-of-react-fiber/ReactDOMFiber.png" title="&lsquo;ReactDOM Fiber&rsquo;" ></p>
+<p>{% img /images/posts/a-state-of-react-fiber/ReactDOMFiber.png &lsquo;ReactDOM Fiber&rsquo; %}</p>
 
 <p>上記の通り、Stackのようにスタックがたくさん積まれていないことがわかります。</p>
 
@@ -1264,14 +1264,14 @@ requestIdleCallbackでは、アイドル時間を<code>timeRemaining</code>の�
 <p>下記はFiberを同期モードで実行した時のスタックです。
 全てが同期的に行われていることがわかります。この間はUIを完全にブロックしてしまいます。</p>
 
-<p><img src="/images/posts/a-state-of-react-fiber/ReactDOMFiber-sync.png" title="&lsquo;ReactDOM Fiber Sync&rsquo;" ></p>
+<p>{% img /images/posts/a-state-of-react-fiber/ReactDOMFiber-sync.png &lsquo;ReactDOM Fiber Sync&rsquo; %}</p>
 
 <p>下記は同じ処理を非同期で実行したスタックです。
 スタックが途切れ途切れになっていることがわかります。そのためUIをブロックしません。
 右端にある細いスタックはcommitWorkによるものです。
 Renderingの処理はcommitWorkの以降でだけ発生していることがわかります。</p>
 
-<p><img src="/images/posts/a-state-of-react-fiber/ReactDOMFiber-async.png" title="&lsquo;ReactDOM Fiber Async&rsquo;" ></p>
+<p>{% img /images/posts/a-state-of-react-fiber/ReactDOMFiber-async.png &lsquo;ReactDOM Fiber Async&rsquo; %}</p>
 
 <p>このとき、HostのViewに反映するといった副作用をこのbeginWork〜completeWorkの中で行わないというのは1つのポイントです。
 例えば、Viewへの反映をこの非同期処理の中で行ってしまうと、Viewが部分部分更新される形になり、UIがガタガタしてしまいます。
