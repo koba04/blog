@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2017-09-28T09:29:33+09:00</updated>
+  <updated>2017-10-01T21:07:23+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -370,8 +370,17 @@
 <p>クライアント側でのAPIの変更については、ReactDOM.renderの代わりに<code>ReactDOM.hydrate</code>という専用のAPIを使うようになります。
 v16の段階では、ReactDOM.renderによるHydrationもサポートされますが、将来的に廃止される予定です。</p>
 
-<p>ちなみに、renderToNodeStreamとrenderToStaticNodeStreamによる出力の違いは、Rootの要素に<code>data-reactroot</code>があるかないかの違いだけです。このdata-reactrootはReactDOM.renderでHydrationするかどうかの判定に使われているだけです。
-なので、将来的にはどちらか1つのAPIだけになると思います。ReactDOM.hydrateを使う場合は、renderToStaticNodeStreamで生成したHTMLに対してもHydration出来ます。</p>
+<p><del>ちなみに、renderToNodeStreamとrenderToStaticNodeStreamによる出力の違いは、Rootの要素に<code>data-reactroot</code>があるかないかの違いだけです。このdata-reactrootはReactDOM.renderでHydrationするかどうかの判定に使われているだけです。
+なので、将来的にはどちらか1つのAPIだけになると思います。ReactDOM.hydrateを使う場合は、renderToStaticNodeStreamで生成したHTMLに対してもHydration出来ます。</del></p>
+
+<hr />
+
+<p><strong>[2017/10/01:訂正]</strong></p>
+
+<p>renderToNodeStreamとrenderToStaticNodeStreamによる出力の違いは、Rootの要素に<code>data-reactroot</code>以外にも、変数部分を識別するためのコメントノードの差し込みがあります。
+したがって、Hydrationする場合にはrenderToNodeStreamを、それ以外の場合はrenderToStaticNodeStreamという使い分けになります。</p>
+
+<hr />
 
 <p>Hydrationの方法については、v15まではrenderToStringで生成したHTMLの<code>data-react-check-sum</code>という属性につけられたチェックサムを使い、クライアント側で生成したReactElementの構造が一致するかどうか判定し、一致すればDOMを再利用して一致しなければDOMを再構築する方法を採用していました。</p>
 
