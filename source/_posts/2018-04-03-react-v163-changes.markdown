@@ -348,8 +348,9 @@ const ThemeContext = React.createContext('dark');
           </ThemeContext.Consumer>
         )}
       </LangContext.Consumer>
-  </Child>
-</ThemeContext.Provider>
+    </Child>
+  </ThemeContext.Provider>
+</LangContext.Provider>
 ```
 
 ### newContext and legacyContext
