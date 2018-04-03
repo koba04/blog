@@ -45,9 +45,9 @@ https://reactjs.org/blog/2018/03/01/sneak-peek-beyond-react-16.html
 
 
 上記を見てわかる通り、v16.3の段階では新しい`static getDerivedStateFromProps` と `getSnapshotBeforeUpdate` と`UNSAFE_xxx`メソッドの追加のみです。
-`UNSAFE_xxx`のメソッドは既存実装のAliasで今のところ、削除される予定は決まっていません。
+UNSAFE_xxxのメソッドは既存実装のAliasで今のところ、削除される予定は決まっていません。
 したがって、他のメソッドへのマイグレーションが難しい場合にはとりあえず使い続けることも可能です。
-`UNSAFE_`のprefixがついていないメソッドは、v16系のマイナーリリースの中で警告が出るようになって、v17系のリリースで削除されます。
+UNSAFE_のprefixがついていないメソッドは、v16系のマイナーリリースの中で警告が出るようになって、v17系のリリースで削除されます。
 （ReactではBreaking Changeをするときは、前のバージョンで警告を出すようになっています）
 この警告は、当初はv16.4のリリースと計画されていたのですが最新のブログではv16.xとなっています。
 
@@ -61,7 +61,7 @@ Render Phaseはインスタンスを作ったり差分を計算するいわゆ�
 
 そのため、Render Phaseで呼ばれるライフサイクルメソッド（componentWillMount, componentWillReceiveProps, shouldComponentUpdate, componentWillUpdate）のうちshouldComponentUpdate以外が廃止されることになりました。
 
-`UNSAFE_`というprefixが付いた形では残りますが、前述した通り、これらのメソッドは何度も呼ばれる可能性があるため、副作用のある処理を行う場合には注意が必要です。
+UNSAFE_というprefixが付いた形では残りますが、前述した通り、これらのメソッドは何度も呼ばれる可能性があるため、副作用のある処理を行う場合には注意が必要です。
 例えば、イベントの登録・解除の処理など、1対1で結びついていることを期待する処理をcomponentWillMountとcomponentWillUnmountを組み合わせて行った場合、1対1であることが保証されないため壊れる可能性があります。
 この場合は、Commit Phaseで実行されるcomponentDidMountとcomponentWillUnmountを組み合わせて使う必要があります。
 
@@ -74,12 +74,12 @@ Render Phaseはインスタンスを作ったり差分を計算するいわゆ�
 - https://speakerdeck.com/koba04/capability-of-react-fiber
 
 前述した通り、非同期レンダリングの世界では、更新処理の割り込みにより様々なタイミングでRender Phaseが複数回実行されます。
-そのため、Reactが管理するPropsやState以外のインスタンスが持つ状態を保証するのが難しいため、componentWillReceivePropsの代わりと使われることが想定されるこの後紹介するgetDerivedStateFromPropsはstaticメソッドになっています。
+そのため、Reactが管理するPropsやState以外のインスタンスが持つ状態を保証するのが難しくなります。そのため、この後紹介するcomponentWillReceivePropsの代わりと使われることが想定されるgetDerivedStateFromPropsは、staticメソッドになっています。
 
-将来的には、ClassによるComponent APIとは違う、Reactが管理するStateなど以外の状態を持つことができないComponentを作成するAPIも計画されているようです。
+将来的には、ClassによるComponent APIとは違う、Reactが管理するStateなど以外の状態を持つことができないComponentを作成する新しいAPIも計画されているようです。
 （つまりクラスではないStateful Functional Componentのような?）
 
-`shouldComponentUpdate`については、基本的にはこのような副作用が書かれていることはないということと影響の大きさから、残されたのかなと思います。
+shouldComponentUpdateについては、基本的にはこのような副作用が書かれていることはないということと影響の大きさから、残されたのかなと思います。
 将来的にstaticなメソッドになる可能性はあるかなと思います。
 
 ### `static getDerivedStateFromProps(nextProps, prevState)`
@@ -100,11 +100,10 @@ Stateを更新する必要がない時は、`null`を返します。
 実際に使おうとするとprevPropsが取得出来ないのを不便に感じるのですが、下記の理由からprevPropsを渡さないようになったとのことです。
 ドキュメントでは、prevPropsが欲しい場合は、Stateとして保存することが推奨されています。
 
-
-- `static getDerivedStateFromProps`はマウント時にも呼ばれ、マウント時はprevPropsは`null`になるので、prevPropsを使おうとする`null`かどうかのチェックが常に必要になってしまう
+- getDerivedStateFromPropsはマウント時にも呼ばれ、マウント時はprevPropsは`null`になるので、prevPropsを使おうとする`null`かどうかのチェックが常に必要になってしまう
 - prevPropsを渡さないことで、メモリ常に保持しておく必要がなくなるので将来的に最適化が可能になる
 
-あんまりいい例が思いつかなかったのですがこんな感じ。
+あんまりいい例が思いつかなかったのですが、getDerivedStateFromPropsの例はこんな感じ。
 
 ```js
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -142,7 +141,7 @@ getSnapshotBeforeUpdateで返したsnapshotは、componentDidUpdateの第3引数
 ちなみにgetDerivedStateFromPropsもgetSnapshotBeforeUpdateも長くて覚えにくい名前だと思いますが、これはこれらのライフサイクルメソッドは頻繁に使うようなものではないため、あえてそういう名前にしたという話もあります。
 （名前決める議論の中でそんなことを言っていた記憶がないので本当かは不明）
 
-例として、タイムラインのようにどんどん先頭に要素が追加されていく状態で、表示されている要素を維持し続けるために更新前のスクロール位置を保持して、追加された要素分位置を調整する場合はこんなイメージ。
+例として、タイムラインのようにどんどん先頭に要素が追加されていく状態で、表示されている要素を維持し続けるために更新前のスクロール位置を保持して、追加された要素分位置を調整する例はこんなイメージ。
 
 ```js
     getSnapshotBeforeUpdate() {
@@ -174,18 +173,18 @@ https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#examples
   - ただ、この辺りは将来的にはReact Suspenseで置き換えることを想定しているようです。SSR時の外部リソースの取得についても言及されているので、React SuspenseはSSRの時にもうまく動作するようになるのかもしれないですね。（既存のSSRのRendererはFiberベースではないのでどう実装するのかは不明ですが…）
 - Adding event listeners (or subscriptions)
   - componentWillMountで行なっていたイベントの購読については、componentDidMountで行うようにします。
-  - 一点注意点としては、componentWillMountは親 → 子の順番で呼ばれますが、componentDidMountは子→ 親の順番で呼ばれます。そのため、親のcomponentDidMountでイベントの購読を行う場合、子のcomponentDidMout発行されたイベントについては購読出来ません。
+  - 一点注意点としては、componentWillMountは親 → 子の順番で呼ばれますが、componentDidMountは子→ 親の順番で呼ばれます。そのため、親のcomponentDidMountでイベントの購読を行う場合、子のcomponentDidMout発行されたイベントについては購読出来ません（子がイベントを発行していた時点で、親はまだイベントを購読してないため）。
   - イベントの処理については、後述する`create-subscription`を使う方法もあります。
 - Updating `state` based on props
-  - componentWillReceivePropsで新しいPropsの値をもとにStateの値を更新していたような場合は、`static getDerivedStateFromProps`を代わりに使います。
+  - componentWillReceivePropsで新しいPropsの値をもとにStateの値を更新していたような場合は、static getDerivedStateFromPropsを代わりに使います。
 - Invoking external callbacks
   - Stateが変更されたタイミングで何かコールバックを実行したいような場合は、componentWillUpdateではなくて、componentDidUpdateを使います。
 - Side effects on props change
   - Propsの変更に応じて何か副作用を呼び出したい場合は、componentWillReceivePropsやcomponentWillUpdateではなく、componentDidUpdateを使います。
 - Fetching external data when props change
-  - Propsの変更に応じて外部リソースをフェッチしたい場合には、`static getDerivedStateFropProps`でデータをリセットして、`componentDidUpdate`でデータをフェッチする方法が推奨されています。（`componentDidUpdate`で呼ばないと何度もリクエストが投げられる可能性があります）
+  - Propsの変更に応じて外部リソースをフェッチしたい場合には、static getDerivedStateFropPropsでデータをリセットして、componentDidUpdateでデータをフェッチする方法が推奨されています。（componentDidUpdateで呼ばないと何度もリクエストが投げられる可能性があります）
 - Reading DOM properties before an update
-  - 更新前のDOMの状態を取得して更新後の値と比較したい場合は、`getSnapshotBeforeUpdate`で取得した値を返して、`componentDidUpdate`の第３第3引数として受け取ります。
+  - 更新前のDOMの状態を取得して更新後の値と比較したい場合は、getSnapshotBeforeUpdateで取得した値を返して、componentDidUpdateの第3引数として受け取ります。
 
 ライフサイクルメソッドについての公式のドキュメント
 
@@ -201,10 +200,10 @@ https://reactjs.org/docs/react-component.html#the-component-lifecycle
     <button ref={ref} />
 ```
 
-注意点としては、上記の場合、button要素は`ref`の変数に入っているのではなく、`ref.current`に入っています。したがって上記の場合、focusをあてたい場合には`ref.current.focus()`とします。
+注意点としては、上記の場合、button要素はrefの変数に入っているのではなく、`ref.current`に入っています。したがって上記の場合、focusをあてたい場合には`ref.current.focus()`とします。
 
-これまで文字列とコールバックを使ったRef指定が可能でした。
-文字列を使ったRefは、利用者としては単純でわかりやすいですが、Ownerコンテキストで評価されるなど内部の実装としても好ましくない部分があったり、最適化や静的型チェックが難しいという問題があり、ずっと廃止予定とアナウンスされていて今回それに変わる`React.createRef()`が登場し廃止されることが決定しました。
+これまでは、文字列とコールバックを使ったRef指定が可能でした。
+文字列を使ったRefは、利用者としては単純でわかりやすいですが、Ownerコンテキストで評価されるなど内部の実装としても好ましくない部分があったり、最適化や静的型チェックが難しいという問題がありました。そのため、ずっと廃止予定とアナウンスされていて、今回それに変わる`React.createRef()`が登場したため、廃止されることが決定しました。
 （どのバージョンで廃止されるのかはまだ未定です）
 
 コールバックを使ったRef指定はそのまま残るので、コールバックで指定しているものはそのままで問題ありません。
@@ -224,13 +223,13 @@ https://reactjs.org/docs/refs-and-the-dom.html
 
 主にHOCでラップされたComponentに対してRefを指定した場合に使います。
 
-`React.forwardRef((props, ref) => <Component {…props} ref={ref}  />)`のような形式にすることで、指定された`ref`を引数として受け取ることが出来るようになるので、そのまま子のComponentの`ref`に指定できます。
+`React.forwardRef((props, ref) => <Component {…props} ref={ref}  />)`のような形式にすることで、指定されたrefを引数として受け取ることが出来るようになるので、そのまま子のComponentのrefに指定できます。
 
-RefはPropsと違い伝播させることができなかったので、これまでは、componentRefのようなPropsとして渡す必要があったのですが、これを使うことで、`ref`として渡すことができるようになります。
+RefはPropsと違い伝播させることができなかったので、これまでは、componentRefのようなPropsとして渡す必要があったのですが、これを使うことで、refとして渡すことができるようになります。
 
 Refで子のComponentを参照することが自体が避けるべきことではあるので、そんなに用途はないように思いますが…。
 
-無理やり例を考えて見ると、HOCでラップしたComponentに対する`ref`を指定したい場合、
+無理やり例を考えて見ると、HOCでラップしたComponentに対するrefを指定したい場合、
 
 ```js
     const withColor = Component => color => ({buttonRef, ...props}) => (
@@ -268,7 +267,7 @@ https://codepen.io/koba04/pen/dmKyNd?editors=0010
 
 https://codepen.io/koba04/pen/pLKobo?editors=0010
 
-のように`React.forwardRef`を使うことで、直接Componentを利用する時のように`ref`として指定出来るようになります。
+のように`React.forwardRef`を使うことで、直接Componentを利用する時のようにrefとして指定出来るようになります。
 
 公式のドキュメント
 
@@ -282,23 +281,22 @@ Strict ModeのComponent自体は何もUIを描画せず、後述するチェッ�
 `<StrictMode>`で囲まれたComponentの中では、廃止予定のAPIや問題になりそうな使い方をチェックして問題を検出してくれます。
 現時点では、下記のようなチェックが行われています。
 
-
 - Identifying components with unsafe lifecycles
 - Warning about legacy string ref API usage
 - Detecting unexpected side effects
 
-“Identifying components with unsafe lifecycles”は、`componentWillMount`や`componentWillReceiveProps`や`componentWillUpdate`などの廃止予定のAPIを使用していないかをチェックして、見つかった場合にはコンソールに出力します。
+“Identifying components with unsafe lifecycles”は、componentWillMountやcomponentWillReceivePropsやcomponentWillUpdateなどの廃止予定のAPIを使用していないかをチェックして、見つかった場合にはコンソールに出力します。
 
-“Warning about legacy string ref API usage”は、文字列を使った`ref`指定をチェックして、見つかった場合にはコンソールに出力します。
+“Warning about legacy string ref API usage”は、文字列を使ったref指定をチェックして、見つかった場合にはコンソールに出力します。
 
 “Detecting unexpected side effects”は、非同期レンダリングが有効になった場合をシミュレートすることで、非同期レンダリングが有効になった時に問題となる副作用のあるコードがないかを検出します。
 ただし、副作用のあるコードがあるかどうかを検出することはできないので、Strict Modeでは、下記のAPIが意図的に2回呼ばれるようになります。
 
 
-- `constructor`
-- `render`メソッド
-- `setState`の第1引数に指定する関数
-- `static getDerivedStateFromProps`
+- constructor
+- renderメソッド
+- setStateの第1引数に指定する関数
+- static getDerivedStateFromProps
 
 これにより、完璧ではないですが、複数回呼ばれると壊れるような副作用のある実装をできることを期待しています。
 
@@ -308,9 +306,10 @@ Strict ModeのComponent自体は何もUIを描画せず、後述するチェッ�
 ## New Context API
 
 APIの変更があるとずっと予告されていたContextの新しいAPIです。
+
 既存のContextも少なくv16系ではサポートされ続けます。
 既存のContextは、`react-redux`や`react-router`などのライブラリが内部で使っているので、多くの人に関係あるといえばある変更です。
-これらのライブラリがどのようにAPIを変えるのかは、Issueなどで議論は行われていますがまだ不明です。
+これらのライブラリがどのように対応するのかは、issueなどで議論は行われていますがまだ不明です。
 また最近軽量なRedux風なライブラリが増えているのはこのContext APIの影響もあると思います。
 
 今回のNew Context APIは正式な機能としてリリースされましたが、Contextをabuseするのではなく、Propsを使ってデータのやりとりをするのが基本であるのは変わりません。
@@ -355,7 +354,7 @@ Render Functionのパターンになっているので、複数種類のContext�
 
 ### newContext and legacyContext
 
-なぜ既存のContext APIが置き換えられることになったかというと、Static Type Checkingが難しいなどの問題がありますが、一番大きいのはContextの伝播が途中Componentが`shouldComponentUpdate`でfalseを返した場合、子孫のComponentは再renderされないので、Contextの変更が伝わらなくなってしまうことです。
+なぜ既存のContext APIが置き換えられることになったかというと、Static Type Checkingが難しいなどの問題がありますが、一番大きいのはContextの伝播が途中ComponentがshouldComponentUpdateでfalseを返した場合、子孫のComponentは再renderされないので、Contextの変更が伝わらなくなってしまうことです。
 
 下記のサンプルを見てもらうとoldContextの方は変更が反映されていないことがわかります。
 
@@ -366,7 +365,7 @@ https://codepen.io/koba04/pen/OvvzXb?editors=0010
 新しいContextのAPIはobservedBitsという面白い機能を持っています。unstableですが...。
 通常Contextに変更があると対応する全てのConsumerを再renderしますが、observedBitsを指定することで、関連のあるConsumerのみ再renderさせることができます。
 
-方法は、`React.createContext`の第二引数に、関数を定義します。この関数は変更前後のContextの値を受け取るので、変更内容を示すビット列を返します。
+方法は、React.createContextの第二引数に、関数を定義します。この関数は変更前後のContextの値を受け取るので、変更内容を示すビット列を返します。
 
 ```js
     // foo === 0b01, bar === 0b10のビット列を設定する
@@ -380,7 +379,7 @@ https://codepen.io/koba04/pen/OvvzXb?editors=0010
 
 説明するまでもないですが、上記の場合は、fooが変更されたら`0b01`を、barが変更されたら`0b10`のビットを立てています。
 
-そして、`Context.Consumer`に、`unstable_observedBits`のPropsとして、Consumerが受け取っている値に関連するビット列を指定します。
+そして、Context.Consumerに、`unstable_observedBits`のPropsとして、Consumerが受け取っている値に関連するビット列を指定します。
 そうすることで、createContextの第2引数が返すビット列(changedBits)とConsumerのunstable_observedBitsの論理積(`&`)をとって0じゃない場合のみ再renderされます。
 
 ```js
@@ -402,18 +401,50 @@ https://codepen.io/koba04/pen/OvvzXb?editors=0010
 
 Reduxのようなライブラリを組み合わせる時の最適化として使えそうですね。
 
+ちなみにReactの内部でもビット列を使ったコードはあったりします。
+
+* https://github.com/facebook/react/blob/master/packages/react-reconciler/src/ReactTypeOfMode.js
+
+```js
+export const NoContext = 0b00;
+export const AsyncMode = 0b01;
+export const StrictMode = 0b10;
+```
+
+* https://github.com/facebook/react/blob/master/packages/shared/ReactTypeOfSideEffect.js
+
+```js
+export const NoEffect = /*              */ 0b000000000000;
+export const PerformedWork = /*         */ 0b000000000001;
+// You can change the rest (and add more).
+export const Placement = /*             */ 0b000000000010;
+export const Update = /*                */ 0b000000000100;
+export const PlacementAndUpdate = /*    */ 0b000000000110;
+export const Deletion = /*              */ 0b000000001000;
+export const ContentReset = /*          */ 0b000000010000;
+export const Callback = /*              */ 0b000000100000;
+export const DidCapture = /*            */ 0b000001000000;
+export const Ref = /*                   */ 0b000010000000;
+export const ErrLog = /*                */ 0b000100000000;
+export const Snapshot = /*              */ 0b100000000000;
+// Union of all host effects
+export const HostEffectMask = /*        */ 0b100111111111;
+export const Incomplete = /*            */ 0b001000000000;
+export const ShouldCapture = /*         */ 0b010000000000;
+```
+
 詳しくは下記のサンプルを見てください。
 
 https://codepen.io/koba04/pen/WzzXJx?editors=0010
 
 ## Others
 
-その他、細かい変更について、さらっと触れておきます。
+その他、細かい変更についても、軽く触れておきます。
 
 ### Rename React.unstable_AsyncComponent to React.unstable_AsyncMode
 
-指定したComponentの中で発生した更新処理をLow Priorityとして扱うことのできる`React.unstable_AsyncComponent`が、`React.unstable_AsyncMode`にリネームされました。
-また、以前は可能だったextendsして使う使い方が出来なくなっています。
+指定したComponentの中で発生した更新処理をデフォルトLow Priorityとして扱うことのできる`React.unstable_AsyncComponent`が、`React.unstable_AsyncMode`にリネームされました。
+また、以前は可能だったextendsする使い方が出来なくなっています。
 
 ### New react-is package
 
@@ -458,7 +489,7 @@ https://github.com/reactjs/react-lifecycles-compat
 
 ### New create-subscription package
 
-非同期レンダリングを考慮した簡単なpub/subモデルを実装するためのライブラリです。
+非同期レンダリングを考慮した、イベントを購読する処理を実装するためのライブラリです。
 これはFluxライブラリの実装として利用することを想定されているのではなく、GeolocationなどのAPIを監視して何かしたい場合の使用が想定されています。
 そこまで利用シーンは多くない気はしています。
 （IntersectionObserverとかと組み合わせると良さそう？）
