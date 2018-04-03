@@ -402,7 +402,7 @@ const StoreContext = React.createContext(null, (prev, next) => {
 
 Reduxのようなライブラリを組み合わせる時の最適化として使えそうですね。
 
-ちなみにReactの内部でもビット列を使ったコードはあったりします。
+ちなみにReactの内部でも、ModeやSideEffectはビット列を使って定義されていて、ビット演算を使って処理されています。
 
 * https://github.com/facebook/react/blob/master/packages/react-reconciler/src/ReactTypeOfMode.js
 
