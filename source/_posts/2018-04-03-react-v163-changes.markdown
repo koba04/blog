@@ -106,23 +106,23 @@ Stateを更新する必要がない時は、`null`を返します。
 あんまりいい例が思いつかなかったのですが、getDerivedStateFromPropsの例はこんな感じ。
 
 ```js
-    static getDerivedStateFromProps(nextProps, prevState) {
-      // カテゴリが変わったらデータをリセット
-      if (nextProps.category !== prevState.category) {
-        return {
-          data: null,
-          category: null,
-        }
-      }
-      return null;
+static getDerivedStateFromProps(nextProps, prevState) {
+  // カテゴリが変わったらデータをリセット
+  if (nextProps.category !== prevState.category) {
+    return {
+      data: null,
+      category: null,
     }
-    componentDidUpdate() {
-      if (this.state.category == null) {
-        fetchData(this.props.category).then((data) => {
-          this.setState({category: this.props.category, data});
-        });
-      }
-    }
+  }
+  return null;
+}
+componentDidUpdate() {
+  if (this.state.category == null) {
+    fetchData(this.props.category).then((data) => {
+      this.setState({category: this.props.category, data});
+    });
+  }
+}
 ```
 
 ### `getSnapshotBeforeUpdate(prevProps, prevState)`
@@ -144,17 +144,17 @@ getSnapshotBeforeUpdateで返したsnapshotは、componentDidUpdateの第3引数
 例として、タイムラインのようにどんどん先頭に要素が追加されていく状態で、表示されている要素を維持し続けるために更新前のスクロール位置を保持して、追加された要素分位置を調整する例はこんなイメージ。
 
 ```js
-    getSnapshotBeforeUpdate() {
-      const body = document.body;
-      return {
-        scrollHeight: body.scrollHeight,
-        scrollTop: body.scrollTop
-      };
-    }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-      const body = document.body;
-      body.scrollTop = snapshot.scrollTop + (body.scrollHeight - snapshot.scrollHeight);
-    }
+getSnapshotBeforeUpdate() {
+  const body = document.body;
+  return {
+    scrollHeight: body.scrollHeight,
+    scrollTop: body.scrollTop
+  };
+}
+componentDidUpdate(prevProps, prevState, snapshot) {
+  const body = document.body;
+  body.scrollTop = snapshot.scrollTop + (body.scrollHeight - snapshot.scrollHeight);
+}
 ```
 
 ### Migration paths
@@ -196,8 +196,8 @@ https://reactjs.org/docs/react-component.html#the-component-lifecycle
 簡単ですね。
 
 ```js
-    const ref = React.createRef();
-    <button ref={ref} />
+const ref = React.createRef();
+<button ref={ref} />
 ```
 
 注意点としては、上記の場合、button要素はrefの変数に入っているのではなく、`ref.current`に入っています。したがって上記の場合、focusをあてたい場合には`ref.current.focus()`とします。
@@ -210,9 +210,9 @@ https://reactjs.org/docs/react-component.html#the-component-lifecycle
 実際Functional Componentの中でただfocusを当てたいような場合には、refの参照を保持しておく必要がないので、コールバックで処理した方が便利です。
 
 ```js
-    const Text = () => (
-      <input ref={el => el && el.focus()} />
-    );
+const Text = () => (
+  <input ref={el => el && el.focus()} />
+);
 ```
 
 公式のドキュメント
@@ -232,18 +232,18 @@ Refで子のComponentを参照することが自体が避けるべきことで�
 無理やり例を考えて見ると、HOCでラップしたComponentに対するrefを指定したい場合、
 
 ```js
-    const withColor = Component => color => ({buttonRef, ...props}) => (
-      <Component {...props} color={color} ref={buttonRef} />
-    );
-    
-    const TomatoButton = withColor(Button)('tomato');
-    
-    const App = () => (
-      <div>
-        <!-- buttonRefとして渡す必要がある -->
-        <TomatoButton id="foo" buttonRef={button => button && button.focus()} />
-      </div>
-    );
+const withColor = Component => color => ({buttonRef, ...props}) => (
+  <Component {...props} color={color} ref={buttonRef} />
+);
+
+const TomatoButton = withColor(Button)('tomato');
+
+const App = () => (
+  <div>
+    <!-- buttonRefとして渡す必要がある -->
+    <TomatoButton id="foo" buttonRef={button => button && button.focus()} />
+  </div>
+);
 ```
 
 https://codepen.io/koba04/pen/dmKyNd?editors=0010
@@ -251,18 +251,18 @@ https://codepen.io/koba04/pen/dmKyNd?editors=0010
 のように`buttonRef`などのようにPropsの一部として渡す必要があったのが、
 
 ```js
-    const withColor = Component => color => React.forwardRef((props, ref) => (
-      <Component {...props} color={color} ref={ref} />
-    ));
-    
-    const TomatoButton = withColor(Button)('tomato');
-    
-    const App = () => (
-      <div>
-        <!-- refとして渡すことが出来る -->
-        <TomatoButton id="foo" ref={button => button && button.focus()} />
-      </div>
-    );
+const withColor = Component => color => React.forwardRef((props, ref) => (
+  <Component {...props} color={color} ref={ref} />
+));
+
+const TomatoButton = withColor(Button)('tomato');
+
+const App = () => (
+  <div>
+    <!-- refとして渡すことが出来る -->
+    <TomatoButton id="foo" ref={button => button && button.focus()} />
+  </div>
+);
 ```
 
 https://codepen.io/koba04/pen/pLKobo?editors=0010
@@ -320,36 +320,36 @@ APIの変更があるとずっと予告されていたContextの新しいAPIで�
 `ThemeContext.Provider`がContextの値を管理する、親となるComponentです。`ThemeContext.Consumer`は、Providerの子孫要素であり、Contextの値を利用する側です。Providerの子孫であればどこでも利用出来ます。
 
 ```js
-    const ThemeContext = React.createContext('dark');
-    
-    <ThemeContext.Provider value={'dark'}>
-      <!-- このツリーの中では、ThemeContext.Consumerを通じてThemeContextの値を参照できる -->
-      <Child>
-        <ThemeContext.Consumer>
-          {(theme) => <button className={theme}>click</button>}
-        </ThemeContext.Consumer>
-      </Child>
-    </ThemeContext.Provider>
+const ThemeContext = React.createContext('dark');
+
+<ThemeContext.Provider value={'dark'}>
+  <!-- このツリーの中では、ThemeContext.Consumerを通じてThemeContextの値を参照できる -->
+  <Child>
+    <ThemeContext.Consumer>
+      {(theme) => <button className={theme}>click</button>}
+    </ThemeContext.Consumer>
+  </Child>
+</ThemeContext.Provider>
 ```
 
 Render Functionのパターンになっているので、複数種類のContextを組み合わせて使うことも勿論可能です。
 
 ```js
-    const LangContext = React.createContext('lang');
-    const ThemeContext = React.createContext('dark');
-    
-    <LangContext.Provider value="en">
-      <ThemeContext.Provider value="dark">
-        <Child>
-          <LangContext.Consumer>
-            {(lang) => (
-              <ThemeContext.Consumer>
-                {(theme) => <button className={theme}>{getMessage('click', lang)}</button>}
-              </ThemeContext.Consumer>
-            )}
-          </LangContext.Consumer>
-      </Child>
-    </ThemeContext.Provider>
+const LangContext = React.createContext('lang');
+const ThemeContext = React.createContext('dark');
+
+<LangContext.Provider value="en">
+  <ThemeContext.Provider value="dark">
+    <Child>
+      <LangContext.Consumer>
+        {(lang) => (
+          <ThemeContext.Consumer>
+            {(theme) => <button className={theme}>{getMessage('click', lang)}</button>}
+          </ThemeContext.Consumer>
+        )}
+      </LangContext.Consumer>
+  </Child>
+</ThemeContext.Provider>
 ```
 
 ### newContext and legacyContext
@@ -368,13 +368,13 @@ https://codepen.io/koba04/pen/OvvzXb?editors=0010
 方法は、React.createContextの第二引数に、関数を定義します。この関数は変更前後のContextの値を受け取るので、変更内容を示すビット列を返します。
 
 ```js
-    // foo === 0b01, bar === 0b10のビット列を設定する
-    const StoreContext = React.createContext(null, (prev, next) => {
-      let result = 0;
-      if (prev.foo !== next.foo) result |= 0b01;
-      if (prev.bar !== next.bar) result |= 0b10;
-      return result;
-    })
+// foo === 0b01, bar === 0b10のビット列を設定する
+const StoreContext = React.createContext(null, (prev, next) => {
+  let result = 0;
+  if (prev.foo !== next.foo) result |= 0b01;
+  if (prev.bar !== next.bar) result |= 0b10;
+  return result;
+})
 ```
 
 説明するまでもないですが、上記の場合は、fooが変更されたら`0b01`を、barが変更されたら`0b10`のビットを立てています。
@@ -383,20 +383,20 @@ https://codepen.io/koba04/pen/OvvzXb?editors=0010
 そうすることで、createContextの第2引数が返すビット列(changedBits)とConsumerのunstable_observedBitsの論理積(`&`)をとって0じゃない場合のみ再renderされます。
 
 ```js
-    // foo(0b01)が変わった場合のみrenderされる
-    <StoreContext.Consumer unstable_observedBits={0b01}>
-      {({foo}) => <div>{foo}</div>
-    </StoreContext.Consumer>
-    
-    // bar(0b10)が変わった場合のみrenderされる
-    <StoreContext.Consumer unstable_observedBits={0b10}>
-      {({bar}) => <div>{bar}</div>
-    </StoreContext.Consumer>
-    
-    // どちらでも(このば場合、unstable_observedBitsは省略できる
-    <StoreContext.Consumer unstable_observedBits={0b11}>
-      {({foo, bar}) => <div>{foo}:{bar}</div>
-    </StoreContext.Consumer>
+// foo(0b01)が変わった場合のみrenderされる
+<StoreContext.Consumer unstable_observedBits={0b01}>
+  {({foo}) => <div>{foo}</div>
+</StoreContext.Consumer>
+
+// bar(0b10)が変わった場合のみrenderされる
+<StoreContext.Consumer unstable_observedBits={0b10}>
+  {({bar}) => <div>{bar}</div>
+</StoreContext.Consumer>
+
+// どちらでも(このば場合、unstable_observedBitsは省略できる
+<StoreContext.Consumer unstable_observedBits={0b11}>
+  {({foo, bar}) => <div>{foo}:{bar}</div>
+</StoreContext.Consumer>
 ```
 
 Reduxのようなライブラリを組み合わせる時の最適化として使えそうですね。
@@ -454,12 +454,12 @@ Componentの種別を使って何かしたい場合に使えます。
 色々なAPIが定義されているので、ドキュメントを参照してください。
 
 ```js
-    import * as ReactIs from 'react-is';
-    
-    ReactIs.isValidElementType(ClassComponent); // true
-    ReactIs.isContextConsumer(<ThemeContext.Consumer />); // true
-    :
-    :
+import * as ReactIs from 'react-is';
+
+ReactIs.isValidElementType(ClassComponent); // true
+ReactIs.isContextConsumer(<ThemeContext.Consumer />); // true
+:
+:
 ```
 
 https://github.com/facebook/react/tree/master/packages/react-is
@@ -474,15 +474,15 @@ HOCとして提供されています。
 内部では、`static getDerivedStateFromProps`や`getSnapshotBeforeUpdate`の動作を、既存の`componentWillMount`や`componentWillReceiveProps`、`componentWillUpdate`でエミュレートする形になっています。
 
 ```js
-    import React from 'react';
-    import polyfill from 'react-lifecycles-compat';
-    
-    class ExampleComponent extends React.Component {
-      // ...
-    }
-    polyfill(ExampleComponent);
-    
-    export default ExampleComponent;
+import React from 'react';
+import polyfill from 'react-lifecycles-compat';
+
+class ExampleComponent extends React.Component {
+  // ...
+}
+polyfill(ExampleComponent);
+
+export default ExampleComponent;
 ```
 
 https://github.com/reactjs/react-lifecycles-compat
@@ -495,20 +495,20 @@ https://github.com/reactjs/react-lifecycles-compat
 （IntersectionObserverとかと組み合わせると良さそう？）
 
 ```js
-    import { createSubscription } from "create-subscription";
-    
-    const Subscription = createSubscription({
-      getCurrentValue(source) {
-        // 現在の値を返します
-      },
-      subscribe(source, callback) {
-        // sourceのPropsを受け取って、変更があった時にcallbackを呼びます
-      }
-    });
-    
-    <Subscription source={eventDispatcher}>
-      {value => <AnotherComponent value={value} />}
-    </Subscription>
+import { createSubscription } from "create-subscription";
+
+const Subscription = createSubscription({
+  getCurrentValue(source) {
+    // 現在の値を返します
+  },
+  subscribe(source, callback) {
+    // sourceのPropsを受け取って、変更があった時にcallbackを呼びます
+  }
+});
+
+<Subscription source={eventDispatcher}>
+  {value => <AnotherComponent value={value} />}
+</Subscription>
 ```
 
 https://github.com/facebook/react/tree/master/packages/create-subscription
