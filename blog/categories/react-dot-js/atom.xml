@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2018-04-04T15:21:01+09:00</updated>
+  <updated>2018-04-04T15:26:17+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -15,35 +15,33 @@
   
   <entry>
     <title type="html"><![CDATA[React v16.3 changes]]></title>
-    <link href="http://blog.koba04.com/post/2018/04/03/react-v163-changes/"/>
-    <updated>2018-04-03T20:59:23+09:00</updated>
-    <id>http://blog.koba04.com/post/2018/04/03/react-v163-changes</id>
-    <content type="html"><![CDATA[<p>React v16.3.0がリリースされました。</p>
+    <link href="http://blog.koba04.com/post/2018/04/04/react-v163-changes/"/>
+    <updated>2018-04-04T15:25:23+09:00</updated>
+    <id>http://blog.koba04.com/post/2018/04/04/react-v163-changes</id>
+    <content type="html"><![CDATA[<p>React v16.3.0 がリリースされました。</p>
 
-<p><strong>※4/4にバグフィックスを含むv16.3.1がリリースされています</strong></p>
+<p><strong>※4/4 にバグフィックスを含む v16.3.1 がリリースされています</strong></p>
 
-<p>このバージョンでは、基本的にはv17で有効化される非同期レンダリングへの対応が中心になっています。
-変更点は多いですが、ほとんどが機能追加であり破壊的な変更はないため、v16.2からv16.3へのアップグレードは比較的簡単じゃないかなと思います。</p>
+<p>このバージョンでは、基本的には v17 で有効化される非同期レンダリングへの対応が中心になっています。変更点は多いですが、ほとんどが機能追加であり破壊的な変更はないため、v16.2 から v16.3 へのアップグレードは比較的簡単じゃないかなと思います。</p>
 
 <p><a href="https://reactjs.org/blog/2018/03/29/react-v-16-3.html">https://reactjs.org/blog/2018/03/29/react-v-16-3.html</a></p>
 
 <!-- more -->
 
 
-<p>当初の予定からはかなり延びたため、直前に発表されたReact Suspenseの機能も入れるのかと思いましたが入りませんでした。
-まだ最終的なAPIは決まってないようなので今後に期待。
-React Suspenseについては、v16.3と関係ないので今回は省略します。</p>
+<p>当初の予定からはかなり延びたため、直前に発表された React Suspense の機能も入れるのかと思いましたが入りませんでした。まだ最終的な API は決まってないようなので今後に期待。
+React Suspense については、v16.3 と関係ないので今回は省略します。</p>
 
 <p><a href="https://reactjs.org/blog/2018/03/01/sneak-peek-beyond-react-16.html">https://reactjs.org/blog/2018/03/01/sneak-peek-beyond-react-16.html</a></p>
 
 <hr />
 
-<p>長いので3行で知りたい人向けのまとめ</p>
+<p>長いので 3 行で知りたい人向けのまとめ</p>
 
 <ul>
-<li>v16.3は、v17移行で有効になる非同期レンダリングに移行するための機能追加が中心で、このバージョンでの破壊的な変更はない</li>
-<li>ライフサイクルメソッドの変更、新しいRefのAPIとContextのAPIが入る</li>
-<li>StrictModeのComponent、<code>react-lifecycle-compat</code> 、<code>react-is</code>、<code>create-subscription</code>パッケージが追加された</li>
+<li>v16.3 は、v17 移行で有効になる非同期レンダリングに移行するための機能追加が中心で、このバージョンでの破壊的な変更はない</li>
+<li>ライフサイクルメソッドの変更、新しい Ref の API と Context の API が入る</li>
+<li>StrictMode の Component、<code>react-lifecycle-compat</code> 、<code>react-is</code>、<code>create-subscription</code>パッケージが追加された</li>
 </ul>
 
 
@@ -55,36 +53,28 @@ React Suspenseについては、v16.3と関係ないので今回は省略しま�
 
 <p>もっとも大きな変更は、将来のライフサイクルメソッドの変更に備えて新しいライフサイクルメソッドが追加されたことです。</p>
 
-<p>ただ実際には、v16.3の段階では破壊的な変更はありません。
-ライフサイクルメソッドの変更は下記のようなスケジュールで適用されます。</p>
+<p>ただ実際には、v16.3 の段階では破壊的な変更はありません。ライフサイクルメソッドの変更は下記のようなスケジュールで適用されます。</p>
 
 <p><img src="/images/posts/react-163-changes/lifecycle-methods.png" title="&lsquo;React Lifecycle Methods Changes&rsquo;" ></p>
 
-<p>上記を見てわかる通り、v16.3の段階では新しい<code>static getDerivedStateFromProps</code> と <code>getSnapshotBeforeUpdate</code> と<code>UNSAFE_xxx</code>メソッドの追加のみです。
-UNSAFE_xxxのメソッドは既存実装のAliasで今のところ、削除される予定は決まっていません。
-したがって、他のメソッドへのマイグレーションが難しい場合にはとりあえず使い続けることも可能です。
-UNSAFE_のprefixがついていないメソッドは、v16系のマイナーリリースの中で警告が出るようになって、v17系のリリースで削除されます。
-（ReactではBreaking Changeをするときは、前のバージョンで警告を出すようになっています）
-この警告は、当初はv16.4のリリースと計画されていたのですが最新のブログではv16.xとなっています。</p>
+<p>上記を見てわかる通り、v16.3 の段階では新しい<code>static getDerivedStateFromProps</code> と <code>getSnapshotBeforeUpdate</code> と<code>UNSAFE_xxx</code>メソッドの追加のみです。
+UNSAFE<em>xxx のメソッドは既存実装の Alias で今のところ、削除される予定は決まっていません。したがって、他のメソッドへのマイグレーションが難しい場合にはとりあえず使い続けることも可能です。
+UNSAFE</em>の prefix がついていないメソッドは、v16 系のマイナーリリースの中で警告が出るようになって、v17 系のリリースで削除されます。（React では Breaking Change をするときは、前のバージョンで警告を出すようになっています）この警告は、当初は v16.4 のリリースと計画されていたのですが最新のブログでは v16.x となっています。</p>
 
-<p>ちなみに、この後で紹介する<code>react-lifecycle-compat</code>というライブラリを使うことで、新しく追加されたstatic getDerivedStateFromPropsやgetSnapshotBeforeUpdateを使ったComponentでも古いバージョンのReactをサポートすることが可能です。</p>
+<p>ちなみに、この後で紹介する<code>react-lifecycle-compat</code>というライブラリを使うことで、新しく追加された static getDerivedStateFromProps や getSnapshotBeforeUpdate を使った Component でも古いバージョンの React をサポートすることが可能です。</p>
 
 <h3>なぜこれらのライフサイクルメソッドが廃止されるのか？</h3>
 
-<p>Reactはv16でReact Fiberと呼ばれる実装に内部実装が書き換えられましたが、v16系ではこれまでのバージョンと互換性のある挙動をするようになっています（同期的）。
-v17では、ここの挙動がデフォルトで変更されます。
-その際、Render PhaseとCommit Phaseのうち、Render Phaseの方は非同期で処理され、さらに何度も呼ばれる可能性があります。</p>
+<p>React は v16 で React Fiber と呼ばれる実装に内部実装が書き換えられましたが、v16 系ではこれまでのバージョンと互換性のある挙動をするようになっています（同期的）。
+v17 では、ここの挙動がデフォルトで変更されます。その際、Render Phase と Commit Phase のうち、Render Phase の方は非同期で処理され、さらに何度も呼ばれる可能性があります。</p>
 
-<p>Render Phaseはインスタンスを作ったり差分を計算するいわゆる副作用のない部分です。Commit Phaseは、Render Phaseの結果を元に実際にDOMなどのHost環境に適用するPhaseで、同期的に処理されます。</p>
+<p>Render Phase はインスタンスを作ったり差分を計算するいわゆる副作用のない部分です。Commit Phase は、Render Phase の結果を元に実際に DOM などの Host 環境に適用する Phase で、同期的に処理されます。</p>
 
-<p>そのため、Render Phaseで呼ばれるライフサイクルメソッド（componentWillMount, componentWillReceiveProps, shouldComponentUpdate, componentWillUpdate）のうちshouldComponentUpdate以外は、安全性を保証できないため廃止されることになりました。</p>
+<p>そのため、Render Phase で呼ばれるライフサイクルメソッド（componentWillMount, componentWillReceiveProps, shouldComponentUpdate, componentWillUpdate）のうち shouldComponentUpdate 以外は、安全性を保証できないため廃止されることになりました。</p>
 
-<p>UNSAFE_というprefixが付いた形では残りますが、前述した通り、これらのメソッドは何度も呼ばれる可能性があるため、副作用のある処理を行う場合には注意が必要です。
-例えば、イベントの登録・解除の処理など、1対1で結びついていることを期待する処理をcomponentWillMountとcomponentWillUnmountを組み合わせて行った場合、1対1であることが保証されないため壊れる可能性があります。
-この場合は、Commit Phaseで実行されるcomponentDidMountとcomponentWillUnmountを組み合わせて使う必要があります。</p>
+<p>UNSAFE_という prefix が付いた形では残りますが、前述した通り、これらのメソッドは何度も呼ばれる可能性があるため、副作用のある処理を行う場合には注意が必要です。例えば、イベントの登録・解除の処理など、1 対 1 で結びついていることを期待する処理を componentWillMount と componentWillUnmount を組み合わせて行った場合、1 対 1 であることが保証されないため壊れる可能性があります。この場合は、Commit Phase で実行される componentDidMount と componentWillUnmount を組み合わせて使う必要があります。</p>
 
-<p>これらの話は、以前にも書いたのでそちらを参照してもらうとイメージ出来ると思います。
-（Render Phaseという名前は最近使われるようになったので、参照先では、beginWork〜completeWorkとして書かれている部分です）</p>
+<p>これらの話は、以前にも書いたのでそちらを参照してもらうとイメージ出来ると思います。（Render Phase という名前は最近使われるようになったので、参照先では、beginWork〜completeWork として書かれている部分です）</p>
 
 <ul>
 <li><a href="http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber/">http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber/</a></li>
@@ -93,40 +83,32 @@ v17では、ここの挙動がデフォルトで変更されます。
 </ul>
 
 
-<p>前述した通り、非同期レンダリングの世界では、更新処理の割り込みにより様々なタイミングでRender Phaseが複数回実行されます。
-そのため、Reactが管理するPropsやState以外のインスタンスが持つ状態を保証するのが難しくなります。そのため、この後紹介するcomponentWillReceivePropsの代わりと使われることが想定されるgetDerivedStateFromPropsは、staticメソッドになっています。</p>
+<p>前述した通り、非同期レンダリングの世界では、更新処理の割り込みにより様々なタイミングで Render Phase が複数回実行されます。そのため、React が管理する Props や State 以外のインスタンスが持つ状態を保証するのが難しくなります。そのため、この後紹介する componentWillReceiveProps の代わりと使われることが想定される getDerivedStateFromProps は、static メソッドになっています。</p>
 
-<p>将来的には、ClassによるComponent APIとは違う、Reactが管理するStateなど以外の状態を持つことができないComponentを作成する新しいAPIも計画されているようです。
-（つまりクラスではないStateful Functional Componentのような?）</p>
+<p>将来的には、Class による Component API とは違う、React が管理する State など以外の状態を持つことができない Component を作成する新しい API も計画されているようです。（つまりクラスではない Stateful Functional Component のような?）</p>
 
-<p>shouldComponentUpdateについては、基本的にはこのような副作用が書かれていることはないということと影響の大きさから、残されたのかなと思います。
-将来的にstaticなメソッドになる可能性はあるかなと思います。</p>
+<p>shouldComponentUpdate については、基本的にはこのような副作用が書かれていることはないということと影響の大きさから、残されたのかなと思います。将来的に static なメソッドになる可能性はあるかなと思います。</p>
 
 <h3><code>static getDerivedStateFromProps(nextProps, prevState)</code></h3>
 
-<p>Render Phaseで呼ばれます。
-タイミングとしては、新しいPropsが渡された場合に、componentWillReceivePropsと同じタイミングで呼ばれます。
-componentWillReceivePropsと違い、更新時だけでなくマウント時にも呼ばれます。</p>
+<p>Render Phase で呼ばれます。タイミングとしては、新しい Props が渡された場合に、componentWillReceiveProps と同じタイミングで呼ばれます。
+componentWillReceiveProps と違い、更新時だけでなくマウント時にも呼ばれます。</p>
 
-<p>引数として新しいPropsと現在のStateを受け取ります。
-このメソッドで返した値は現在のStateの値とマージされます。
-つまり受け取ったPropsを元にStateの値を更新したいような場面で使います。
-返した値がStateの値とマージされるというのは、setStateの挙動と同じです。</p>
+<p>引数として新しい Props と現在の State を受け取ります。このメソッドで返した値は現在の State の値とマージされます。つまり受け取った Props を元に State の値を更新したいような場面で使います。返した値が State の値とマージされるというのは、setState の挙動と同じです。</p>
 
-<p>componentWillReceivePropsと違いstaticになっているのは、前述した通りRender Phaseでいつ呼ばれてもいいように、PropsとState以外の状態に依存させないためです。</p>
+<p>componentWillReceiveProps と違い static になっているのは、前述した通り Render Phase でいつ呼ばれてもいいように、Props と State 以外の状態に依存させないためです。</p>
 
-<p>Stateを更新する必要がない時は、<code>null</code>を返します。</p>
+<p>State を更新する必要がない時は、<code>null</code>を返します。</p>
 
-<p>実際に使おうとするとprevPropsが取得出来ないのを不便に感じるのですが、下記の理由からprevPropsを渡さないようになったとのことです。
-ドキュメントでは、prevPropsが欲しい場合は、Stateとして保存することが推奨されています。</p>
+<p>実際に使おうとすると prevProps が取得出来ないのを不便に感じるのですが、下記の理由から prevProps を渡さないようになったとのことです。ドキュメントでは、prevProps が欲しい場合は、State として保存することが推奨されています。</p>
 
 <ul>
-<li>getDerivedStateFromPropsはマウント時にも呼ばれ、マウント時はprevPropsは<code>null</code>になるので、prevPropsを使おうとする<code>null</code>かどうかのチェックが常に必要になってしまう</li>
-<li>prevPropsを渡さないことで、メモリ常に保持しておく必要がなくなるので将来的に最適化が可能になる</li>
+<li>getDerivedStateFromProps はマウント時にも呼ばれ、マウント時は prevProps は<code>null</code>になるので、prevProps を使おうとする<code>null</code>かどうかのチェックが常に必要になってしまう</li>
+<li>prevProps を渡さないことで、メモリ常に保持しておく必要がなくなるので将来的に最適化が可能になる</li>
 </ul>
 
 
-<p>あんまりいい例が思いつかなかったのですが、getDerivedStateFromPropsの例はこんな感じ。</p>
+<p>あんまりいい例が思いつかなかったのですが、getDerivedStateFromProps の例はこんな感じ。</p>
 
 <p>```js
 static getDerivedStateFromProps(nextProps, prevState) {
@@ -156,19 +138,15 @@ componentDidUpdate() {
 
 <h3><code>getSnapshotBeforeUpdate(prevProps, prevState)</code></h3>
 
-<p>Commit Phaseで呼ばれます。
-したがって、Render Phaseで呼ばれるcomponentWillUpdateと違い、更新前に必ず一度だけ呼ばれることが保証されます。</p>
+<p>Commit Phase で呼ばれます。したがって、Render Phase で呼ばれる componentWillUpdate と違い、更新前に必ず一度だけ呼ばれることが保証されます。</p>
 
-<p>用途としては、スクロール位置などHost環境(DOM)の更新前後の値を比較して何かしたい場合に使います。
-これまでは、componentWillUpdateでインスタンスプロパティに保存して、componentDidUpdateでそれを参照し比較していたのを、componentWillUpdateの代わりにgetSnapshotBeforeUpdateを使います。
-getSnapshotBeforeUpdateでは、名前の通りsnapshotを返します。
-snapshotはどんな値でもよく、上記の場合はスクロール位置をsnapshotとして返します。</p>
+<p>用途としては、スクロール位置など Host 環境(DOM)の更新前後の値を比較して何かしたい場合に使います。これまでは、componentWillUpdate でインスタンスプロパティに保存して、componentDidUpdate でそれを参照し比較していたのを、componentWillUpdate の代わりに getSnapshotBeforeUpdate を使います。
+getSnapshotBeforeUpdate では、名前の通り snapshot を返します。
+snapshot はどんな値でもよく、上記の場合はスクロール位置を snapshot として返します。</p>
 
-<p>getSnapshotBeforeUpdateで返したsnapshotは、componentDidUpdateの第3引数として渡されます。
-したがってcomponentDidUpdateの中では、snapshotと現在の値を比較できます。</p>
+<p>getSnapshotBeforeUpdate で返した snapshot は、componentDidUpdate の第 3 引数として渡されます。したがって componentDidUpdate の中では、snapshot と現在の値を比較できます。</p>
 
-<p>ちなみにgetDerivedStateFromPropsもgetSnapshotBeforeUpdateも長くて覚えにくい名前だと思いますが、これはこれらのライフサイクルメソッドは頻繁に使うようなものではないため、あえてそういう名前にしたという話もあります。
-（名前決める議論の中でそんなことを言っていた記憶がないので本当かは不明）</p>
+<p>ちなみに getDerivedStateFromProps も getSnapshotBeforeUpdate も長くて覚えにくい名前だと思いますが、これはこれらのライフサイクルメソッドは頻繁に使うようなものではないため、あえてそういう名前にしたという話もあります。（名前決める議論の中でそんなことを言っていた記憶がないので本当かは不明）</p>
 
 <p>例として、タイムラインのようにどんどん先頭に要素が追加されていく状態で、表示されている要素を維持し続けるために更新前のスクロール位置を保持して、追加された要素分位置を調整する例はこんなイメージ。</p>
 
@@ -201,52 +179,52 @@ componentDidUpdate(prevProps, prevState, snapshot) {
 <li>Initializing state
 
 <ul>
-<li>Stateの初期化をcomponentWillMountで初期化を行なっていた場合は、constructorに移動させることが出来ます</li>
+<li>State の初期化を componentWillMount で初期化を行なっていた場合は、constructor に移動させることが出来ます</li>
 </ul>
 </li>
 <li>Fetching external data
 
 <ul>
-<li>外部リソースの取得をcomponentWillMountで行なっていた場合は、componentDidMountで行うようにします。</li>
-<li>ただ、この辺りは将来的にはReact Suspenseで置き換えることを想定しているようです。SSR時の外部リソースの取得についても言及されているので、React SuspenseはSSRの時にもうまく動作するようになるのかもしれないですね。（既存のSSRのRendererはFiberベースではないのでどう実装するのかは不明ですが…）</li>
+<li>外部リソースの取得を componentWillMount で行なっていた場合は、componentDidMount で行うようにします。</li>
+<li>ただ、この辺りは将来的には React Suspense で置き換えることを想定しているようです。SSR 時の外部リソースの取得についても言及されているので、React Suspense は SSR の時にもうまく動作するようになるのかもしれないですね。（既存の SSR の Renderer は Fiber ベースではないのでどう実装するのかは不明ですが…）</li>
 </ul>
 </li>
 <li>Adding event listeners (or subscriptions)
 
 <ul>
-<li>componentWillMountで行なっていたイベントの購読については、componentDidMountで行うようにします。</li>
-<li>一点注意点としては、componentWillMountは親 → 子の順番で呼ばれますが、componentDidMountは子→ 親の順番で呼ばれます。そのため、親のcomponentDidMountでイベントの購読を行う場合、子のcomponentDidMout発行されたイベントについては購読出来ません（子がイベントを発行していた時点で、親はまだイベントを購読してないため）。</li>
+<li>componentWillMount で行なっていたイベントの購読については、componentDidMount で行うようにします。</li>
+<li>一点注意点としては、componentWillMount は親 → 子の順番で呼ばれますが、componentDidMount は子 → 親の順番で呼ばれます。そのため、親の componentDidMount でイベントの購読を行う場合、子の componentDidMout 発行されたイベントについては購読出来ません（子がイベントを発行していた時点で、親はまだイベントを購読してないため）。</li>
 <li>イベントの処理については、後述する<code>create-subscription</code>を使う方法もあります。</li>
 </ul>
 </li>
 <li>Updating state based on props
 
 <ul>
-<li>componentWillReceivePropsで新しいPropsの値をもとにStateの値を更新していたような場合は、static getDerivedStateFromPropsを代わりに使います。</li>
+<li>componentWillReceiveProps で新しい Props の値をもとに State の値を更新していたような場合は、static getDerivedStateFromProps を代わりに使います。</li>
 </ul>
 </li>
 <li>Invoking external callbacks
 
 <ul>
-<li>Stateが変更されたタイミングで何かコールバックを実行したいような場合は、componentWillUpdateではなくて、componentDidUpdateを使います。</li>
+<li>State が変更されたタイミングで何かコールバックを実行したいような場合は、componentWillUpdate ではなくて、componentDidUpdate を使います。</li>
 </ul>
 </li>
 <li>Side effects on props change
 
 <ul>
-<li>Propsの変更に応じて何か副作用を呼び出したい場合は、componentWillReceivePropsやcomponentWillUpdateではなく、componentDidUpdateを使います。</li>
+<li>Props の変更に応じて何か副作用を呼び出したい場合は、componentWillReceiveProps や componentWillUpdate ではなく、componentDidUpdate を使います。</li>
 </ul>
 </li>
 <li>Fetching external data when props change
 
 <ul>
-<li>Propsの変更に応じて外部リソースをフェッチしたい場合には、static getDerivedStateFropPropsでデータをリセットして、componentDidUpdateでデータをフェッチする方法が推奨されています。（componentDidUpdateで呼ばないと何度もリクエストが投げられる可能性があります）</li>
+<li>Props の変更に応じて外部リソースをフェッチしたい場合には、static getDerivedStateFropProps でデータをリセットして、componentDidUpdate でデータをフェッチする方法が推奨されています。（componentDidUpdate で呼ばないと何度もリクエストが投げられる可能性があります）</li>
 </ul>
 </li>
 <li>Reading DOM properties before an update
 
 <ul>
-<li>更新前のDOMの状態を取得して更新後の値と比較したい場合は、getSnapshotBeforeUpdateで取得した値を返して、componentDidUpdateの第3引数として受け取ります。</li>
+<li>更新前の DOM の状態を取得して更新後の値と比較したい場合は、getSnapshotBeforeUpdate で取得した値を返して、componentDidUpdate の第 3 引数として受け取ります。</li>
 </ul>
 </li>
 </ul>
@@ -258,27 +236,21 @@ componentDidUpdate(prevProps, prevState, snapshot) {
 
 <h2>createRef API</h2>
 
-<p>新しいRefに対するAPIです。<code>React.createRef()</code>で作成した変数をrefに設定します。
-簡単ですね。</p>
+<p>新しい Ref に対する API です。<code>React.createRef()</code>で作成した変数を ref に設定します。簡単ですね。</p>
 
 <p><code>js
 const ref = React.createRef();
-&lt;button ref={ref} /&gt;
+&lt;button ref={ref} /&gt;;
 </code></p>
 
-<p>注意点としては、上記の場合、button要素はrefの変数に入っているのではなく、<code>ref.current</code>に入っています。したがって上記の場合、focusをあてたい場合には<code>ref.current.focus()</code>とします。</p>
+<p>注意点としては、上記の場合、button 要素は ref の変数に入っているのではなく、<code>ref.current</code>に入っています。したがって上記の場合、focus をあてたい場合には<code>ref.current.focus()</code>とします。</p>
 
-<p>これまでは、文字列とコールバックを使ったRef指定が可能でした。
-文字列を使ったRefは、利用者としては単純でわかりやすいですが、Ownerコンテキストで評価されるなど内部の実装としても好ましくない部分があったり、最適化や静的型チェックが難しいという問題がありました。そのため、ずっと廃止予定とアナウンスされていて、今回それに変わる<code>React.createRef()</code>が登場したため、廃止されることが決定しました。
-（どのバージョンで廃止されるのかはまだ未定です）</p>
+<p>これまでは、文字列とコールバックを使った Ref 指定が可能でした。文字列を使った Ref は、利用者としては単純でわかりやすいですが、Owner コンテキストで評価されるなど内部の実装としても好ましくない部分があったり、最適化や静的型チェックが難しいという問題がありました。そのため、ずっと廃止予定とアナウンスされていて、今回それに変わる<code>React.createRef()</code>が登場したため、廃止されることが決定しました。（どのバージョンで廃止されるのかはまだ未定です）</p>
 
-<p>コールバックを使ったRef指定はそのまま残るので、コールバックで指定しているものはそのままで問題ありません。
-実際Functional Componentの中でただfocusを当てたいような場合には、refの参照を保持しておく必要がないので、コールバックで処理した方が便利です。</p>
+<p>コールバックを使った Ref 指定はそのまま残るので、コールバックで指定しているものはそのままで問題ありません。実際 Functional Component の中でただ focus を当てたいような場合には、ref の参照を保持しておく必要がないので、コールバックで処理した方が便利です。</p>
 
 <p><code>js
-const Text = () =&gt; (
-  &lt;input ref={el =&gt; el &amp;&amp; el.focus()} /&gt;
-);
+const Text = () =&gt; &lt;input ref={el =&gt; el &amp;&amp; el.focus()} /&gt;;
 </code></p>
 
 <p>公式のドキュメント</p>
@@ -287,15 +259,15 @@ const Text = () =&gt; (
 
 <h2>forwardRef API</h2>
 
-<p>主にHOCでラップされたComponentに対してRefを指定した場合に使います。</p>
+<p>主に HOC でラップされた Component に対して Ref を指定した場合に使います。</p>
 
-<p><code>React.forwardRef((props, ref) =&gt; &lt;Component {…props} ref={ref}  /&gt;)</code>のような形式にすることで、指定されたrefを引数として受け取ることが出来るようになるので、そのまま子のComponentのrefに指定できます。</p>
+<p><code>React.forwardRef((props, ref) =&gt; &lt;Component {…props} ref={ref} /&gt;)</code>のような形式にすることで、指定された ref を引数として受け取ることが出来るようになるので、そのまま子の Component の ref に指定できます。</p>
 
-<p>RefはPropsと違い伝播させることができなかったので、これまでは、componentRefのようなPropsとして渡す必要があったのですが、これを使うことで、refとして渡すことができるようになります。</p>
+<p>Ref は Props と違い伝播させることができなかったので、これまでは、componentRef のような Props として渡す必要があったのですが、これを使うことで、ref として渡すことができるようになります。</p>
 
-<p>Refで子のComponentを参照することが自体が避けるべきことではあるので、そんなに用途はないように思いますが…。</p>
+<p>Ref で子の Component を参照することが自体が避けるべきことではあるので、そんなに用途はないように思いますが…。</p>
 
-<p>無理やり例を考えて見ると、HOCでラップしたComponentに対するrefを指定したい場合、</p>
+<p>無理やり例を考えて見ると、HOC でラップした Component に対する ref を指定したい場合、</p>
 
 <p>```js
 const withColor = Component => color => ({buttonRef, &hellip;props}) => (
@@ -317,7 +289,7 @@ const withColor = Component => color => ({buttonRef, &hellip;props}) => (
 
 <p><a href="https://codepen.io/koba04/pen/dmKyNd?editors=0010">https://codepen.io/koba04/pen/dmKyNd?editors=0010</a></p>
 
-<p>のように<code>buttonRef</code>などのようにPropsの一部として渡す必要があったのが、</p>
+<p>のように<code>buttonRef</code>などのように Props の一部として渡す必要があったのが、</p>
 
 <p>```js
 const withColor = Component => color => React.forwardRef((props, ref) => (
@@ -339,7 +311,7 @@ const withColor = Component => color => React.forwardRef((props, ref) => (
 
 <p><a href="https://codepen.io/koba04/pen/pLKobo?editors=0010">https://codepen.io/koba04/pen/pLKobo?editors=0010</a></p>
 
-<p>のように<code>React.forwardRef</code>を使うことで、直接Componentを利用する時のようにrefとして指定出来るようになります。</p>
+<p>のように<code>React.forwardRef</code>を使うことで、直接 Component を利用する時のように ref として指定出来るようになります。</p>
 
 <p>公式のドキュメント</p>
 
@@ -347,34 +319,33 @@ const withColor = Component => color => React.forwardRef((props, ref) => (
 
 <h2>Strict Mode</h2>
 
-<p>新しいComponentです。Componentなので、<code>&lt;React.StrictMode&gt;…&lt;/React.StrictMode&gt;</code>のように利用します。
-Strict ModeのComponent自体は何もUIを描画せず、後述するチェックもdevelopment環境の場合のみチェックするので、本番環境のコードに含めたままでも問題ありません。</p>
+<p>新しい Component です。Component なので、<code>&lt;React.StrictMode&gt;…&lt;/React.StrictMode&gt;</code>のように利用します。
+Strict Mode の Component 自体は何も UI を描画せず、後述するチェックも development 環境の場合のみチェックするので、本番環境のコードに含めたままでも問題ありません。</p>
 
-<p><code>&lt;StrictMode&gt;</code>で囲まれたComponentの中では、廃止予定のAPIや問題になりそうな使い方をチェックして問題を検出してくれます。
-現時点では、下記のようなチェックが行われています。</p>
+<p><code>&lt;StrictMode&gt;</code>で囲まれた Component の中では、廃止予定の API や問題になりそうな使い方をチェックして問題を検出してくれます。現時点では、下記のようなチェックが行われています。</p>
 
 <ul>
 <li>Identifying components with unsafe lifecycles
 
 <ul>
-<li>componentWillMountやcomponentWillReceivePropsやcomponentWillUpdateなどの廃止予定のAPIを使用していないかをチェックして、見つかった場合にはコンソールに出力します。</li>
+<li>componentWillMount や componentWillReceiveProps や componentWillUpdate などの廃止予定の API を使用していないかをチェックして、見つかった場合にはコンソールに出力します。</li>
 </ul>
 </li>
 <li>Warning about legacy string ref API usage
 
 <ul>
-<li>文字列を使ったref指定をチェックして、見つかった場合にはコンソールに出力します。</li>
+<li>文字列を使った ref 指定をチェックして、見つかった場合にはコンソールに出力します。</li>
 </ul>
 </li>
 <li>Detecting unexpected side effects
 
 <ul>
-<li>非同期レンダリングが有効になった場合をシミュレートすることで、非同期レンダリングが有効になった時に問題となる副作用のあるコードがないかを検出します。ただし、副作用のあるコードがあるかどうかを検出することはできないので、Strict Modeでは、下記のAPIが意図的に2回呼ばれるようになります。
+<li>非同期レンダリングが有効になった場合をシミュレートすることで、非同期レンダリングが有効になった時に問題となる副作用のあるコードがないかを検出します。ただし、副作用のあるコードがあるかどうかを検出することはできないので、Strict Mode では、下記の API が意図的に 2 回呼ばれるようになります。
 
 <ul>
 <li>constructor</li>
-<li>renderメソッド</li>
-<li>setStateの第1引数に指定する関数</li>
+<li>render メソッド</li>
+<li>setState の第 1 引数に指定する関数</li>
 <li>static getDerivedStateFromProps</li>
 </ul>
 </li>
@@ -384,18 +355,15 @@ Strict ModeのComponent自体は何もUIを描画せず、後述するチェッ�
 </ul>
 
 
-<p>ちなみに、なぜ<code>React.strictMode = true</code>のようになっていないのか疑問に思うかもしれませんが、Componentの形式になっていることでアプリケーションの一部だけチェックすることが出来るようになります。
-これはFacebookが50,000以上のComponentを持っていることから来ているマイグレーションの戦略かなと思います。</p>
+<p>ちなみに、なぜ<code>React.strictMode = true</code>のようになっていないのか疑問に思うかもしれませんが、Component の形式になっていることでアプリケーションの一部だけチェックすることが出来るようになります。これは Facebook が 50,000 以上の Component を持っていることから来ているマイグレーションの戦略かなと思います。</p>
 
 <h2>New Context API</h2>
 
 <p>長くなってきたのでここからは簡潔に&hellip;。</p>
 
-<p>APIの変更があるとずっと予告されていたContextの新しいAPIです。</p>
+<p>API の変更があるとずっと予告されていた Context の新しい API です。</p>
 
-<p>既存のContextも少なくv16系ではサポートされ続けます。
-既存のContextは、<code>react-redux</code>や<code>react-router</code>などのライブラリが内部で使っているので、多くの人に関係あるといえばある変更です。
-これらのライブラリがどのように対応するのかは、issueなどで議論は行われていますがまだ不明です。</p>
+<p>既存の Context も少なく v16 系ではサポートされ続けます。既存の Context は、<code>react-redux</code>や<code>react-router</code>などのライブラリが内部で使っているので、多くの人に関係あるといえばある変更です。これらのライブラリがどのように対応するのかは、issue などで議論は行われていますがまだ不明です。</p>
 
 <ul>
 <li><a href="https://github.com/reactjs/react-redux/pull/898">https://github.com/reactjs/react-redux/pull/898</a></li>
@@ -403,19 +371,18 @@ Strict ModeのComponent自体は何もUIを描画せず、後述するチェッ�
 </ul>
 
 
-<p>また最近軽量なRedux風なライブラリが増えているのはこのContext APIの影響もあると思います。</p>
+<p>また最近軽量な Redux 風なライブラリが増えているのはこの Context API の影響もあると思います。</p>
 
 <ul>
 <li><a href="https://github.com/jamiebuilds/unstated">https://github.com/jamiebuilds/unstated</a></li>
 </ul>
 
 
-<p>今回のNew Context APIは正式な機能としてリリースされましたが、Contextをabuseするのではなく、Propsを使ってデータのやりとりをするのが基本であるのは変わりません。
-テーマや言語のような様々な場所、階層で利用されるようなものやFluxのStoreなど本当に必要な部分のみで利用することが推奨されています。</p>
+<p>今回の New Context API は正式な機能としてリリースされましたが、Context を abuse するのではなく、Props を使ってデータのやりとりをするのが基本であるのは変わりません。テーマや言語のような様々な場所、階層で利用されるようなものや Flux の Store など本当に必要な部分のみで利用することが推奨されています。</p>
 
-<p>新しいContextのAPIは、Componentベースになっていて、<code>const ThemeContext = React.createContext('themeName')</code>でContextを作成し、<code>ThemeContext.Provider</code>と<code>ThemeContext.Consumer</code>を組み合わせます。</p>
+<p>新しい Context の API は、Component ベースになっていて、<code>const ThemeContext = React.createContext('themeName')</code>で Context を作成し、<code>ThemeContext.Provider</code>と<code>ThemeContext.Consumer</code>を組み合わせます。</p>
 
-<p><code>ThemeContext.Provider</code>がContextの値を管理する、親となるComponentです。<code>ThemeContext.Consumer</code>は、Providerの子孫要素であり、Contextの値を利用する側です。Providerの子孫であればどこでも利用出来ます。</p>
+<p><code>ThemeContext.Provider</code>が Context の値を管理する、親となる Component です。<code>ThemeContext.Consumer</code>は、Provider の子孫要素であり、Context の値を利用する側です。Provider の子孫であればどこでも利用出来ます。</p>
 
 <p>```js
 const ThemeContext = React.createContext(&lsquo;dark&rsquo;);</p>
@@ -433,20 +400,22 @@ const ThemeContext = React.createContext(&lsquo;dark&rsquo;);</p>
 &lt;/ThemeContext.Provider>
 ```</p>
 
-<p>Render Functionのパターンになっているので、複数種類のContextを組み合わせて使うことも勿論可能です。</p>
+<p>Render Function のパターンになっているので、複数種類の Context を組み合わせて使うことも勿論可能です。</p>
 
 <p>```js
-const LangContext = React.createContext(&lsquo;lang&rsquo;);
-const ThemeContext = React.createContext(&lsquo;dark&rsquo;);</p>
+const LangContext = React.createContext(&ldquo;lang&rdquo;);
+const ThemeContext = React.createContext(&ldquo;dark&rdquo;);</p>
 
 <p>&lt;LangContext.Provider value=&ldquo;en&rdquo;>
   &lt;ThemeContext.Provider value=&ldquo;dark&rdquo;></p>
 
 <pre><code>&lt;Child&gt;
   &lt;LangContext.Consumer&gt;
-    {(lang) =&gt; (
+    {lang =&gt; (
       &lt;ThemeContext.Consumer&gt;
-        {(theme) =&gt; &lt;button className={theme}&gt;{getMessage('click', lang)}&lt;/button&gt;}
+        {theme =&gt; (
+          &lt;button className={theme}&gt;{getMessage("click", lang)}&lt;/button&gt;
+        )}
       &lt;/ThemeContext.Consumer&gt;
     )}
   &lt;/LangContext.Consumer&gt;
@@ -454,23 +423,22 @@ const ThemeContext = React.createContext(&lsquo;dark&rsquo;);</p>
 </code></pre>
 
 <p>  &lt;/ThemeContext.Provider>
-&lt;/LangContext.Provider>
+&lt;/LangContext.Provider>;
 ```</p>
 
 <h3>newContext and legacyContext</h3>
 
-<p>なぜ既存のContext APIが置き換えられることになったかというと、Static Type Checkingが難しいなどの問題がありますが、一番大きいのはContextの伝播が途中ComponentがshouldComponentUpdateでfalseを返した場合、子孫のComponentは再renderされないので、Contextの変更が伝わらなくなってしまうことです。</p>
+<p>なぜ既存の Context API が置き換えられることになったかというと、Static Type Checking が難しいなどの問題がありますが、一番大きいのは Context の伝播が途中 Component が shouldComponentUpdate で false を返した場合、子孫の Component は再 render されないので、Context の変更が伝わらなくなってしまうことです。</p>
 
-<p>下記のサンプルを見てもらうとoldContextの方は変更が反映されていないことがわかります。</p>
+<p>下記のサンプルを見てもらうと oldContext の方は変更が反映されていないことがわかります。</p>
 
 <p><a href="https://codepen.io/koba04/pen/OvvzXb?editors=0010">https://codepen.io/koba04/pen/OvvzXb?editors=0010</a></p>
 
 <h3>observedBits</h3>
 
-<p>新しいContextのAPIはobservedBitsという面白い機能を持っています。unstableですが&hellip;。
-通常Contextに変更があると対応する全てのConsumerを再renderしますが、observedBitsを指定することで、関連のあるConsumerのみ再renderさせることができます。</p>
+<p>新しい Context の API は observedBits という面白い機能を持っています。unstable ですが&hellip;。通常 Context に変更があると対応する全ての Consumer を再 render しますが、observedBits を指定することで、関連のある Consumer のみ再 render させることができます。</p>
 
-<p>方法は、React.createContextの第二引数に、関数を定義します。この関数は変更前後のContextの値を受け取るので、変更内容を示すビット列を返します。</p>
+<p>方法は、React.createContext の第二引数に、関数を定義します。この関数は変更前後の Context の値を受け取るので、変更内容を示すビット列を返します。</p>
 
 <p><code>js
 // foo === 0b01, bar === 0b10のビット列を設定する
@@ -479,13 +447,12 @@ const StoreContext = React.createContext(null, (prev, next) =&gt; {
   if (prev.foo !== next.foo) result |= 0b01;
   if (prev.bar !== next.bar) result |= 0b10;
   return result;
-})
+});
 </code></p>
 
-<p>説明するまでもないですが、上記の場合は、fooが変更されたら<code>0b01</code>を、barが変更されたら<code>0b10</code>のビットを立てています。</p>
+<p>説明するまでもないですが、上記の場合は、foo が変更されたら<code>0b01</code>を、bar が変更されたら<code>0b10</code>のビットを立てています。</p>
 
-<p>そして、Context.Consumerに、<code>unstable_observedBits</code>のPropsとして、Consumerが受け取っている値に関連するビット列を指定します。
-そうすることで、createContextの第2引数が返すビット列(changedBits)とConsumerのunstable_observedBitsの論理積(<code>&amp;</code>)をとって0じゃない場合のみ再renderされます。</p>
+<p>そして、Context.Consumer に、<code>unstable_observedBits</code>の Props として、Consumer が受け取っている値に関連するビット列を指定します。そうすることで、createContext の第 2 引数が返すビット列(changedBits)と Consumer の unstable_observedBits の論理積(<code>&amp;</code>)をとって 0 じゃない場合のみ再 render されます。</p>
 
 <p>```js
 // foo(0b01)が変わった場合のみrenderされる
@@ -504,13 +471,13 @@ const StoreContext = React.createContext(null, (prev, next) =&gt; {
 &lt;/StoreContext.Consumer>
 ```</p>
 
-<p>Reduxのようなライブラリを組み合わせる時の最適化として使えそうですね。</p>
+<p>Redux のようなライブラリを組み合わせる時の最適化として使えそうですね。</p>
 
 <p>詳しくは下記のサンプルを見てください。</p>
 
 <p><a href="https://codepen.io/koba04/pen/WzzXJx?editors=0010">https://codepen.io/koba04/pen/WzzXJx?editors=0010</a></p>
 
-<p>ちなみにReactの内部でも、ModeやSideEffectはビット列を使って定義されていて、ビット演算を使って処理されています。</p>
+<p>ちなみに React の内部でも、Mode や SideEffect はビット列を使って定義されていて、ビット演算を使って処理されています。</p>
 
 <ul>
 <li><a href="https://github.com/facebook/react/blob/master/packages/react-reconciler/src/ReactTypeOfMode.js">https://github.com/facebook/react/blob/master/packages/react-reconciler/src/ReactTypeOfMode.js</a></li>
@@ -554,15 +521,12 @@ export const ShouldCapture = /*         */ 0b010000000000;
 
 <h3>Rename React.unstable_AsyncComponent to React.unstable_AsyncMode</h3>
 
-<p>指定したComponentの中で発生した更新処理をデフォルトLow Priorityとして扱うことのできる<code>React.unstable_AsyncComponent</code>が、<code>React.unstable_AsyncMode</code>にリネームされました。
-また、以前は可能だったextendsする使い方が出来なくなっています。</p>
+<p>指定した Component の中で発生した更新処理をデフォルト Low Priority として扱うことのできる<code>React.unstable_AsyncComponent</code>が、<code>React.unstable_AsyncMode</code>にリネームされました。また、以前は可能だった extends する使い方が出来なくなっています。</p>
 
 <h3>New react-is package</h3>
 
-<p><code>react-is</code>という新しいパッケージが公開されました。
-この中には様々なComponent種別に対する比較処理などを、内部実装を直接参照することなくできます。
-Componentの種別を使って何かしたい場合に使えます。
-色々なAPIが定義されているので、ドキュメントを参照してください。</p>
+<p><code>react-is</code>という新しいパッケージが公開されました。この中には様々な Component 種別に対する比較処理などを、内部実装を直接参照することなくできます。
+Component の種別を使って何かしたい場合に使えます。色々な API が定義されているので、ドキュメントを参照してください。</p>
 
 <p>```js
 import * as ReactIs from &lsquo;react-is&rsquo;;</p>
@@ -577,16 +541,16 @@ ReactIs.isContextConsumer(&lt;ThemeContext.Consumer />); // true
 
 <h3>New react-lifecycle-compat package</h3>
 
-<p>static getDerivedStateFromPropsやgetSnapshotBeforeUpdateを使って書かれたComponentをこれらをサポートしていない、古いバージョンのReactでも動作させるためのパッケージです。</p>
+<p>static getDerivedStateFromProps や getSnapshotBeforeUpdate を使って書かれた Component をこれらをサポートしていない、古いバージョンの React でも動作させるためのパッケージです。</p>
 
-<p>これを使うことで、Componentの開発者は新しいライフサイクルメソッドのAPIを、古いバージョンのReactのサポートを切り捨てることなく利用出来ます。
-HOCとして提供されています。</p>
+<p>これを使うことで、Component の開発者は新しいライフサイクルメソッドの API を、古いバージョンの React のサポートを切り捨てることなく利用出来ます。
+HOC として提供されています。</p>
 
-<p>内部では、static getDerivedStateFromPropsやgetSnapshotBeforeUpdateの動作を、既存のcomponentWillMountやcomponentWillReceiveProps、componentWillUpdateでエミュレートする形になっています。</p>
+<p>内部では、static getDerivedStateFromProps や getSnapshotBeforeUpdate の動作を、既存の componentWillMount や componentWillReceiveProps、componentWillUpdate でエミュレートする形になっています。</p>
 
 <p>```js
-import React from &lsquo;react&rsquo;;
-import polyfill from &lsquo;react-lifecycles-compat&rsquo;;</p>
+import React from &ldquo;react&rdquo;;
+import polyfill from &ldquo;react-lifecycles-compat&rdquo;;</p>
 
 <p>class ExampleComponent extends React.Component {
   // &hellip;
@@ -600,10 +564,7 @@ polyfill(ExampleComponent);</p>
 
 <h3>New create-subscription package</h3>
 
-<p>非同期レンダリングを考慮した、イベントを購読する処理を実装するためのライブラリです。
-これはFluxライブラリの実装として利用することを想定されているのではなく、GeolocationなどのAPIを監視して何かしたい場合の使用が想定されています。
-そこまで利用シーンは多くない気はしています。
-（IntersectionObserverとかと組み合わせると良さそう？）</p>
+<p>非同期レンダリングを考慮した、イベントを購読する処理を実装するためのライブラリです。これは Flux ライブラリの実装として利用することを想定されているのではなく、Geolocation などの API を監視して何かしたい場合の使用が想定されています。そこまで利用シーンは多くない気はしています。（IntersectionObserver とかと組み合わせると良さそう？）</p>
 
 <p>```js
 import { createSubscription } from &ldquo;create-subscription&rdquo;;</p>
@@ -625,30 +586,28 @@ import { createSubscription } from &ldquo;create-subscription&rdquo;;</p>
 
 <p><Subscription source={eventDispatcher}>
   {value => <AnotherComponent value={value} />}
-</Subscription>
+</Subscription>;
 ```</p>
 
-<p>Componentがマウントされているかどうかの状態も考慮してくれているので、Promiseを使って非同期処理の結果をComponentに適用することを安全に行うために使うことも出来ます。</p>
+<p>Component がマウントされているかどうかの状態も考慮してくれているので、Promise を使って非同期処理の結果を Component に適用することを安全に行うために使うことも出来ます。</p>
 
 <p><a href="https://github.com/facebook/react/tree/master/packages/create-subscription">https://github.com/facebook/react/tree/master/packages/create-subscription</a></p>
 
 <h3>Expose react-reconciler/persistent</h3>
 
-<p>カスタムレンダラーを作成するための<code>react-reconciler</code>で、persistentモデルのreconcilerが外部に公開されました。
-これ何かやってるなぁと認識してはいたものの、しっかり見ていないのでどういうものかはわかっていません。</p>
+<p>カスタムレンダラーを作成するための<code>react-reconciler</code>で、persistent モデルの reconciler が外部に公開されました。これ何かやってるなぁと認識してはいたものの、しっかり見ていないのでどういうものかはわかっていません。</p>
 
 <h3>Remove useSyncScheduling</h3>
 
 <p>フラグが削除されています。なので現時点では前述した<code>React.unstable_AsyncMode</code>で使い分ける形になります。</p>
 
-<p>その他のCHANGELOGは下記にあります。
-自分のPRも2つほど入ってました（実装したことも忘れてましたが…）</p>
+<p>その他の CHANGELOG は下記にあります。自分の PR も 2 つほど入ってました（実装したことも忘れてましたが…）</p>
 
 <p><a href="https://github.com/facebook/react/blob/master/CHANGELOG.md#1630-march-29-2018">https://github.com/facebook/react/blob/master/CHANGELOG.md#1630-march-29-2018</a></p>
 
 <hr />
 
-<p>というわけで色々入りましたが、どれも必要に応じて使えばいいものなので、出来るようになったことを把握しつつ、ゆっくりv17の準備をするのがいいのかなと思います。</p>
+<p>というわけで色々入りましたが、どれも必要に応じて使えばいいものなので、出来るようになったことを把握しつつ、ゆっくり v17 の準備をするのがいいのかなと思います。</p>
 ]]></content>
   </entry>
   
