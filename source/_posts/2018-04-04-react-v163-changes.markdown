@@ -42,8 +42,8 @@ https://reactjs.org/blog/2018/03/01/sneak-peek-beyond-react-16.html
 {% img /images/posts/react-163-changes/lifecycle-methods.png 'React Lifecycle Methods Changes' %}
 
 上記を見てわかる通り、v16.3 の段階では新しい`static getDerivedStateFromProps` と `getSnapshotBeforeUpdate` と`UNSAFE_xxx`メソッドの追加のみです。
-UNSAFE*xxx のメソッドは既存実装の Alias で今のところ、削除される予定は決まっていません。したがって、他のメソッドへのマイグレーションが難しい場合にはとりあえず使い続けることも可能です。
-UNSAFE*の prefix がついていないメソッドは、v16 系のマイナーリリースの中で警告が出るようになって、v17 系のリリースで削除されます。（React では Breaking Change をするときは、前のバージョンで警告を出すようになっています）この警告は、当初は v16.4 のリリースと計画されていたのですが最新のブログでは v16.x となっています。
+`UNSAFE_xxx` のメソッドは既存実装の Alias で今のところ、削除される予定は決まっていません。したがって、他のメソッドへのマイグレーションが難しい場合にはとりあえず使い続けることも可能です。
+`UNSAFE_`の prefix がついていないメソッドは、v16 系のマイナーリリースの中で警告が出るようになって、v17 系のリリースで削除されます。（React では Breaking Change をするときは、前のバージョンで警告を出すようになっています）この警告は、当初は v16.4 のリリースと計画されていたのですが最新のブログでは v16.x となっています。
 
 ちなみに、この後で紹介する`react-lifecycle-compat`というライブラリを使うことで、新しく追加された static getDerivedStateFromProps や getSnapshotBeforeUpdate を使った Component でも古いバージョンの React をサポートすることが可能です。
 
@@ -56,7 +56,7 @@ Render Phase はインスタンスを作ったり差分を計算するいわゆ�
 
 そのため、Render Phase で呼ばれるライフサイクルメソッド（componentWillMount, componentWillReceiveProps, shouldComponentUpdate, componentWillUpdate）のうち shouldComponentUpdate 以外は、安全性を保証できないため廃止されることになりました。
 
-UNSAFE\_という prefix が付いた形では残りますが、前述した通り、これらのメソッドは何度も呼ばれる可能性があるため、副作用のある処理を行う場合には注意が必要です。例えば、イベントの登録・解除の処理など、1 対 1 で結びついていることを期待する処理を componentWillMount と componentWillUnmount を組み合わせて行った場合、1 対 1 であることが保証されないため壊れる可能性があります。この場合は、Commit Phase で実行される componentDidMount と componentWillUnmount を組み合わせて使う必要があります。
+`UNSAFE_`という prefix が付いた形では残りますが、前述した通り、これらのメソッドは何度も呼ばれる可能性があるため、副作用のある処理を行う場合には注意が必要です。例えば、イベントの登録・解除の処理など、1 対 1 で結びついていることを期待する処理を componentWillMount と componentWillUnmount を組み合わせて行った場合、1 対 1 であることが保証されないため壊れる可能性があります。この場合は、Commit Phase で実行される componentDidMount と componentWillUnmount を組み合わせて使う必要があります。
 
 これらの話は、以前にも書いたのでそちらを参照してもらうとイメージ出来ると思います。（Render Phase という名前は最近使われるようになったので、参照先では、beginWork〜completeWork として書かれている部分です）
 
