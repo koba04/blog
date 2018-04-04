@@ -3,7 +3,11 @@
 $header-main-font-size: 30px;
 $header-sub-font-size: 20px;
 $header-sub-margin: 30px 0 15px 0;
-$nav-font-color: #FFF;
+$nav-font-color: #fff;
+
+body {
+  font: 18px/1.831 sans-serif;
+}
 
 h1.link {
   font-size: $header-main-font-size;
@@ -45,7 +49,7 @@ p {
 }
 
 li {
-  line-height: 180%;
+  line-height: 160%;
   margin: 10px 0;
 }
 
@@ -62,7 +66,6 @@ strong {
 code {
   font-size: inherit;
 }
-
 
 .jumbotron {
   font-size: $header-main-font-size;
