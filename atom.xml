@@ -4,7 +4,7 @@
   <title><![CDATA[blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2017-10-01T23:18:47+09:00</updated>
+  <updated>2018-04-04T15:21:01+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -12,6 +12,771 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React v16.3 changes]]></title>
+    <link href="http://blog.koba04.com/post/2018/04/03/react-v163-changes/"/>
+    <updated>2018-04-03T20:59:23+09:00</updated>
+    <id>http://blog.koba04.com/post/2018/04/03/react-v163-changes</id>
+    <content type="html"><![CDATA[<p>React v16.3.0がリリースされました。</p>
+
+<p><strong>※4/4にバグフィックスを含むv16.3.1がリリースされています</strong></p>
+
+<p>このバージョンでは、基本的にはv17で有効化される非同期レンダリングへの対応が中心になっています。
+変更点は多いですが、ほとんどが機能追加であり破壊的な変更はないため、v16.2からv16.3へのアップグレードは比較的簡単じゃないかなと思います。</p>
+
+<p><a href="https://reactjs.org/blog/2018/03/29/react-v-16-3.html">https://reactjs.org/blog/2018/03/29/react-v-16-3.html</a></p>
+
+<!-- more -->
+
+
+<p>当初の予定からはかなり延びたため、直前に発表されたReact Suspenseの機能も入れるのかと思いましたが入りませんでした。
+まだ最終的なAPIは決まってないようなので今後に期待。
+React Suspenseについては、v16.3と関係ないので今回は省略します。</p>
+
+<p><a href="https://reactjs.org/blog/2018/03/01/sneak-peek-beyond-react-16.html">https://reactjs.org/blog/2018/03/01/sneak-peek-beyond-react-16.html</a></p>
+
+<hr />
+
+<p>長いので3行で知りたい人向けのまとめ</p>
+
+<ul>
+<li>v16.3は、v17移行で有効になる非同期レンダリングに移行するための機能追加が中心で、このバージョンでの破壊的な変更はない</li>
+<li>ライフサイクルメソッドの変更、新しいRefのAPIとContextのAPIが入る</li>
+<li>StrictModeのComponent、<code>react-lifecycle-compat</code> 、<code>react-is</code>、<code>create-subscription</code>パッケージが追加された</li>
+</ul>
+
+
+<hr />
+
+<p>それでは、大きな変更だけ見ていきたいと思います。</p>
+
+<h2>Lifecycle Methods</h2>
+
+<p>もっとも大きな変更は、将来のライフサイクルメソッドの変更に備えて新しいライフサイクルメソッドが追加されたことです。</p>
+
+<p>ただ実際には、v16.3の段階では破壊的な変更はありません。
+ライフサイクルメソッドの変更は下記のようなスケジュールで適用されます。</p>
+
+<p><img src="http://blog.koba04.com/images/posts/react-163-changes/lifecycle-methods.png" title="'React Lifecycle Methods Changes'" ></p>
+
+<p>上記を見てわかる通り、v16.3の段階では新しい<code>static getDerivedStateFromProps</code> と <code>getSnapshotBeforeUpdate</code> と<code>UNSAFE_xxx</code>メソッドの追加のみです。
+UNSAFE_xxxのメソッドは既存実装のAliasで今のところ、削除される予定は決まっていません。
+したがって、他のメソッドへのマイグレーションが難しい場合にはとりあえず使い続けることも可能です。
+UNSAFE_のprefixがついていないメソッドは、v16系のマイナーリリースの中で警告が出るようになって、v17系のリリースで削除されます。
+（ReactではBreaking Changeをするときは、前のバージョンで警告を出すようになっています）
+この警告は、当初はv16.4のリリースと計画されていたのですが最新のブログではv16.xとなっています。</p>
+
+<p>ちなみに、この後で紹介する<code>react-lifecycle-compat</code>というライブラリを使うことで、新しく追加されたstatic getDerivedStateFromPropsやgetSnapshotBeforeUpdateを使ったComponentでも古いバージョンのReactをサポートすることが可能です。</p>
+
+<h3>なぜこれらのライフサイクルメソッドが廃止されるのか？</h3>
+
+<p>Reactはv16でReact Fiberと呼ばれる実装に内部実装が書き換えられましたが、v16系ではこれまでのバージョンと互換性のある挙動をするようになっています（同期的）。
+v17では、ここの挙動がデフォルトで変更されます。
+その際、Render PhaseとCommit Phaseのうち、Render Phaseの方は非同期で処理され、さらに何度も呼ばれる可能性があります。</p>
+
+<p>Render Phaseはインスタンスを作ったり差分を計算するいわゆる副作用のない部分です。Commit Phaseは、Render Phaseの結果を元に実際にDOMなどのHost環境に適用するPhaseで、同期的に処理されます。</p>
+
+<p>そのため、Render Phaseで呼ばれるライフサイクルメソッド（componentWillMount, componentWillReceiveProps, shouldComponentUpdate, componentWillUpdate）のうちshouldComponentUpdate以外は、安全性を保証できないため廃止されることになりました。</p>
+
+<p>UNSAFE_というprefixが付いた形では残りますが、前述した通り、これらのメソッドは何度も呼ばれる可能性があるため、副作用のある処理を行う場合には注意が必要です。
+例えば、イベントの登録・解除の処理など、1対1で結びついていることを期待する処理をcomponentWillMountとcomponentWillUnmountを組み合わせて行った場合、1対1であることが保証されないため壊れる可能性があります。
+この場合は、Commit Phaseで実行されるcomponentDidMountとcomponentWillUnmountを組み合わせて使う必要があります。</p>
+
+<p>これらの話は、以前にも書いたのでそちらを参照してもらうとイメージ出来ると思います。
+（Render Phaseという名前は最近使われるようになったので、参照先では、beginWork〜completeWorkとして書かれている部分です）</p>
+
+<ul>
+<li><a href="http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber/">http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber/</a></li>
+<li><a href="https://speakerdeck.com/koba04/react-v16-and-beyond-react-fiber">https://speakerdeck.com/koba04/react-v16-and-beyond-react-fiber</a></li>
+<li><a href="https://speakerdeck.com/koba04/capability-of-react-fiber">https://speakerdeck.com/koba04/capability-of-react-fiber</a></li>
+</ul>
+
+
+<p>前述した通り、非同期レンダリングの世界では、更新処理の割り込みにより様々なタイミングでRender Phaseが複数回実行されます。
+そのため、Reactが管理するPropsやState以外のインスタンスが持つ状態を保証するのが難しくなります。そのため、この後紹介するcomponentWillReceivePropsの代わりと使われることが想定されるgetDerivedStateFromPropsは、staticメソッドになっています。</p>
+
+<p>将来的には、ClassによるComponent APIとは違う、Reactが管理するStateなど以外の状態を持つことができないComponentを作成する新しいAPIも計画されているようです。
+（つまりクラスではないStateful Functional Componentのような?）</p>
+
+<p>shouldComponentUpdateについては、基本的にはこのような副作用が書かれていることはないということと影響の大きさから、残されたのかなと思います。
+将来的にstaticなメソッドになる可能性はあるかなと思います。</p>
+
+<h3><code>static getDerivedStateFromProps(nextProps, prevState)</code></h3>
+
+<p>Render Phaseで呼ばれます。
+タイミングとしては、新しいPropsが渡された場合に、componentWillReceivePropsと同じタイミングで呼ばれます。
+componentWillReceivePropsと違い、更新時だけでなくマウント時にも呼ばれます。</p>
+
+<p>引数として新しいPropsと現在のStateを受け取ります。
+このメソッドで返した値は現在のStateの値とマージされます。
+つまり受け取ったPropsを元にStateの値を更新したいような場面で使います。
+返した値がStateの値とマージされるというのは、setStateの挙動と同じです。</p>
+
+<p>componentWillReceivePropsと違いstaticになっているのは、前述した通りRender Phaseでいつ呼ばれてもいいように、PropsとState以外の状態に依存させないためです。</p>
+
+<p>Stateを更新する必要がない時は、<code>null</code>を返します。</p>
+
+<p>実際に使おうとするとprevPropsが取得出来ないのを不便に感じるのですが、下記の理由からprevPropsを渡さないようになったとのことです。
+ドキュメントでは、prevPropsが欲しい場合は、Stateとして保存することが推奨されています。</p>
+
+<ul>
+<li>getDerivedStateFromPropsはマウント時にも呼ばれ、マウント時はprevPropsは<code>null</code>になるので、prevPropsを使おうとする<code>null</code>かどうかのチェックが常に必要になってしまう</li>
+<li>prevPropsを渡さないことで、メモリ常に保持しておく必要がなくなるので将来的に最適化が可能になる</li>
+</ul>
+
+
+<p>あんまりいい例が思いつかなかったのですが、getDerivedStateFromPropsの例はこんな感じ。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">static</span> <span class="nx">getDerivedStateFromProps</span><span class="p">(</span><span class="nx">nextProps</span><span class="p">,</span> <span class="nx">prevState</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// カテゴリが変わったらデータをリセット</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">nextProps</span><span class="p">.</span><span class="nx">category</span> <span class="o">!==</span> <span class="nx">prevState</span><span class="p">.</span><span class="nx">category</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">data</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">category</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">componentDidUpdate</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">category</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">fetchData</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">category</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="nx">category</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">category</span><span class="p">,</span> <span class="nx">data</span><span class="p">});</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3><code>getSnapshotBeforeUpdate(prevProps, prevState)</code></h3>
+
+<p>Commit Phaseで呼ばれます。
+したがって、Render Phaseで呼ばれるcomponentWillUpdateと違い、更新前に必ず一度だけ呼ばれることが保証されます。</p>
+
+<p>用途としては、スクロール位置などHost環境(DOM)の更新前後の値を比較して何かしたい場合に使います。
+これまでは、componentWillUpdateでインスタンスプロパティに保存して、componentDidUpdateでそれを参照し比較していたのを、componentWillUpdateの代わりにgetSnapshotBeforeUpdateを使います。
+getSnapshotBeforeUpdateでは、名前の通りsnapshotを返します。
+snapshotはどんな値でもよく、上記の場合はスクロール位置をsnapshotとして返します。</p>
+
+<p>getSnapshotBeforeUpdateで返したsnapshotは、componentDidUpdateの第3引数として渡されます。
+したがってcomponentDidUpdateの中では、snapshotと現在の値を比較できます。</p>
+
+<p>ちなみにgetDerivedStateFromPropsもgetSnapshotBeforeUpdateも長くて覚えにくい名前だと思いますが、これはこれらのライフサイクルメソッドは頻繁に使うようなものではないため、あえてそういう名前にしたという話もあります。
+（名前決める議論の中でそんなことを言っていた記憶がないので本当かは不明）</p>
+
+<p>例として、タイムラインのようにどんどん先頭に要素が追加されていく状態で、表示されている要素を維持し続けるために更新前のスクロール位置を保持して、追加された要素分位置を調整する例はこんなイメージ。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">getSnapshotBeforeUpdate</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kr">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">scrollHeight</span><span class="o">:</span> <span class="nx">body</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">scrollTop</span><span class="o">:</span> <span class="nx">body</span><span class="p">.</span><span class="nx">scrollTop</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">componentDidUpdate</span><span class="p">(</span><span class="nx">prevProps</span><span class="p">,</span> <span class="nx">prevState</span><span class="p">,</span> <span class="nx">snapshot</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kr">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">body</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">=</span> <span class="nx">snapshot</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">+</span> <span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollHeight</span> <span class="o">-</span> <span class="nx">snapshot</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Migration paths</h3>
+
+<p>今回のライフサイクルメソッドの変更で影響のありそうなパターンについては、下記のブログで丁寧に触れられているので、移行作業をする際には確認することをオススメします。</p>
+
+<p><a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#examples">https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#examples</a></p>
+
+<p>以下、簡単に紹介しておきます。</p>
+
+<ul>
+<li>Initializing state
+
+<ul>
+<li>Stateの初期化をcomponentWillMountで初期化を行なっていた場合は、constructorに移動させることが出来ます</li>
+</ul>
+</li>
+<li>Fetching external data
+
+<ul>
+<li>外部リソースの取得をcomponentWillMountで行なっていた場合は、componentDidMountで行うようにします。</li>
+<li>ただ、この辺りは将来的にはReact Suspenseで置き換えることを想定しているようです。SSR時の外部リソースの取得についても言及されているので、React SuspenseはSSRの時にもうまく動作するようになるのかもしれないですね。（既存のSSRのRendererはFiberベースではないのでどう実装するのかは不明ですが…）</li>
+</ul>
+</li>
+<li>Adding event listeners (or subscriptions)
+
+<ul>
+<li>componentWillMountで行なっていたイベントの購読については、componentDidMountで行うようにします。</li>
+<li>一点注意点としては、componentWillMountは親 → 子の順番で呼ばれますが、componentDidMountは子→ 親の順番で呼ばれます。そのため、親のcomponentDidMountでイベントの購読を行う場合、子のcomponentDidMout発行されたイベントについては購読出来ません（子がイベントを発行していた時点で、親はまだイベントを購読してないため）。</li>
+<li>イベントの処理については、後述する<code>create-subscription</code>を使う方法もあります。</li>
+</ul>
+</li>
+<li>Updating state based on props
+
+<ul>
+<li>componentWillReceivePropsで新しいPropsの値をもとにStateの値を更新していたような場合は、static getDerivedStateFromPropsを代わりに使います。</li>
+</ul>
+</li>
+<li>Invoking external callbacks
+
+<ul>
+<li>Stateが変更されたタイミングで何かコールバックを実行したいような場合は、componentWillUpdateではなくて、componentDidUpdateを使います。</li>
+</ul>
+</li>
+<li>Side effects on props change
+
+<ul>
+<li>Propsの変更に応じて何か副作用を呼び出したい場合は、componentWillReceivePropsやcomponentWillUpdateではなく、componentDidUpdateを使います。</li>
+</ul>
+</li>
+<li>Fetching external data when props change
+
+<ul>
+<li>Propsの変更に応じて外部リソースをフェッチしたい場合には、static getDerivedStateFropPropsでデータをリセットして、componentDidUpdateでデータをフェッチする方法が推奨されています。（componentDidUpdateで呼ばないと何度もリクエストが投げられる可能性があります）</li>
+</ul>
+</li>
+<li>Reading DOM properties before an update
+
+<ul>
+<li>更新前のDOMの状態を取得して更新後の値と比較したい場合は、getSnapshotBeforeUpdateで取得した値を返して、componentDidUpdateの第3引数として受け取ります。</li>
+</ul>
+</li>
+</ul>
+
+
+<p>ライフサイクルメソッドについての公式のドキュメント</p>
+
+<p><a href="https://reactjs.org/docs/react-component.html#the-component-lifecycle">https://reactjs.org/docs/react-component.html#the-component-lifecycle</a></p>
+
+<h2>createRef API</h2>
+
+<p>新しいRefに対するAPIです。<code>React.createRef()</code>で作成した変数をrefに設定します。
+簡単ですね。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">const</span> <span class="nx">ref</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createRef</span><span class="p">();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">button</span> <span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span> <span class="o">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意点としては、上記の場合、button要素はrefの変数に入っているのではなく、<code>ref.current</code>に入っています。したがって上記の場合、focusをあてたい場合には<code>ref.current.focus()</code>とします。</p>
+
+<p>これまでは、文字列とコールバックを使ったRef指定が可能でした。
+文字列を使ったRefは、利用者としては単純でわかりやすいですが、Ownerコンテキストで評価されるなど内部の実装としても好ましくない部分があったり、最適化や静的型チェックが難しいという問題がありました。そのため、ずっと廃止予定とアナウンスされていて、今回それに変わる<code>React.createRef()</code>が登場したため、廃止されることが決定しました。
+（どのバージョンで廃止されるのかはまだ未定です）</p>
+
+<p>コールバックを使ったRef指定はそのまま残るので、コールバックで指定しているものはそのままで問題ありません。
+実際Functional Componentの中でただfocusを当てたいような場合には、refの参照を保持しておく必要がないので、コールバックで処理した方が便利です。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">const</span> <span class="nx">Text</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">el</span> <span class="o">=&gt;</span> <span class="nx">el</span> <span class="o">&amp;&amp;</span> <span class="nx">el</span><span class="p">.</span><span class="nx">focus</span><span class="p">()}</span> <span class="o">/&gt;</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>公式のドキュメント</p>
+
+<p><a href="https://reactjs.org/docs/refs-and-the-dom.html">https://reactjs.org/docs/refs-and-the-dom.html</a></p>
+
+<h2>forwardRef API</h2>
+
+<p>主にHOCでラップされたComponentに対してRefを指定した場合に使います。</p>
+
+<p><code>React.forwardRef((props, ref) =&gt; &lt;Component {…props} ref={ref}  /&gt;)</code>のような形式にすることで、指定されたrefを引数として受け取ることが出来るようになるので、そのまま子のComponentのrefに指定できます。</p>
+
+<p>RefはPropsと違い伝播させることができなかったので、これまでは、componentRefのようなPropsとして渡す必要があったのですが、これを使うことで、refとして渡すことができるようになります。</p>
+
+<p>Refで子のComponentを参照することが自体が避けるべきことではあるので、そんなに用途はないように思いますが…。</p>
+
+<p>無理やり例を考えて見ると、HOCでラップしたComponentに対するrefを指定したい場合、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">const</span> <span class="nx">withColor</span> <span class="o">=</span> <span class="nx">Component</span> <span class="o">=&gt;</span> <span class="nx">color</span> <span class="o">=&gt;</span> <span class="p">({</span><span class="nx">buttonRef</span><span class="p">,</span> <span class="p">...</span><span class="nx">props</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">Component</span> <span class="p">{...</span><span class="nx">props</span><span class="p">}</span> <span class="nx">color</span><span class="o">=</span><span class="p">{</span><span class="nx">color</span><span class="p">}</span> <span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">buttonRef</span><span class="p">}</span> <span class="o">/&gt;</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">TomatoButton</span> <span class="o">=</span> <span class="nx">withColor</span><span class="p">(</span><span class="nx">Button</span><span class="p">)(</span><span class="s1">&#39;tomato&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!--</span> <span class="nx">buttonRef</span><span class="err">として渡す必要がある</span> <span class="o">--&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">TomatoButton</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span> <span class="nx">buttonRef</span><span class="o">=</span><span class="p">{</span><span class="nx">button</span> <span class="o">=&gt;</span> <span class="nx">button</span> <span class="o">&amp;&amp;</span> <span class="nx">button</span><span class="p">.</span><span class="nx">focus</span><span class="p">()}</span> <span class="o">/&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://codepen.io/koba04/pen/dmKyNd?editors=0010">https://codepen.io/koba04/pen/dmKyNd?editors=0010</a></p>
+
+<p>のように<code>buttonRef</code>などのようにPropsの一部として渡す必要があったのが、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">const</span> <span class="nx">withColor</span> <span class="o">=</span> <span class="nx">Component</span> <span class="o">=&gt;</span> <span class="nx">color</span> <span class="o">=&gt;</span> <span class="nx">React</span><span class="p">.</span><span class="nx">forwardRef</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span> <span class="nx">ref</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">Component</span> <span class="p">{...</span><span class="nx">props</span><span class="p">}</span> <span class="nx">color</span><span class="o">=</span><span class="p">{</span><span class="nx">color</span><span class="p">}</span> <span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span> <span class="o">/&gt;</span>
+</span><span class='line'><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">TomatoButton</span> <span class="o">=</span> <span class="nx">withColor</span><span class="p">(</span><span class="nx">Button</span><span class="p">)(</span><span class="s1">&#39;tomato&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!--</span> <span class="nx">ref</span><span class="err">として渡すことが出来る</span> <span class="o">--&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">TomatoButton</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span> <span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">button</span> <span class="o">=&gt;</span> <span class="nx">button</span> <span class="o">&amp;&amp;</span> <span class="nx">button</span><span class="p">.</span><span class="nx">focus</span><span class="p">()}</span> <span class="o">/&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://codepen.io/koba04/pen/pLKobo?editors=0010">https://codepen.io/koba04/pen/pLKobo?editors=0010</a></p>
+
+<p>のように<code>React.forwardRef</code>を使うことで、直接Componentを利用する時のようにrefとして指定出来るようになります。</p>
+
+<p>公式のドキュメント</p>
+
+<p><a href="https://reactjs.org/docs/forwarding-refs.html">https://reactjs.org/docs/forwarding-refs.html</a></p>
+
+<h2>Strict Mode</h2>
+
+<p>新しいComponentです。Componentなので、<code>&lt;React.StrictMode&gt;…&lt;/React.StrictMode&gt;</code>のように利用します。
+Strict ModeのComponent自体は何もUIを描画せず、後述するチェックもdevelopment環境の場合のみチェックするので、本番環境のコードに含めたままでも問題ありません。</p>
+
+<p><code>&lt;StrictMode&gt;</code>で囲まれたComponentの中では、廃止予定のAPIや問題になりそうな使い方をチェックして問題を検出してくれます。
+現時点では、下記のようなチェックが行われています。</p>
+
+<ul>
+<li>Identifying components with unsafe lifecycles
+
+<ul>
+<li>componentWillMountやcomponentWillReceivePropsやcomponentWillUpdateなどの廃止予定のAPIを使用していないかをチェックして、見つかった場合にはコンソールに出力します。</li>
+</ul>
+</li>
+<li>Warning about legacy string ref API usage
+
+<ul>
+<li>文字列を使ったref指定をチェックして、見つかった場合にはコンソールに出力します。</li>
+</ul>
+</li>
+<li>Detecting unexpected side effects
+
+<ul>
+<li>非同期レンダリングが有効になった場合をシミュレートすることで、非同期レンダリングが有効になった時に問題となる副作用のあるコードがないかを検出します。ただし、副作用のあるコードがあるかどうかを検出することはできないので、Strict Modeでは、下記のAPIが意図的に2回呼ばれるようになります。
+
+<ul>
+<li>constructor</li>
+<li>renderメソッド</li>
+<li>setStateの第1引数に指定する関数</li>
+<li>static getDerivedStateFromProps</li>
+</ul>
+</li>
+<li>これにより、完璧ではないですが、複数回呼ばれると壊れるような副作用のある実装をできることを期待しています。</li>
+</ul>
+</li>
+</ul>
+
+
+<p>ちなみに、なぜ<code>React.strictMode = true</code>のようになっていないのか疑問に思うかもしれませんが、Componentの形式になっていることでアプリケーションの一部だけチェックすることが出来るようになります。
+これはFacebookが50,000以上のComponentを持っていることから来ているマイグレーションの戦略かなと思います。</p>
+
+<h2>New Context API</h2>
+
+<p>長くなってきたのでここからは簡潔に&hellip;。</p>
+
+<p>APIの変更があるとずっと予告されていたContextの新しいAPIです。</p>
+
+<p>既存のContextも少なくv16系ではサポートされ続けます。
+既存のContextは、<code>react-redux</code>や<code>react-router</code>などのライブラリが内部で使っているので、多くの人に関係あるといえばある変更です。
+これらのライブラリがどのように対応するのかは、issueなどで議論は行われていますがまだ不明です。</p>
+
+<ul>
+<li><a href="https://github.com/reactjs/react-redux/pull/898">https://github.com/reactjs/react-redux/pull/898</a></li>
+<li><a href="https://github.com/ReactTraining/react-router/pull/5908">https://github.com/ReactTraining/react-router/pull/5908</a></li>
+</ul>
+
+
+<p>また最近軽量なRedux風なライブラリが増えているのはこのContext APIの影響もあると思います。</p>
+
+<ul>
+<li><a href="https://github.com/jamiebuilds/unstated">https://github.com/jamiebuilds/unstated</a></li>
+</ul>
+
+
+<p>今回のNew Context APIは正式な機能としてリリースされましたが、Contextをabuseするのではなく、Propsを使ってデータのやりとりをするのが基本であるのは変わりません。
+テーマや言語のような様々な場所、階層で利用されるようなものやFluxのStoreなど本当に必要な部分のみで利用することが推奨されています。</p>
+
+<p>新しいContextのAPIは、Componentベースになっていて、<code>const ThemeContext = React.createContext('themeName')</code>でContextを作成し、<code>ThemeContext.Provider</code>と<code>ThemeContext.Consumer</code>を組み合わせます。</p>
+
+<p><code>ThemeContext.Provider</code>がContextの値を管理する、親となるComponentです。<code>ThemeContext.Consumer</code>は、Providerの子孫要素であり、Contextの値を利用する側です。Providerの子孫であればどこでも利用出来ます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">const</span> <span class="nx">ThemeContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="s1">&#39;dark&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">ThemeContext</span><span class="p">.</span><span class="nx">Provider</span> <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;dark&#39;</span><span class="p">}</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="c">&lt;!--</span> <span class="err">このツリーの中では、</span><span class="nx">ThemeContext</span><span class="p">.</span><span class="nx">Consumer</span><span class="err">を通じて</span><span class="nx">ThemeContext</span><span class="err">の値を参照できる</span> <span class="o">--&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">Child</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">ThemeContext</span><span class="p">.</span><span class="nx">Consumer</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="p">{(</span><span class="nx">theme</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">theme</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">click</span><span class="o">&lt;</span><span class="err">/button&gt;}</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/ThemeContext.Consumer&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="err">/Child&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/ThemeContext.Provider&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Render Functionのパターンになっているので、複数種類のContextを組み合わせて使うことも勿論可能です。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">const</span> <span class="nx">LangContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="s1">&#39;lang&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="kr">const</span> <span class="nx">ThemeContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="s1">&#39;dark&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">LangContext</span><span class="p">.</span><span class="nx">Provider</span> <span class="nx">value</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">ThemeContext</span><span class="p">.</span><span class="nx">Provider</span> <span class="nx">value</span><span class="o">=</span><span class="s2">&quot;dark&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nx">Child</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nx">LangContext</span><span class="p">.</span><span class="nx">Consumer</span><span class="o">&gt;</span>
+</span><span class='line'>        <span class="p">{(</span><span class="nx">lang</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+</span><span class='line'>          <span class="o">&lt;</span><span class="nx">ThemeContext</span><span class="p">.</span><span class="nx">Consumer</span><span class="o">&gt;</span>
+</span><span class='line'>            <span class="p">{(</span><span class="nx">theme</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">theme</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">getMessage</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">lang</span><span class="p">)}</span><span class="o">&lt;</span><span class="err">/button&gt;}</span>
+</span><span class='line'>          <span class="o">&lt;</span><span class="err">/ThemeContext.Consumer&gt;</span>
+</span><span class='line'>        <span class="p">)}</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="err">/LangContext.Consumer&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="err">/Child&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="err">/ThemeContext.Provider&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/LangContext.Provider&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>newContext and legacyContext</h3>
+
+<p>なぜ既存のContext APIが置き換えられることになったかというと、Static Type Checkingが難しいなどの問題がありますが、一番大きいのはContextの伝播が途中ComponentがshouldComponentUpdateでfalseを返した場合、子孫のComponentは再renderされないので、Contextの変更が伝わらなくなってしまうことです。</p>
+
+<p>下記のサンプルを見てもらうとoldContextの方は変更が反映されていないことがわかります。</p>
+
+<p><a href="https://codepen.io/koba04/pen/OvvzXb?editors=0010">https://codepen.io/koba04/pen/OvvzXb?editors=0010</a></p>
+
+<h3>observedBits</h3>
+
+<p>新しいContextのAPIはobservedBitsという面白い機能を持っています。unstableですが&hellip;。
+通常Contextに変更があると対応する全てのConsumerを再renderしますが、observedBitsを指定することで、関連のあるConsumerのみ再renderさせることができます。</p>
+
+<p>方法は、React.createContextの第二引数に、関数を定義します。この関数は変更前後のContextの値を受け取るので、変更内容を示すビット列を返します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// foo === 0b01, bar === 0b10のビット列を設定する</span>
+</span><span class='line'><span class="kr">const</span> <span class="nx">StoreContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">(</span><span class="nx">prev</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">prev</span><span class="p">.</span><span class="nx">foo</span> <span class="o">!==</span> <span class="nx">next</span><span class="p">.</span><span class="nx">foo</span><span class="p">)</span> <span class="nx">result</span> <span class="o">|=</span> <span class="mi">0</span><span class="nx">b01</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">prev</span><span class="p">.</span><span class="nx">bar</span> <span class="o">!==</span> <span class="nx">next</span><span class="p">.</span><span class="nx">bar</span><span class="p">)</span> <span class="nx">result</span> <span class="o">|=</span> <span class="mi">0</span><span class="nx">b10</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>説明するまでもないですが、上記の場合は、fooが変更されたら<code>0b01</code>を、barが変更されたら<code>0b10</code>のビットを立てています。</p>
+
+<p>そして、Context.Consumerに、<code>unstable_observedBits</code>のPropsとして、Consumerが受け取っている値に関連するビット列を指定します。
+そうすることで、createContextの第2引数が返すビット列(changedBits)とConsumerのunstable_observedBitsの論理積(<code>&amp;</code>)をとって0じゃない場合のみ再renderされます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">// foo(0b01)が変わった場合のみrenderされる</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">StoreContext</span><span class="p">.</span><span class="nx">Consumer</span> <span class="nx">unstable_observedBits</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="nx">b01</span><span class="p">}</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="p">{({</span><span class="nx">foo</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">foo</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/StoreContext.Consumer&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// bar(0b10)が変わった場合のみrenderされる</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">StoreContext</span><span class="p">.</span><span class="nx">Consumer</span> <span class="nx">unstable_observedBits</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="nx">b10</span><span class="p">}</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="p">{({</span><span class="nx">bar</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">bar</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/StoreContext.Consumer&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// どちらでも(このば場合、unstable_observedBitsは省略できる</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">StoreContext</span><span class="p">.</span><span class="nx">Consumer</span> <span class="nx">unstable_observedBits</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="nx">b11</span><span class="p">}</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="p">{({</span><span class="nx">foo</span><span class="p">,</span> <span class="nx">bar</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">foo</span><span class="p">}</span><span class="o">:</span><span class="p">{</span><span class="nx">bar</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/StoreContext.Consumer&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Reduxのようなライブラリを組み合わせる時の最適化として使えそうですね。</p>
+
+<p>詳しくは下記のサンプルを見てください。</p>
+
+<p><a href="https://codepen.io/koba04/pen/WzzXJx?editors=0010">https://codepen.io/koba04/pen/WzzXJx?editors=0010</a></p>
+
+<p>ちなみにReactの内部でも、ModeやSideEffectはビット列を使って定義されていて、ビット演算を使って処理されています。</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/packages/react-reconciler/src/ReactTypeOfMode.js">https://github.com/facebook/react/blob/master/packages/react-reconciler/src/ReactTypeOfMode.js</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">NoContext</span> <span class="o">=</span> <span class="mi">0</span><span class="nx">b00</span><span class="p">;</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">AsyncMode</span> <span class="o">=</span> <span class="mi">0</span><span class="nx">b01</span><span class="p">;</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">StrictMode</span> <span class="o">=</span> <span class="mi">0</span><span class="nx">b10</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><a href="https://github.com/facebook/react/blob/master/packages/shared/ReactTypeOfSideEffect.js">https://github.com/facebook/react/blob/master/packages/shared/ReactTypeOfSideEffect.js</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">NoEffect</span> <span class="o">=</span> <span class="cm">/*              */</span> <span class="mi">0</span><span class="nx">b000000000000</span><span class="p">;</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">PerformedWork</span> <span class="o">=</span> <span class="cm">/*         */</span> <span class="mi">0</span><span class="nx">b000000000001</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// You can change the rest (and add more).</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">Placement</span> <span class="o">=</span> <span class="cm">/*             */</span> <span class="mi">0</span><span class="nx">b000000000010</span><span class="p">;</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">Update</span> <span class="o">=</span> <span class="cm">/*                */</span> <span class="mi">0</span><span class="nx">b000000000100</span><span class="p">;</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">PlacementAndUpdate</span> <span class="o">=</span> <span class="cm">/*    */</span> <span class="mi">0</span><span class="nx">b000000000110</span><span class="p">;</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">Deletion</span> <span class="o">=</span> <span class="cm">/*              */</span> <span class="mi">0</span><span class="nx">b000000001000</span><span class="p">;</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">ContentReset</span> <span class="o">=</span> <span class="cm">/*          */</span> <span class="mi">0</span><span class="nx">b000000010000</span><span class="p">;</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">Callback</span> <span class="o">=</span> <span class="cm">/*              */</span> <span class="mi">0</span><span class="nx">b000000100000</span><span class="p">;</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">DidCapture</span> <span class="o">=</span> <span class="cm">/*            */</span> <span class="mi">0</span><span class="nx">b000001000000</span><span class="p">;</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">Ref</span> <span class="o">=</span> <span class="cm">/*                   */</span> <span class="mi">0</span><span class="nx">b000010000000</span><span class="p">;</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">ErrLog</span> <span class="o">=</span> <span class="cm">/*                */</span> <span class="mi">0</span><span class="nx">b000100000000</span><span class="p">;</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">Snapshot</span> <span class="o">=</span> <span class="cm">/*              */</span> <span class="mi">0</span><span class="nx">b100000000000</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// Union of all host effects</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">HostEffectMask</span> <span class="o">=</span> <span class="cm">/*        */</span> <span class="mi">0</span><span class="nx">b100111111111</span><span class="p">;</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">Incomplete</span> <span class="o">=</span> <span class="cm">/*            */</span> <span class="mi">0</span><span class="nx">b001000000000</span><span class="p">;</span>
+</span><span class='line'><span class="kr">export</span> <span class="kr">const</span> <span class="nx">ShouldCapture</span> <span class="o">=</span> <span class="cm">/*         */</span> <span class="mi">0</span><span class="nx">b010000000000</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Others</h2>
+
+<p>その他、細かい変更についても、軽く触れておきます。</p>
+
+<h3>Rename React.unstable_AsyncComponent to React.unstable_AsyncMode</h3>
+
+<p>指定したComponentの中で発生した更新処理をデフォルトLow Priorityとして扱うことのできる<code>React.unstable_AsyncComponent</code>が、<code>React.unstable_AsyncMode</code>にリネームされました。
+また、以前は可能だったextendsする使い方が出来なくなっています。</p>
+
+<h3>New react-is package</h3>
+
+<p><code>react-is</code>という新しいパッケージが公開されました。
+この中には様々なComponent種別に対する比較処理などを、内部実装を直接参照することなくできます。
+Componentの種別を使って何かしたい場合に使えます。
+色々なAPIが定義されているので、ドキュメントを参照してください。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">ReactIs</span> <span class="nx">from</span> <span class="s1">&#39;react-is&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">ReactIs</span><span class="p">.</span><span class="nx">isValidElementType</span><span class="p">(</span><span class="nx">ClassComponent</span><span class="p">);</span> <span class="c1">// true</span>
+</span><span class='line'><span class="nx">ReactIs</span><span class="p">.</span><span class="nx">isContextConsumer</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">ThemeContext</span><span class="p">.</span><span class="nx">Consumer</span> <span class="o">/&gt;</span><span class="p">);</span> <span class="c1">// true</span>
+</span><span class='line'><span class="o">:</span>
+</span><span class='line'><span class="o">:</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/facebook/react/tree/master/packages/react-is">https://github.com/facebook/react/tree/master/packages/react-is</a></p>
+
+<h3>New react-lifecycle-compat package</h3>
+
+<p>static getDerivedStateFromPropsやgetSnapshotBeforeUpdateを使って書かれたComponentをこれらをサポートしていない、古いバージョンのReactでも動作させるためのパッケージです。</p>
+
+<p>これを使うことで、Componentの開発者は新しいライフサイクルメソッドのAPIを、古いバージョンのReactのサポートを切り捨てることなく利用出来ます。
+HOCとして提供されています。</p>
+
+<p>内部では、static getDerivedStateFromPropsやgetSnapshotBeforeUpdateの動作を、既存のcomponentWillMountやcomponentWillReceiveProps、componentWillUpdateでエミュレートする形になっています。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="kr">import</span> <span class="nx">polyfill</span> <span class="nx">from</span> <span class="s1">&#39;react-lifecycles-compat&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">class</span> <span class="nx">ExampleComponent</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">polyfill</span><span class="p">(</span><span class="nx">ExampleComponent</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">export</span> <span class="k">default</span> <span class="nx">ExampleComponent</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/reactjs/react-lifecycles-compat">https://github.com/reactjs/react-lifecycles-compat</a></p>
+
+<h3>New create-subscription package</h3>
+
+<p>非同期レンダリングを考慮した、イベントを購読する処理を実装するためのライブラリです。
+これはFluxライブラリの実装として利用することを想定されているのではなく、GeolocationなどのAPIを監視して何かしたい場合の使用が想定されています。
+そこまで利用シーンは多くない気はしています。
+（IntersectionObserverとかと組み合わせると良さそう？）</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="p">{</span> <span class="nx">createSubscription</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;create-subscription&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">const</span> <span class="nx">Subscription</span> <span class="o">=</span> <span class="nx">createSubscription</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">getCurrentValue</span><span class="p">(</span><span class="nx">source</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// 現在の値を返します</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nx">subscribe</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// sourceのPropsを受け取って、変更があった時にcallbackを呼びます</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">Subscription</span> <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="nx">eventDispatcher</span><span class="p">}</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="p">{</span><span class="nx">value</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">AnotherComponent</span> <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">value</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/Subscription&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Componentがマウントされているかどうかの状態も考慮してくれているので、Promiseを使って非同期処理の結果をComponentに適用することを安全に行うために使うことも出来ます。</p>
+
+<p><a href="https://github.com/facebook/react/tree/master/packages/create-subscription">https://github.com/facebook/react/tree/master/packages/create-subscription</a></p>
+
+<h3>Expose react-reconciler/persistent</h3>
+
+<p>カスタムレンダラーを作成するための<code>react-reconciler</code>で、persistentモデルのreconcilerが外部に公開されました。
+これ何かやってるなぁと認識してはいたものの、しっかり見ていないのでどういうものかはわかっていません。</p>
+
+<h3>Remove useSyncScheduling</h3>
+
+<p>フラグが削除されています。なので現時点では前述した<code>React.unstable_AsyncMode</code>で使い分ける形になります。</p>
+
+<p>その他のCHANGELOGは下記にあります。
+自分のPRも2つほど入ってました（実装したことも忘れてましたが…）</p>
+
+<p><a href="https://github.com/facebook/react/blob/master/CHANGELOG.md#1630-march-29-2018">https://github.com/facebook/react/blob/master/CHANGELOG.md#1630-march-29-2018</a></p>
+
+<hr />
+
+<p>というわけで色々入りましたが、どれも必要に応じて使えばいいものなので、出来るようになったことを把握しつつ、ゆっくりv17の準備をするのがいいのかなと思います。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React v16でのサーバーサイドレンダリング]]></title>
@@ -4601,181 +5366,6 @@ React Componentのaccessibilityを検査する<code>eslint-plugin-a11y</code>が
 
 
 <p>個人的には使っていないので詳細はわからないですが、Stateless ComponentsやHOC辺りのサポートや設定周りが改善されたようです。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[React Links vol.1 4/6〜4/14]]></title>
-    <link href="http://blog.koba04.com/post/2016/04/14/reactjs-links-vol1/"/>
-    <updated>2016-04-14T13:17:31+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/04/14/reactjs-links-vol1</id>
-    <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
-
-<p>今週はF8があったのでReact Native関連の記事が多くありました。</p>
-
-<!-- more -->
-
-
-<h2>React v15</h2>
-
-<ul>
-<li><a href="http://facebook.github.io/react/blog/2016/04/07/react-v15.html">http://facebook.github.io/react/blog/2016/04/07/react-v15.html</a></li>
-<li><a href="https://facebook.github.io/react/blog/2016/04/08/react-v15.0.1.html">https://facebook.github.io/react/blog/2016/04/08/react-v15.0.1.html</a></li>
-</ul>
-
-
-<p>React v15がリリースされました。バグがあったのですぐに15.0.1がリリースされています。インストールする際には15.0.1を使用してください。</p>
-
-<p>細かいfeatureについてはブログ書いたのでそちらをみてください</p>
-
-<ul>
-<li><a href="http://blog.koba04.com/post/2016/03/09/react-js-v15-changes/">http://blog.koba04.com/post/2016/03/09/react-js-v15-changes/</a></li>
-</ul>
-
-
-<h2>React Native: A year in review</h2>
-
-<ul>
-<li><a href="https://code.facebook.com/posts/597378980427792/react-native-a-year-in-review/">https://code.facebook.com/posts/597378980427792/react-native-a-year-in-review/</a></li>
-</ul>
-
-
-<p>React Nativeが2013年の夏に社内の(?)hackathonで誕生してから、30,000以上のstarをgithubで得るようになるまでのStoryが書かれています。
-&ldquo;The React Native team has grown from around 10 to around 20 engineers in the past year&#8221;や&#8221;we are 1 percent finished. &#8220;とあるように、今後も力を入れていくことがわかります。
-Facebookのエンジニア以外からのcommitも30%くらいあって、Facebook以外でも使われていることがわかります。</p>
-
-<p>また、facebookがreact-nativeのリポジトリをどのように管理しているのかや、たくさんのissueやPRを処理するために作ったmention-botなどについても書かれていて、巨大なOSSをgithubでどう管理するかという点でも面白いです。</p>
-
-<p><a href="https://github.com/facebook/mention-bot">https://github.com/facebook/mention-bot</a></p>
-
-<h2>Building the F8 2016 App</h2>
-
-<ul>
-<li><a href="http://makeitopen.com/">http://makeitopen.com/</a></li>
-</ul>
-
-
-<p>ReactNativeを使ってF8のiOSとAndroidのアプリを作った際のことを、チュートリアルとして紹介しています。
-どのような構成にするのかを検討して、マルチプラットフォーム対応をどうするか、データ管理をどうするか、テストをどうするかなどが書かれていてとても参考になります。</p>
-
-<p>React使っている人は一度見てみるといいんじゃないかと思います。</p>
-
-<p>ReactNative + Flow + Redux + Jestな構成でサーバーサイドにはOSSのParse Serverを使っているようです。
-エディターはNuclideだそうです。</p>
-
-<p>アプリのソースコードもgithubで公開されています。</p>
-
-<ul>
-<li><a href="https://github.com/fbsamples/f8app">https://github.com/fbsamples/f8app</a></li>
-</ul>
-
-
-<h2>React Native on the Universal Windows Platform</h2>
-
-<ul>
-<li><a href="https://blogs.windows.com/buildingapps/2016/04/13/react-native-on-the-universal-windows-platform/">https://blogs.windows.com/buildingapps/2016/04/13/react-native-on-the-universal-windows-platform/</a></li>
-</ul>
-
-
-<p>MicroSoftがUniversal Windows Platform (UWP)対応をReactNativeに追加することが書かれています。
-これにより、WindowsのPCがモバイルだけでなく、Xbox OneやHoloLensのためのアプリをReactNativeで作れるようになります。
-記事では、F8のアプリをWindows 10 mobileとDesktop向けに作ったことが紹介されています。</p>
-
-<p>JavaScriptのランタイムにはChakraが使われているみたいです。</p>
-
-<p>また、VSCodeのReactNative拡張やReactNativeを使ったWindowsアプリに対するCodePush対応などを行っているようです。</p>
-
-<ul>
-<li><a href="http://microsoft.github.io/code-push/articles/ReactNativeWindows.html">http://microsoft.github.io/code-push/articles/ReactNativeWindows.html</a></li>
-</ul>
-
-
-<p>現在はforkしたrepositoryになっていますが、将来的にはReactNative本体と同期が取れるようにうまくやっていくようです。</p>
-
-<p><a href="https://github.com/ReactWindows/react-native">https://github.com/ReactWindows/react-native</a></p>
-
-<h2>core note 4/7</h2>
-
-<ul>
-<li><a href="https://github.com/reactjs/core-notes/blob/master/2016-04/april-7.md">https://github.com/reactjs/core-notes/blob/master/2016-04/april-7.md</a></li>
-</ul>
-
-
-<p>Reactのcoreチームのmeeting noteが公開されています。
-以前はあったものの途中で削除されたBrowser Testingについて言及されているのは注目です。</p>
-
-<p>その他では、<em>ReactDOM.render() return value being <del>deprecated</del> legacy</em> (<a href="https://github.com/facebook/react/pull/6400">#6400</a>) も注目です。
-内部的なアルゴリズムの見直しをするために、ReactDOM.renderが将来的に戻り値を返さなくなります。
-戻り値を使いたい場合は、Refsを指定して取得することになりそうです。</p>
-
-<p>また、<em>Sebastian is moving some files from React Native to React</em> (<a href="https://github.com/facebook/react/pull/6338">#6338</a>)としてReactNativeのrenderer周りをreactのrepositoryに持ってきて、<code>react-native-renderer</code>として別パッケージにすることも予定されています。
-さらに<code>react-dom</code>から<code>react-dom-renderer</code>も切り離すことを検討されています。</p>
-
-<p>これによってカスタムrendererを作る時のI/Fが整備されて、わかりやすくなるといいなと思います。
-Windows対応もあったりでこの辺りを整理する優先度は高そうです。</p>
-
-<h2>Improve React performance with Babel</h2>
-
-<ul>
-<li><a href="https://medium.com/doctolib-engineering/improve-react-performance-with-babel-16f1becfaa25">https://medium.com/doctolib-engineering/improve-react-performance-with-babel-16f1becfaa25</a></li>
-</ul>
-
-
-<p>productionビルドやBabelの最適化を使った場合のパフォーマンスについてのエントリーです。当たり前ですが、developmentビルドとproductionビルドのパフォーマンスの違いが目立っています。
-Babelを使った最適化の場合でも数%の向上が見られますが、アプリケーションによるので利用する際は計測してみて導入することをおすすめします。</p>
-
-<h2>unofficial React Router docs</h2>
-
-<ul>
-<li><a href="http://knowbody.github.io/react-router-docs/">http://knowbody.github.io/react-router-docs/</a></li>
-</ul>
-
-
-<p><a href="https://github.com/knowbody">knowbody</a>さんによる非公式なReact Routerのドキュメントです。WIPですが、公式を読んでよくわからなかった人は確認してみるといいかもしれません。</p>
-
-<h2>React Router is dead. Long live rrtr.</h2>
-
-<p><strong>下のエントリーは現在は削除されています。</strong></p>
-
-<ul>
-<li><del><a href="https://medium.com/@taion/react-router-is-dead-long-live-rrtr-d229ca30e318#.vd0qjkccc">https://medium.com/@taion/react-router-is-dead-long-live-rrtr-d229ca30e318#.vd0qjkccc</a></del></li>
-</ul>
-
-
-<p>React Routerでここ数ヶ月中心的にcontributeしていた<a href="https://github.com/taion">taion</a>さんがリリースのサイクルの遅さやプロセスに不満を抱いてforkして<a href="https://github.com/taion/rrtr">rrtr</a>を作ったことを表明したエントリーです。</p>
-
-<p>それに対して、React Routerのオーナーである<a href="https://github.com/ryanflorence">ryanflorence</a>さんもgistでリアクションしています。</p>
-
-<ul>
-<li><del><a href="https://gist.github.com/ryanflorence/08a056374e24a7cda3c459e3d7d63e6e">https://gist.github.com/ryanflorence/08a056374e24a7cda3c459e3d7d63e6e</a></del> (<strong>これも削除済み</strong>)</li>
-</ul>
-
-
-<p>で下の通り、結局丸く収まりました。</p>
-
-<ul>
-<li><a href="https://medium.com/rackt-and-roll/rrtr-is-dead-long-live-react-router-ce982f6f1c10">https://medium.com/rackt-and-roll/rrtr-is-dead-long-live-react-router-ce982f6f1c10</a></li>
-</ul>
-
-
-<p>結果的に、PRをmergeするプロセスや定期的なリリースなど、プロジェクトの運営方針が行われました。</p>
-
-<p>ちなみにtaionさんはhistoryと組み合わせてscroll位置の復元などをサポートするscroll-behaviorというライブラリーも公開しています。</p>
-
-<ul>
-<li><a href="https://github.com/taion/scroll-behavior">https://github.com/taion/scroll-behavior</a></li>
-</ul>
-
-
-<h2>crysislinux/chrome-react-perf</h2>
-
-<ul>
-<li><a href="https://github.com/crysislinux/chrome-react-perf">https://github.com/crysislinux/chrome-react-perf</a></li>
-</ul>
-
-
-<p>Perfによる計測をChrome Developer Toolsで行うことができるライブラリーです。
-カジュアルに計測が出来そうなのでよさそうです。</p>
 ]]></content>
   </entry>
   
