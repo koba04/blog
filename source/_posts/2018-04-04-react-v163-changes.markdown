@@ -27,7 +27,7 @@ https://reactjs.org/blog/2018/03/01/sneak-peek-beyond-react-16.html
 
 * v16.3 は、v17 移行で有効になる非同期レンダリングに移行するための機能追加が中心で、このバージョンでの破壊的な変更はない
 * ライフサイクルメソッドの変更、新しい Ref の API と Context の API が入る
-* StrictMode の Component、`react-lifecycle-compat` 、`react-is`、`create-subscription`パッケージが追加された
+* StrictMode の Component、`react-lifecycles-compat` 、`react-is`、`create-subscription`パッケージが追加された
 
 ---
 
@@ -45,7 +45,7 @@ https://reactjs.org/blog/2018/03/01/sneak-peek-beyond-react-16.html
 `UNSAFE_xxx` のメソッドは既存実装の Alias で今のところ、削除される予定は決まっていません。したがって、他のメソッドへのマイグレーションが難しい場合にはとりあえず使い続けることも可能です。
 `UNSAFE_`の prefix がついていないメソッドは、v16 系のマイナーリリースの中で警告が出るようになって、v17 系のリリースで削除されます。（React では Breaking Change をするときは、前のバージョンで警告を出すようになっています）この警告は、当初は v16.4 のリリースと計画されていたのですが最新のブログでは v16.x となっています。
 
-ちなみに、この後で紹介する`react-lifecycle-compat`というライブラリを使うことで、新しく追加された static getDerivedStateFromProps や getSnapshotBeforeUpdate を使った Component でも古いバージョンの React をサポートすることが可能です。
+ちなみに、この後で紹介する`react-lifecycles-compat`というライブラリを使うことで、新しく追加された static getDerivedStateFromProps や getSnapshotBeforeUpdate を使った Component でも古いバージョンの React をサポートすることが可能です。
 
 ### なぜこれらのライフサイクルメソッドが廃止されるのか？
 
@@ -430,7 +430,7 @@ ReactIs.isContextConsumer(<ThemeContext.Consumer />); // true
 
 https://github.com/facebook/react/tree/master/packages/react-is
 
-### New react-lifecycle-compat package
+### New react-lifecycles-compat package
 
 static getDerivedStateFromProps や getSnapshotBeforeUpdate を使って書かれた Component をこれらをサポートしていない、古いバージョンの React でも動作させるためのパッケージです。
 
