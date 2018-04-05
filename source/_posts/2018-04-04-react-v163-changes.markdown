@@ -441,7 +441,7 @@ HOC として提供されています。
 
 ```js
 import React from "react";
-import polyfill from "react-lifecycles-compat";
+import { polyfill } from "react-lifecycles-compat";
 
 class ExampleComponent extends React.Component {
   // ...
