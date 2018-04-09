@@ -522,7 +522,8 @@ Strict Mode の Component 自体は何も UI を描画せず、後述するチ�
 
 <p>新しい Context の API は、Component ベースになっていて、<code>const ThemeContext = React.createContext('themeName')</code>で Context を作成し、<code>ThemeContext.Provider</code>と<code>ThemeContext.Consumer</code>を組み合わせます。</p>
 
-<p><code>ThemeContext.Provider</code>が Context の値を管理する、親となる Component です。<code>ThemeContext.Consumer</code>は、Provider の子孫要素であり、Context の値を利用する側です。Provider の子孫であればどこでも利用出来ます。</p>
+<p><code>ThemeContext.Provider</code>が Context の値を管理する、親となる Component です。<code>ThemeContext.Consumer</code>は、Provider の子孫要素であり、Context の値を利用する側です。
+Provider の子孫でない場所で Consumer を利用する場合には、 Consumer は React.createContext で指定したデフォルト値を受け取ります。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

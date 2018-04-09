@@ -4,7 +4,7 @@
   <title><![CDATA[Category: react.js | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/react-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2018-04-05T17:22:46+09:00</updated>
+  <updated>2018-04-09T16:28:44+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -382,7 +382,8 @@ Strict Mode の Component 自体は何も UI を描画せず、後述するチ�
 
 <p>新しい Context の API は、Component ベースになっていて、<code>const ThemeContext = React.createContext('themeName')</code>で Context を作成し、<code>ThemeContext.Provider</code>と<code>ThemeContext.Consumer</code>を組み合わせます。</p>
 
-<p><code>ThemeContext.Provider</code>が Context の値を管理する、親となる Component です。<code>ThemeContext.Consumer</code>は、Provider の子孫要素であり、Context の値を利用する側です。Provider の子孫であればどこでも利用出来ます。</p>
+<p><code>ThemeContext.Provider</code>が Context の値を管理する、親となる Component です。<code>ThemeContext.Consumer</code>は、Provider の子孫要素であり、Context の値を利用する側です。
+Provider の子孫でない場所で Consumer を利用する場合には、 Consumer は React.createContext で指定したデフォルト値を受け取ります。</p>
 
 <p>```js
 const ThemeContext = React.createContext(&lsquo;dark&rsquo;);</p>
