@@ -285,7 +285,8 @@ API の変更があるとずっと予告されていた Context の新しい API
 
 新しい Context の API は、Component ベースになっていて、`const ThemeContext = React.createContext('themeName')`で Context を作成し、`ThemeContext.Provider`と`ThemeContext.Consumer`を組み合わせます。
 
-`ThemeContext.Provider`が Context の値を管理する、親となる Component です。`ThemeContext.Consumer`は、Provider の子孫要素であり、Context の値を利用する側です。Provider の子孫であればどこでも利用出来ます。
+`ThemeContext.Provider`が Context の値を管理する、親となる Component です。`ThemeContext.Consumer`は、Provider の子孫要素であり、Context の値を利用する側です。
+Provider の子孫でない場所で Consumer を利用する場合には、 Consumer は React.createContext で指定したデフォルト値を受け取ります。
 
 ```js
 const ThemeContext = React.createContext('dark');
