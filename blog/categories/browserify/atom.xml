@@ -4,7 +4,7 @@
   <title><![CDATA[Category: browserify | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/browserify/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2017-10-01T23:18:53+09:00</updated>
+  <updated>2018-04-09T16:28:44+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -297,7 +297,7 @@ assert(
 
 
 <p><template>
-  <div v-component="{{view}}" v-transition></div>
+  <div v-component="" v-transition></div>
 </template></p>
 
 
@@ -635,7 +635,7 @@ opacity: 1
 </ul>
 
 
-<p>{% img /images/last-fm-top-tracks.png &lsquo;Atrist Top Tracks by Last.FM&rsquo; %}</p>
+<p><img src="/images/last-fm-top-tracks.png" title="&lsquo;Atrist Top Tracks by Last.FM&rsquo;" ></p>
 
 <ul>
 <li><a href="http://koba04.com/last-fm-top-tracks/">http://koba04.com/last-fm-top-tracks/</a></li>
