@@ -4,7 +4,7 @@
   <title><![CDATA[Category: test | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/test/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2018-09-23T20:34:45+09:00</updated>
+  <updated>2018-09-23T21:56:05+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.koba04.com/post/2014/06/23/karma-for-javascript-test-runner/"/>
     <updated>2014-06-23T00:48:32+09:00</updated>
     <id>http://blog.koba04.com/post/2014/06/23/karma-for-javascript-test-runner</id>
-    <content type="html"><![CDATA[<p><img src="/images/karma.png" title="&lsquo;karma&rsquo;" ></p>
+    <content type="html"><![CDATA[<p>{% img /images/karma.png &lsquo;karma&rsquo; %}</p>
 
 <p>今まではなんとなくtestemを使っていたのですが、Karmaを検討する必要があったので試してみました。</p>
 
@@ -146,7 +146,7 @@ frameworks: ['mocha-debug', 'mocha'],
 karmaでも出来ないないかな思って調べるみると、karma-mocha-debugを使うと出来るようでした。
 karmaのブラウザからdebugボタンを押してdebug.htmlを開くと見ることが出来ます。素晴らしい！</p>
 
-<p><img src="/images/karma-mocha-debug.png" title="&lsquo;karma mocha debug&rsquo;" ></p>
+<p>{% img /images/karma-mocha-debug.png &lsquo;karma mocha debug&rsquo; %}</p>
 
 <h2>Preprocessors</h2>
 
@@ -203,7 +203,7 @@ reporters: ["nyan"]
 
 <p>nyanの形式でテストを出力してくれるのでもっとテスト書こうという気持ちになっていいです。(バグってたのpull reqして直してもらいました&hellip;)</p>
 
-<p><img src="/images/karma-nyan-reporter.gif" title="&lsquo;karma nyan reporter&rsquo;" ></p>
+<p>{% img /images/karma-nyan-reporter.gif &lsquo;karma nyan reporter&rsquo; %}</p>
 
 <h3>karma-growl-reporter,karma-osx-reporter</h3>
 
@@ -284,7 +284,7 @@ reporters: [&ldquo;mp3&rdquo;]</p>
 
 <p>コミットログはこの辺り。 <a href="https://github.com/koba04/backbone-boilerplate/commit/2fadec43e46f99cce0d3d828c66d4b12d758f4f0">https://github.com/koba04/backbone-boilerplate/commit/2fadec43e46f99cce0d3d828c66d4b12d758f4f0</a></p>
 
-<p><img src="/images/power-assert.png" title="&lsquo;power-assert&rsquo;" ></p>
+<p>{% img /images/power-assert.png &lsquo;power-assert&rsquo; %}</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: YAPC | blog.koba04.com]]></title>
   <link href="http://blog.koba04.com/blog/categories/yapc/atom.xml" rel="self"/>
   <link href="http://blog.koba04.com/"/>
-  <updated>2018-09-23T20:34:45+09:00</updated>
+  <updated>2018-09-23T21:56:05+09:00</updated>
   <id>http://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
@@ -54,7 +54,7 @@
 
 <p>誰にオファーするかは、一度上記のメンバーで集まった時にひたすら面白いサービス作っている人の名前を挙げていって、そのリストから自分が聞きたい！と思った人に順番に声を掛けていきました。(一応PerlメインになりそうなTalkのバランスも考えましたが)</p>
 
-<p><img src="/images/oretoku.png"></p>
+<p>{% img /images/oretoku.png %}</p>
 
 <p>皆さん快くお受け頂いて本当に感謝しています。</p>
 
