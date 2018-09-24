@@ -389,9 +389,9 @@ end
 
 def blog_url(user, project)
   url = if File.exists?('source/CNAME')
-    "http://#{IO.read('source/CNAME').strip}"
+    "https://#{IO.read('source/CNAME').strip}"
   else
-    "http://#{user}.github.io"
+    "https://#{user}.github.io"
   end
   url += "/#{project}" unless project == ''
   url
