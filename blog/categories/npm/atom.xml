@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: npm | blog.koba04.com]]></title>
-  <link href="http://blog.koba04.com/blog/categories/npm/atom.xml" rel="self"/>
-  <link href="http://blog.koba04.com/"/>
-  <updated>2018-09-23T21:58:32+09:00</updated>
-  <id>http://blog.koba04.com/</id>
+  <link href="https://blog.koba04.com/blog/categories/npm/atom.xml" rel="self"/>
+  <link href="https://blog.koba04.com/"/>
+  <updated>2018-09-24T20:28:20+09:00</updated>
+  <id>https://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Setting up minimum single page application]]></title>
-    <link href="http://blog.koba04.com/post/2015/03/19/setting-up-minimum-single-page-application/"/>
+    <link href="https://blog.koba04.com/post/2015/03/19/setting-up-minimum-single-page-application/"/>
     <updated>2015-03-19T18:54:49+09:00</updated>
-    <id>http://blog.koba04.com/post/2015/03/19/setting-up-minimum-single-page-application</id>
+    <id>https://blog.koba04.com/post/2015/03/19/setting-up-minimum-single-page-application</id>
     <content type="html"><![CDATA[<p>React.jsなどを試そうとするときに、browserify? gulp? grunt? webpack? どれ使えばいいのとか、テストは何を使えばいいのかとかよくわからないというのをたまに聞くので、最低限の設定だけどES6で書けたりautobuildやlivereloadが出来る構成のサンプルを作ってみました。</p>
 
 <p>あと、テストはkarma + mocha + power-assertでchromeでテスト出来るようにしています。</p>

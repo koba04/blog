@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[blog.koba04.com]]></title>
-  <link href="http://blog.koba04.com/atom.xml" rel="self"/>
-  <link href="http://blog.koba04.com/"/>
-  <updated>2018-09-23T21:58:32+09:00</updated>
-  <id>http://blog.koba04.com/</id>
+  <link href="https://blog.koba04.com/atom.xml" rel="self"/>
+  <link href="https://blog.koba04.com/"/>
+  <updated>2018-09-24T20:28:20+09:00</updated>
+  <id>https://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[React v16.3 changes]]></title>
-    <link href="http://blog.koba04.com/post/2018/04/04/react-v163-changes/"/>
+    <link href="https://blog.koba04.com/post/2018/04/04/react-v163-changes/"/>
     <updated>2018-04-04T15:25:23+09:00</updated>
-    <id>http://blog.koba04.com/post/2018/04/04/react-v163-changes</id>
+    <id>https://blog.koba04.com/post/2018/04/04/react-v163-changes</id>
     <content type="html"><![CDATA[<p>React v16.3.0 がリリースされました。</p>
 
 <p><strong>※4/4 にバグフィックスを含む v16.3.1 がリリースされています</strong></p>
@@ -55,7 +55,7 @@ React Suspense については、v16.3 と関係ないので今回は省略し�
 
 <p>ただ実際には、v16.3 の段階では破壊的な変更はありません。ライフサイクルメソッドの変更は下記のようなスケジュールで適用されます。</p>
 
-<p><img src="http://blog.koba04.com/images/posts/react-163-changes/lifecycle-methods.png" title="'React Lifecycle Methods Changes'" ></p>
+<p><img src="https://blog.koba04.com/images/posts/react-163-changes/lifecycle-methods.png" title="'React Lifecycle Methods Changes'" ></p>
 
 <p>上記を見てわかる通り、v16.3 の段階では新しい<code>static getDerivedStateFromProps</code> と <code>getSnapshotBeforeUpdate</code> と<code>UNSAFE_xxx</code>メソッドの追加のみです。
 <code>UNSAFE_xxx</code> のメソッドは既存実装の Alias で今のところ、削除される予定は決まっていません。したがって、他のメソッドへのマイグレーションが難しい場合にはとりあえず使い続けることも可能です。
@@ -740,9 +740,9 @@ HOC として提供されています。</p>
   
   <entry>
     <title type="html"><![CDATA[React v16でのサーバーサイドレンダリング]]></title>
-    <link href="http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/"/>
+    <link href="https://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16/"/>
     <updated>2017-10-01T23:02:46+09:00</updated>
-    <id>http://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16</id>
+    <id>https://blog.koba04.com/post/2017/10/01/serverside-rendering-in-react-v16</id>
     <content type="html"><![CDATA[<p>React v16について書いたブログの中の、サーバーサイドレンダリングについての部分に間違いがあったので修正しつつ、v16のサーバーサイドレンダリングについて補足します。</p>
 
 <p><a href="http://blog.koba04.com/post/2017/09/27/react-v16-changes/">http://blog.koba04.com/post/2017/09/27/react-v16-changes/</a></p>
@@ -1071,9 +1071,9 @@ HTML文字列として渡したりする必要はありません。</p>
   
   <entry>
     <title type="html"><![CDATA[React v16 changes]]></title>
-    <link href="http://blog.koba04.com/post/2017/09/27/react-v16-changes/"/>
+    <link href="https://blog.koba04.com/post/2017/09/27/react-v16-changes/"/>
     <updated>2017-09-27T16:34:07+09:00</updated>
-    <id>http://blog.koba04.com/post/2017/09/27/react-v16-changes</id>
+    <id>https://blog.koba04.com/post/2017/09/27/react-v16-changes</id>
     <content type="html"><![CDATA[<p>Reactのv16がリリースされたので、変更点などを整理したいと思います。</p>
 
 <ul>
@@ -1981,9 +1981,9 @@ v3からはAdapterのアーキテクチャになっており、対象とするRe
   
   <entry>
     <title type="html"><![CDATA[React Fiber現状確認]]></title>
-    <link href="http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber/"/>
+    <link href="https://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber/"/>
     <updated>2017-04-25T02:00:55+09:00</updated>
-    <id>http://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber</id>
+    <id>https://blog.koba04.com/post/2017/04/25/a-state-of-react-fiber</id>
     <content type="html"><![CDATA[<p><a href="https://developers.facebook.com/videos/?category=f8_2017">F8</a>でもReact Fiberについての発表もあったので、気になっている人も多いReact Fiberの現状について簡単に書きたいと思います。</p>
 
 <p>Reactの完全な書き換えということで、使い方も変わってしまうと思っている人もいると思いますが、内部実装の書き換えであり、利用者から見える部分ではほとんど変更はありません。</p>
@@ -2098,7 +2098,7 @@ Hostに反映させる部分はHostが何かによっても異なり、反映方
 <p>それでは、まずは現在使われているStackのrendererについて簡単に触れます。
 Stackは、ReactElementがツリー構造になるのと同様に、親から子、子から孫に処理を行っていきます。</p>
 
-<p><img src="http://blog.koba04.com/images/posts/a-state-of-react-fiber/ReactDOM.png" title="'ReactDOM Stack'" ></p>
+<p><img src="https://blog.koba04.com/images/posts/a-state-of-react-fiber/ReactDOM.png" title="'ReactDOM Stack'" ></p>
 
 <p>上記では、<code>mountComponent</code> がどんどん入れ子になって呼ばれているのがわかります。
 加えてこれは同期的に行われます。</p>
@@ -2204,7 +2204,7 @@ Fiberは、基本的には1つのReactElementと対応すると考えること�
 FiberはLinked Listの構造になっています。Stackの場合はTree構造を掘り下げていくように処理をしていましたが、Fiberでは、<code>return</code> や<code>child</code> や<code>sibling</code> などをたどることで順番にReactElementを処理していきます。
 そのことは、下記のスタックツリーを見てもわかります。</p>
 
-<p><img src="http://blog.koba04.com/images/posts/a-state-of-react-fiber/ReactDOMFiber.png" title="'ReactDOM Fiber'" ></p>
+<p><img src="https://blog.koba04.com/images/posts/a-state-of-react-fiber/ReactDOMFiber.png" title="'ReactDOM Fiber'" ></p>
 
 <p>上記の通り、Stackのようにスタックがたくさん積まれていないことがわかります。</p>
 
@@ -2358,14 +2358,14 @@ requestIdleCallbackでは、アイドル時間を<code>timeRemaining</code>の�
 <p>下記はFiberを同期モードで実行した時のスタックです。
 全てが同期的に行われていることがわかります。この間はUIを完全にブロックしてしまいます。</p>
 
-<p><img src="http://blog.koba04.com/images/posts/a-state-of-react-fiber/ReactDOMFiber-sync.png" title="'ReactDOM Fiber Sync'" ></p>
+<p><img src="https://blog.koba04.com/images/posts/a-state-of-react-fiber/ReactDOMFiber-sync.png" title="'ReactDOM Fiber Sync'" ></p>
 
 <p>下記は同じ処理を非同期で実行したスタックです。
 スタックが途切れ途切れになっていることがわかります。そのためUIをブロックしません。
 右端にある細いスタックはcommitWorkによるものです。
 Renderingの処理はcommitWorkの以降でだけ発生していることがわかります。</p>
 
-<p><img src="http://blog.koba04.com/images/posts/a-state-of-react-fiber/ReactDOMFiber-async.png" title="'ReactDOM Fiber Async'" ></p>
+<p><img src="https://blog.koba04.com/images/posts/a-state-of-react-fiber/ReactDOMFiber-async.png" title="'ReactDOM Fiber Async'" ></p>
 
 <p>このとき、HostのViewに反映するといった副作用をこのbeginWork〜completeWorkの中で行わないというのは1つのポイントです。
 例えば、Viewへの反映をこの非同期処理の中で行ってしまうと、Viewが部分部分更新される形になり、UIがガタガタしてしまいます。
@@ -2726,9 +2726,9 @@ React Fiberになることで、これまで同期的にツリーを処理して
   
   <entry>
     <title type="html"><![CDATA[React v15.5(6) and v16]]></title>
-    <link href="http://blog.koba04.com/post/2017/04/14/react-dot-js-v155-and-v16/"/>
+    <link href="https://blog.koba04.com/post/2017/04/14/react-dot-js-v155-and-v16/"/>
     <updated>2017-04-14T14:00:05+09:00</updated>
-    <id>http://blog.koba04.com/post/2017/04/14/react-dot-js-v155-and-v16</id>
+    <id>https://blog.koba04.com/post/2017/04/14/react-dot-js-v155-and-v16</id>
     <content type="html"><![CDATA[<p>Reactのv15.5がリリースされたので、v15.5での変更点とv16についてのまとめです。</p>
 
 <ul>
@@ -2924,7 +2924,7 @@ Perfに変わる何かについては検討されるので、将来的に何か�
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">react@next and react-dom@next are flat bundles! 👀 <a href="https://twitter.com/hashtag/reactjs?src=hash">#reactjs</a> <a href="https://t.co/5ezjjf08sd">pic.twitter.com/5ezjjf08sd</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/850180571653222400">April 7, 2017</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>これにより、初期ロード時間の短縮やサーバーサイドでのパフォーマンスの向上が見込まれています。
@@ -2944,9 +2944,9 @@ Perfに変わる何かについては検討されるので、将来的に何か�
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.12]]></title>
-    <link href="http://blog.koba04.com/post/2016/09/30/reactjs-links-vol12/"/>
+    <link href="https://blog.koba04.com/post/2016/09/30/reactjs-links-vol12/"/>
     <updated>2016-09-30T14:00:10+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/09/30/reactjs-links-vol12</id>
+    <id>https://blog.koba04.com/post/2016/09/30/reactjs-links-vol12</id>
     <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
 
 <!-- more -->
@@ -3039,9 +3039,9 @@ Reduxについての実際に作った人たちの考えが説明されている
   
   <entry>
     <title type="html"><![CDATA[React.js meetup #4]]></title>
-    <link href="http://blog.koba04.com/post/2016/09/30/reactjs-meetup-vol4/"/>
+    <link href="https://blog.koba04.com/post/2016/09/30/reactjs-meetup-vol4/"/>
     <updated>2016-09-30T13:56:56+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/09/30/reactjs-meetup-vol4</id>
+    <id>https://blog.koba04.com/post/2016/09/30/reactjs-meetup-vol4</id>
     <content type="html"><![CDATA[<p>前回が2月だったので約半年振りですが、React.js meetup #4を開催しました。</p>
 
 <ul>
@@ -3054,7 +3054,7 @@ Reduxについての実際に作った人たちの考えが説明されている
 <blockquote class="twitter-tweet" data-lang="en"><p lang="ja" dir="ltr">たくさんの方に参加してもらって感謝！！ <a href="https://twitter.com/hashtag/reactjs_meetup?src=hash">#reactjs_meetup</a> <a href="https://t.co/1tTO5gKDxP">pic.twitter.com/1tTO5gKDxP</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/780747386251415552">September 27, 2016</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>今回も、前回同様にサイボウズさんに会場を提供して頂き開催することができました。
@@ -3095,7 +3095,7 @@ Twitterのpollを見る感じでも、抽選の方がよさそうですね。</p
 <blockquote class="twitter-tweet" data-lang="en"><p lang="ja" dir="ltr">ちなみに次回 <a href="https://twitter.com/hashtag/reactjs_meetup?src=hash">#reactjs_meetup</a> やるとしたら、募集方法は抽選と先着のどちらがいいですか？</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/780705408335753222">September 27, 2016</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <h2>React.js meetupについて</h2>
@@ -3129,7 +3129,7 @@ Twitterのpollを見る感じでも、抽選の方がよさそうですね。</p
 <blockquote class="twitter-tweet" data-lang="en"><p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/reactjs_meetup?src=hash">#reactjs_meetup</a> <br>yield pizza;<br><br>とのこと <a href="https://t.co/RDGQgcMKsz">pic.twitter.com/RDGQgcMKsz</a></p>&mdash; Yosuke FURUKAWA (@yosuke_furukawa) <a href="https://twitter.com/yosuke_furukawa/status/780737219464007682">September 27, 2016</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <h2>次回？</h2>
@@ -3143,9 +3143,9 @@ Twitterのpollを見る感じでも、抽選の方がよさそうですね。</p
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.11]]></title>
-    <link href="http://blog.koba04.com/post/2016/09/07/reactjs-links-vol11d/"/>
+    <link href="https://blog.koba04.com/post/2016/09/07/reactjs-links-vol11d/"/>
     <updated>2016-09-07T19:26:04+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/09/07/reactjs-links-vol11d</id>
+    <id>https://blog.koba04.com/post/2016/09/07/reactjs-links-vol11d</id>
     <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
 
 <!-- more -->
@@ -3246,9 +3246,9 @@ Reactの思想などについて語られていて、面白いです。</p>
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.10]]></title>
-    <link href="http://blog.koba04.com/post/2016/08/10/react-dot-js-links-vol-dot-10/"/>
+    <link href="https://blog.koba04.com/post/2016/08/10/react-dot-js-links-vol-dot-10/"/>
     <updated>2016-08-10T14:09:19+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/08/10/react-dot-js-links-vol-dot-10</id>
+    <id>https://blog.koba04.com/post/2016/08/10/react-dot-js-links-vol-dot-10</id>
     <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。
 10回目!!!</p>
 
@@ -3441,9 +3441,9 @@ TDDの流れに沿って順番にテストを書いていく方法が丁寧に�
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.9]]></title>
-    <link href="http://blog.koba04.com/post/2016/07/21/react-dot-js-links-vol-dot-9/"/>
+    <link href="https://blog.koba04.com/post/2016/07/21/react-dot-js-links-vol-dot-9/"/>
     <updated>2016-07-21T19:38:19+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/07/21/react-dot-js-links-vol-dot-9</id>
+    <id>https://blog.koba04.com/post/2016/07/21/react-dot-js-links-vol-dot-9</id>
     <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
 
 <!-- more -->
@@ -3567,9 +3567,9 @@ alpha.1から結構経ってますがそろそろ出そうですね。</p>
   
   <entry>
     <title type="html"><![CDATA[A brief note of ReactEurope2016 sessions]]></title>
-    <link href="http://blog.koba04.com/post/2016/07/15/a-brief-note-of-reacteurope2016-sessions/"/>
+    <link href="https://blog.koba04.com/post/2016/07/15/a-brief-note-of-reacteurope2016-sessions/"/>
     <updated>2016-07-15T14:56:46+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/07/15/a-brief-note-of-reacteurope2016-sessions</id>
+    <id>https://blog.koba04.com/post/2016/07/15/a-brief-note-of-reacteurope2016-sessions</id>
     <content type="html"><![CDATA[<p>ReactEurope 2016に行ってきて、改めてメインのTalkの動画を一通り見たので、一言解説を。</p>
 
 <p><a href="https://www.react-europe.org/">https://www.react-europe.org/</a></p>
@@ -3968,9 +3968,9 @@ JavaScriptではMutablityがデフォルトなので、Immutablityが複雑な�
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.8]]></title>
-    <link href="http://blog.koba04.com/post/2016/06/23/react-dot-js-links-vol-dot-8/"/>
+    <link href="https://blog.koba04.com/post/2016/06/23/react-dot-js-links-vol-dot-8/"/>
     <updated>2016-06-23T13:33:36+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/06/23/react-dot-js-links-vol-dot-8</id>
+    <id>https://blog.koba04.com/post/2016/06/23/react-dot-js-links-vol-dot-8</id>
     <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
 
 <!-- more -->
@@ -4114,9 +4114,9 @@ JSXChildを拡張して<code>{...children}</code>を許容するようにする�
   
   <entry>
     <title type="html"><![CDATA[Immutable App ArchitectureについてのTalkを観た]]></title>
-    <link href="http://blog.koba04.com/post/2016/06/21/immutable-app-architecture/"/>
+    <link href="https://blog.koba04.com/post/2016/06/21/immutable-app-architecture/"/>
     <updated>2016-06-21T01:30:35+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/06/21/immutable-app-architecture</id>
+    <id>https://blog.koba04.com/post/2016/06/21/immutable-app-architecture</id>
     <content type="html"><![CDATA[<iframe src="https://player.vimeo.com/video/166790294" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 
@@ -4158,7 +4158,7 @@ JSXChildを拡張して<code>{...children}</code>を許容するようにする�
 
 <p>これらを踏まえて、Immutable App Architectureとして、下記の図のような構成を紹介しています。</p>
 
-<p><img src="http://blog.koba04.com/images/posts/immutable-app-architecture/immutable-app-architecture.png" title="'Immutable App Architecture'" ></p>
+<p><img src="https://blog.koba04.com/images/posts/immutable-app-architecture/immutable-app-architecture.png" title="'Immutable App Architecture'" ></p>
 
 <p>詳細については動画を見てほしいのですが下のような要素があります。
 Fluxについて聞いたことがあるとだいたいイメージできると思います。</p>
@@ -4192,7 +4192,7 @@ Mutationが前提になっていて、管理や最適化が難しいとしてい
 <p>Structural Sharingは、Immurable.jsなどで使われていて、変更があった箇所とその上位の要素だけを再作成して、その他は参照を付け替えるだけなので全体を毎回再生成しているわけではないということです。
 もちろん、Immutable.jsを使わなくても実装することは可能で、Reduxを使っている人にはおなじみだと思います。</p>
 
-<p><img src="http://blog.koba04.com/images/posts/immutable-app-architecture/structual-sharing.png" title="'Structural Sharing'" ></p>
+<p><img src="https://blog.koba04.com/images/posts/immutable-app-architecture/structual-sharing.png" title="'Structural Sharing'" ></p>
 
 <p>Immutableにすることにより、Memoizationなどの最適化のテクニックも適用しやすいとしています。</p>
 
@@ -4247,7 +4247,7 @@ Mutationが前提になっていて、管理や最適化が難しいとしてい
 
 <p>これにより、ネットワークリクエストが失敗した場合は、 <strong>Optimistic State</strong> から <strong>True State</strong> に戻せばいいだけなのでロールバックも簡単だとしています。</p>
 
-<p><img src="http://blog.koba04.com/images/posts/immutable-app-architecture/action-queue.png" title="'Action Queue'" ></p>
+<p><img src="https://blog.koba04.com/images/posts/immutable-app-architecture/action-queue.png" title="'Action Queue'" ></p>
 
 <p>それぞれ依存する<code>(State) =&gt; State, Promise&lt;State&gt;</code>のActionが複数Queueに積まれた時にどう処理するのかなど細かい不明な点はありますが、こんな感じだと思います。</p>
 
@@ -4266,11 +4266,11 @@ Action毎に作成されます。</p>
 
 <p>Plainなオブジェクト（JavaでいうPOJO）であることを推奨しています（JSの場合はImmutable.jsのデータ構造の場合も）。</p>
 
-<p><img src="http://blog.koba04.com/images/posts/immutable-app-architecture/immutable-app-model.png" title="'Model'" ></p>
+<p><img src="https://blog.koba04.com/images/posts/immutable-app-architecture/immutable-app-model.png" title="'Model'" ></p>
 
 <h2>まとめ</h2>
 
-<p><img src="http://blog.koba04.com/images/posts/immutable-app-architecture/immutable-app-architecture.png" title="'Immutable App Architecture'" ></p>
+<p><img src="https://blog.koba04.com/images/posts/immutable-app-architecture/immutable-app-architecture.png" title="'Immutable App Architecture'" ></p>
 
 <p>上記のように構成されるImmutable App Architectureは <strong>Pure Function</strong>、<strong>Immutability</strong>、<strong>Composition</strong> を組み合わせた <strong>Composition of Simple Elements</strong> だとしています。
 Immutable App ArchitectureはFacebookのアプリでも使われていてフィットしているとのことです。</p>
@@ -4295,9 +4295,9 @@ Immutable App ArchitectureはFacebookのアプリでも使われていてフィ�
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.7]]></title>
-    <link href="http://blog.koba04.com/post/2016/06/16/reactjs-links-vol7/"/>
+    <link href="https://blog.koba04.com/post/2016/06/16/reactjs-links-vol7/"/>
     <updated>2016-06-16T13:33:36+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/06/16/reactjs-links-vol7</id>
+    <id>https://blog.koba04.com/post/2016/06/16/reactjs-links-vol7</id>
     <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
 
 <!-- more -->
@@ -4462,9 +4462,9 @@ mergeされそうな雰囲気?</p>
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.6 5/19〜5/27]]></title>
-    <link href="http://blog.koba04.com/post/2016/05/27/reactjs-links-vol6/"/>
+    <link href="https://blog.koba04.com/post/2016/05/27/reactjs-links-vol6/"/>
     <updated>2016-05-27T19:04:55+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/05/27/reactjs-links-vol6</id>
+    <id>https://blog.koba04.com/post/2016/05/27/reactjs-links-vol6</id>
     <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
 
 <!-- more -->
@@ -4578,9 +4578,9 @@ Markdownなんかも使えるようです。</p>
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.5 5/12〜5/18]]></title>
-    <link href="http://blog.koba04.com/post/2016/05/18/reactjs-links-vol5/"/>
+    <link href="https://blog.koba04.com/post/2016/05/18/reactjs-links-vol5/"/>
     <updated>2016-05-18T23:27:34+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/05/18/reactjs-links-vol5</id>
+    <id>https://blog.koba04.com/post/2016/05/18/reactjs-links-vol5</id>
     <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
 
 <!-- more -->
@@ -4717,9 +4717,9 @@ ReactNativeのinternalやJSSの話もあったりして色々面白そうです�
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.4 4/29〜5/11]]></title>
-    <link href="http://blog.koba04.com/post/2016/05/11/reactjs-links-vol4/"/>
+    <link href="https://blog.koba04.com/post/2016/05/11/reactjs-links-vol4/"/>
     <updated>2016-05-11T18:41:13+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/05/11/reactjs-links-vol4</id>
+    <id>https://blog.koba04.com/post/2016/05/11/reactjs-links-vol4</id>
     <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
 
 <!-- more -->
@@ -4860,9 +4860,9 @@ Storeとなるクラスの値をobservableにして、Compnentがobserveとな�
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.3 4/20〜4/28]]></title>
-    <link href="http://blog.koba04.com/post/2016/04/28/reactjs-links-vol3/"/>
+    <link href="https://blog.koba04.com/post/2016/04/28/reactjs-links-vol3/"/>
     <updated>2016-04-28T19:19:19+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/04/28/reactjs-links-vol3</id>
+    <id>https://blog.koba04.com/post/2016/04/28/reactjs-links-vol3</id>
     <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
 
 <!-- more -->
@@ -5054,9 +5054,9 @@ Reactと組み合わせることが想定されているようで、Reactとbind
   
   <entry>
     <title type="html"><![CDATA[Podcasts I'm listening]]></title>
-    <link href="http://blog.koba04.com/post/2016/04/21/podcasts-im-listening/"/>
+    <link href="https://blog.koba04.com/post/2016/04/21/podcasts-im-listening/"/>
     <updated>2016-04-21T18:39:19+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/04/21/podcasts-im-listening</id>
+    <id>https://blog.koba04.com/post/2016/04/21/podcasts-im-listening</id>
     <content type="html"><![CDATA[<p>以前Qiitaで少し書きましたが、最近聴いている英語のPodcastの一覧のメモ。
 日本語だとRebuild.fmとかmozaic.fmとかを聴いてますがまぁ言うまでもないので。</p>
 
@@ -5199,9 +5199,9 @@ Softとある通り、tech以外の話題を取り上げているPodcastです�
   
   <entry>
     <title type="html"><![CDATA[React.js Links vol.2 4/15〜4/19]]></title>
-    <link href="http://blog.koba04.com/post/2016/04/19/reactjs-links-vol2/"/>
+    <link href="https://blog.koba04.com/post/2016/04/19/reactjs-links-vol2/"/>
     <updated>2016-04-19T19:19:19+09:00</updated>
-    <id>http://blog.koba04.com/post/2016/04/19/reactjs-links-vol2</id>
+    <id>https://blog.koba04.com/post/2016/04/19/reactjs-links-vol2</id>
     <content type="html"><![CDATA[<p>これはReactに関する記事や気になるissueなどのリンクを紹介する記事です。</p>
 
 <!-- more -->

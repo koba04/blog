@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: self | blog.koba04.com]]></title>
-  <link href="http://blog.koba04.com/blog/categories/self/atom.xml" rel="self"/>
-  <link href="http://blog.koba04.com/"/>
-  <updated>2018-09-23T21:58:32+09:00</updated>
-  <id>http://blog.koba04.com/</id>
+  <link href="https://blog.koba04.com/blog/categories/self/atom.xml" rel="self"/>
+  <link href="https://blog.koba04.com/"/>
+  <updated>2018-09-24T20:28:20+09:00</updated>
+  <id>https://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Looking back 2014]]></title>
-    <link href="http://blog.koba04.com/post/2014/12/31/looking-back-2014/"/>
+    <link href="https://blog.koba04.com/post/2014/12/31/looking-back-2014/"/>
     <updated>2014-12-31T22:18:22+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/12/31/looking-back-2014</id>
+    <id>https://blog.koba04.com/post/2014/12/31/looking-back-2014</id>
     <content type="html"><![CDATA[<p>2014年の振り返りということで。</p>
 
 <h2>最初にまとめ</h2>
@@ -50,7 +50,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>日記書いた「GalaxyS4のWebviewでのCanvasがおかしい件の解決方法」 <a href="http://t.co/eTTS6RfXD1">http://t.co/eTTS6RfXD1</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/421568611971387392">January 10, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 
@@ -58,7 +58,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>2014年最初のエントリがAndroidの機種依存のバグ対応についてとかだいぶ前途多難感がある</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/421661190800936960">January 10, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>新年早々、Androidのバグに遭遇していたようです。</p>
@@ -66,7 +66,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>“Introduction to React // Speaker Deck” <a href="http://t.co/X5ea2haYgQ">http://t.co/X5ea2haYgQ</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/425472004771172352">January 21, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>一応React.jsについては見ていたみたいですがこの時点ではスルーしていたようです。</p>
@@ -74,7 +74,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>日記書いた「Marionette.js in Single Page Applicationという話をした」 <a href="http://t.co/yEF0uQYo25">http://t.co/yEF0uQYo25</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/425574026891624448">January 21, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>Marionette.jsについて社内勉強会で話したみたいです。</p>
@@ -82,7 +82,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>ライトなMVVMのフレームワークかな / “vue.js” <a href="http://t.co/AeqbyAt5AZ">http://t.co/AeqbyAt5AZ</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/430502612278841344">February 4, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>vue.jsについても興味を持っていたようです。</p>
@@ -90,7 +90,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>node-webkitってそういうことだったのか。名前だけでPhantomJSみたいなもんだと思ってたｗ</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/430707052223012865">February 4, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>node-webkitについて認識したようです。</p>
@@ -98,7 +98,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>日記書いた「さようならはてなダイアリー、ありがとうはてなダイアリー」 <a href="http://t.co/CjACcmDF4Q">http://t.co/CjACcmDF4Q</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/440140794402316288">March 2, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>はてなダイアリーから移行しました。</p>
@@ -106,7 +106,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>posted blog “npmとbowerライブラリのバージョン管理” <a href="http://t.co/eRxP3dMo8S">http://t.co/eRxP3dMo8S</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/440528560424353792">March 3, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>npmの依存性の解決とかどうなるのって思って書いたエントリーです。npm-shrinkwrap教えてもらいました。</p>
@@ -114,7 +114,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>testem、ファイルが増えてくると最初の立ち上げがものすごく遅くなるし、specまとめると毎回の起動が遅くなるしどうしたらいいの....</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/441906651063271424">March 7, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>testemが辛くなってきたようです。</p>
@@ -122,7 +122,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>browserify、よくわからなくて面白い。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/446090322280329216">March 19, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>browserifyについて興味を持ったようですがよくわかってないようです。</p>
@@ -130,7 +130,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>node-webkitやっぱ面白いなぁ</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/446283446894071810">March 19, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>node-webkitに興味を持っているようです。</p>
@@ -138,7 +138,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>Posted new entry &quot;browserify in Backbone.Marionette project&quot; <a href="http://t.co/ALM8atVdRZ">http://t.co/ALM8atVdRZ</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/447875601546768384">March 23, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>browserifyを試しているみたいです。</p>
@@ -146,7 +146,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>node-webkitはscriptタグで読み込んだ時はwindowのcontextでrequireした先はnodeのcontextになるのか。だからvue.jsみたいなrequireでdocument参照してるライブラリ読み込むとエラーになるのかー。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/449169127077212162">March 27, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>node-webkitのcontextの扱いについて悩んでいるようです。</p>
@@ -154,7 +154,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>フロント側、開発効率を上げつつyak率を抑えるバランスが難しい</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/449555088327979009">March 28, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>色々フロントエンドで取り入れていてちょっとやり過ぎ感を感じているようです。</p>
@@ -162,7 +162,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>espowerifyも出たから次のテストはpower-assertで書いてみよう</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/450447992416264192">March 31, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>power-assertで書くことを決めたようです。</p>
@@ -170,7 +170,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>Uターンして株式会社はてなに入社したい</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/450803394756628480">April 1, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>何故かはてなに入社したいと思っていたようです。</p>
@@ -178,7 +178,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>semver運動もいいけど、changelog設置しよう運動もお願いしたいところ</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/454283994981359617">April 10, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>changelogなくて辛かったらしい。</p>
@@ -186,7 +186,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>Webサイト的なものを作る時にフロントのJavaScriptどうするか大変悩ましい。SEO的に。AjaxSEO(なんて括るのかわからん)みたいなサービス使うだけでいいならだいぶ楽だけど。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/455678860760068098">April 14, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>SPAでのSEOについてどうすんのと考えていたらしい。仕事はSEO関係ない世界でやってたけど。</p>
@@ -194,7 +194,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>はぁ、やっとVue.jsのGuideとAPIのところ読み終わった。。スライドにでもまとめるかな・・・ <a href="https://t.co/AJ1FOq7LEl">https://t.co/AJ1FOq7LEl</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/455726759502041088">April 14, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>vue.jsのドキュメントを読んでいたようです。</p>
@@ -202,7 +202,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>イベントの実装、既存の機能をどんどん汚していくような感じになってツライ</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/456374359867678720">April 16, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>イベントの実装で悩んでいたらしい。</p>
@@ -210,7 +210,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>ブログ書いた「Reusable components by Vue.js and Browserify」 <a href="http://t.co/DRjEtoEYkK">http://t.co/DRjEtoEYkK</a> ちょっとタイトルと内容が違うけど、、。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/456570783368622080">April 16, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>この辺りからComponentを意識し始めていたみたい。</p>
@@ -218,7 +218,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>わーい、Vue.jsの作者に日本語でありがとうって言われた！(translateではないけど・・) <a href="https://t.co/dwTXDGZttT">https://t.co/dwTXDGZttT</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/456628489991360512">April 17, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>承認欲求が満たされたみたい。</p>
@@ -226,7 +226,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>nodeでフロントにサーバー立てる構成ちょっとやってみたい</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/456792479337951232">April 17, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>これはずっと思ってる。</p>
@@ -234,7 +234,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>答えたい質問があったのでstackoverflowに登録した</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/456952402441027584">April 18, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>stackoverflowデビュー。確かvue.jsについての質問に答えた。</p>
@@ -242,7 +242,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>ロシア語とかで面白そうな記事を見たりすると、日本語じゃなくて英語で書こうかなーとかちょっと思ったりするけど、そうすると(英語が酷すぎて)誰も読めなくなるので自重してる。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/458518498189127680">April 22, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>英語力の低さを嘆いてる。</p>
@@ -250,7 +250,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>2050年になったらコケるテスト書いた</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/458873755385593856">April 23, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>罠を仕込んだ。</p>
@@ -258,7 +258,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>ついに「iTunes Match 終わらない」でググってしまった…</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/464030008843849728">May 7, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>iTunes Matchに消耗してた。</p>
@@ -266,7 +266,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>子育てエンジニア飲み会を企画してやろうかなという気分になってる。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/465717911856750592">May 12, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>今年こそは！</p>
@@ -274,7 +274,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>Angular.js、いつまで経ってもfactoryとserviceとproviderの違いについてのpostがいっぱい出てくるので見直した方がいいのでは感ある。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/466451268232564736">May 14, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>はい。</p>
@@ -282,7 +282,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>続きを読むにはイイねをみたい記事、HTTPリクエストの無駄だから滅んでほしい。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/470899883998601216">May 26, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>マジで。</p>
@@ -290,7 +290,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>これ、ものすごい大事な発表やんか。 / “Google ウェブマスター向け公式ブログ: ウェブページをより深く理解するようになりました” <a href="http://t.co/4CeKj7De5D">http://t.co/4CeKj7De5D</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/470935988789723136">May 26, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>Googleだけどうにか出来ればいいわけではないけど、大きな一歩。</p>
@@ -298,7 +298,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>node-webkitのwikiのTOPに&quot;I know most of you just don&#39;t read documentations&quot; て書いてあるｗ</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/471304537404219394">May 27, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>www</p>
@@ -306,7 +306,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>メモリリークしてるコード見つけるとテンションがあがる。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/472296743074148352">May 30, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>メモリリークを探していたようです。</p>
@@ -314,7 +314,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>1人で子ども2人の面倒見ながらのalert対応、だいぶ厳しい感ある。見れるけどコード書けない。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/472633096718651393">May 31, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>子どもはキーボードが大好き。</p>
@@ -322,7 +322,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>&quot;Mithril and React use virtual DOM diffing &quot; 気になる。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/473975523194847232">June 3, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>Virtual DOMにも興味を持っていたようです。</p>
@@ -330,7 +330,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>HTTP 1.1での最適化がHTTP 2.0だと悪影響になるって面白いな。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/474884509242904576">June 6, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>ハイパフォーマンスブラウザネットワーキングを読んでいたようです。</p>
@@ -338,7 +338,7 @@
 <blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/hashtag/%E6%9A%87?src=hash">#暇</a> <a href="http://t.co/DSt4esbPDh">pic.twitter.com/DSt4esbPDh</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/476382524105424896">June 10, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>暇だったらしい。</p>
@@ -346,7 +346,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>レビューを指名制から出来る人が取る方式に変えてみたけどうまくいくかなー。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/477033635086745600">June 12, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>レビューをうまく回したかったらしい。</p>
@@ -354,7 +354,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>Marionette 2.0 release notes in Japanese&#10;&#10;<a href="http://t.co/VLItT4JDHy">http://t.co/VLItT4JDHy</a>&#10;&#10;Thanks <a href="https://twitter.com/koba04">@koba04</a></p>&mdash; Backbone.Marionette (@marionettejs) <a href="https://twitter.com/marionettejs/status/479635101555638272">June 19, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>紹介されて嬉しかった。</p>
@@ -362,7 +362,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>Karmaについて書いた。 &quot;Karma for JavaScript test runner&quot; <a href="http://t.co/yS5YW4xHgz">http://t.co/yS5YW4xHgz</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/481220465571024897">June 23, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>testemからKarmaに移行したようです。</p>
@@ -370,7 +370,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>Vue.jsもくもく会 <a href="https://twitter.com/hashtag/2%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%99?src=hash">#2に参加します</a>！ vue.js bookの続きを書かねば... <a href="http://t.co/M4jZZR34kY">http://t.co/M4jZZR34kY</a> <a href="https://twitter.com/hashtag/vuejs_mkmk?src=hash">#vuejs_mkmk</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/482535242687709184">June 27, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>Vue.jsもくもく会にも参加してた。途中から行けなくなってしまったけど&hellip;。</p>
@@ -378,7 +378,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>そういえばVue.jsのEvanからいきなりメール来てビビったんだけど、Vue.jsで改善したい項目あれば教えてもらえれば伝えておきますよ。日本人の意見も聞きたいらしい。 このissueに書いてもよさそうだけど。 <a href="https://t.co/nr0fA4xGYZ">https://t.co/nr0fA4xGYZ</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/483422819053621248">June 30, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>Evanからメール来て残念な英語でメールを返信した。</p>
@@ -386,7 +386,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>英語で文章書くの時間掛かるし、issueみたいなのじゃなくて考え説明するの伝わる気がしない…</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/483603220304896002">June 30, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>英語力&hellip;。</p>
@@ -394,7 +394,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>Reactかぁー見てみよう / “Atom Blog” <a href="http://t.co/eNzaWCXkur">http://t.co/eNzaWCXkur</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/484547742782337024">July 3, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>React.jsを調べてみようと思ったタイミングです。</p>
@@ -402,7 +402,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>今日は天下一クライアントサイドJS MV\*フレームワーク武道会でLTとパネルやります！ドキドキ... <a href="http://t.co/oI5ae94l3f">http://t.co/oI5ae94l3f</a> <a href="https://twitter.com/hashtag/ten1club?src=hash">#ten1club</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/487529507675320321">July 11, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>JS関連で初めて外で話したイベント。</p>
@@ -410,7 +410,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>VirtualDOM難しい…。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/492309911032713216">July 24, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>Virtual DOMの何が難しかったのだろうか&hellip;。</p>
@@ -418,7 +418,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>ZombieView見つけて直すの楽しい</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/494411375251177472">July 30, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>ZombieViewを退治してようです。</p>
@@ -426,7 +426,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>面白い話がいっぱい聞けると思うので是非来て下さい！ / “今年のYAPC前夜祭は「Webアプリ10連発」！ - YAPC::Asia Tokyo 2014” <a href="http://t.co/5RxK36NsNG">http://t.co/5RxK36NsNG</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/499040965420519426">August 12, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>YAPCの前夜祭の手伝いをしていたみたいです。</p>
@@ -434,7 +434,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>最近Reactのドキュメントをちょいちょい読んでる</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/501892377544364032">August 20, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>React.jsのドキュメント読み始めてる。</p>
@@ -442,7 +442,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>誰も幸せにならない感じのソースを久々に見た</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/502612257977954306">August 22, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>何だろう。気になる&hellip;。</p>
@@ -450,7 +450,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>「よし、次のプロジェクトではReact使うぞ！」って言って嫌な顔されたい</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/502612835009318912">August 22, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>React.js気に入ってるみたい。</p>
@@ -458,7 +458,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>いやー、typesterさんの話、本当によかった。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/505672825202434048">August 30, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>YAPCのtypesterさんの話よかった。</p>
@@ -466,7 +466,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>isomorphicを実現するためにReactを使うの盛り上がっていきそうだな。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/509487375710289920">September 9, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>isomorphicにも興味を持っているようです。</p>
@@ -474,7 +474,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>社内で話したやつ(ちょっと手を加えたけど) <a href="http://t.co/bMAObYgQfa">http://t.co/bMAObYgQfa</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/516458323579637761">September 29, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>冠詞がないとご指摘頂きました。</p>
@@ -482,7 +482,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>React.jsについてのスライド書いた <a href="https://t.co/AxCEVstmfb">https://t.co/AxCEVstmfb</a> <a href="https://twitter.com/hashtag/reactjs?src=hash">#reactjs</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/516812116783661056">September 30, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>React.jsについてまとめてる。</p>
@@ -490,7 +490,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>中学英語〜みたいな本読んだら前より英語わかるようになったのでどうやら中学レベルの英語力らしい。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/519309644871630848">October 7, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>中学レベルの英語力です。</p>
@@ -498,7 +498,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>雑にVue.js v0.11での変更点まとめた(個人のメモレベル) 「Vue.js v0.11の変更点(予定)まとめ」 <a href="http://t.co/OSu4sTayFa">http://t.co/OSu4sTayFa</a> <a href="https://twitter.com/hashtag/vuejs?src=hash">#vuejs</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/519371264226373633">October 7, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>個人のメモレベルって書いてるのは逃げですね。</p>
@@ -506,7 +506,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>そっか、podcastもscrobblingされるのか <a href="http://t.co/Gy4GgRhP8I">pic.twitter.com/Gy4GgRhP8I</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/519661300113080322">October 8, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>BeckとNUMBER GIRLの間にmiyagawaさんがいる。</p>
@@ -514,7 +514,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>ヨセミテった</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/523022191332323330">October 17, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>ヨセミテにしたらしい。</p>
@@ -522,7 +522,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>What is song used by JavaScript Jabber?</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/524365178595311616">October 21, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>JavaScript Jabberの曲が気になっている。これも冠詞ないな&hellip;。</p>
@@ -530,7 +530,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>家族増えると帰省するだけでめっちゃお金掛かるようになる</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/524462349533446146">October 21, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>知見です。</p>
@@ -538,7 +538,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>koaのworkshopやったついでにtypoとか直しておいた。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/524766543591112704">October 22, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>何故かこのタイミングでkoaのworkshopやってた。</p>
@@ -546,7 +546,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>JSONをサーバーとフロント側で安全に共有する on <a href="https://twitter.com/Qiita">@Qiita</a> <a href="http://t.co/hzJHzaU7m0">http://t.co/hzJHzaU7m0</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/525185306249539584">October 23, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>結構XSS出来そうなサンプル実装が多かったので書いてみた。</p>
@@ -554,7 +554,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>達人出版会さん、kindleフォーマットも欲しいです…。変換するの面倒なので…。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/525666150500151297">October 24, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>お願いします&hellip;。</p>
@@ -562,7 +562,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>現状です。 &quot;Joining TOLOT&quot; <a href="http://t.co/8udQFUqVs0">http://t.co/8udQFUqVs0</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/531595354605514752">November 9, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>転職したようです。</p>
@@ -570,7 +570,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>めっちゃAWSのドキュメント読んでる</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/531726245336084480">November 10, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>AWSについて調べているみたいです。</p>
@@ -578,7 +578,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>知らないことに囲まれて、hubotのscript書くことに逃避しかけてた。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/531752267557244928">November 10, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twipt async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twipt async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>逃避です。</p>
@@ -586,7 +586,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>JSのテスト、mochaとpower-assertでファイナルアンサー感ある。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/532529669262675970">November 12, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>この組み合わせはいいと思う。</p>
@@ -594,7 +594,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>とりあえずVDOMとJavaScriptのAdventCalendarには登録しておいた</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/532690253459378176">November 13, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>Advent Calendar、この時はReact.jsの書くかまだ悩んでた。</p>
@@ -602,7 +602,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>Om試さないとな</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/534370157565460480">November 17, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>Omは来年触る。(多分&hellip;)</p>
@@ -610,7 +610,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>React.jsのAdventCalendar書くぞ！！！ <a href="http://t.co/z8ecrLvoSx">http://t.co/z8ecrLvoSx</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/537979299244937216">November 27, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>勢い大事。</p>
@@ -618,7 +618,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>Reactのドキュメント読んでたら間違ってたので直しておいた</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/539554749603803137">December 1, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>documentのfixだけど、contributeしておいた。</p>
@@ -626,7 +626,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>Utilsとかって名前、負けてる感あって好きじゃないんだよなー。実際のprojectに作るとなんでもそこに入ってくるし。</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/541852742822543361">December 8, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>Util問題。(これは多分Fluxの実装見て言ってる)</p>
@@ -634,7 +634,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>子連れのAdventCalendar書いておいた</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/542703997685997568">December 10, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>React.jsのAdvent Calendarの息抜きに書いた。</p>
@@ -642,7 +642,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>.<a href="https://twitter.com/ama_ch">@ama_ch</a> コメント書きました！ <a href="https://t.co/1OAwiHkOdt">https://t.co/1OAwiHkOdt</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/545241754752909312">December 17, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>呼ばれたので答えた。</p>
@@ -650,7 +650,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>The Get Up Kidsはエモい</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/545837308503543809">December 19, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>エモい is&hellip;</p>
@@ -658,7 +658,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>私のJavaScript情報の集め方 on <a href="https://twitter.com/Qiita">@Qiita</a> <a href="http://t.co/UoRg6MHPIh">http://t.co/UoRg6MHPIh</a></p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/547248396835123201">December 23, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>さくっと書いたら意外とストックされた。</p>
@@ -666,7 +666,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>React.js Advent Calendar全部のストック数とさくっと書いた情報の集め方1つの記事のストック数がほぼ同じという現実…</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/547914405963247617">December 25, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>これな。</p>
@@ -674,7 +674,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>一人React.js Advent Calendarお疲れ様でした！</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/547989651219152898">December 25, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>他のAdvent Calendarで言ってたら一人だけど言ったら意外と反応もらえて嬉しかった。</p>
@@ -682,7 +682,7 @@
 <blockquote class="twitter-tweet" lang="en"><p>来年 <a href="https://twitter.com/hashtag/reactsushi?src=hash">#reactsushi</a> いくぞ！！</p>&mdash; Toru Kobayashi (@koba04) <a href="https://twitter.com/koba04/status/548023404238880768">December 25, 2014</a></blockquote>
 
 
-<script async src="http://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async src="https://blog.koba04.com//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <p>いくぞ！</p>
@@ -695,9 +695,9 @@
   
   <entry>
     <title type="html"><![CDATA[Joining TOLOT]]></title>
-    <link href="http://blog.koba04.com/post/2014/11/08/joining-tolot/"/>
+    <link href="https://blog.koba04.com/post/2014/11/08/joining-tolot/"/>
     <updated>2014-11-08T23:19:00+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/11/08/joining-tolot</id>
+    <id>https://blog.koba04.com/post/2014/11/08/joining-tolot</id>
     <content type="html"><![CDATA[<p>11月から<a href="http://tolot.com/">TOLOT</a>で働いています。</p>
 
 <p><a href="http://tolot.com/">http://tolot.com/</a></p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: book | blog.koba04.com]]></title>
-  <link href="http://blog.koba04.com/blog/categories/book/atom.xml" rel="self"/>
-  <link href="http://blog.koba04.com/"/>
-  <updated>2018-09-23T21:58:32+09:00</updated>
-  <id>http://blog.koba04.com/</id>
+  <link href="https://blog.koba04.com/blog/categories/book/atom.xml" rel="self"/>
+  <link href="https://blog.koba04.com/"/>
+  <updated>2018-09-24T20:28:20+09:00</updated>
+  <id>https://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[「Yコンビネーター シリコンバレー最強のスタートアップ養成スクール」を読んだ]]></title>
-    <link href="http://blog.koba04.com/post/2014/07/25/book-review-of-the-launch-pad/"/>
+    <link href="https://blog.koba04.com/post/2014/07/25/book-review-of-the-launch-pad/"/>
     <updated>2014-07-25T00:06:17+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/07/25/book-review-of-the-launch-pad</id>
+    <id>https://blog.koba04.com/post/2014/07/25/book-review-of-the-launch-pad</id>
     <content type="html"><![CDATA[<p>37Signals本を読んだりしていて、たまたま本屋でこの本を発見して読んでみました。</p>
 
 <p>Yコンビネーターは「ハッカーと画家」やLispプログラマーとしても有名なポール・グレアムがやっているスタートアップを支援する組織で、この本はそこに集まった起業家が3ヶ月後のデモ・デーに挑むまでのドキュメンタリーが中心の内容になっています。</p>
@@ -69,9 +69,9 @@
   
   <entry>
     <title type="html"><![CDATA[Webアプリエンジニア養成読本を読んだ]]></title>
-    <link href="http://blog.koba04.com/post/2014/05/01/book-review-of-webapp-mook/"/>
+    <link href="https://blog.koba04.com/post/2014/05/01/book-review-of-webapp-mook/"/>
     <updated>2014-05-01T23:36:44+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/05/01/book-review-of-webapp-mook</id>
+    <id>https://blog.koba04.com/post/2014/05/01/book-review-of-webapp-mook</id>
     <content type="html"><![CDATA[<p><a href="http://www.amazon.co.jp/dp/4774163678?">Webアプリエンジニア養成読本</a></p>
 
 <h2>全体の感想</h2>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: es6 | blog.koba04.com]]></title>
-  <link href="http://blog.koba04.com/blog/categories/es6/atom.xml" rel="self"/>
-  <link href="http://blog.koba04.com/"/>
-  <updated>2018-09-23T21:58:32+09:00</updated>
-  <id>http://blog.koba04.com/</id>
+  <link href="https://blog.koba04.com/blog/categories/es6/atom.xml" rel="self"/>
+  <link href="https://blog.koba04.com/"/>
+  <updated>2018-09-24T20:28:20+09:00</updated>
+  <id>https://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A combination of React.js and 6to5]]></title>
-    <link href="http://blog.koba04.com/post/2015/01/13/a-combination-of-reactjs-and-6to5/"/>
+    <link href="https://blog.koba04.com/post/2015/01/13/a-combination-of-reactjs-and-6to5/"/>
     <updated>2015-01-13T18:50:28+09:00</updated>
-    <id>http://blog.koba04.com/post/2015/01/13/a-combination-of-reactjs-and-6to5</id>
+    <id>https://blog.koba04.com/post/2015/01/13/a-combination-of-reactjs-and-6to5</id>
     <content type="html"><![CDATA[<p>In English article is <a href="http://en.blog.koba04.com/2015/02/04/a-combination-of-reactjs-and-6to5/">here</a>.</p>
 
 <p>今までは、react-toolsを使ってjsxのharmony optionを有効にして書くことで一部のES6のfeatureが使えて満足していたのですが、azuさんの記事を見て6to5を試したくなったのでReact.js + 6to5の組み合わせで書いてみました。</p>

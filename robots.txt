@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://blog.koba04.com/sitemap.xml 
+Sitemap: https://blog.koba04.com/sitemap.xml 

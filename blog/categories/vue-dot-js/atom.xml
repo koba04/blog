@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: vue.js | blog.koba04.com]]></title>
-  <link href="http://blog.koba04.com/blog/categories/vue-dot-js/atom.xml" rel="self"/>
-  <link href="http://blog.koba04.com/"/>
-  <updated>2018-09-23T21:58:32+09:00</updated>
-  <id>http://blog.koba04.com/</id>
+  <link href="https://blog.koba04.com/blog/categories/vue-dot-js/atom.xml" rel="self"/>
+  <link href="https://blog.koba04.com/"/>
+  <updated>2018-09-24T20:28:20+09:00</updated>
+  <id>https://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[vueifyでcomponent化]]></title>
-    <link href="http://blog.koba04.com/post/2014/10/07/component-by-vueify/"/>
+    <link href="https://blog.koba04.com/post/2014/10/07/component-by-vueify/"/>
     <updated>2014-10-07T15:29:06+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/10/07/component-by-vueify</id>
+    <id>https://blog.koba04.com/post/2014/10/07/component-by-vueify</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/vuejs/vueify">https://github.com/vuejs/vueify</a></p>
 
 <p>vueifyというVue.js用のbrowserifyのtransformが出てたので紹介。</p>
@@ -88,9 +88,9 @@ src
   
   <entry>
     <title type="html"><![CDATA[Vue.js v0.11の変更点(予定)まとめ]]></title>
-    <link href="http://blog.koba04.com/post/2014/10/07/vue-js-v011-changes/"/>
+    <link href="https://blog.koba04.com/post/2014/10/07/vue-js-v011-changes/"/>
     <updated>2014-10-07T13:04:51+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/10/07/vue-js-v011-changes</id>
+    <id>https://blog.koba04.com/post/2014/10/07/vue-js-v011-changes</id>
     <content type="html"><![CDATA[<p>Vue.js v0.11のrc版もリリースされて、v0.10からの変更点が多いのでchangesを参考にまとめてみました。</p>
 
 <p><strong> rc3がリリースされたので修正・追記しました </strong></p>
@@ -767,9 +767,9 @@ content: 'content-2'
   
   <entry>
     <title type="html"><![CDATA[Reusable components by Vue.js and Browserify]]></title>
-    <link href="http://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browserify/"/>
+    <link href="https://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browserify/"/>
     <updated>2014-04-17T01:27:24+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browserify</id>
+    <id>https://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browserify</id>
     <content type="html"><![CDATA[<p>最近Vue.jsについて調べたり試したりしていて、browserifyと組み合わせたexampleがなかなか興味深かったので参考に自分でも作ってみました。</p>
 
 <p>参考</p>

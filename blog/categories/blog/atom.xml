@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: blog | blog.koba04.com]]></title>
-  <link href="http://blog.koba04.com/blog/categories/blog/atom.xml" rel="self"/>
-  <link href="http://blog.koba04.com/"/>
-  <updated>2018-09-23T21:58:32+09:00</updated>
-  <id>http://blog.koba04.com/</id>
+  <link href="https://blog.koba04.com/blog/categories/blog/atom.xml" rel="self"/>
+  <link href="https://blog.koba04.com/"/>
+  <updated>2018-09-24T20:28:20+09:00</updated>
+  <id>https://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ブログ移行しました]]></title>
-    <link href="http://blog.koba04.com/post/2014/03/02/blog-renewal/"/>
+    <link href="https://blog.koba04.com/post/2014/03/02/blog-renewal/"/>
     <updated>2014-03-02T03:07:09+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/03/02/blog-renewal</id>
+    <id>https://blog.koba04.com/post/2014/03/02/blog-renewal</id>
     <content type="html"><![CDATA[<p>これまでははてなダイアリーでブログを書いていたのですが、ふと思い立ってブログを移行しました。</p>
 
 <p>旧ブログ: <a href="http://d.hatena.ne.jp/koba04/">http://d.hatena.ne.jp/koba04/</a></p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: YAPC | blog.koba04.com]]></title>
-  <link href="http://blog.koba04.com/blog/categories/yapc/atom.xml" rel="self"/>
-  <link href="http://blog.koba04.com/"/>
-  <updated>2018-09-23T21:58:32+09:00</updated>
-  <id>http://blog.koba04.com/</id>
+  <link href="https://blog.koba04.com/blog/categories/yapc/atom.xml" rel="self"/>
+  <link href="https://blog.koba04.com/"/>
+  <updated>2018-09-24T20:28:20+09:00</updated>
+  <id>https://blog.koba04.com/</id>
   <author>
     <name><![CDATA[koba04]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[YAPC::ASIA 2014の前夜祭をやった]]></title>
-    <link href="http://blog.koba04.com/post/2014/08/30/hold-yapc-asia-2014-eve/"/>
+    <link href="https://blog.koba04.com/post/2014/08/30/hold-yapc-asia-2014-eve/"/>
     <updated>2014-08-30T01:30:49+09:00</updated>
-    <id>http://blog.koba04.com/post/2014/08/30/hold-yapc-asia-2014-eve</id>
+    <id>https://blog.koba04.com/post/2014/08/30/hold-yapc-asia-2014-eve</id>
     <content type="html"><![CDATA[<p><a href="http://yapcasia.org/2014/talk/show/bc6052f4-0c8b-11e4-aec0-ad686aeab6a4">http://yapcasia.org/2014/talk/show/bc6052f4-0c8b-11e4-aec0-ad686aeab6a4</a></p>
 
 <p>YAPC::ASIA 2014の前夜祭の企画・進行をやってきました。</p>
