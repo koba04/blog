@@ -26,8 +26,8 @@ export async function getPostData(params: {
   // Use remark to convert markdown into HTML string
   const processedContent = await remark()
     .use(html)
-    .use(prism)
     .use(linkify(/https?:\/\/[^\s]*/))
+    .use(prism)
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
 

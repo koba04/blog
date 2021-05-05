@@ -48,8 +48,10 @@ devDependenciesも含めたい場合は、--devオプションを付ける必要
 :
 % npm shrinkwrap --dev
 wrote npm-shrinkwrap.json
+```
 
-% cat npm-shrinkwrap.json
+- cat npm-shrinkwrap.json
+```json
 {
   "name": "myapp",
   "version": "0.0.1",
