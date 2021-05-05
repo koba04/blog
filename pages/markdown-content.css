@@ -1,0 +1,48 @@
+.content img {
+    width: 80%;
+}
+.content p {
+    margin-bottom: 1rem;
+}
+
+.content a {
+ color: #ae1a1e;
+}
+.content a:hover {
+    color: #c6781d;
+}
+
+.content ul {
+    list-style: inside;
+    margin: 1rem;
+}
+
+.content code {
+    background-color: #eed1d2;
+    border-radius: 3px;
+    padding: 1px 3px;
+}
+
+.content h2 {
+    font-size: 1.5rem;
+    border-bottom: 1px solid;
+    margin-bottom: 1rem;
+}
+
+.content h3 {
+    font-size: 1.3rem;
+    border-bottom: 1px solid;
+    margin-bottom: 1rem;
+}
+
+.content h4 {
+    font-size: 1.1rem;
+    border-bottom: 1px solid;
+    margin-bottom: 1rem;
+}
+
+.content h5,h6 {
+    font-size: 1rem;
+    border-bottom: 1px solid;
+    margin-bottom: 1rem;
+}
