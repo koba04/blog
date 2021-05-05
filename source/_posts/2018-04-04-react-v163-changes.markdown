@@ -39,7 +39,7 @@ https://reactjs.org/blog/2018/03/01/sneak-peek-beyond-react-16.html
 
 ただ実際には、v16.3 の段階では破壊的な変更はありません。ライフサイクルメソッドの変更は下記のようなスケジュールで適用されます。
 
-{% img /images/posts/react-163-changes/lifecycle-methods.png 'React Lifecycle Methods Changes' %}
+![React Lifecycle Methods Changes](/images/posts/react-163-changes/lifecycle-methods.png)
 
 上記を見てわかる通り、v16.3 の段階では新しい`static getDerivedStateFromProps` と `getSnapshotBeforeUpdate` と`UNSAFE_xxx`メソッドの追加のみです。
 `UNSAFE_xxx` のメソッドは既存実装の Alias で今のところ、削除される予定は決まっていません。したがって、他のメソッドへのマイグレーションが難しい場合にはとりあえず使い続けることも可能です。

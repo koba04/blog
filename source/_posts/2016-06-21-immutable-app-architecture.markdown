@@ -40,7 +40,7 @@ Webの場合、 **What Changed** の部分にはReactを使ったComponentによ
 
 これらを踏まえて、Immutable App Architectureとして、下記の図のような構成を紹介しています。
 
-{% img /images/posts/immutable-app-architecture/immutable-app-architecture.png 'Immutable App Architecture' %}
+![Immutable App Architecture](/images/posts/immutable-app-architecture/immutable-app-architecture.png)
 
 詳細については動画を見てほしいのですが下のような要素があります。
 Fluxについて聞いたことがあるとだいたいイメージできると思います。
@@ -74,7 +74,7 @@ ActionごとにStateを再作成するのはパフォーマンス的にツラい
 Structural Sharingは、Immurable.jsなどで使われていて、変更があった箇所とその上位の要素だけを再作成して、その他は参照を付け替えるだけなので全体を毎回再生成しているわけではないということです。
 もちろん、Immutable.jsを使わなくても実装することは可能で、Reduxを使っている人にはおなじみだと思います。
 
-{% img /images/posts/immutable-app-architecture/structual-sharing.png 'Structural Sharing' %}
+![Structural Sharing](/images/posts/immutable-app-architecture/structual-sharing.png)
 
 Immutableにすることにより、Memoizationなどの最適化のテクニックも適用しやすいとしています。
 
@@ -120,7 +120,7 @@ TODOアイテムの作成を例にすると、下記のような流れになる�
 
 これにより、ネットワークリクエストが失敗した場合は、 **Optimistic State** から **True State** に戻せばいいだけなのでロールバックも簡単だとしています。
 
-{% img /images/posts/immutable-app-architecture/action-queue.png 'Action Queue' %}
+![Action Queue](/images/posts/immutable-app-architecture/action-queue.png)
 
 それぞれ依存する`(State) => State, Promise<State>`のActionが複数Queueに積まれた時にどう処理するのかなど細かい不明な点はありますが、こんな感じだと思います。
 
@@ -139,11 +139,11 @@ ModelはStateを構成するComponentが必要とするGraphQLのTypeで定義�
 
 Plainなオブジェクト（JavaでいうPOJO）であることを推奨しています（JSの場合はImmutable.jsのデータ構造の場合も）。
 
-{% img /images/posts/immutable-app-architecture/immutable-app-model.png 'Model' %}
+![Model](/images/posts/immutable-app-architecture/immutable-app-model.png)
 
 ## まとめ
 
-{% img /images/posts/immutable-app-architecture/immutable-app-architecture.png 'Immutable App Architecture' %}
+![Immutable App Architecture](/images/posts/immutable-app-architecture/immutable-app-architecture.png)
 
 上記のように構成されるImmutable App Architectureは **Pure Function**、**Immutability**、**Composition** を組み合わせた **Composition of Simple Elements** だとしています。
 Immutable App ArchitectureはFacebookのアプリでも使われていてフィットしているとのことです。

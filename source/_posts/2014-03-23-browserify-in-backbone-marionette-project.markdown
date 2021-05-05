@@ -24,7 +24,7 @@ browserifyはbrowser環境でもnodeのようにrequire('xxx')というスタイ
 
 * https://github.com/koba04/backbone-boilerplate
 
-{% img /images/last-fm-top-tracks.png 'Atrist Top Tracks by Last.FM' %}
+![Atrist Top Tracks by Last.FM](/images/last-fm-top-tracks.png)
 
 * http://koba04.com/last-fm-top-tracks/
 

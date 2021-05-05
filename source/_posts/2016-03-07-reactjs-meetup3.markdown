@@ -15,7 +15,7 @@ categories: react.js
 
 connpassの管理画面によると**75/80人**の方が参加してくださいました。感謝！
 
-{% img /images/reactjs-meetup3.jpg 'React.js meetup #3' %}
+![React.js meetup #3](/images/reactjs-meetup3.jpg)
 
 <!-- more -->
 

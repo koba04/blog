@@ -439,7 +439,7 @@ Vue.config.delimiters = ['(%', '%)']
 NativeのArrayのsubclassなどを作っている場合で、`__proto__`の書き換えされると困る場合にfalseにすることで`__proto__`の書き換えがされなくなります
 (配列のオブジェクトに追加される)
 
-{% img /images/vue-config-proto.png 'Vue.config.proto = false' %}
+![Vue.config.proto = false](/images/vue-config-proto.png)
 
 またrc2からオブジェクトの場合に`__proto__`の書き換えがされることはなくなりました。ただObject.prototypeに$addと$delete、Array.prototypeに$removeと$setが追加されています。
 
@@ -452,7 +452,7 @@ var Hoge = function () {
 Hoge.prototype.foo = function() { console.log(this.name) };
 ```
 
-{% img /images/vue-object-prototype.png 'Vue object prototype' %}
+![Vue object prototype](/images/vue-object-prototype.png)
 
 ### async optionをfalseにすることで即時にDOMが更新することが出来ます
 

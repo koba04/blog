@@ -6,7 +6,7 @@ comments: true
 categories: javascript test karma
 ---
 
-{% img /images/karma.png 'karma' %}
+![karma](/images/karma.png)
 
 今まではなんとなくtestemを使っていたのですが、Karmaを検討する必要があったので試してみました。
 
@@ -122,7 +122,7 @@ testem+mochaでやっている時に、ブラウザで結果を確認してそ�
 karmaでも出来ないないかな思って調べるみると、karma-mocha-debugを使うと出来るようでした。
 karmaのブラウザからdebugボタンを押してdebug.htmlを開くと見ることが出来ます。素晴らしい！
 
-{% img /images/karma-mocha-debug.png 'karma mocha debug' %}
+![karma mocha debug](/images/karma-mocha-debug.png)
 
 
 ## Preprocessors
@@ -176,7 +176,7 @@ reporters: ["nyan"]
 
 nyanの形式でテストを出力してくれるのでもっとテスト書こうという気持ちになっていいです。(バグってたのpull reqして直してもらいました...)
 
-{% img /images/karma-nyan-reporter.gif 'karma nyan reporter' %}
+![karma nyan reporter](/images/karma-nyan-reporter.gif)
 
 
 ### karma-growl-reporter,karma-osx-reporter
@@ -248,4 +248,4 @@ describe "constructor", ->
 
 コミットログはこの辺り。 https://github.com/koba04/backbone-boilerplate/commit/2fadec43e46f99cce0d3d828c66d4b12d758f4f0
 
-{% img /images/power-assert.png 'power-assert' %}
+![power-assert](/images/power-assert.png)

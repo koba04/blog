@@ -88,7 +88,7 @@ Hostとは各環境のことです。ブラウザー環境であればDOMであ�
 Stackは、ReactElementがツリー構造になるのと同様に、親から子、子から孫に処理を行っていきます。
 
 
-{% img /images/posts/a-state-of-react-fiber/ReactDOM.png 'ReactDOM Stack' %}
+![ReactDOM Stack](/images/posts/a-state-of-react-fiber/ReactDOM.png)
 
 
 上記では、`mountComponent` がどんどん入れ子になって呼ばれているのがわかります。
@@ -165,7 +165,7 @@ FiberはLinked Listの構造になっています。Stackの場合はTree構造�
 そのことは、下記のスタックツリーを見てもわかります。
 
 
-{% img /images/posts/a-state-of-react-fiber/ReactDOMFiber.png 'ReactDOM Fiber' %}
+![ReactDOM Fiber](/images/posts/a-state-of-react-fiber/ReactDOMFiber.png)
 
 
 上記の通り、Stackのようにスタックがたくさん積まれていないことがわかります。
@@ -273,7 +273,7 @@ requestIdleCallbackでは、アイドル時間を`timeRemaining`の関数から�
 下記はFiberを同期モードで実行した時のスタックです。
 全てが同期的に行われていることがわかります。この間はUIを完全にブロックしてしまいます。
 
-{% img /images/posts/a-state-of-react-fiber/ReactDOMFiber-sync.png 'ReactDOM Fiber Sync' %}
+![ReactDOM Fiber Sync](/images/posts/a-state-of-react-fiber/ReactDOMFiber-sync.png)
 
 下記は同じ処理を非同期で実行したスタックです。
 スタックが途切れ途切れになっていることがわかります。そのためUIをブロックしません。
@@ -281,7 +281,7 @@ requestIdleCallbackでは、アイドル時間を`timeRemaining`の関数から�
 Renderingの処理はcommitWorkの以降でだけ発生していることがわかります。
 
 
-{% img /images/posts/a-state-of-react-fiber/ReactDOMFiber-async.png 'ReactDOM Fiber Async' %}
+![ReactDOM Fiber Async](/images/posts/a-state-of-react-fiber/ReactDOMFiber-async.png)
 
 
 このとき、HostのViewに反映するといった副作用をこのbeginWork〜completeWorkの中で行わないというのは1つのポイントです。
