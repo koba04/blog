@@ -1,5 +1,5 @@
 {
-  "name": "learn-starter",
+  "name": "blog.koba04.com",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
     "dayjs": "^1.10.4",
     "gray-matter": "^4.0.3",
     "next": "^10.0.0",
+    "prismjs": "^1.23.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "remark": "^13.0.0",
@@ -18,7 +19,13 @@
   },
   "devDependencies": {
     "@types/node": "^15.0.2",
+    "@types/prismjs": "^1.16.5",
     "@types/react": "^17.0.5",
+    "autoprefixer": "^10.2.5",
+    "postcss": "^8.2.13",
+    "remark-linkify-regex": "^1.0.0",
+    "remark-prism": "^1.3.6",
+    "tailwindcss": "^2.1.2",
     "typescript": "^4.2.4"
   }
 }
