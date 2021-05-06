@@ -1,3 +1,7 @@
+.content {
+  word-break: break-word;
+}
+
 .content img {
     width: 80%;
 }
