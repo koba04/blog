@@ -8,7 +8,10 @@ export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
   return {
     props: {
-      allPostsData,
+      allPostsData: allPostsData.map((post: any) => ({
+        ...post,
+        date: post.date.format("YYYY/MM/DD"),
+      })),
     },
   };
 }

@@ -33,26 +33,16 @@ export function getSortedPostsData() {
     };
   });
   // Sort posts by date
-  return allPostsData
-    .sort((a: any, b: any) => {
-      if (a.date < b.date) {
-        return 1;
-      }
-      return -1;
-    })
-    .map((post: any) => ({ ...post, date: post.date.format("YYYY/MM/DD") }));
+  return allPostsData.sort((a: any, b: any) => {
+    if (a.date < b.date) {
+      return 1;
+    }
+    return -1;
+  });
 }
 
-export async function getPostData(params: {
-  title: string;
-  year: string;
-  month: string;
-  day: string;
-}) {
-  const fullPath = path.join(
-    postsDirectory,
-    `${params.year}-${params.month}-${params.day}-${params.title}.markdown`
-  );
+export async function getPostData(id: string) {
+  const fullPath = path.join(postsDirectory, `${id}.markdown`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
   // Use gray-matter to parse the post metadata section
