@@ -1,10 +1,9 @@
 import path from "path";
 import fs from "fs";
-import Head from "next/head";
 
 import { Header } from "../../../../../../components/Header";
 import { getPostData } from "../../../../../../lib/markdown";
-import { Og } from "../../../../../../components/Og";
+import { Head } from "../../../../../../components/Head";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
@@ -37,11 +36,7 @@ export default function Post({ postData }: any) {
   )}`;
   return (
     <>
-      <Head>
-        <title>{postData.title}</title>
-        <link rel="icon" href="/images/favicon.ico" />
-        <Og title={postData.title} url={url} />
-      </Head>
+      <Head title={postData.title} url={url} />
       <Header />
       <article className="container mx-auto max-w-5xl p-4">
         <h1 className="text-3xl py-4">{postData.title}</h1>

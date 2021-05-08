@@ -1,9 +1,8 @@
-import Head from "next/head";
 import Link from "next/link";
 import { Header } from "../components/Header";
 import styles from "./index.module.css";
 import { getSortedPostsData } from "../lib/markdown";
-import { Og } from "../components/Og";
+import { Head } from "../components/Head";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -20,11 +19,7 @@ export async function getStaticProps() {
 export default function Home({ allPostsData }: { allPostsData: any[] }) {
   return (
     <div>
-      <Head>
-        <title>blog.koba04.com</title>
-        <link rel="icon" href="/images/favicon.ico" />
-        <Og title="blog.koba04.com" url="https://blog.koba04.com" />
-      </Head>
+      <Head title="blog.koba04.com" url="https://blog.koba04.com" />
       <Header />
       <main className="container mx-auto max-w-5xl p-4">
         <ul className="py-4">
