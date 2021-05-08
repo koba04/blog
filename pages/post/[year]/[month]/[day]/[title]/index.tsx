@@ -4,6 +4,7 @@ import Head from "next/head";
 
 import { Header } from "../../../../../../components/Header";
 import { getPostData } from "../../../../../../lib/markdown";
+import { Og } from "../../../../../../components/Og";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
@@ -30,11 +31,16 @@ export async function getStaticProps({ params }: any) {
 }
 
 export default function Post({ postData }: any) {
+  const url = `https://blog.koba04.com/post/${postData.id.replace(
+    /^(\d{4})-(\d{2})-(\d{2})-/,
+    "$1/$2/$3/"
+  )}`;
   return (
     <>
       <Head>
         <title>{postData.title}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/favicon.ico" />
+        <Og title={postData.title} url={url} />
       </Head>
       <Header />
       <article className="container mx-auto max-w-5xl p-4">
