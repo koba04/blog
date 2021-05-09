@@ -52,7 +52,7 @@ npm start
 
 ```json
   "scripts": {
-    "build": "NODE_ENV=production browserify index.js -t babelify | uglifyjs > public/bundle.js",
+    "build": "NODE_ENV=production browserify index.js -t babelify | uglifyjs > public/bundle.js",
     "watch": "watchify -d index.js -t babelify -o public/bundle.js -v",
     "server": "browser-sync start --server public --files public/**/*",
     "test": "karma start",
@@ -173,11 +173,11 @@ const {TestUtils} = React.addons;
 
 describe("App", () => {
   let component;
-  
+
   beforeEach(() => {
     component = TestUtils.renderIntoDocument(<App />);
   });
-  
+
   it("returns Hello World in div", () => {
     const div = TestUtils.findRenderedDOMComponentWithTag(component, 'div');
     assert(
