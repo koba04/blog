@@ -27,7 +27,10 @@ export async function getStaticProps({ params }: any) {
   const postData = await getPostData(id);
   return {
     props: {
-      postData,
+      postData: {
+        ...postData,
+        date: dayjs(postData.date).format("YYYY/MM/DD"),
+      },
     },
   };
 }
@@ -44,7 +47,7 @@ export default function Post({ postData }: any) {
       <article className="container mx-auto max-w-5xl p-4">
         <h1 className="text-3xl py-4">{postData.title}</h1>
         <p>
-          {dayjs(postData.date).format("YYYY/MM/DD")}&nbsp;
+          {postData.date}&nbsp;
           <a
             href="https://github.com/koba04/"
             target="_blank"

@@ -61,5 +61,5 @@ export async function getPostData(id: string) {
     id,
     contentHtml,
     ...matterResult.data,
-  };
+  } as Record<string, any>;
 }
