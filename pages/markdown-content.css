@@ -50,3 +50,7 @@
     border-bottom: 1px solid;
     margin-bottom: 1rem;
 }
+
+iframe {
+  max-width: 100%;
+}
