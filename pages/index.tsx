@@ -21,7 +21,7 @@ export default function Home({ allPostsData }: { allPostsData: any[] }) {
     <div>
       <Head title="blog.koba04.com" url="https://blog.koba04.com" />
       <Header />
-      <main className="container mx-auto max-w-5xl p-4">
+      <main className="container mx-auto max-w-5xl p-2">
         <ul className="py-4">
           {allPostsData.map((data) => (
             <li key={data.id} className="p-2">
