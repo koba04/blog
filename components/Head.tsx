@@ -15,7 +15,7 @@ export const Head = ({ title, url }: { title: string; url: string }) => (
     <meta property="og:url" content={url} />
     <meta
       property="og:image"
-      content="https://blog-koba04-com.vercel.app/images/ogp.png"
+      content="https://blog.koba04.com/images/ogp.png"
     />
     <meta property="og:author" content="koba04" />
     <meta property="og:site_name" content="blog.koba04.com" />
