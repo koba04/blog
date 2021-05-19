@@ -21,7 +21,8 @@ http://blog.koba04.com/post/2014/04/17/reusable-components-by-vuejs-and-browseri
 vueifyを使うと1つのファイルにHTMLとJavaScriptとCSSを全部まとめて書くようになり、1ファイルが1Componentという形になります。
 
 * src/app.vue
-```
+
+```html
 <script lang="coffee">
   module.exports =
     data: ->
