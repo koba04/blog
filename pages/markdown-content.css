@@ -21,6 +21,12 @@
     margin: 1rem;
 }
 
+.content li > ul {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+
 .content code {
     background-color: #eed1d2;
     border-radius: 3px;
@@ -49,6 +55,16 @@
     font-size: 1rem;
     border-bottom: 1px solid;
     margin-bottom: 1rem;
+}
+
+.content blockquote {
+  font-style: italic;
+  background-color: #f4f2f2;
+  padding: 0.5rem;
+}
+
+.content blockquote p {
+  margin: 0;
 }
 
 iframe {
