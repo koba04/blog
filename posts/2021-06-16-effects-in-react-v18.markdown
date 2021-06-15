@@ -107,6 +107,8 @@ https://github.com/reactwg/react-18/discussions/19#discussion-3385715
 
 ちなみに以前の Offscreen API では Suspense と同様に `display: none;` を指定すること非表示にされていました。
 
+https://github.com/facebook/react/blob/9212d994ba939f20a04220a61e9776b488381596/packages/react-dom/src/client/ReactDOMHostConfig.js#L631-L641
+
 また、別のコメントでは、
 
 > We haven't started on the API yet, but you would render a tree wrapped in something like `<Offscreen visible={false} />` to pre-render it. That means we would render the tree at a lower priority that what's visible, but wouldn't fire any effects. When the user navigates to it, you could make it visible and we would just need to show what was rendered and mount all of the effects for the first time.
