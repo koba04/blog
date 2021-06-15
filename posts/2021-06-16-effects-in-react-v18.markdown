@@ -107,7 +107,7 @@ https://github.com/reactwg/react-18/discussions/19#discussion-3385715
 
 ちなみに以前の Offscreen API では Suspense と同様に `display: none;` を指定すること非表示にされていました。
 
-https://github.com/facebook/react/blob/9212d994ba939f20a04220a61e9776b488381596/packages/react-dom/src/client/ReactDOMHostConfig.js#L631-L641
+[ReactDOMHostConfig#hideInstance の実装](https://github.com/facebook/react/blob/9212d994ba939f20a04220a61e9776b488381596/packages/react-dom/src/client/ReactDOMHostConfig.js#L631-L641)
 
 また、別のコメントでは、
 
