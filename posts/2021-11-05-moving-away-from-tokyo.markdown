@@ -6,7 +6,7 @@ date: 2021-11-05 00:00:00 +0900
 2021 年の 4 月から家族で東京を離れて静岡県の富士市で暮らしています。
 富士市での暮らしも落ち着いてきたのでまとめということで書いてます。
 
-![富士山](/images/posts/moving-away-from-tokyo/mtfuji.jpg)
+<p><img src="/images/posts/moving-away-from-tokyo/mtfuji.jpg" alt="富士山" style="width: 80%; aspect-ratio: 4/3" /></p>
 
 ## 移住を決めるまで
 
@@ -103,7 +103,7 @@ https://www.city.fuji.shizuoka.jp/kurashi/c0308/rn2ola0000021gld.html
 
 ### 住んでみて
 
-<p><img src="/images/posts/moving-away-from-tokyo/minatopark.jpg" alt="みなと公園" style="width: 70%" /></p>
+<p><img src="/images/posts/moving-away-from-tokyo/minatopark.jpg" alt="みなと公園" style="width: 70%; aspect-ratio: 4/3;" /></p>
 
 コロナの状態での移住であり、家にいるのが中心になるためそこまで大きな違いもなく生活を開始することができました。
 近くに買い物する場所もあり東京でも車中心の生活をしていたため、普段の暮らしでもそこまで困ることはありませんでした。Amazon もあるので。
@@ -111,14 +111,14 @@ https://www.city.fuji.shizuoka.jp/kurashi/c0308/rn2ola0000021gld.html
 遊びに行く場所も海に行ったり公園も色々とあったり、これまでは何時間もかけて行っていた牧場なんかもすぐに行けるので行くところは増えました。
 まかいの牧場がお気に入りです。
 
-<p><img src="/images/posts/moving-away-from-tokyo/makai.jpg" alt="まかいの牧場" style="width: 70%" /></p>
+<p><img src="/images/posts/moving-away-from-tokyo/makai.jpg" alt="まかいの牧場" style="width: 70%; aspect-ratio: 4/3;" /></p>
 
 https://www.makaino.com/
 
 元々東京に住んでいた時も休みの日は都内ではなく郊外に行くことが多かったので気軽に行けるのはとても体験がいいです。
 あとは子どもがやりたいと言い出したのでこちらに来てから釣りもに行くようになりました。中学・高校くらいの時にやっていたので懐かしいです。
 
-<p><img src="/images/posts/moving-away-from-tokyo/fishing.jpg" alt="釣り" style="width: 50%" /></p>
+<p><img src="/images/posts/moving-away-from-tokyo/fishing.jpg" alt="釣り" style="width: 50%; aspect-ratio: 3/4;" /></p>
 
 子どももこちらに来てから苦手だった虫を捕まえて飼うようになったりと環境の変化で変わって面白いです。
 相変わらず YouTube はなんかは好きですが。あとは、家庭菜園も借りているので食卓に野菜が増えました。
@@ -131,7 +131,7 @@ https://www.makaino.com/
 仕事に関しては、正直なんの変化もありませんでした。部屋がリビングと離れた場所になったので以前よりは集中しやすくなった点はよかったです。
 移住を機にアーロンチェアを買ったり昇降式デスクを買ったりと環境を整えたので環境はよくなりました。
 
-<p><img src="/images/posts/moving-away-from-tokyo/desk.jpg" alt="デスク" style="width: 50%" /></p>
+<p><img src="/images/posts/moving-away-from-tokyo/desk.jpg" alt="デスク" style="width: 70%; aspect-ratio: 4/3;" /></p>
 
 ただ、移住したことでフルリモートできない東京の会社では働けなくなりました。多くの会社がフルリモートで働けるような世界になるといいなと願っています。
 
