@@ -21,5 +21,6 @@ export const Head = ({ title, url }: { title: string; url: string }) => (
     <meta property="og:site_name" content="blog.koba04.com" />
     <meta property="og:locale" content="ja_JP" />
     <meta property="og:type" content="article" />
+    <meta name="Hatena::Bookmark" content="nocomment" />
   </HeadWrapper>
 );
