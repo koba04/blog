@@ -28,7 +28,7 @@
     "@cybozu/eslint-config": "^16.0.1",
     "@types/node": "^15.14.9",
     "@types/prismjs": "^1.16.8",
-    "@types/react": "^17.0.40",
+    "@types/react": "^17.0.45",
     "@types/rss": "^0.0.29",
     "autoprefixer": "^10.4.2",
     "eslint": "^8.6.0",
