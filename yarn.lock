@@ -3027,11 +3027,12 @@ remark-html@^13.0.2:
     hast-util-to-html "^7.0.0"
     mdast-util-to-hast "^10.0.0"
 
-remark-linkify-regex@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/remark-linkify-regex/-/remark-linkify-regex-1.0.0.tgz#afcaf4dcc96ffdf62e7aca490c3f3f5969a43f85"
-  integrity sha512-ysHcEHKFGmdjfcsWD7fLZw3soTOtuLbL2+xXH/kyf8fZROKD92gINgkb0QVPdTjfuRj/wycs4IQjqiSJy0uqTA==
+remark-linkify-regex@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/remark-linkify-regex/-/remark-linkify-regex-1.2.1.tgz#5121ad7f8297a7d75e56df4d87c808052d325fc8"
+  integrity sha512-aKZAFcZWzrw64m1eTKfVgiZ9iKhZ5vxeOVoACjCd9ahPpKpdnAz++z0qVaR7h0z5nryrvUrTQvIyFieHkdEfCA==
   dependencies:
+    unicode-word-regex "^1.0.1"
     unist-util-flatmap "1.0.x"
     unist-util-visit-parents "2.0.x"
 
@@ -3631,6 +3632,11 @@ unbox-primitive@^1.0.2:
     has-bigints "^1.0.2"
     has-symbols "^1.0.3"
     which-boxed-primitive "^1.0.2"
+
+unicode-word-regex@^1.0.1:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/unicode-word-regex/-/unicode-word-regex-1.1.0.tgz#cdd6910e4e413606e704e139079bcab2b91040e3"
+  integrity sha512-2HlIXyag8yi0+AsB1Rx88gSuzw4hS/PgrcTbzkqIW/RBdi2VSp1rRr55RS+HszErwlSRAoA9jhM6L/x+xtu41w==
 
 unified@^9.1.0:
   version "9.2.1"
