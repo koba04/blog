@@ -19,6 +19,8 @@ export default function handle(req: NextRequest) {
       (
         <div
           style={{
+            backgroundColor: "white",
+            color: "black",
             height: "100%",
             width: "100%",
             display: "flex",
