@@ -1,5 +1,5 @@
 ---
-title: "React v18 での Effects に関する変更内容（予定）"
+title: "React v18 での Effects に関する変更内容(予定)"
 date: 2021-06-16 00:00:00 +0900
 ---
 
