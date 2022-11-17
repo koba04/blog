@@ -13,10 +13,7 @@ export const Head = ({ title, url }: { title: string; url: string }) => (
     <meta property="og:title" content={title} />
     <meta property="og:description" content="" />
     <meta property="og:url" content={url} />
-    <meta
-      property="og:image"
-      content="https://blog.koba04.com/images/ogp.png"
-    />
+    <meta property="og:image" content={`/api/og/?title=${title}`} />
     <meta property="og:author" content="koba04" />
     <meta property="og:site_name" content="blog.koba04.com" />
     <meta property="og:locale" content="ja_JP" />
