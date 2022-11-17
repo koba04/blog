@@ -47,12 +47,12 @@ export default function handle(req: NextRequest) {
               justifyContent: "flex-end",
               alignItems: "center",
               flexGrow: 0,
-              margin: 20,
+              padding: 20,
             }}
           >
             <div
               style={{
-                marginRight: 5,
+                paddingRight: 5,
                 fontSize: 24,
               }}
             >
@@ -68,8 +68,6 @@ export default function handle(req: NextRequest) {
         </div>
       ),
       {
-        width: 1200,
-        height: 630,
         debug: false,
       }
     );
