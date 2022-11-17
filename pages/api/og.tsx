@@ -70,7 +70,7 @@ export default function handle(req: NextRequest) {
       {
         width: 1200,
         height: 630,
-        debug: true,
+        debug: false,
       }
     );
   } catch (e: any) {
