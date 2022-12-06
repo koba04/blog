@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@vercel/og": "^0.0.21",
-    "dayjs": "^1.11.6",
+    "dayjs": "^1.11.7",
     "gray-matter": "^4.0.3",
     "next": "^12.3.4",
     "prismjs": "^1.29.0",
