@@ -1,13 +1,13 @@
 ---
-title: "SWR v2 がリリースされました"
-date: 2022-12-12 01:00:00 +0900
+title: "SWR v2 をリリースしました"
+date: 2022-12-13 12:00:00 +0900
 ---
 
-SWR v2 がリリースされましたので紹介したいと思います。
+メンテナとして関わっていた SWR v2 がリリースされましたので紹介したいと思います。
 
 各機能の細かい紹介については、リリースブログを確認してください。日本語翻訳もしてあるので日本語で読むこともできます。
 
-https://swr.vercel.app/blog/swr-v2
+https://swr.vercel.app/ja/blog/swr-v2
 
 ここでは、ざっくりと補足を書きたいと思います。
 
@@ -42,7 +42,7 @@ function App() {
 ```
 
 `isMutating` により mutation 実行中の状態が取得できるのはこれまでにできなかったことです。
-その他は `mutate` とほぼ同等です。詳しくは下記を。
+その他は `mutate` とほぼ同等ですが Hook として宣言的なインターフェイスで利用できるようになっています。詳しくは下記を。
 
 https://swr.vercel.app/blog/swr-v2#useswrmutation
 
@@ -50,11 +50,30 @@ https://swr.vercel.app/blog/swr-v2#useswrmutation
 
 Optimistic Update 自体は v1.2.0 から可能だったのですが、関数が渡せるようになったり柔軟に指定できるようになりました。
 
+```jsx
+const { mutate, data } = useSWR('/api/todos')
+
+return <>
+  <ul>{/* Display data */}</ul>
+
+  <button onClick={() => {
+    mutate(addNewTodo('New Item'), {
+      optimisticData: [...data, 'New Item'],
+    })
+  }}>
+    Add New Item
+  </button>
+</>
+```
+
 https://swr.vercel.app/blog/swr-v2#optimistic-ui
+
+エラー時のロールバックなんかも自動でやってくれるので簡単に使うことができるのではないかと思います。
 
 ### Mutate Multiple Keys
 
 個人的には、これが一番嬉しいのではと思っていたのですが、言及している人が少ない気がします。
+
 グローバルな `mutate` (`useSWR` 経由で取得するものではない) にフィルタリング関数を渡すことで、柔軟に revalidate ができるようになりました。
 
 ```jsx
@@ -70,7 +89,7 @@ mutate(
 ```
 
 上記の例では、`/api/item` のエンドポイントに関するデータを全て revalidate するようなケースが想定されています。
-他にも配列をキーにしている場合には配列の一部がマッチするもの全てを revalidate することも可能です。この関数では全てのキーが渡されるのでキーの型チェックは必須です。
+他にも配列をキーにしている場合には配列の一部がマッチするもの全てを revalidate することも可能です。この関数には全てのキーが渡されるのでキーの型チェックは必須です。
 
 ```jsx
 // ['user', 1], ['user', 2] のようなキーで 'user' に関するもの全てを revalidate する
@@ -96,15 +115,12 @@ https://swr.vercel.app/blog/swr-v2#mutate-multiple-keys
 
 ## SWRDevTools
 
-作ってみたのでご利用ください。
+![SWRDevTools](/images/posts/swr-v2/swr-devtools.png)
+
 SWR v2 に上げて、拡張をインストールするだけで使えます。
 （v1 でもコンポーネントをアプリケーションに差し込むことで利用可能です）
 
 https://swr.vercel.app/blog/swr-v2#swr-devtools
-
-フィードバックも歓迎です！
-
-https://github.com/koba04/swr-devtools
 
 ## Preloading Data
 
@@ -163,6 +179,8 @@ https://swr.vercel.app/docs/advanced/understanding#combining-with-isloading-and-
 
 https://swr.vercel.app/blog/swr-v2#preserving-previous-state
 
+これを使うことでユーザー体験を改善できるケースは多いと思います。
+
 ## Extending Configurations
 
 `SWRConfig` のコンポーネントの `value` が関数を受け取るようになったので、親の `SWRConfig` の設定を元に拡張できるようになりました。
@@ -190,7 +208,7 @@ Shim も含まれているので React 17 でも動作します。
 })
 ```
 
-これを変えた理由としては、fetcher の引数に対して拡張性を持たせたいからです。これを利用した機能拡張も検討されています。
+これを変えた理由としては、fetcher の引数に対して拡張性を持たせたいからです。これを利用した機能拡張も検討中です。
 
 ### Global Mutate No Longer Accepts a getKey Function
 
@@ -238,17 +256,18 @@ LocalStorage に保存してるような場合は、バージョンアップ時�
 
 元々のターゲットが ES5 であったため、バンドルサイズもかなり小さくなり、結果的に色々と機能が追加されたにも関わらず、バンドルサイズは v1 よりも小さくなりました。
 
-TODO: Image
+![SWR v2 のバンドルサイズ](/images/posts/swr-v2/bundlephobia.png)
 
 https://bundlephobia.com/package/swr@2.0.0
 
+個人的には、バンドルサイズが増えなかったのがとても嬉しかったです。
 
 ## Next.js 13　によりどうなる？
 
 2022 年の Next.js Conf において、Next.js の `app/` ディレクトリで提供される React Server Components のような機能により SWR のユースケースもカバーできるという話があったので、SWR どうなるのと感じた人は自分以外にもいたのではないでしょうか？そのため、今回のリリースブログにそれについても足してもらいました。
 
-結論としては、これからもよりよい UX を提供していくために SWR には取り組んでいきます。
-React Server Components 上で動かすのは難しいため、Client Components においてのデータ取得のライブラリとして開発されていくことが想定されています。
+結論としては、よりよい UX を提供していくためのライブラリとしてこれからも SWR の開発は継続されます。実際、自動的な revalidation など SWR でしかカバーできないケースも存在します。
+ただ、SWR を React Server Components 上で動かすのは難しいため、Client Components においてのデータ取得のライブラリとして開発されていくことが想定されています。
 そのため、`client-only` を付与することも検討されています。
 
 https://github.com/vercel/swr/issues/2221
@@ -257,4 +276,58 @@ https://github.com/vercel/swr/issues/2221
 
 ### Middleware によるコアのスリム化
 
+SWR は v1 で Middleware の仕組みを導入しています。
+
+https://swr.vercel.app/docs/middleware
+
+これにより、fetcher を拡張したり前後に処理を挟むことが可能になっています。Middleware は利用者に対してもメリットがありますが SWR 自体に対してもメリットがある仕組みになっています。
+
+例えば、`swr/immutable` や `swr/infinite`、今回追加された `swr/mutation` は全て Middleware として実装されています。そのため、機能を追加した場合でも SWR のコア自体に対して複雑性が高まることはなく、バンドルサイズも増えることがありません。
+また今回追加された `preload` の実装を担当したのですが、実はこれも内部的には Middleware として実装して、Builtin-Middleware として組み込まれています。
+
 ### 今回のリリースで主にやったこと
+
+前回の v1 のリリース時はコントリビュータとして開発に参加しておりブログで感謝の言葉をもらって嬉しかったのですが、今回はメンテナとしてリリースに携わりました。
+
+v2 では `preload` や幾つかの機能実装やバグ修正をやりつつ、最も力を注いだのがドキュメント（ブログ含む）です。
+
+ブログは Author の一人になりました。
+（感謝の部分を書いたのは自分ではないですが、自分で翻訳して何とも言えない気持ちになりました）
+
+![v2 ブログの Author](/images/posts/swr-v2/blog-authors.png)
+
+![v2 のブログ](/images/posts/swr-v2/v2-thankyou.png)
+
+https://github.com/vercel/swr-site/pull/325
+
+上記の PR にある v2 のドキュメント反映は大体担当しました。リリースブログも大体書いたのですが、マージ前に Shu さんが手直してくれてとてもわかりやすくなりました。
+
+今回は Mutation 周りのドキュメントの構成がかなり変わっています。これまでは API のインターフェイスもわかりにくかったのですが、その辺りを明示的に書いたりユースケースを追加したりしています。
+
+またこれは v2 に直接関係ないのですが、「Understanding SWR」というページも追加させてもらいました。
+
+https://swr.vercel.app/docs/advanced/understanding
+
+SWR を最初に触った時にどういった値が返ってくるのかがわからないと思った記憶があり、v2 で `isLoading` や `keepPreviousData` など新しいパターンが増えるので図にして表現してみました。
+名前が示す通り、ここには他にも色々とコンテンツを追加していきたいなと思っています。
+
+SWR のドキュメントはまだまだよくできる部分もあるのでこの辺りは今後もやっていきたいと思っています。
+
+また、DevTools がないという声を Issue で目にしたので、SWRDevTools を作ってみました。
+
+https://swr-devtools.vercel.app/
+
+自分が必要だと思って作ったわけではないのでどこまで使いやすいかは未知数ですが、フィードバックもらいながらよくしていければなと思っているのでフィードバック歓迎です！
+
+https://github.com/koba04/swr-devtools
+
+アプリケーションに手を入れることなく、拡張をインストールして開いたら確認できる手軽な形にはなっていると思います。
+拡張作るの初めてでライフサイクルを完全に理解できておらず、開きっぱなしで放置しておくと接続が切れる不具合があるので、そのうち修正したいなと思っています。
+Shu さんが足してくれた UI がカッコいい Network Panel については、不具合がまだあるので Experimental という形になっています。
+
+SWRDevTools から Mutation できる機能については、あった方がいいのかなと思いつつ使いたいユースケースがあまり思いつかなかったので入れてません。
+
+## 最後に
+
+SWR はとあるアプリケーションのレビューをさせてもらった時に初めて使われているのを見て面白いなと思い趣味でコントリビュートを始めたのがきっかけです。
+コードからの学びも大きくチームメンバーも素晴らしくとても楽しいプロジェクトなので、今後もメンバーとして貢献していきたいなと思っています。
