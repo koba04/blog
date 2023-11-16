@@ -25,12 +25,13 @@ export default function handle(req: NextRequest) {
             width: "100%",
             display: "flex",
             flexDirection: "column",
+            padding: 20,
           }}
         >
           <div
             style={{
               width: "100%",
-              fontSize: 32,
+              fontSize: 60,
               display: "flex",
               flexGrow: 1,
               flexDirection: "column",
