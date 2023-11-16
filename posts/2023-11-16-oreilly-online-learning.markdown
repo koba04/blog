@@ -3,7 +3,7 @@ title: "O'Reilly Online Learning がいい"
 date: 2023-11-16 00:00:00 +0900
 ---
 
-O’Reilly Online Learning をずっと使っているので改めていいなと思う点を書いていきたいと思います。
+[O’Reilly Online Learning](https://www.oreilly.com/online-learning/) をずっと使っているので改めていいなと思う点を書いていきたいと思います。
 
 一言で言うと、「購入せずに読める」につきます。
 
