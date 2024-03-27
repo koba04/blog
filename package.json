@@ -28,7 +28,7 @@
   "devDependencies": {
     "@cybozu/eslint-config": "^17.0.3",
     "@types/node": "^18.7.23",
-    "@types/prismjs": "^1.26.2",
+    "@types/prismjs": "^1.26.3",
     "@types/react": "^18.2.33",
     "@types/rss": "^0.0.31",
     "autoprefixer": "^10.4.16",
