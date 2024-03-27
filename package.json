@@ -30,7 +30,7 @@
     "@types/node": "^18.7.23",
     "@types/prismjs": "^1.26.3",
     "@types/react": "^18.2.73",
-    "@types/rss": "^0.0.31",
+    "@types/rss": "^0.0.32",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.23.1",
     "eslint-config-next": "^12.3.4",
