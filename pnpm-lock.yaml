@@ -52,8 +52,8 @@ importers:
         specifier: ^1.26.3
         version: 1.26.3
       '@types/react':
-        specifier: ^18.2.73
-        version: 18.2.73
+        specifier: ^18.2.79
+        version: 18.3.18
       '@types/rss':
         specifier: ^0.0.32
         version: 0.0.32
@@ -360,8 +360,8 @@ packages:
   '@types/prop-types@15.7.3':
     resolution: {integrity: sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==}
 
-  '@types/react@18.2.73':
-    resolution: {integrity: sha512-XcGdod0Jjv84HOC7N5ziY3x+qL0AfmubvKOZ9hJjJ2yd5EE+KYjWhdOjt387e9HPheHkdggF9atTifMRtyAaRA==}
+  '@types/react@18.3.18':
+    resolution: {integrity: sha512-t4yC+vtgnkYjNSKlFx1jkAhH8LgTo2N/7Qvi83kdEaUtMDiwpbLAktKDaAMlRcJ5eSxZkH74eEGt1ky31d7kfQ==}
 
   '@types/rss@0.0.32':
     resolution: {integrity: sha512-2oKNqKyUY4RSdvl5eZR1n2Q9yvw3XTe3mQHsFPn9alaNBxfPnbXBtGP8R0SV8pK1PrVnLul0zx7izbm5/gF5Qw==}
@@ -2537,7 +2537,7 @@ snapshots:
 
   '@types/prop-types@15.7.3': {}
 
-  '@types/react@18.2.73':
+  '@types/react@18.3.18':
     dependencies:
       '@types/prop-types': 15.7.3
       csstype: 3.0.8
