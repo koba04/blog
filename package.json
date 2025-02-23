@@ -10,6 +10,7 @@
     "lint": "run-p lint:*",
     "lint:eslint": "eslint '**/*.{ts,tsx}'",
     "lint:next": "next lint",
+    "lint:tsx": "tsc",
     "start": "next start"
   },
   "dependencies": {
