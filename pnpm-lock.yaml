@@ -52,7 +52,7 @@ importers:
         specifier: ^1.26.3
         version: 1.26.3
       '@types/react':
-        specifier: ^18.2.79
+        specifier: ^18.3.18
         version: 18.3.18
       '@types/rss':
         specifier: ^0.0.32
