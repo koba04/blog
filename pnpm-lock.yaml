@@ -64,8 +64,8 @@ importers:
         specifier: ^8.57.1
         version: 8.57.1
       eslint-config-next:
-        specifier: ^12.3.4
-        version: 12.3.4(eslint@8.57.1)(typescript@4.8.4)
+        specifier: ^12.3.5
+        version: 12.3.5(eslint@8.57.1)(typescript@4.8.4)
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
@@ -264,8 +264,8 @@ packages:
   '@next/env@15.1.7':
     resolution: {integrity: sha512-d9jnRrkuOH7Mhi+LHav2XW91HOgTAWHxjMPkXMGBc9B2b7614P7kjt8tAplRvJpbSt4nbO1lugcT/kAaWzjlLQ==}
 
-  '@next/eslint-plugin-next@12.3.4':
-    resolution: {integrity: sha512-BFwj8ykJY+zc1/jWANsDprDIu2MgwPOIKxNVnrKvPs+f5TPegrVnem8uScND+1veT4B7F6VeqgaNLFW1Hzl9Og==}
+  '@next/eslint-plugin-next@12.3.5':
+    resolution: {integrity: sha512-Dw6sF3UIAV0B401jyUg/cXycxttTCD+oQy1GuNLJhzdrSwZWG9Q2pMZzf35/QcHXYpTo2ielcpQZTPFdg8CFwg==}
 
   '@next/swc-darwin-arm64@15.1.7':
     resolution: {integrity: sha512-hPFwzPJDpA8FGj7IKV3Yf1web3oz2YsR8du4amKw8d+jAOHfYHYFpMkoF6vgSY4W6vB29RtZEklK9ayinGiCmQ==}
@@ -905,8 +905,8 @@ packages:
     engines: {node: '>=6.0'}
     hasBin: true
 
-  eslint-config-next@12.3.4:
-    resolution: {integrity: sha512-WuT3gvgi7Bwz00AOmKGhOeqnyA5P29Cdyr0iVjLyfDbk+FANQKcOjFUTZIdyYfe5Tq1x4TGcmoe4CwctGvFjHQ==}
+  eslint-config-next@12.3.5:
+    resolution: {integrity: sha512-xBv2ri51KKlWhRB9zVDJLI0ZUXcnLtE41qNHe7ESd5QOf+qUyX7oiaZ1TXROtIx1ELWmdU0vZJGS7GgnHmoqhw==}
     peerDependencies:
       eslint: ^7.23.0 || ^8.0.0
       typescript: '>=3.3.1'
@@ -2503,7 +2503,7 @@ snapshots:
 
   '@next/env@15.1.7': {}
 
-  '@next/eslint-plugin-next@12.3.4':
+  '@next/eslint-plugin-next@12.3.5':
     dependencies:
       glob: 7.1.7
 
@@ -3105,9 +3105,9 @@ snapshots:
     optionalDependencies:
       source-map: 0.6.1
 
-  eslint-config-next@12.3.4(eslint@8.57.1)(typescript@4.8.4):
+  eslint-config-next@12.3.5(eslint@8.57.1)(typescript@4.8.4):
     dependencies:
-      '@next/eslint-plugin-next': 12.3.4
+      '@next/eslint-plugin-next': 12.3.5
       '@rushstack/eslint-patch': 1.1.4
       '@typescript-eslint/parser': 5.33.1(eslint@8.57.1)(typescript@4.8.4)
       eslint: 8.57.1
