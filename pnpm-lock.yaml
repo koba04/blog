@@ -55,7 +55,7 @@ importers:
         specifier: ^1.26.3
         version: 1.26.3
       '@types/react':
-        specifier: ^19.0.14
+        specifier: ^19.1.0
         version: 19.1.0
       '@types/rss':
         specifier: ^0.0.32
