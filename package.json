@@ -18,7 +18,7 @@
     "dayjs": "^1.11.13",
     "gray-matter": "^4.0.3",
     "next": "^15.1.7",
-    "prismjs": "^1.29.0",
+    "prismjs": "^1.30.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "remark": "^13.0.0",
