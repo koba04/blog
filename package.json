@@ -30,7 +30,7 @@
     "@cybozu/eslint-config": "^17.0.3",
     "@tailwindcss/postcss": "^4.0.17",
     "@types/node": "^22.13.17",
-    "@types/prismjs": "^1.26.3",
+    "@types/prismjs": "^1.26.6",
     "@types/react": "^19.1.8",
     "@types/rss": "^0.0.32",
     "eslint": "^8.57.1",
