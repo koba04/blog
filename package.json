@@ -14,7 +14,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@vercel/og": "^0.0.27",
+    "@vercel/og": "^0.11.1",
     "dayjs": "^1.11.13",
     "gray-matter": "^4.0.3",
     "next": "^15.1.7",
